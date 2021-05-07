@@ -2,6 +2,7 @@ package org.hedbor.evan.classictalents.styles
 
 import javafx.scene.layout.BackgroundPosition
 import javafx.scene.layout.BackgroundRepeat
+import javafx.scene.layout.BackgroundSize
 import javafx.scene.layout.BorderStrokeStyle
 import javafx.scene.paint.Color
 import tornadofx.*
@@ -11,6 +12,7 @@ class TalentButtonStyles : Stylesheet() {
         val talentButton by cssclass()
         val talentButtonIcon by cssclass()
         val pointCounter by cssclass()
+        val tooltip by cssclass()
     }
 
     init {
@@ -49,12 +51,8 @@ class TalentButtonStyles : Stylesheet() {
             borderWidth += box(0.px)
             opacity = 1.0
         }
-
         talentButtonIcon {
-            // image
-            //backgroundSize += BackgroundSize(56.0, 56.0, false, false, false, false)
-            // border
-            //backgroundSize += BackgroundSize(68.0, 68.0, false, false, false, false)
+            backgroundSize += BackgroundSize(1.0, 1.0, true, true, false, false)
             backgroundPosition += BackgroundPosition.CENTER
             backgroundRepeat += Pair(BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT)
         }
@@ -66,6 +64,10 @@ class TalentButtonStyles : Stylesheet() {
         }
         pointCounter and disabled {
             opacity = 1.0
+        }
+        tooltip {
+            fontFamily = "Arial"
+            fontSize = 20.px
         }
     }
 }
