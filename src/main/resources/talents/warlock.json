@@ -1,0 +1,114 @@
+{
+  "warlock": {
+    "spec1": {
+      "background": "/images/backgrounds/warlock_affliction.jpg",
+      "talents": {
+        "suppression": {
+          "location": [0, 1],
+          "maxRank": 5,
+          "icon": "/images/Classic/Spells/Spell_Shadow_UnsummonBuilding.png"
+        },
+        "improved_corruption": {
+          "location": [0, 2],
+          "maxRank": 5,
+          "icon": "/images/Classic/Spells/Spell_Shadow_AbominationExplosion.png"
+        },
+        "improved_curse_of_weakness": {
+          "location": [1, 0],
+          "maxRank": 3,
+          "icon": "/images/Classic/Spells/Spell_Shadow_CurseOfMannoroth.png"
+        },
+        "improved_drain_soul": {
+          "location": [1, 1],
+          "maxRank": 2,
+          "icon": "/images/Classic/Spells/Spell_Shadow_Haunting.png"
+        },
+        "improved_life_tap": {
+          "location": [1, 2],
+          "maxRank": 2,
+          "icon": "/images/Classic/Spells/Spell_Shadow_BurningSpirit.png"
+        },
+        "improved_drain_life": {
+          "location": [1, 3],
+          "maxRank": 5,
+          "icon": "/images/Classic/Spells/Spell_Shadow_LifeDrain02.png"
+        },
+        "improved_curse_of_agony": {
+          "location": [2, 0],
+          "maxRank": 3,
+          "icon": "/images/Classic/Spells/Spell_Shadow_CurseOfSargeras.png"
+        },
+        "fel_concentration": {
+          "location": [2, 1],
+          "maxRank": 5,
+          "icon": "/images/Classic/Spells/Spell_Shadow_FingerOfDeath.png"
+        },
+        "amplify_curse": {
+          "location": [2, 2],
+          "maxRank": 1,
+          "ability": {
+            "castTime": "instant",
+            "cooldown": "3 min"
+          },
+          "icon": "/images/Classic/Spells/Spell_Shadow_Contagion.png"
+        },
+        "grim_reach": {
+          "location": [3, 0],
+          "maxRank": 2,
+          "icon": "/images/Classic/Spells/Spell_Shadow_CallofBone.png"
+        },
+        "nightfall": {
+          "location": [3, 1],
+          "maxRank": 2,
+          "icon": "/images/Classic/Spells/Spell_Shadow_Twilight.png"
+        },
+        "improved_drain_mana": {
+          "location": [3, 2],
+          "maxRank": 2,
+          "icon": "/images/Classic/Spells/Spell_Shadow_SiphonMana.png"
+        },
+        "siphon_life": {
+          "location": [4, 1],
+          "maxRank": 1,
+          "ability": {
+            "castTime": "instant",
+            "resourceCost": "150 mana",
+            "range": "30 yd"
+          },
+          "icon": "/images/Classic/Spells/Spell_Shadow_Requiem.png"
+        },
+        "curse_of_exhaustion": {
+          "location": [4, 2],
+          "maxRank": 1,
+          "requires": [2, 2],
+          "ability": {
+            "castTime": "instant",
+            "resourceCost": "8 %mana",
+            "range": "30 yd"
+          },
+          "icon": "/images/Classic/Spells/Spell_Shadow_GrimWard.png"
+        },
+        "improved_curse_of_exhaustion": {
+          "location": [4, 3],
+          "maxRank": 4,
+          "requires": [4, 2],
+          "icon": "/images/Classic/Spells/Spell_Shadow_GrimWard.png"
+        },
+        "shadow_mastery": {
+          "location": [5, 1],
+          "maxRank": 5,
+          "requires": [4, 1],
+          "icon": "/images/Classic/Spells/Spell_Shadow_ShadeTrueSight.png"
+        },
+        "dark_pact": {
+          "location": [6, 1],
+          "maxRank": 1,
+          "ability": {
+            "castTime": "instant"
+          },
+          "icon": "/images/Classic/Spells/Spell_Shadow_DarkRitual.png"
+        }
+      }
+    }
+  }
+}
