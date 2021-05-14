@@ -5,4 +5,4 @@ import java.util.*
 
 
 fun ResourceBundle.getAndFormat(key: String, vararg formatArgs: Any?): String
-        = MessageFormat(getString(key)).format(formatArgs)
+        = MessageFormat(this.getString(key)).format(formatArgs)

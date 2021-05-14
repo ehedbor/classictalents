@@ -1,7 +1,8 @@
 package org.hedbor.evan.classictalents
 
-import javafx.stage.Stage
-import org.hedbor.evan.classictalents.styles.Styles
-import tornadofx.*
+import org.hedbor.evan.classictalents.styles.TalentButtonStyles
+import org.hedbor.evan.classictalents.styles.TalentButtonTooltipStyles
+import org.hedbor.evan.classictalents.styles.TalentTreeStyles
+import tornadofx.App
 
-class ClassicStatsApp : App(MainView::class, Styles::class)
+class ClassicStatsApp : App(MainView::class, TalentTreeStyles::class, TalentButtonStyles::class, TalentButtonTooltipStyles::class)

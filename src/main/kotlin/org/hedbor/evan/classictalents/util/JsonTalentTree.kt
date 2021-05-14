@@ -3,7 +3,7 @@ package org.hedbor.evan.classictalents.util
 import com.beust.klaxon.Json
 
 data class JsonWowClass(
-    @Json(name = "class") val className: String,
+    @Json(name = "class") val key: String,
     val spec1: JsonTalentTree,
     //val spec2: JsonTalentTree,
     //val spec3: JsonTalentTree

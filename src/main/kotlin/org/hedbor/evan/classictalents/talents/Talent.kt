@@ -1,9 +1,12 @@
 package org.hedbor.evan.classictalents.talents
 
-import tornadofx.*
+import tornadofx.getProperty
+import tornadofx.property
 
 
 class Talent(val key: String, val icon: String, val location: Pair<Int, Int>, val maxRank: Int, val spellInfo: SpellInfo? = null, val prerequisite: Pair<Int, Int>? = null) {
+    lateinit var tree: TalentTree
+
     var allocatedPoints: Int by property(0)
     fun allocatedPointsProperty() = getProperty(Talent::allocatedPoints)
 }

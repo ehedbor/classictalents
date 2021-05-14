@@ -1,11 +1,13 @@
 package org.hedbor.evan.classictalents.util
 
 import com.beust.klaxon.Klaxon
-import javafx.collections.FXCollections.*
+import javafx.collections.FXCollections.observableArrayList
 import javafx.collections.ObservableList
-import org.hedbor.evan.classictalents.talents.*
+import org.hedbor.evan.classictalents.talents.ResourceType
+import org.hedbor.evan.classictalents.talents.SpellInfo
+import org.hedbor.evan.classictalents.talents.Talent
+import org.hedbor.evan.classictalents.talents.TalentTree
 import java.io.IOException
-import java.lang.IllegalStateException
 
 
 private object Dummy
@@ -18,7 +20,7 @@ fun loadTalentTree(path: String): TalentTree {
     val wowClass = Klaxon().parse<JsonWowClass>(resource) ?: throw IllegalStateException("Could not parse resource.")
     val spec = wowClass.spec1
 
-    val talentTreeKey = "${wowClass.className}.spec1"
+    val talentTreeKey = "${wowClass.key}.spec1"
     val backgroundImage = spec.backgroundImage
     val talents: ObservableList<Talent> = observableArrayList()
 
@@ -39,7 +41,9 @@ fun loadTalentTree(path: String): TalentTree {
         talents += Talent(key, icon, location, maxRank, spellInfo, prerequisite)
     }
 
-    return TalentTree(talentTreeKey, backgroundImage, talents)
+    val tree = TalentTree(talentTreeKey, wowClass.key, backgroundImage, talents)
+    talents.forEach { it.tree = tree }
+    return tree
 }
 
 private fun parseSpell(talentKey: String, jsonSpellInfo: JsonSpellInfo?): SpellInfo? {

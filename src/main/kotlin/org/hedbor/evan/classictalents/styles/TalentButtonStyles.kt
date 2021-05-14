@@ -3,16 +3,21 @@ package org.hedbor.evan.classictalents.styles
 import javafx.scene.layout.BackgroundPosition
 import javafx.scene.layout.BackgroundRepeat
 import javafx.scene.layout.BackgroundSize
-import javafx.scene.layout.BorderStrokeStyle
 import javafx.scene.paint.Color
-import tornadofx.*
+import tornadofx.Stylesheet
+import tornadofx.box
+import tornadofx.cssclass
+import tornadofx.px
 
 class TalentButtonStyles : Stylesheet() {
     companion object {
         val talentButton by cssclass()
         val talentButtonIcon by cssclass()
         val pointCounter by cssclass()
-        val tooltip by cssclass()
+
+        val tooltipTitle by cssclass()
+        val tooltipSubtitle by cssclass()
+        val tooltipDescription by cssclass()
     }
 
     init {
@@ -57,17 +62,18 @@ class TalentButtonStyles : Stylesheet() {
             backgroundRepeat += Pair(BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT)
         }
         pointCounter {
-            textFill = Color.WHITE
-            fontFamily = "Arial"
+            textFill = Color.GOLDENROD
+            fontFamily = "Friz Quadrata TT"
             fontSize = 14.px
             backgroundColor += Color.BLACK
+            backgroundRadius += box(5.px)
+
+            borderWidth += box(1.px)
+            borderColor += box(Color.DARKGOLDENROD)
+            borderRadius += box(5.px)
         }
         pointCounter and disabled {
             opacity = 1.0
-        }
-        tooltip {
-            fontFamily = "Arial"
-            fontSize = 20.px
         }
     }
 }
