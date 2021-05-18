@@ -4,20 +4,14 @@ import javafx.scene.layout.BackgroundPosition
 import javafx.scene.layout.BackgroundRepeat
 import javafx.scene.layout.BackgroundSize
 import javafx.scene.paint.Color
-import tornadofx.Stylesheet
-import tornadofx.box
-import tornadofx.cssclass
-import tornadofx.px
+import tornadofx.*
 
 class TalentButtonStyles : Stylesheet() {
     companion object {
         val talentButton by cssclass()
+        val inactive by csspseudoclass()
         val talentButtonIcon by cssclass()
         val pointCounter by cssclass()
-
-        val tooltipTitle by cssclass()
-        val tooltipSubtitle by cssclass()
-        val tooltipDescription by cssclass()
     }
 
     init {
@@ -51,7 +45,7 @@ class TalentButtonStyles : Stylesheet() {
             backgroundColor += Color.TRANSPARENT
             borderWidth += box(0.px)
         }
-        talentButton and disabled {
+        talentButton and inactive {
             backgroundColor += Color.TRANSPARENT
             borderWidth += box(0.px)
             opacity = 1.0
@@ -62,17 +56,21 @@ class TalentButtonStyles : Stylesheet() {
             backgroundRepeat += Pair(BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT)
         }
         pointCounter {
-            textFill = Color.GOLDENROD
-            fontFamily = "Friz Quadrata TT"
-            fontSize = 14.px
+            textFill = StyleConstants.DESCRIPTION_COLOR
+            fontFamily = StyleConstants.UI_FONT
+            fontSize = StyleConstants.SMALL_LABEL_TEXT
             backgroundColor += Color.BLACK
             backgroundRadius += box(5.px)
 
             borderWidth += box(1.px)
-            borderColor += box(Color.DARKGOLDENROD)
+            borderColor += box(StyleConstants.DESCRIPTION_COLOR)
             borderRadius += box(5.px)
         }
         pointCounter and disabled {
+            textFill = Color.GRAY
+            borderWidth += box(1.px)
+            borderColor += box(Color.GRAY)
+            borderRadius += box(5.px)
             opacity = 1.0
         }
     }

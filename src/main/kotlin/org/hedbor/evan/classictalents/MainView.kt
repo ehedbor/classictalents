@@ -9,7 +9,7 @@ import tornadofx.vbox
 import java.util.*
 
 class MainView : View("Classic WoW Talent Calculator") {
-    val afflictionTalentTree = loadTalentTree("/talents/warlock.json")
+    private val afflictionTalentTree = loadTalentTree("/talents/warlock.json")
 
     init {
         messages = ResourceBundle.getBundle("bundles.Messages")

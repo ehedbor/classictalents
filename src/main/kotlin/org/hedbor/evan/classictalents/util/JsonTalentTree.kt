@@ -18,6 +18,7 @@ data class JsonTalent(
     val location: List<Int>,
     val maxRank: Int,
     val icon: String,
+    @Json(name = "requires")
     val prerequisite: List<Int>? = null,
     val spell: JsonSpellInfo? = null
 )

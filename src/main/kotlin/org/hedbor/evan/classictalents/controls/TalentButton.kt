@@ -1,68 +1,91 @@
 package org.hedbor.evan.classictalents.controls
 
+import javafx.beans.property.BooleanProperty
+import javafx.beans.property.BooleanPropertyBase
+import javafx.css.PseudoClass
 import javafx.event.EventTarget
-import javafx.geometry.Pos
 import javafx.scene.control.ToggleButton
 import javafx.scene.control.Tooltip
 import javafx.scene.image.Image
+import javafx.scene.image.ImageView
 import javafx.scene.input.MouseButton
 import javafx.scene.layout.StackPane
-import org.hedbor.evan.classictalents.styles.TalentButtonStyles
 import org.hedbor.evan.classictalents.talents.Talent
+import org.hedbor.evan.classictalents.util.generateGrayscaleImage
 import tornadofx.*
 import java.util.*
+import org.hedbor.evan.classictalents.styles.TalentButtonStyles as Styles
 
 
-class TalentButton(val talent: Talent, val messages: ResourceBundle) : StackPane() {
+class TalentButton(val talent: Talent, messages: ResourceBundle) : ToggleButton() {
     companion object {
         private const val BORDER_IMAGE = "/images/Icon/large/border/default.png"
         private const val BORDER_HILITE_HOVER_IMAGE = "/images/Icon/large/hilite/hilite.png"
-        private const val BORDER_HILITE_ENABLED_IMAGE = "/images/Icon/large/hilite/enabled.png"
+        private const val BORDER_HILITE_ACTIVE_IMAGE = "/images/Icon/large/hilite/enabled.png"
         private const val BORDER_HILITE_MAX_RANK_IMAGE = "/images/Icon/large/hilite/max_rank.png"
+
+        private val INACTIVE_PSEUDO_CLASS = PseudoClass.getPseudoClass("inactive")
     }
 
-    @Suppress("JoinDeclarationAndAssignment")
-    private val button: ToggleButton
+    val inactiveProperty: BooleanProperty = object : BooleanPropertyBase(false) {
+        override fun invalidated() {
+            pseudoClassStateChanged(INACTIVE_PSEUDO_CLASS, get())
+        }
 
-    // used to compute min/max/pref size
+        override fun getBean(): Any = this@TalentButton
+
+        override fun getName(): String = "inactive"
+    }
+
+    var isInactive by inactiveProperty
+
+    private val normalBackgroundImage = Image(talent.icon)
+    private val grayscaleBackgroundImage = generateGrayscaleImage(normalBackgroundImage)
+    private val backgroundImageView: ImageView
+
+    // used to compute size
     private val borderImage = Image(BORDER_IMAGE)
 
     init {
-        button = togglebutton(selectFirst = false) {
-            addClass(TalentButtonStyles.talentButton)
-            padding = insets(0)
-            graphic = StackPane().apply {
-                imageview(talent.icon)
-                imageview(borderImage)
-                imageview(BORDER_HILITE_HOVER_IMAGE) {
-                    visibleProperty().bind(this@togglebutton.hoverProperty())
-                }
-                imageview(BORDER_HILITE_ENABLED_IMAGE) {
-                    visibleProperty().bind(talent.allocatedPointsProperty().booleanBinding(this@togglebutton.disableProperty()) { allocatedPoints ->
-                        allocatedPoints != talent.maxRank && !this@togglebutton.isDisable
-                    })
-                }
-                imageview(BORDER_HILITE_MAX_RANK_IMAGE) {
-                    visibleProperty().bind(talent.allocatedPointsProperty().booleanBinding { it == talent.maxRank })
-                }
-                children.forEach { it.addClass(TalentButtonStyles.talentButtonIcon) }
+        addClass(Styles.talentButton)
+        padding = insets(0)
+        inactiveProperty.bind(talent.shouldBeActive.not())
+
+        graphic = StackPane().apply {
+            backgroundImageView = imageview(getAppropriateBackgroundImage(isInactive)) {
+                addClass(Styles.talentButtonIcon)
             }
-            setOnMouseClicked { event ->
-                if (event.button == MouseButton.PRIMARY && talent.allocatedPoints < talent.maxRank) {
-                    talent.allocatedPoints++
-                } else if (event.button == MouseButton.SECONDARY && talent.allocatedPoints > 0) {
-                    talent.allocatedPoints--
-                }
-                isSelected = talent.allocatedPoints == talent.maxRank
+            imageview(borderImage) {
+                addClass(Styles.talentButtonIcon)
             }
-            Tooltip.install(this, TalentButtonTooltip(talent, messages))
+            imageview(BORDER_HILITE_HOVER_IMAGE) {
+                addClass(Styles.talentButtonIcon)
+                visibleProperty().bind(this@TalentButton.hoverProperty())
+            }
+            imageview(BORDER_HILITE_ACTIVE_IMAGE) {
+                addClass(Styles.talentButtonIcon)
+                visibleProperty().bind(talent.allocatedPointsProperty().booleanBinding(this@TalentButton.inactiveProperty) { allocatedPoints ->
+                    allocatedPoints != talent.maxRank && !this@TalentButton.isInactive
+                })
+            }
+            imageview(BORDER_HILITE_MAX_RANK_IMAGE) {
+                addClass(Styles.talentButtonIcon)
+                visibleProperty().bind(talent.allocatedPointsProperty().booleanBinding { it == talent.maxRank })
+            }
         }
-        alignment = Pos.BOTTOM_RIGHT
-        label(talent.allocatedPointsProperty().stringBinding { "$it" }) {
-            addClass(TalentButtonStyles.pointCounter)
-            padding = insets(3, 0)
-            isMouseTransparent = true
+        setOnMouseClicked { event ->
+            if (isInactive) return@setOnMouseClicked
+            if (event.button == MouseButton.PRIMARY && talent.allocatedPoints < talent.maxRank) {
+                talent.allocatedPoints++
+            } else if (event.button == MouseButton.SECONDARY && talent.allocatedPoints > 0) {
+                talent.allocatedPoints--
+            }
+            isSelected = talent.allocatedPoints == talent.maxRank
         }
+        inactiveProperty.addListener(ChangeListener { _, _, inactive ->
+            backgroundImageView.image = getAppropriateBackgroundImage(inactive)
+        })
+        Tooltip.install(this, TalentButtonTooltip(talent, messages))
     }
 
     override fun computeMinWidth(height: Double): Double {
@@ -87,6 +110,10 @@ class TalentButton(val talent: Talent, val messages: ResourceBundle) : StackPane
 
     override fun computeMaxHeight(width: Double): Double {
         return computePrefHeight(width)
+    }
+
+    private fun getAppropriateBackgroundImage(inactive: Boolean): Image {
+        return if (inactive) grayscaleBackgroundImage else normalBackgroundImage
     }
 }
 

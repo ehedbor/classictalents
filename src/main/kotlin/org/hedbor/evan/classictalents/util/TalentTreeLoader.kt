@@ -1,8 +1,6 @@
 package org.hedbor.evan.classictalents.util
 
 import com.beust.klaxon.Klaxon
-import javafx.collections.FXCollections.observableArrayList
-import javafx.collections.ObservableList
 import org.hedbor.evan.classictalents.talents.ResourceType
 import org.hedbor.evan.classictalents.talents.SpellInfo
 import org.hedbor.evan.classictalents.talents.Talent
@@ -22,8 +20,8 @@ fun loadTalentTree(path: String): TalentTree {
 
     val talentTreeKey = "${wowClass.key}.spec1"
     val backgroundImage = spec.backgroundImage
-    val talents: ObservableList<Talent> = observableArrayList()
-
+    val tree = TalentTree(talentTreeKey, wowClass.key, backgroundImage)
+    
     for ((talentName, jsonTalent) in spec.talents) {
         val key = "$talentTreeKey.$talentName"
         val icon = jsonTalent.icon
@@ -32,17 +30,15 @@ fun loadTalentTree(path: String): TalentTree {
         val maxRank = jsonTalent.maxRank
         val prerequisite = if (jsonTalent.prerequisite != null) {
             if (jsonTalent.prerequisite.size != 2) malformedProperty("$key.prerequisite", "[#, #]")
-            jsonTalent.prerequisite[0] to jsonTalent.location[1]
+            jsonTalent.prerequisite[0] to jsonTalent.prerequisite[1]
         } else {
             null
         }
         val spellInfo = parseSpell(key, jsonTalent.spell)
 
-        talents += Talent(key, icon, location, maxRank, spellInfo, prerequisite)
+        tree.talents += Talent(tree, key, icon, location, maxRank, spellInfo, prerequisite)
     }
 
-    val tree = TalentTree(talentTreeKey, wowClass.key, backgroundImage, talents)
-    talents.forEach { it.tree = tree }
     return tree
 }
 
