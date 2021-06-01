@@ -77,7 +77,7 @@ class TalentButton(val talent: Talent, messages: ResourceBundle) : ToggleButton(
             if (isInactive) return@setOnMouseClicked
             if (event.button == MouseButton.PRIMARY && talent.allocatedPoints < talent.maxRank) {
                 talent.allocatedPoints++
-            } else if (event.button == MouseButton.SECONDARY && talent.allocatedPoints > 0) {
+            } else if (event.button == MouseButton.SECONDARY && talent.canRemovePoints.get()) {
                 talent.allocatedPoints--
             }
             isSelected = talent.allocatedPoints == talent.maxRank

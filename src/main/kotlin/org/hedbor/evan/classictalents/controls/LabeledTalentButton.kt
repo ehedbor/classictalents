@@ -9,7 +9,7 @@ import tornadofx.*
 import java.util.*
 
 
-class LabeledTalentButton(talent: Talent, messages: ResourceBundle) : StackPane() {
+class LabeledTalentButton(val talent: Talent, messages: ResourceBundle) : StackPane() {
     init {
         val button = talentbutton(talent, messages)
 

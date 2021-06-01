@@ -1,5 +1,6 @@
 package org.hedbor.evan.classictalents.talents
 
+import javafx.beans.binding.Bindings
 import tornadofx.booleanBinding
 import tornadofx.getProperty
 import tornadofx.property
@@ -10,6 +11,29 @@ class Talent(val tree: TalentTree, val key: String, val icon: String, val locati
     fun allocatedPointsProperty() = getProperty(Talent::allocatedPoints)
 
     val talentRowUnlocked = tree.totalAllocatedPoints.booleanBinding { it as Int >= requiredPoints }
+
+    val canRemovePoints = Bindings.createBooleanBinding({
+            if (allocatedPoints <= 0) return@createBooleanBinding false
+
+            // you cannot remove points if doing so would cause a later talent's prerequisite to not be met
+            // first, check the talent that requires this talent, if any
+            val dependency = tree.talents.firstOrNull { this.location == it.prerequisiteLocation }
+            if (dependency != null && dependency.allocatedPoints > 0) {
+                return@createBooleanBinding false
+            }
+
+            // next, find the row of the highest allocated talent.
+            // if this talent is in the final row, a point can be removed
+            val highestTalent = tree.talents.filter { it.allocatedPoints > 0 }.maxByOrNull { it.location.first }!!
+            if (location.first == highestTalent.location.first) {
+                return@createBooleanBinding true
+            }
+
+            // otherwise, determine the total number of allocated points in all tiers lower than the highest.
+            // if removing a point would cause this total to be less than the requirement of the highest talent, a point cannot be removed
+            val totalPoints = tree.talents.filter { it.location.first < highestTalent.location.first }.sumOf { it.allocatedPoints }
+            totalPoints - 1 >= highestTalent.requiredPoints
+        }, tree.talents)
 
     val shouldBeActive = talentRowUnlocked.booleanBinding { talentRowUnlocked ->
         val prereq = prerequisite

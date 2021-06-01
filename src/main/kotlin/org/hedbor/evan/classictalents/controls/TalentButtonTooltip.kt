@@ -140,6 +140,8 @@ class TalentButtonTooltip(private val talent: Talent, private val messages: Reso
         }
 
         if (talent.maxRank > 1) {
+            // spacer
+            label {}
             label {
                 addClass(Styles.tooltipSubtitle)
                 text = messages["talent.rank.next"]
@@ -165,6 +167,9 @@ class TalentButtonTooltip(private val talent: Talent, private val messages: Reso
     }
 
     private fun EventTarget.generateFooter() {
+        // spacer
+        label {}
+
         label {
             addClass(Styles.tooltipError)
             val specName = messages[talent.tree.key]
@@ -188,16 +193,15 @@ class TalentButtonTooltip(private val talent: Talent, private val messages: Reso
 
         label {
             addClass(Styles.tooltipConfirmation)
-            textProperty().bind(talent.allocatedPointsProperty().stringBinding { points ->
-                if (points == talent.maxRank) {
-                    messages["talent.unlearn"]
-                } else {
-                    messages["talent.learn"]
-                }
-            })
-
-            // TODO: make this invisible if the talent cant be unlearned
+            text = messages["talent.learn"]
             visibleWhen { talent.shouldBeActive }
+            managedWhen(visibleProperty())
+        }
+
+        label {
+            addClass(Styles.tooltipError)
+            text = messages["talent.unlearn"]
+            visibleWhen { talent.canRemovePoints }
             managedWhen(visibleProperty())
         }
     }
