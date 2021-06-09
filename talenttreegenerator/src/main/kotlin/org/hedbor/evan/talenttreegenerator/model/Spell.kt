@@ -7,17 +7,18 @@ import javafx.beans.property.SimpleStringProperty
 import tornadofx.getValue
 import tornadofx.setValue
 
+@Suppress("unused", "HasPlatformType")
 class Spell(
     hasResource: Boolean = false,
-    resourceCost: Int = Int.MIN_VALUE,
+    resourceCost: Int = 0,
     resourceType: String? = null,
-    isInstantCast: Boolean = false,
-    castTime: Double = Double.MIN_VALUE,
+    isNotInstantCast: Boolean = false,
+    castTime: Double = 0.0,
     hasCooldown: Boolean = false,
-    cooldown: Int = Int.MIN_VALUE,
+    cooldown: Int = 0,
     cooldownUnit: String? = null,
     isNotMeleeRange: Boolean = false,
-    range: Int = Int.MIN_VALUE
+    range: Int = 0
 ) {
     val hasResourceProperty = SimpleBooleanProperty(this, "hasResource", hasResource)
     var hasResource by hasResourceProperty
@@ -28,8 +29,8 @@ class Spell(
     val resourceTypeProperty = SimpleStringProperty(this, "resourceType", resourceType)
     var resourceType by resourceTypeProperty
 
-    val isInstantCastProperty = SimpleBooleanProperty(this, "isInstantCast", isInstantCast)
-    var isInstantCast by isInstantCastProperty
+    val isNotInstantCastProperty = SimpleBooleanProperty(this, "isNotInstantCast", isNotInstantCast)
+    var isNotInstantCast by isNotInstantCastProperty
 
     val castTimeProperty = SimpleDoubleProperty(this, "castTime", castTime)
     var castTime by castTimeProperty

@@ -7,17 +7,18 @@ import javafx.beans.property.SimpleStringProperty
 import tornadofx.getValue
 import tornadofx.setValue
 
+@Suppress("unused", "HasPlatformType")
 class Talent(
     displayName: String? = null,
     translationKey: String? = null,
-    location: Location? = null,
+    location: Location = Location(),
     description: String? = null,
-    maxRank: Int = Integer.MIN_VALUE,
+    maxRank: Int = 0,
     icon: String? = null,
     hasPrerequisite: Boolean = false,
-    prerequisite: Location? = null,
+    prerequisite: Location = Location(),
     isSpell: Boolean = false,
-    spellInfo: Spell? = null,
+    spell: Spell = Spell(),
 ) {
     val displayNameProperty = SimpleStringProperty(this, "displayName", displayName)
     var displayName by displayNameProperty
@@ -25,7 +26,7 @@ class Talent(
     val translationKeyProperty = SimpleStringProperty(this, "translationKey", translationKey)
     var translationKey by translationKeyProperty
 
-    val locationProperty = SimpleObjectProperty(this, "location", location)
+    val locationProperty = SimpleObjectProperty<Location>(this, "location", location)
     var location by locationProperty
 
     val descriptionProperty = SimpleStringProperty(this, "description", description)
@@ -40,12 +41,12 @@ class Talent(
     val hasPrerequisiteProperty = SimpleBooleanProperty(this, "hasPrerequisite", hasPrerequisite)
     val hasPrerequisite by hasPrerequisiteProperty
 
-    val prerequisiteProperty = SimpleObjectProperty(this, "prerequisite", prerequisite)
+    val prerequisiteProperty = SimpleObjectProperty<Location>(this, "prerequisite", prerequisite)
     val prerequisite by prerequisiteProperty
 
     val isSpellProperty = SimpleBooleanProperty(this, "isSpell", isSpell)
     var isSpell by isSpellProperty
 
-    val spellInfoProperty = SimpleObjectProperty(this, "spellInfo", spellInfo)
-    var spellInfo by spellInfoProperty
+    val spellProperty = SimpleObjectProperty<Spell>(this, "spell", spell)
+    var spell by spellProperty
 }

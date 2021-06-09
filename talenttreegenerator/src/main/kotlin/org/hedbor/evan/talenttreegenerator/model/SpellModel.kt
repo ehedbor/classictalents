@@ -6,7 +6,7 @@ class SpellModel : ItemViewModel<Spell>() {
     val hasResource = bind(Spell::hasResourceProperty)
     val resourceCost = bind(Spell::resourceCostProperty)
     val resourceType = bind(Spell::resourceTypeProperty)
-    val isInstantCast = bind(Spell::isInstantCastProperty)
+    val isNotInstantCast = bind(Spell::isNotInstantCastProperty)
     val castTime = bind(Spell::castTimeProperty)
     val hasCooldown = bind(Spell::hasCooldownProperty)
     val cooldown = bind(Spell::cooldownProperty)

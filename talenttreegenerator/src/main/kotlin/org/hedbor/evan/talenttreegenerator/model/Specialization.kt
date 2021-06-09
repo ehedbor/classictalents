@@ -7,7 +7,13 @@ import tornadofx.getValue
 import tornadofx.observableListOf
 import tornadofx.setValue
 
+@Suppress("HasPlatformType", "unused")
 class Specialization(displayName: String? = null, translationKey: String? = null, backgroundImage: String? = null, talents: ObservableList<Talent> = observableListOf()) {
+    companion object {
+        internal const val ROWS = 7
+        internal const val COLUMNS = 4
+    }
+
     val displayNameProperty = SimpleStringProperty(this, "displayName", displayName)
     var displayName by displayNameProperty
 

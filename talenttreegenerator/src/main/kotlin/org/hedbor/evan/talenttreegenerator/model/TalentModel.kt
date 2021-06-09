@@ -7,18 +7,20 @@ class TalentModel : ItemViewModel<Talent>() {
     val displayName = bind(Talent::displayNameProperty)
     val translationKey = bind(Talent::translationKeyProperty)
     val description = bind(Talent::descriptionProperty)
+    private val locationProperty = bind(Talent::locationProperty)
     val location = LocationModel()
     val maxRank = bind(Talent::maxRankProperty)
     val icon = bind(Talent::iconProperty)
     val hasPrerequisite = bind(Talent::hasPrerequisiteProperty)
+    private val prerequisiteProperty = bind(Talent::prerequisiteProperty)
     val prerequisite = LocationModel()
     val isSpell = bind(Talent::isSpellProperty)
-    val spellInfo = SpellModel()
-
+    private val spellProperty = bind(Talent::spellProperty)
+    val spell = SpellModel()
 
     init {
-        //location.itemProperty.bind(item.locationProperty)
-        //prerequisite.itemProperty.bind(item.prerequisiteProperty)
-        //spellInfo.itemProperty.bind(item.spellInfoProperty)
+        location.itemProperty.bind(locationProperty)
+        prerequisite.itemProperty.bind(prerequisiteProperty)
+        spell.itemProperty.bind(spellProperty)
     }
 }

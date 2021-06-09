@@ -6,7 +6,16 @@ import tornadofx.ItemViewModel
 class WowClassModel : ItemViewModel<WowClass>() {
     val displayName = bind(WowClass::displayNameProperty)
     val translationKey = bind(WowClass::translationKeyProperty)
-    val spec1 = bind(WowClass::spec1Property)
-    val spec2 = bind(WowClass::spec2Property)
-    val spec3 = bind(WowClass::spec3Property)
+    private val spec1Property = bind(WowClass::spec1Property)
+    private val spec2Property = bind(WowClass::spec2Property)
+    private val spec3Property = bind(WowClass::spec3Property)
+    val spec1 = SpecializationModel()
+    val spec2 = SpecializationModel()
+    val spec3 = SpecializationModel()
+
+    init {
+        spec1.itemProperty.bind(spec1Property)
+        spec2.itemProperty.bind(spec2Property)
+        spec3.itemProperty.bind(spec3Property)
+    }
 }
