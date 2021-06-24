@@ -1,5 +1,6 @@
 package org.hedbor.evan.talenttreegenerator.view
 
+import javafx.beans.binding.BooleanExpression
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonBar
 import org.hedbor.evan.talenttreegenerator.*
@@ -10,9 +11,11 @@ import org.hedbor.evan.talenttreegenerator.model.WowClassModel
 import tornadofx.*
 
 
-class WowClassEditor : Fragment() {
+class WowClassEditor : View("Talent Tree Editor") {
     val controller: TalentTreeController by inject()
-    val model: WowClassModel by inject()
+    val model: WowClassModel by lazy { controller.model }
+
+    private lateinit var specFieldset: Fieldset
 
     init {
         titleProperty.bind(model.displayName)
@@ -46,29 +49,28 @@ class WowClassEditor : Fragment() {
                         }
                     }
                 }
-                fieldset("Specializations") {
-                    for (i in 1..3) createNewSpecField()
+                specFieldset = fieldset("Specializations") {
                     button("Add Specialization") {
-                        action { createNewSpecField() }
+                        repeat(3) { createNewSpecField(addNewSpec()) }
+                        action { createNewSpecField(addNewSpec()) }
                     }
                 }
-
             }
         }
         bottom {
             buttonbar {
                 button("Open") {
-                    action { controller.load() }
+                    action { load() }
                 }
                 button("Save") {
-                    enableWhen(model.dirty.and(model.valid))
+                    enableWhen(model.dirty.and(modelValid))
                     action {
                         model.commit()
                         controller.save()
                     }
                 }
                 button("Save As") {
-                    enableWhen(model.dirty.and(model.valid))
+                    enableWhen(model.dirty.and(modelValid))
                     action {
                         model.commit()
                         controller.save(toNewFile = true)
@@ -78,6 +80,22 @@ class WowClassEditor : Fragment() {
                     action { quitWithConfirmation() }
                 }
             }
+        }
+    }
+
+    private val modelValid: BooleanExpression
+        get() {
+            return model.specializations.booleanBinding(model.valid) { specs ->
+                model.isValid && specs!!.map { it.validated }.all { it }
+            }
+        }
+
+    private fun load() {
+        unbindTranslationKey(model.translationKey)
+        val success = controller.load()
+        if (success) {
+            specFieldset.children.filterIsInstance<Field>().forEach { it.removeFromParent() }
+            model.specializations.forEach { specFieldset.createNewSpecField(it) }
         }
     }
 
@@ -99,8 +117,7 @@ class WowClassEditor : Fragment() {
         }
     }
 
-    private fun Fieldset.createNewSpecField() {
-        val spec = addNewSpec()
+    private fun Fieldset.createNewSpecField(spec: Specialization) {
         val field = Field().apply field@{
             textProperty.bind(spec.displayNameProperty)
             invisibleCheckbox()

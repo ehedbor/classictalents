@@ -3,6 +3,7 @@ package org.hedbor.evan.talenttreegenerator.model.serializers
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import org.hedbor.evan.talenttreegenerator.model.Location
@@ -15,6 +16,8 @@ object TalentSerializer : KSerializer<Talent> {
     override val descriptor = TalentSurrogate.serializer().descriptor
 
     override fun serialize(encoder: Encoder, value: Talent) {
+        if (!value.validated) throw SerializationException("Attempted to serialize invalid Talent: $value")
+
         val prerequisite = if (value.hasPrerequisite) value.prerequisite else null
         val spell = if (value.isSpell) value.spell else null
         val surrogate = TalentSurrogate(value.location, value.maxRank, prerequisite, spell, value.icon)
@@ -27,7 +30,8 @@ object TalentSerializer : KSerializer<Talent> {
         return Talent(
             location = surrogate.location,
             maxRank = surrogate.maxRank,
-            icon = surrogate.icon
+            icon = surrogate.icon,
+            validated = true
         ).apply {
             if (surrogate.prerequisite != null) {
                 hasPrerequisite = true

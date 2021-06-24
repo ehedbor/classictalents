@@ -52,4 +52,10 @@ class Spell(
 
     val rangeProperty = SimpleIntegerProperty(this, "range", range)
     var range by rangeProperty
+
+    override fun toString(): String {
+        return """Spell(hasResource=$hasResource, resourceCost=$resourceCost, resourceType='$resourceType', 
+            |isNotInstantCast=$isNotInstantCast, castTime=$castTime, hasCooldown=$hasCooldown, cooldown=$cooldown, 
+            |cooldownUnit='$cooldownUnit', hasRange=$hasRange, range=$range)""".trimMargin()
+    }
 }

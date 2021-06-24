@@ -22,6 +22,10 @@ class TalentEditor : Fragment("Talent Editor") {
     val specModel: SpecializationModel by inject()
     val model: TalentModel by inject()
 
+    init {
+        model.validated.bind(modelValid)
+    }
+
     override val root = form {
         fieldset("General") {
             field("Display Name") {
@@ -67,7 +71,9 @@ class TalentEditor : Fragment("Talent Editor") {
             field("Max Rank") {
                 invisibleCheckbox()
                 combobox(model.maxRank, listOf(1, 2, 3, 4, 5)) {
-                    selectionModel.selectFirst()
+                    if (selectionModel.selectedItem !in items) {
+                        selectionModel.selectLast()
+                    }
                     prefWidthProperty().bind(this@field.widthProperty().divide(COMBOBOX_SCALE_FACTOR))
                     maxWidthProperty().bind(prefWidthProperty())
                     validator {
@@ -90,7 +96,7 @@ class TalentEditor : Fragment("Talent Editor") {
                         when {
                             isDisable -> null
                             text.isNullOrEmpty() -> error("This field is required.")
-                            text.toIntOrNull() !in 1..Specialization.ROWS -> error("Row out of bounds.")
+                            text.toIntOrNull() !in 0 until Specialization.ROWS -> error("Row out of bounds.")
                             else -> success()
                         }
                     }
@@ -105,7 +111,7 @@ class TalentEditor : Fragment("Talent Editor") {
                         when {
                             isDisable -> null
                             text.isNullOrEmpty() -> error("This field is required.")
-                            text.toIntOrNull() !in 1..Specialization.ROWS -> error("Column out of bounds.")
+                            text.toIntOrNull() !in 0 until Specialization.ROWS -> error("Column out of bounds.")
                             else -> success()
                         }
                     }
@@ -152,7 +158,9 @@ class TalentEditor : Fragment("Talent Editor") {
                     prefWidthProperty().bind(this@field.widthProperty().divide(COMBOBOX_SCALE_FACTOR))
                     maxWidthProperty().bind(prefWidthProperty())
                     minWidth = 50.0
-                    selectionModel.selectFirst()
+                    if (selectionModel.selectedItem !in items) {
+                        selectionModel.selectFirst()
+                    }
                     enableWhen(model.spell.hasResource)
                     validator {
                         when {
@@ -217,7 +225,9 @@ class TalentEditor : Fragment("Talent Editor") {
                 combobox(model.spell.cooldownUnit, listOf("sec", "min", "hr")) {
                     prefWidthProperty().bind(this@field.widthProperty().divide(COMBOBOX_SCALE_FACTOR))
                     maxWidthProperty().bind(prefWidthProperty())
-                    selectionModel.selectFirst()
+                    if (selectionModel.selectedItem !in items) {
+                        selectionModel.selectFirst()
+                    }
                     enableWhen(model.spell.hasCooldown)
                     validator {
                         when {
@@ -278,16 +288,19 @@ class TalentEditor : Fragment("Talent Editor") {
         model.prerequisite.commit()
         model.spell.commit()
         model.commit()
+        specModel.markDirty(specModel.talents)
     }
 
     private fun saveAndCloseEditor() {
         unbindTranslationKey(model.translationKey)
+        model.validated.unbind()
         saveEditor()
         close()
     }
 
     private fun closeEditor() {
         unbindTranslationKey(model.translationKey)
+        model.validated.unbind()
         model.location.rollback()
         model.prerequisite.rollback()
         model.spell.rollback()

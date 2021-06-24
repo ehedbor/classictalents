@@ -23,4 +23,6 @@ class Location(row: Int = 0, column: Int = 0) {
     }
 
     override fun hashCode() = 31 * row + column
+
+    override fun toString()= "[$row, $column]"
 }

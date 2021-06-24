@@ -28,7 +28,7 @@ object SpellSerializer : KSerializer<Spell> {
         }
 
         var castTime = "instant"
-        if (value.isNotInstantCast) {
+        if (value.isNotInstantCast && value.castTime > 0.0004) {
             castTime = "${value.castTime} sec"
         }
 
@@ -84,6 +84,7 @@ object SpellSerializer : KSerializer<Spell> {
                 if (substrings.size != 2) {
                     malformedProperty("cooldown", "#.# (sec|min|hr)")
                 }
+                hasCooldown = true
                 cooldown = substrings[0].toDoubleOrNull() ?: malformedProperty("cooldown", "#.# (sec|min|hr)'")
                 cooldownUnit = when (val unit = substrings[1]) {
                     "sec", "min", "hr" -> unit

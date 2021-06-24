@@ -1,5 +1,6 @@
 package org.hedbor.evan.talenttreegenerator.model
 
+import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleListProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.ObservableList
@@ -15,7 +16,8 @@ class Specialization(
     displayName: String? = null,
     translationKey: String? = null,
     backgroundImage: String? = null,
-    talents: ObservableList<Talent> = observableListOf()
+    talents: ObservableList<Talent> = observableListOf(),
+    validated: Boolean = false
 ) {
     companion object {
         internal const val ROWS = 7
@@ -33,4 +35,14 @@ class Specialization(
 
     val talentsProperty = SimpleListProperty(this, "talents", talents)
     var talents by talentsProperty
+
+    val validatedProperty = SimpleBooleanProperty(this, "isValid", validated)
+    var validated by validatedProperty
+
+    override fun toString(): String {
+        return "Specialization(displayName='$displayName', translationKey='$translationKey', " +
+                "backgroundImage='$backgroundImage', talents=$talents, validated=$validated)"
+    }
+
+
 }

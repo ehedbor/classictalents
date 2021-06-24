@@ -25,4 +25,8 @@ class WowClass(
 
     val specializationsProperty = SimpleListProperty<Specialization>(this, "specializations", specializations)
     var specializations by specializationsProperty
+
+    override fun toString(): String {
+        return "WowClass(displayName='$displayName', translationKey='$translationKey', specializations=$specializations)"
+    }
 }

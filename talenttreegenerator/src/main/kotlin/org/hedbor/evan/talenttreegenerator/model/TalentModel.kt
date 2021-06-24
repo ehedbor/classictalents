@@ -17,6 +17,7 @@ class TalentModel(initialValue: Talent? = null) : ItemViewModel<Talent>(initialV
     val isSpell = bind(Talent::isSpellProperty)
     private val spellProperty = bind(Talent::spellProperty)
     val spell = SpellModel()
+    val validated = bind(Talent::validatedProperty)
 
     init {
         location.itemProperty.bind(locationProperty)

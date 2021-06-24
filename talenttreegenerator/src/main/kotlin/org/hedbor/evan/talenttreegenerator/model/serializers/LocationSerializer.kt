@@ -2,10 +2,12 @@ package org.hedbor.evan.talenttreegenerator.model.serializers
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.builtins.IntArraySerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.StructureKind
+import kotlinx.serialization.encoding.CompositeDecoder.Companion.DECODE_DONE
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.encoding.decodeStructure
@@ -29,8 +31,17 @@ object LocationSerializer : KSerializer<Location> {
         var row: Int = -1
         var col: Int = -1
         decoder.decodeStructure(IntArraySerializer().descriptor) {
-            row = decodeIntElement(Int.serializer().descriptor, 0)
-            col = decodeIntElement(Int.serializer().descriptor, 1)
+            val size = decodeCollectionSize(Int.serializer().descriptor)
+            val unknownSize = (size == -1)
+            if (!unknownSize && size != 2) { throw SerializationException("Expected int array of size 2. Actual size: $size") }
+            while (true) {
+                when (val index = decodeElementIndex(Int.serializer().descriptor)) {
+                    0 -> row = decodeIntElement(Int.serializer().descriptor, 0)
+                    1 -> col = decodeIntElement(Int.serializer().descriptor, 1)
+                    DECODE_DONE -> break
+                    else -> throw SerializationException("Unexpected index $index. Expected int array of size 2.")
+                }
+            }
         }
         return Location(row, col)
     }

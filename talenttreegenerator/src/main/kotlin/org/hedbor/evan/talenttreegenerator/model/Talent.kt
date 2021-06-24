@@ -22,7 +22,12 @@ class Talent(
     prerequisite: Location = Location(),
     isSpell: Boolean = false,
     spell: Spell = Spell(),
+    validated: Boolean = false
 ) {
+    companion object {
+        const val HELPFUL_DESCRIPTION = "{0,choice,1#ONE_POINT|2#TWO_POINTS|3#THREE_POINTS|4#FOUR_POINTS|5#FIVE_POINTS}"
+    }
+
     val displayNameProperty = SimpleStringProperty(this, "displayName", displayName)
     var displayName by displayNameProperty
 
@@ -52,4 +57,14 @@ class Talent(
 
     val spellProperty = SimpleObjectProperty<Spell>(this, "spell", spell)
     var spell by spellProperty
+
+    val validatedProperty = SimpleBooleanProperty(this, "isValid", validated)
+    var validated by validatedProperty
+
+    override fun toString(): String {
+        return """Talent(
+            |displayName='$displayName', translationKey='$translationKey', location=$location, 
+            |description='$description', maxRank=$maxRank, icon='$icon', hasPrerequisite=$hasPrerequisite, 
+            |prerequisite=$prerequisite, isSpell=$isSpell, spell=$spell, validated=$validated)""".trimMargin()
+    }
 }

@@ -18,8 +18,10 @@ object WowClassSerializer : KSerializer<WowClass> {
     override val descriptor = WowClassSurrogate.serializer().descriptor
 
     override fun serialize(encoder: Encoder, value: WowClass) {
-        val specs = value.specializations.filterNotNull().associateBy { it.translationKey }
-        val toEncode = mapOf(value.translationKey to WowClassSurrogate(specs))
+        val specs = value.specializations
+            .filter { it != null && it.validated }
+            .associateBy { it.translationKey }
+        val toEncode = linkedMapOf(value.translationKey to WowClassSurrogate(specs))
         val serializer = MapSerializer(String.serializer(), WowClassSurrogate.serializer())
         encoder.encodeSerializableValue(serializer, toEncode)
     }
