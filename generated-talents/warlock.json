@@ -1,0 +1,16 @@
+{
+    "warlock": {
+        "specs": {
+            "affliction": {
+                "backgroundImage": "/images/backgrounds/warlock_affliction.jpg",
+                "talents": {
+                    "suppression": {
+                        "location": [0, 1],
+                        "maxRank": 1,
+                        "icon": "/images/Classic/Spells/Racial_Troll_Berserk.png"
+                    }
+                }
+            }
+        }
+    }
+}

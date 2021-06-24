@@ -45,7 +45,8 @@ fun loadTalentTree(path: String): TalentTree {
 private fun parseSpell(talentKey: String, jsonSpellInfo: JsonSpellInfo?): SpellInfo? {
     if (jsonSpellInfo == null) return null
     
-    val castTimeSec = if (jsonSpellInfo.castTime == "instant") 0 else jsonSpellInfo.castTime.toInt()
+    val castTimeSec = if (jsonSpellInfo.castTime == "instant") 0 else jsonSpellInfo.castTime.toIntOrNull()
+        ?: malformedProperty("$talentKey.spell.castTime", "'(instant|#)'")
 
     var cooldownSec: Int? = null
     if (jsonSpellInfo.cooldown != null) {

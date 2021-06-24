@@ -4,10 +4,13 @@ import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
+import kotlinx.serialization.Serializable
+import org.hedbor.evan.talenttreegenerator.model.serializers.TalentSerializer
 import tornadofx.getValue
 import tornadofx.setValue
 
 @Suppress("unused", "HasPlatformType")
+@Serializable(with = TalentSerializer::class)
 class Talent(
     displayName: String? = null,
     translationKey: String? = null,
@@ -39,10 +42,10 @@ class Talent(
     var icon by iconProperty
 
     val hasPrerequisiteProperty = SimpleBooleanProperty(this, "hasPrerequisite", hasPrerequisite)
-    val hasPrerequisite by hasPrerequisiteProperty
+    var hasPrerequisite by hasPrerequisiteProperty
 
     val prerequisiteProperty = SimpleObjectProperty<Location>(this, "prerequisite", prerequisite)
-    val prerequisite by prerequisiteProperty
+    var prerequisite by prerequisiteProperty
 
     val isSpellProperty = SimpleBooleanProperty(this, "isSpell", isSpell)
     var isSpell by isSpellProperty

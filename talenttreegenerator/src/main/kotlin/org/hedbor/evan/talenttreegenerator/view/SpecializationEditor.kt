@@ -2,7 +2,9 @@ package org.hedbor.evan.talenttreegenerator.view
 
 import javafx.collections.ObservableList
 import javafx.event.EventTarget
+import javafx.scene.control.Alert
 import javafx.scene.control.Button
+import javafx.scene.control.ButtonBar
 import org.hedbor.evan.talenttreegenerator.*
 import org.hedbor.evan.talenttreegenerator.model.*
 import tornadofx.*
@@ -14,51 +16,43 @@ class SpecializationEditor : Fragment() {
 
     private val talentButtons: ObservableList<ObservableList<Button>> = observableListOf()
 
+    init {
+        titleProperty.bind(model.displayName)
+    }
+
     override val root = borderpane {
-        left {
+        center {
             form {
-                fieldset {
-                    field("Display Name *") {
+                fieldset("Specialization") {
+                    field("Display Name") {
                         invisibleCheckbox()
                         textfield(model.displayName) {
-                            validator {
-                                val text = text
-                                when {
-                                    text.isNullOrEmpty() -> error("This field is required.")
-                                    !isValidDisplayName(text) -> error("Display name may only contain letters, numbers and spaces.")
-                                    else -> success()
-                                }
-                            }
+                            isValidName(NameType.DISPLAY_NAME)
                         }
                     }
-                    field("Translation Key *") {
+                    field("Translation Key") {
                         val useCustomTranslationKeyCheckBox = checkbox {
                             action {
                                 if (!isSelected) {
-                                    bindTranslationKey(model.translationKey, model.displayName, wowClassModel.translationKey)
+                                    bindTranslationKey(model.translationKey, model.displayName)
                                 } else {
                                     unbindTranslationKey(model.translationKey)
                                 }
                             }
                         }
-                        bindTranslationKey(model.translationKey, model.displayName, wowClassModel.translationKey)
+                        bindTranslationKey(model.translationKey, model.displayName)
 
+                        label(wowClassModel.translationKey.stringBinding{ "$it." })
                         textfield(model.translationKey) {
-                            validator {
-                                val text = text
-                                when {
-                                    text.isNullOrEmpty() -> error("This field is required.")
-                                    !isValidTranslationKey(text) ->
-                                        error("Translation key may only contain lowercase letters, numbers, periods and underscores.")
-                                    else -> success()
-                                }
-                            }
+                            isValidName(NameType.TRANSLATION_KEY)
                             enableWhen(useCustomTranslationKeyCheckBox.selectedProperty())
                         }
                     }
-                    field("Background Image *") {
+                    field("Background Image") {
                         invisibleCheckbox()
-                        textfield(model.backgroundImage).required()
+                        textfield(model.backgroundImage) {
+                            requiredWithSuccess()
+                        }
                         button("...") {
                             action {
                                 val image = chooseIconFromResources("Choose a Background Image", INITIAL_BACKGROUND_DIRECTORY)
@@ -67,33 +61,45 @@ class SpecializationEditor : Fragment() {
                             }
                         }
                     }
-                }
-            }
-        }
-        center {
-            vbox {
-                gridpane {
-                    for (row in 0 until Specialization.ROWS) {
-                        val talentRow = observableListOf<Button>()
-                        for (col in 0 until Specialization.COLUMNS) {
-                            talentRow += talentbutton(row, col)
+                    field("Talents") {
+                        invisibleCheckbox()
+                        gridpane {
+                            for (row in 0 until Specialization.ROWS) {
+                                val talentRow = observableListOf<Button>()
+                                for (col in 0 until Specialization.COLUMNS) {
+                                    talentRow += talentbutton(row, col)
+                                }
+                                talentButtons += talentRow
+                            }
                         }
-                        talentButtons += talentRow
                     }
                 }
             }
         }
-    }
-
-    init {
-        titleProperty.bind(model.displayName)
+        bottom {
+            buttonbar {
+                button("Apply", ButtonBar.ButtonData.APPLY) {
+                    enableWhen(model.valid.and(model.dirty))
+                    action { saveEditor() }
+                }
+                button("OK", ButtonBar.ButtonData.OK_DONE) {
+                    enableWhen(model.valid)
+                    action { saveAndCloseEditor() }
+                }
+                button("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE) {
+                    action { closeEditorWithConfirmation() }
+                }
+            }
+        }
     }
 
     private fun EventTarget.talentbutton(row: Int, col: Int): Button {
         val location = Location(row, col)
         var talent = model.talents.find { it.location == location  }
         if (talent == null) {
-            talent = Talent(location = location, description = "{0,choice,1#AAAA|2#BBBB|3#CCCC|4#DDDD|5#EEEE}")
+            talent = Talent(
+                location = location,
+                description = "{0,choice,1#ONE_POINT|2#TWO_POINTS|3#THREE_POINTS|4#FOUR_POINTS|5#FIVE_POINTS}")
             model.talents += talent
         }
 
@@ -112,13 +118,40 @@ class SpecializationEditor : Fragment() {
         }
     }
 
+    private fun saveEditor() {
+        model.commit()
+    }
+
+    private fun saveAndCloseEditor() {
+        unbindTranslationKey(model.translationKey)
+        saveEditor()
+        close()
+    }
+
+    private fun closeEditor() {
+        unbindTranslationKey(model.translationKey)
+        model.rollback()
+        close()
+    }
+
+    private fun closeEditorWithConfirmation() {
+        if (!model.dirty.value) {
+            closeEditor()
+        } else {
+            alert(
+                Alert.AlertType.CONFIRMATION,
+                "Discard changes?",
+                "Are you sure you want to discard all changes made to this spec? You will not be able to reverse your decision."
+            ) {
+                if (it.buttonData == ButtonBar.ButtonData.OK_DONE)
+                    closeEditor()
+            }
+        }
+    }
+
     private fun editTalent(talent: Talent) {
-        val editScope = Scope()
-        val talentModel = TalentModel()
-        talentModel.item = talent
-        setInScope(wowClassModel, editScope)
-        setInScope(model, editScope)
-        setInScope(talentModel, editScope)
-        find<TalentEditor>(editScope).openModal()
+        val talentModel = TalentModel(talent)
+        val scope = Scope(wowClassModel, model, talentModel)
+        find<TalentEditor>(scope).openModal()
     }
 }

@@ -2,7 +2,7 @@ package org.hedbor.evan.talenttreegenerator.model
 
 import tornadofx.ItemViewModel
 
-class SpellModel : ItemViewModel<Spell>() {
+class SpellModel(initialValue: Spell? = null) : ItemViewModel<Spell>(initialValue) {
     val hasResource = bind(Spell::hasResourceProperty)
     val resourceCost = bind(Spell::resourceCostProperty)
     val resourceType = bind(Spell::resourceTypeProperty)
@@ -11,6 +11,6 @@ class SpellModel : ItemViewModel<Spell>() {
     val hasCooldown = bind(Spell::hasCooldownProperty)
     val cooldown = bind(Spell::cooldownProperty)
     val cooldownUnit = bind(Spell::cooldownUnitProperty)
-    val isNotMeleeRange = bind(Spell::isNotMeleeRangeProperty)
+    val hasRange = bind(Spell::hasRangeProperty)
     val range = bind(Spell::rangeProperty)
 }

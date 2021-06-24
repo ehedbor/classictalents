@@ -3,12 +3,20 @@ package org.hedbor.evan.talenttreegenerator.model
 import javafx.beans.property.SimpleListProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.ObservableList
+import kotlinx.serialization.Serializable
+import org.hedbor.evan.talenttreegenerator.model.serializers.SpecializationSerializer
 import tornadofx.getValue
 import tornadofx.observableListOf
 import tornadofx.setValue
 
 @Suppress("HasPlatformType", "unused")
-class Specialization(displayName: String? = null, translationKey: String? = null, backgroundImage: String? = null, talents: ObservableList<Talent> = observableListOf()) {
+@Serializable(with = SpecializationSerializer::class)
+class Specialization(
+    displayName: String? = null,
+    translationKey: String? = null,
+    backgroundImage: String? = null,
+    talents: ObservableList<Talent> = observableListOf()
+) {
     companion object {
         internal const val ROWS = 7
         internal const val COLUMNS = 4

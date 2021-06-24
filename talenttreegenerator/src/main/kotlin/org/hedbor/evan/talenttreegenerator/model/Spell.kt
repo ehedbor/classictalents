@@ -4,10 +4,13 @@ import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleDoubleProperty
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
+import kotlinx.serialization.Serializable
+import org.hedbor.evan.talenttreegenerator.model.serializers.SpellSerializer
 import tornadofx.getValue
 import tornadofx.setValue
 
 @Suppress("unused", "HasPlatformType")
+@Serializable(with = SpellSerializer::class)
 class Spell(
     hasResource: Boolean = false,
     resourceCost: Int = 0,
@@ -15,9 +18,9 @@ class Spell(
     isNotInstantCast: Boolean = false,
     castTime: Double = 0.0,
     hasCooldown: Boolean = false,
-    cooldown: Int = 0,
+    cooldown: Double = 0.0,
     cooldownUnit: String? = null,
-    isNotMeleeRange: Boolean = false,
+    hasRange: Boolean = false,
     range: Int = 0
 ) {
     val hasResourceProperty = SimpleBooleanProperty(this, "hasResource", hasResource)
@@ -38,14 +41,14 @@ class Spell(
     val hasCooldownProperty = SimpleBooleanProperty(this, "hasCooldown", hasCooldown)
     var hasCooldown by hasCooldownProperty
 
-    val cooldownProperty = SimpleIntegerProperty(this, "cooldown", cooldown)
+    val cooldownProperty = SimpleDoubleProperty(this, "cooldown", cooldown)
     var cooldown by cooldownProperty
 
     val cooldownUnitProperty = SimpleStringProperty(this, "cooldownUnit", cooldownUnit)
     var cooldownUnit by cooldownUnitProperty
 
-    val isNotMeleeRangeProperty = SimpleBooleanProperty(this, "isNotMeleeRange", isNotMeleeRange)
-    var isNotMeleeRange by isNotMeleeRangeProperty
+    val hasRangeProperty = SimpleBooleanProperty(this, "hasRange", hasRange)
+    var hasRange by hasRangeProperty
 
     val rangeProperty = SimpleIntegerProperty(this, "range", range)
     var range by rangeProperty

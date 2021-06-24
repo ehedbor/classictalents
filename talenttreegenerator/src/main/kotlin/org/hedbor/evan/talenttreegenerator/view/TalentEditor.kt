@@ -1,11 +1,13 @@
 package org.hedbor.evan.talenttreegenerator.view
 
+import javafx.scene.control.Alert
 import javafx.scene.control.ButtonBar
 import javafx.util.converter.NumberStringConverter
 import org.hedbor.evan.talenttreegenerator.*
 import org.hedbor.evan.talenttreegenerator.model.Specialization
 import org.hedbor.evan.talenttreegenerator.model.SpecializationModel
 import org.hedbor.evan.talenttreegenerator.model.TalentModel
+import org.hedbor.evan.talenttreegenerator.model.WowClassModel
 import tornadofx.*
 
 
@@ -16,59 +18,43 @@ class TalentEditor : Fragment("Talent Editor") {
         private const val COMBOBOX_SCALE_FACTOR = 6
     }
 
+    val wowClassModel: WowClassModel by inject()
     val specModel: SpecializationModel by inject()
     val model: TalentModel by inject()
 
     override val root = form {
-        fieldset("Edit Talent") {
-            field("Display Name *") {
+        fieldset("General") {
+            field("Display Name") {
                 invisibleCheckbox()
                 textfield(model.displayName) {
-                    validator {
-                        val text = text
-                        when {
-                            text.isNullOrEmpty() -> error("This field is required.")
-                            !isValidDisplayName(text) -> error("Display name may only contain letters, numbers and spaces.")
-                            else -> success()
-                        }
-                    }
+                    isValidName(NameType.DISPLAY_NAME)
                 }
             }
-            field("Translation Key *") {
+            field("Translation Key") {
                 val useCustomTranslationKeyCheckBox = checkbox {
                     action {
                         if (!isSelected) {
-                            bindTranslationKey(model.translationKey, model.displayName, specModel.translationKey)
+                            bindTranslationKey(model.translationKey, model.displayName)
                         } else {
                             unbindTranslationKey(model.translationKey)
                         }
                     }
 
                 }
-                bindTranslationKey(model.translationKey, model.displayName, specModel.translationKey)
+                bindTranslationKey(model.translationKey, model.displayName)
 
+                label(wowClassModel.translationKey.stringBinding(specModel.translationKey) {
+                    "$it.${specModel.translationKey.value}."
+                })
                 textfield(model.translationKey) {
-                    validator {
-                        val text = text
-                        when {
-                            text.isNullOrEmpty() -> error("This field is required.")
-                            !isValidTranslationKey(text) ->
-                                error("Translation key may only contain lowercase letters, numbers, periods and underscores.")
-                            else -> success()
-                        }
-                    }
+                    isValidName(NameType.TRANSLATION_KEY)
                     enableWhen(useCustomTranslationKeyCheckBox.selectedProperty())
                 }
             }
-            field("Icon *") {
+            field("Icon") {
                 invisibleCheckbox()
                 textfield(model.icon) {
-                    validator {
-                        when {
-                            text.isNullOrEmpty() -> error("This field is required.")
-                            else -> success()
-                        }
-                    }
+                    requiredWithSuccess()
                 }
                 button("...") {
                     action {
@@ -78,7 +64,7 @@ class TalentEditor : Fragment("Talent Editor") {
                     }
                 }
             }
-            field("Max Rank *") {
+            field("Max Rank") {
                 invisibleCheckbox()
                 combobox(model.maxRank, listOf(1, 2, 3, 4, 5)) {
                     selectionModel.selectFirst()
@@ -92,21 +78,6 @@ class TalentEditor : Fragment("Talent Editor") {
                     }
                 }
             }
-            field("Location") {
-                invisibleCheckbox()
-                label("Row")
-                textfield(model.location.row, NumberStringConverter()) {
-                    prefWidthProperty().bind(this@field.widthProperty().divide(SMALL_TEXTBOX_SCALE_FACTOR))
-                    maxWidthProperty().bind(prefWidthProperty())
-                    isDisable = true
-                }
-                label("Col")
-                textfield(model.location.column, NumberStringConverter()) {
-                    prefWidthProperty().bind(this@field.widthProperty().divide(SMALL_TEXTBOX_SCALE_FACTOR))
-                    maxWidthProperty().bind(prefWidthProperty())
-                    isDisable = true
-                }
-            }
             field("Prerequisite") {
                 checkbox(property = model.hasPrerequisite)
                 label("Row")
@@ -117,7 +88,7 @@ class TalentEditor : Fragment("Talent Editor") {
                     validator {
                         val text = text
                         when {
-                            isDisable -> success()
+                            isDisable -> null
                             text.isNullOrEmpty() -> error("This field is required.")
                             text.toIntOrNull() !in 1..Specialization.ROWS -> error("Row out of bounds.")
                             else -> success()
@@ -132,7 +103,7 @@ class TalentEditor : Fragment("Talent Editor") {
                     validator {
                         val text = text
                         when {
-                            isDisable -> success()
+                            isDisable -> null
                             text.isNullOrEmpty() -> error("This field is required.")
                             text.toIntOrNull() !in 1..Specialization.ROWS -> error("Column out of bounds.")
                             else -> success()
@@ -146,7 +117,7 @@ class TalentEditor : Fragment("Talent Editor") {
                     isWrapText = true
                     prefRowCount = 5
                     prefColumnCount = 28
-                    required()
+                    requiredWithSuccess()
                 }
             }
         }
@@ -166,7 +137,7 @@ class TalentEditor : Fragment("Talent Editor") {
                     validator {
                         val text = text
                         when {
-                            isDisable -> success()
+                            isDisable -> null
                             text.isNullOrEmpty() -> error("This field is required.")
                             else -> {
                                 val integerValue = text.toIntOrNull()
@@ -185,7 +156,7 @@ class TalentEditor : Fragment("Talent Editor") {
                     enableWhen(model.spell.hasResource)
                     validator {
                         when {
-                            isDisable -> success()
+                            isDisable -> null
                             value.isNullOrEmpty() || value !in items -> error("This field is required.")
                             else -> success()
                         }
@@ -204,7 +175,7 @@ class TalentEditor : Fragment("Talent Editor") {
                     validator {
                         val text = text
                         when {
-                            isDisable -> success()
+                            isDisable -> null
                             text.isNullOrEmpty() -> error("This field is required.")
                             else -> {
                                 val integerValue = text.toDoubleOrNull()
@@ -232,10 +203,10 @@ class TalentEditor : Fragment("Talent Editor") {
                     validator {
                         val text = text
                         when {
-                            isDisable -> success()
+                            isDisable -> null
                             text.isNullOrEmpty() -> error("This field is required.")
                             else -> {
-                                val integerValue = text.toIntOrNull()
+                                val integerValue = text.toDoubleOrNull()
                                 if (integerValue != null && integerValue <= 0)
                                     error("Cooldown must be positive.")
                                 success()
@@ -250,7 +221,7 @@ class TalentEditor : Fragment("Talent Editor") {
                     enableWhen(model.spell.hasCooldown)
                     validator {
                         when {
-                            isDisable -> success()
+                            isDisable -> null
                             value.isNullOrEmpty() || value !in items -> error("This field is required.")
                             else -> success()
                         }
@@ -259,18 +230,19 @@ class TalentEditor : Fragment("Talent Editor") {
             }
             field("Range") {
                 enableWhen(model.isSpell)
-                checkbox(property = model.spell.isNotMeleeRange) {
-                    tooltip("Is ranged spell?")
+                checkbox(property = model.spell.hasRange) {
+                    tooltip("Is self cast?")
                 }
                 textfield(model.spell.range, NumberStringConverter()) {
                     prefWidthProperty().bind(this@field.widthProperty().divide(SMALL_TEXTBOX_SCALE_FACTOR))
                     maxWidthProperty().bind(prefWidthProperty())
-                    enableWhen(model.spell.isNotMeleeRange)
+                    tooltip("A range of 0 indicates melee range.")
+                    enableWhen(model.spell.hasRange)
                     requiredWhen(disableProperty().not())
                     validator {
                         val text = text
                         when {
-                            isDisable -> success()
+                            isDisable -> null
                             text.isNullOrEmpty() -> error("This field is required.")
                             else -> {
                                 val integerValue = text.toIntOrNull()
@@ -282,32 +254,72 @@ class TalentEditor : Fragment("Talent Editor") {
                     }
                 }
                 label("yd") {
-                    enableWhen(model.spell.isNotMeleeRange)
+                    enableWhen(model.spell.hasRange)
                 }
             }
         }
         buttonbar {
+            button("Apply", ButtonBar.ButtonData.APPLY) {
+                enableWhen(modelDirty.and(modelValid))
+                action { saveEditor() }
+            }
             button("OK", ButtonBar.ButtonData.OK_DONE) {
-                enableWhen(model.valid)
-                action {
-                    unbindTranslationKey(model.translationKey)
-                    model.location.commit()
-                    model.prerequisite.commit()
-                    model.spell.commit()
-                    model.commit()
-                    close()
-                }
+                enableWhen(modelValid)
+                action { saveAndCloseEditor() }
             }
             button("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE) {
-                action {
-                    unbindTranslationKey(model.translationKey)
-                    model.location.rollback()
-                    model.prerequisite.rollback()
-                    model.spell.rollback()
-                    model.rollback()
-                    close()
-                }
+                action { closeEditorWithWarning() }
             }
         }
     }
+
+    private fun saveEditor() {
+        model.location.commit()
+        model.prerequisite.commit()
+        model.spell.commit()
+        model.commit()
+    }
+
+    private fun saveAndCloseEditor() {
+        unbindTranslationKey(model.translationKey)
+        saveEditor()
+        close()
+    }
+
+    private fun closeEditor() {
+        unbindTranslationKey(model.translationKey)
+        model.location.rollback()
+        model.prerequisite.rollback()
+        model.spell.rollback()
+        model.rollback()
+        close()
+    }
+
+    private fun closeEditorWithWarning() {
+        if (!modelDirty.value) {
+            closeEditor()
+        } else {
+            alert(
+                Alert.AlertType.CONFIRMATION,
+                "Discard changes?",
+                "Are you sure you want to discard all changes made to this talent? " +
+                        "You will not be able to reverse your decision."
+            ) {
+                if (it.buttonData == ButtonBar.ButtonData.OK_DONE)
+                    closeEditor()
+            }
+        }
+    }
+
+    private val modelDirty
+        get() = model.dirty
+            .or(model.location.dirty)
+            .or(model.prerequisite.dirty)
+            .or(model.spell.dirty)
+    
+    private val modelValid
+        get() = model.valid
+            .and(model.location.valid)
+            .and(model.prerequisite.valid)
+            .and(model.spell.valid)
 }

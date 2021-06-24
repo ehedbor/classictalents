@@ -1,5 +1,6 @@
 plugins {
-    kotlin("jvm") 
+    kotlin("jvm")
+    kotlin("plugin.serialization") version "1.5.0"
 }
 
 group = "org.hedbor.evan"
@@ -11,10 +12,11 @@ repositories {
 
 dependencies {
     implementation(kotlin("reflect"))
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
     implementation("no.tornado:tornadofx:1.7.20")
-    implementation("com.beust:klaxon:5.5")
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>() {
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
 }

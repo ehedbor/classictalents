@@ -3,7 +3,7 @@ package org.hedbor.evan.talenttreegenerator.model
 import tornadofx.ItemViewModel
 
 
-class TalentModel : ItemViewModel<Talent>() {
+class TalentModel(initialValue: Talent? = null) : ItemViewModel<Talent>(initialValue) {
     val displayName = bind(Talent::displayNameProperty)
     val translationKey = bind(Talent::translationKeyProperty)
     val description = bind(Talent::descriptionProperty)
