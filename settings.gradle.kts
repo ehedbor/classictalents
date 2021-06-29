@@ -1,3 +1,5 @@
 
 rootProject.name = "classictalents"
-include("talenttreegenerator")
+include("app")
+include("common")
+include("talentgen")
