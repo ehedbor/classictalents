@@ -3,11 +3,11 @@ package org.hedbor.evan.classictalents.talentgen.view
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonBar
 import javafx.util.converter.NumberStringConverter
-import org.hedbor.evan.talenttreegenerator.*
-import org.hedbor.evan.talenttreegenerator.model.Specialization
-import org.hedbor.evan.talenttreegenerator.model.SpecializationModel
-import org.hedbor.evan.talenttreegenerator.model.TalentModel
-import org.hedbor.evan.talenttreegenerator.model.WowClassModel
+import org.hedbor.evan.classictalents.talentgen.*
+import org.hedbor.evan.classictalents.talentgen.model.Specialization
+import org.hedbor.evan.classictalents.talentgen.model.SpecializationModel
+import org.hedbor.evan.classictalents.talentgen.model.TalentModel
+import org.hedbor.evan.classictalents.talentgen.model.WowClassModel
 import tornadofx.*
 
 

@@ -1,13 +1,12 @@
-package org.hedbor.evan.classictalents.talentgen.model
+package org.hedbor.evan.classictalents.common.model
 
 import javafx.beans.property.SimpleIntegerProperty
 import kotlinx.serialization.Serializable
-import org.hedbor.evan.talenttreegenerator.model.serializers.LocationSerializer
-import tornadofx.getValue
-import tornadofx.setValue
+import org.hedbor.evan.classictalents.common.serialization.LocationSerializer
+import tornadofx.*
 
 
-@Suppress("unused", "MemberVisibilityCanBePrivate")
+@Suppress("MemberVisibilityCanBePrivate")
 @Serializable(with = LocationSerializer::class)
 class Location(row: Int = 0, column: Int = 0) {
     val rowProperty = SimpleIntegerProperty(this, "row", row)

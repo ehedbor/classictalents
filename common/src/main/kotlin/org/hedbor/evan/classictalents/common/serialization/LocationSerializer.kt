@@ -1,21 +1,13 @@
-package org.hedbor.evan.classictalents.talentgen.model.serializers
+package org.hedbor.evan.classictalents.common.serialization
 
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerializationException
-import kotlinx.serialization.builtins.IntArraySerializer
-import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.descriptors.StructureKind
+import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.CompositeDecoder.Companion.DECODE_DONE
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.encoding.decodeStructure
-import kotlinx.serialization.encoding.encodeStructure
-import org.hedbor.evan.talenttreegenerator.model.Location
+import kotlinx.serialization.encoding.*
+import org.hedbor.evan.classictalents.common.model.Location
 
-
-object LocationSerializer : KSerializer<Location> {
+internal object LocationSerializer : KSerializer<Location> {
     override val descriptor: SerialDescriptor = LocationDescriptor
 
     override fun serialize(encoder: Encoder, value: Location) {

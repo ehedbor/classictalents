@@ -1,13 +1,16 @@
-package org.hedbor.evan.classictalents.talentgen.model.serializers
+package org.hedbor.evan.classictalents.common.serialization
 
-import org.hedbor.evan.talenttreegenerator.model.WowClass
+import org.hedbor.evan.classictalents.common.model.WowClass
 import java.io.File
 import java.util.*
 import kotlin.collections.LinkedHashSet
 
 
-object TranslationsSerializer {
-    fun read(wowClass: WowClass, source: File) {
+internal object Translations {
+    /**
+     * Reads the translation strings from the given [source] into an existing [wowClass].
+     */
+    fun load(wowClass: WowClass, source: File) {
         val properties = OrderedProperties()
         properties.load(source.bufferedReader())
 
@@ -18,7 +21,7 @@ object TranslationsSerializer {
             spec.displayName = properties.getProperty(specKey)
 
             for (talent in spec.talents) {
-                if (talent.translationKey.isNullOrEmpty()) continue
+                if (talent.translationKey.isEmpty()) continue
 
                 val talentKey = specKey + "." + talent.translationKey
                 talent.displayName = properties.getProperty(talentKey)
@@ -27,7 +30,10 @@ object TranslationsSerializer {
         }
     }
 
-    fun write(wowClass: WowClass, destination: File) {
+    /**
+     * Saves the translation strings in the given [wowClass] to the given [destination].
+     */
+    fun save(wowClass: WowClass, destination: File) {
         val properties = OrderedProperties()
         properties.setProperty(wowClass.translationKey, wowClass.displayName)
 
@@ -36,7 +42,7 @@ object TranslationsSerializer {
             properties.setProperty(specKey, spec.displayName)
 
             for (talent in spec.talents) {
-                if (talent.displayName.isNullOrEmpty()) continue
+                if (talent.displayName.isEmpty()) continue
 
                 val talentKey = specKey + "." + talent.translationKey
                 properties.setProperty(talentKey, talent.displayName)

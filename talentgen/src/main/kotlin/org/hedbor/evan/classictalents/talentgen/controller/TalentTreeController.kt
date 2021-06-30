@@ -2,13 +2,9 @@ package org.hedbor.evan.classictalents.talentgen.controller
 
 import javafx.application.Platform
 import javafx.stage.FileChooser
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import org.hedbor.evan.talenttreegenerator.model.WowClass
-import org.hedbor.evan.talenttreegenerator.model.WowClassModel
-import org.hedbor.evan.talenttreegenerator.model.serializers.TranslationsSerializer
+import org.hedbor.evan.classictalents.common.model.WowClass
+import org.hedbor.evan.classictalents.common.serialization.ClassicTalentsSerializer
+import org.hedbor.evan.classictalents.talentgen.model.WowClassModel
 import tornadofx.Controller
 import tornadofx.FileChooserMode
 import tornadofx.chooseFile
@@ -30,21 +26,11 @@ class TalentTreeController : Controller() {
     private var currentDataFile: File? = null
     private var currentLangFile: File? = null
 
-    @OptIn(ExperimentalSerializationApi::class)
-    private val preferredJsonParser by lazy {
-        Json {
-            prettyPrint = true
-            prettyPrintIndent = "  "
-        }
-    }
-
     fun load(): Boolean {
         val success = selectNewFiles(FileChooserMode.Single)
         if (!success) return false
 
-        model.item = preferredJsonParser.decodeFromString<WowClass>(currentDataFile!!.readText())
-        TranslationsSerializer.read(model.item, currentLangFile!!)
-
+        model.item = ClassicTalentsSerializer.load(currentDataFile!!, currentLangFile!!)
         return true
     }
 
@@ -55,9 +41,7 @@ class TalentTreeController : Controller() {
             if (!success) return false
         }
 
-        currentDataFile!!.writeText(preferredJsonParser.encodeToString(model.item))
-        TranslationsSerializer.write(model.item, currentLangFile!!)
-
+        ClassicTalentsSerializer.save(model.item, currentDataFile!!, currentLangFile!!)
         return true
     }
 

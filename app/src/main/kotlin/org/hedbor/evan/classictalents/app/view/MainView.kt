@@ -1,8 +1,6 @@
 package org.hedbor.evan.classictalents.app.view
 
 import javafx.util.Duration
-import org.hedbor.evan.classictalents.app.view.talenttreeview
-import org.hedbor.evan.classictalents.app.util.loadTalentTree
 import org.hedbor.evan.classictalents.app.util.setGlobalTooltipBehavior
 import tornadofx.View
 import tornadofx.vbox

@@ -1,6 +1,7 @@
 package org.hedbor.evan.classictalents.talentgen.model
 
-import tornadofx.ItemViewModel
+import org.hedbor.evan.classictalents.common.model.Location
+import tornadofx.*
 
 class LocationModel(initialValue: Location? = null) : ItemViewModel<Location>(initialValue) {
     val row = bind(Location::rowProperty)
