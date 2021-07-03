@@ -5,9 +5,10 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import org.hedbor.evan.classictalents.common.model.Era
 import org.hedbor.evan.classictalents.common.model.Specialization
 import org.hedbor.evan.classictalents.common.model.WowClass
-import tornadofx.*
+import tornadofx.toObservable
 
 
 internal object WowClassSerializer : KSerializer<WowClass> {
@@ -15,14 +16,14 @@ internal object WowClassSerializer : KSerializer<WowClass> {
 
     override fun serialize(encoder: Encoder, value: WowClass) {
         val specs = value.specializations.sortedBy { it.displayName }
-        val surrogate = WowClassSurrogate(value.translationKey, specs)
+        val surrogate = WowClassSurrogate(value.translationKey, value.era, specs)
         encoder.encodeSerializableValue(WowClassSurrogate.serializer(), surrogate)
 
     }
 
     override fun deserialize(decoder: Decoder): WowClass {
         val surrogate = decoder.decodeSerializableValue(WowClassSurrogate.serializer())
-        return WowClass(translationKey = surrogate.key, specializations = surrogate.specs.toObservable())
+        return with(surrogate) { WowClass("", key, era, specs.toObservable()) }
     }
 }
 
@@ -36,5 +37,6 @@ internal object WowClassSerializer : KSerializer<WowClass> {
 @SerialName("Class")
 private class WowClassSurrogate(
     val key: String,
+    val era: Era,
     val specs: List<Specialization>
 )

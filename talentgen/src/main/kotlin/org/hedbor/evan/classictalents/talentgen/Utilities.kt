@@ -1,36 +1,11 @@
 package org.hedbor.evan.classictalents.talentgen
 
-import javafx.beans.property.SimpleStringProperty
-import javafx.event.EventTarget
-import javafx.scene.control.TextInputControl
 import javafx.stage.FileChooser
-import tornadofx.checkbox
 import tornadofx.chooseFile
-import tornadofx.stringBinding
-import tornadofx.validator
 import java.io.File
 
-
-/**
- * Create an invisible checkbox in order to align "required" fields with "optional" fields.
- */
-internal fun EventTarget.invisibleCheckbox() {
-    checkbox {
-        isVisible = false
-    }
-}
-
-
-internal fun bindTranslationKey(translationKey: SimpleStringProperty, displayName: SimpleStringProperty) {
-    fun formatKey(display: String?): String {
-        return display?.lowercase()?.replace(' ', '_') ?: ""
-    }
-
-    translationKey.bind(displayName.stringBinding { formatKey(it) })
-}
-
-internal fun unbindTranslationKey(translationKey: SimpleStringProperty) {
-    translationKey.unbind()
+internal fun formatTranslationKey(displayName: String?): String {
+    return displayName?.lowercase()?.replace(' ', '_').orEmpty()
 }
 
 
@@ -50,36 +25,4 @@ internal fun chooseIconFromResources(prompt: String, initialDirectory: File): St
     var path = file.relativeTo(RESOURCES_DIRECTORY).path
     path = '/' + path.replace(File.separatorChar, '/')
     return path
-}
-
-
-internal enum class NameType(val pattern: Regex, val errorMsg: String) {
-    DISPLAY_NAME(
-        Regex("^[A-Za-z0-9 ]*$"),
-        "Display name may only contain letters, numbers and spaces."),
-    TRANSLATION_KEY(
-        Regex("^[a-z0-9_]*$"),
-        "Translation key may only contain lowercase letters, numbers, and underscores."),
-
-}
-
-internal fun TextInputControl.isValidName(nameType: NameType) {
-    validator {
-        val text = text
-        when {
-            text.isNullOrEmpty() -> error("This field is required.")
-            !(text matches nameType.pattern) -> error(nameType.errorMsg)
-            else -> success()
-        }
-    }
-}
-
-/**
- * The default [tornadofx.required] method returns null when validation is successful.
- * This method returns [tornadofx.ValidationContext.success] in such a situation.
- */
-internal fun TextInputControl.requiredWithSuccess() {
-    validator {
-        if (text.isNullOrEmpty()) error("This field is required.") else success()
-    }
 }

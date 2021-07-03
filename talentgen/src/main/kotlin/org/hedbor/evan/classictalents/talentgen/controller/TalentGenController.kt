@@ -3,8 +3,8 @@ package org.hedbor.evan.classictalents.talentgen.controller
 import javafx.application.Platform
 import javafx.stage.FileChooser
 import org.hedbor.evan.classictalents.common.model.WowClass
+import org.hedbor.evan.classictalents.common.model.WowClassModel
 import org.hedbor.evan.classictalents.common.serialization.ClassicTalentsSerializer
-import org.hedbor.evan.classictalents.talentgen.model.WowClassModel
 import tornadofx.Controller
 import tornadofx.FileChooserMode
 import tornadofx.chooseFile
@@ -12,7 +12,7 @@ import java.io.File
 import kotlin.system.exitProcess
 
 
-class TalentTreeController : Controller() {
+class TalentGenController : Controller() {
     companion object {
         private val OUTPUT_DIR = File("./generated-talents")
         private val ALL_FILES_FILTER = FileChooser.ExtensionFilter("All Files", "*.*")

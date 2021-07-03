@@ -1,29 +1,27 @@
 package org.hedbor.evan.classictalents.talentgen.view
 
-import javafx.collections.ObservableList
 import javafx.event.EventTarget
 import javafx.geometry.Insets
 import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.ButtonBar
 import javafx.scene.control.OverrunStyle
-import javafx.scene.layout.Region
 import javafx.scene.layout.StackPane
-import javafx.scene.paint.Color
 import javafx.scene.text.FontWeight
-import javafx.scene.text.TextAlignment
-import org.hedbor.evan.talenttreegenerator.*
-import org.hedbor.evan.talenttreegenerator.model.*
+import org.hedbor.evan.classictalents.common.model.*
+import org.hedbor.evan.classictalents.talentgen.INITIAL_BACKGROUND_DIRECTORY
+import org.hedbor.evan.classictalents.talentgen.chooseIconFromResources
+import org.hedbor.evan.classictalents.talentgen.formatTranslationKey
 import tornadofx.*
 
 
 class SpecializationEditor : Fragment() {
-    val wowClassModel: WowClassModel by inject()
-    val model: SpecializationModel by inject()
+    private val wowClassModel: WowClassModel by inject()
+    private val model: SpecializationModel by inject()
 
     init {
         titleProperty.bind(model.displayName)
-        model.validated.bind(model.valid)
+        model.translationKey.bind(model.displayName.stringBinding { formatTranslationKey(it) })
     }
 
     override val root = borderpane {
@@ -31,48 +29,28 @@ class SpecializationEditor : Fragment() {
             form {
                 fieldset("Specialization") {
                     field("Display Name") {
-                        invisibleCheckbox()
-                        textfield(model.displayName) {
-                            isValidName(NameType.DISPLAY_NAME)
-                        }
+                        textfield(model.displayName) { mustBePresent() }
                     }
                     field("Translation Key") {
-                        val useCustomTranslationKeyCheckBox = checkbox {
-                            action {
-                                if (!isSelected) {
-                                    bindTranslationKey(model.translationKey, model.displayName)
-                                } else {
-                                    unbindTranslationKey(model.translationKey)
-                                }
-                            }
-                        }
-                        bindTranslationKey(model.translationKey, model.displayName)
-
-                        label(wowClassModel.translationKey.stringBinding{ "$it." })
-                        textfield(model.translationKey) {
-                            isValidName(NameType.TRANSLATION_KEY)
-                            enableWhen(useCustomTranslationKeyCheckBox.selectedProperty())
-                        }
+                        label(wowClassModel.translationKey.stringBinding { "$it." })
+                        textfield(model.translationKey) { isDisable = true }
                     }
                     field("Background Image") {
-                        invisibleCheckbox()
                         textfield(model.backgroundImage) {
-                            requiredWithSuccess()
+                            mustBePresent()
                         }
                         button("...") {
                             action {
                                 val image = chooseIconFromResources("Choose a Background Image", INITIAL_BACKGROUND_DIRECTORY)
-                                if (image != null)
-                                    model.backgroundImage.value = image
+                                if (image != null) model.backgroundImage.value = image
                             }
                         }
                     }
                     field("Talents") {
-                        invisibleCheckbox()
                         gridpane {
-                            for (row in 0 until Specialization.ROWS) {
-                                for (col in 0 until Specialization.COLUMNS) {
-                                    talentbutton(row, col)
+                            for (row in 0 until wowClassModel.era.value.talentRowCount) {
+                                for (col in 0 until Specialization.TALENT_COLUMN_COUNT) {
+                                    talentbutton(Location(row, col))
                                 }
                             }
                         }
@@ -98,20 +76,19 @@ class SpecializationEditor : Fragment() {
     }
 
     private fun saveEditor() {
-        model.commit()
-        wowClassModel.markDirty(wowClassModel.specializations)
+        model.commit {
+            wowClassModel.specializations.invalidate()
+        }
     }
 
     private fun saveAndCloseEditor() {
-        unbindTranslationKey(model.translationKey)
-        model.validated.unbind()
+        model.translationKey.unbind()
         saveEditor()
         close()
     }
 
     private fun closeEditor() {
-        unbindTranslationKey(model.translationKey)
-        model.validated.unbind()
+        model.translationKey.unbind()
         model.rollback()
         close()
     }
@@ -128,21 +105,20 @@ class SpecializationEditor : Fragment() {
         }
     }
 
-    private fun EventTarget.talentbutton(row: Int, col: Int): StackPane {
-        val location = Location(row, col)
+    private fun EventTarget.talentbutton(location: Location): StackPane {
         return stackpane {
             gridpaneConstraints {
-                columnRowIndex(col, row)
+                columnRowIndex(location.column, location.row)
             }
             val editButton = button(getOrCreateTalentAt(location).displayNameProperty) {
                 textOverrun = OverrunStyle.LEADING_ELLIPSIS
                 prefWidth = 65.0
                 prefHeight = 65.0
-                action {
-                    editTalent(getOrCreateTalentAt(location))
-                }
+                action { editTalent(getOrCreateTalentAt(location)) }
             }
             anchorpane {
+                // prevent the anchor pane from eating click events to the editButton
+                // unless the delete button is being clicked
                 isPickOnBounds = false
                 button("X") {
                     anchorpaneConstraints {

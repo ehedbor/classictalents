@@ -1,5 +1,6 @@
 plugins {
     `java-platform`
+    kotlin("jvm") apply false
 }
 
 allprojects {

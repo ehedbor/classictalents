@@ -3,22 +3,24 @@ package org.hedbor.evan.classictalents.talentgen.view
 import javafx.beans.binding.BooleanExpression
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonBar
-import org.hedbor.evan.talenttreegenerator.*
-import org.hedbor.evan.talenttreegenerator.controller.TalentTreeController
-import org.hedbor.evan.talenttreegenerator.model.Specialization
-import org.hedbor.evan.talenttreegenerator.model.SpecializationModel
-import org.hedbor.evan.talenttreegenerator.model.WowClassModel
+import org.hedbor.evan.classictalents.common.model.Era
+import org.hedbor.evan.classictalents.common.model.Specialization
+import org.hedbor.evan.classictalents.common.model.SpecializationModel
+import org.hedbor.evan.classictalents.common.model.WowClassModel
+import org.hedbor.evan.classictalents.talentgen.controller.TalentGenController
+import org.hedbor.evan.classictalents.talentgen.formatTranslationKey
 import tornadofx.*
 
 
 class WowClassEditor : View("Talent Tree Editor") {
-    val controller: TalentTreeController by inject()
-    val model: WowClassModel by lazy { controller.model }
+    private val controller: TalentGenController by inject()
+    private val model: WowClassModel by lazy { controller.model }
 
     private lateinit var specFieldset: Fieldset
 
     init {
         titleProperty.bind(model.displayName)
+        model.translationKey.bind(model.displayName.stringBinding { formatTranslationKey(it) })
     }
 
     override val root = borderpane {
@@ -26,32 +28,21 @@ class WowClassEditor : View("Talent Tree Editor") {
             form {
                 fieldset("General") {
                     field("Display Name") {
-                        invisibleCheckbox()
-                        textfield(model.displayName) {
-                            isValidName(NameType.DISPLAY_NAME)
-                        }
+                        textfield(model.displayName) { mustBePresent() }
                     }
                     field("Translation Key") {
-                        val useCustomTranslationKeyCheckBox = checkbox {
-                            action {
-                                if (!isSelected) {
-                                    bindTranslationKey(model.translationKey, model.displayName)
-                                } else {
-                                    unbindTranslationKey(model.translationKey)
-                                }
+                        textfield(model.translationKey) { isDisable = true }
+                    }
+                    field("Era") {
+                        combobox(model.era, Era.values().toList()) {
+                            if (selectedItem !in items) {
+                                selectionModel.selectFirst()
                             }
-                        }
-                        bindTranslationKey(model.translationKey, model.displayName)
-
-                        textfield(model.translationKey) {
-                            isValidName(NameType.TRANSLATION_KEY)
-                            enableWhen(useCustomTranslationKeyCheckBox.selectedProperty())
                         }
                     }
                 }
                 specFieldset = fieldset("Specializations") {
                     button("Add Specialization") {
-                        repeat(3) { createNewSpecField(addNewSpec()) }
                         action { createNewSpecField(addNewSpec()) }
                     }
                 }
@@ -86,14 +77,17 @@ class WowClassEditor : View("Talent Tree Editor") {
     private val modelValid: BooleanExpression
         get() {
             return model.specializations.booleanBinding(model.valid) { specs ->
-                model.isValid && specs!!.map { it.validated }.all { it }
+                // you know that a spec is valid if the icon name is not null or empty,
+                // since you cant close the spec editor otherwise
+                model.isValid && specs!!.all { !it.backgroundImageProperty.value.isNullOrBlank() }
             }
         }
 
     private fun load() {
-        unbindTranslationKey(model.translationKey)
+        model.translationKey.unbind()
         val success = controller.load()
         if (success) {
+            // remove the old fields and replace them with new ones
             specFieldset.children.filterIsInstance<Field>().forEach { it.removeFromParent() }
             model.specializations.forEach { specFieldset.createNewSpecField(it) }
         }
@@ -120,7 +114,6 @@ class WowClassEditor : View("Talent Tree Editor") {
     private fun Fieldset.createNewSpecField(spec: Specialization) {
         val field = Field().apply field@{
             textProperty.bind(spec.displayNameProperty)
-            invisibleCheckbox()
             button("Edit") {
                 action {
                     editSpec(spec)
@@ -134,6 +127,7 @@ class WowClassEditor : View("Talent Tree Editor") {
             }
         }
         addChildIfPossible(field, model.specializations.size)
+        currentStage?.sizeToScene()
     }
 
     private fun addNewSpec(): Specialization {
@@ -145,6 +139,7 @@ class WowClassEditor : View("Talent Tree Editor") {
 
     private fun removeSpec(spec: Specialization) {
         model.specializations.remove(spec)
+        currentStage?.sizeToScene()
     }
 
     private fun editSpec(spec: Specialization) {

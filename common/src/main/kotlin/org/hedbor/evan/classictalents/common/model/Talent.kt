@@ -5,7 +5,11 @@ import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
 import kotlinx.serialization.Serializable
 import org.hedbor.evan.classictalents.common.serialization.TalentSerializer
-import tornadofx.*
+import tornadofx.getValue
+import tornadofx.setValue
+import kotlin.Int
+import kotlin.String
+import kotlin.Suppress
 
 
 @Suppress("MemberVisibilityCanBePrivate")
@@ -21,6 +25,8 @@ class Talent(
     spell: Spell? = null,
 ) {
     companion object {
+        const val MINIMUM_RANK = 1
+        const val MAXIMUM_PERMISSIBLE_RANK = 5
         const val HELPFUL_DESCRIPTION = "{0,choice,1#ONE_POINT|2#TWO_POINTS|3#THREE_POINTS|4#FOUR_POINTS|5#FIVE_POINTS}"
     }
 

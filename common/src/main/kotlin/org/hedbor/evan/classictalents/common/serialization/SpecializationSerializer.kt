@@ -7,14 +7,14 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import org.hedbor.evan.classictalents.common.model.Specialization
 import org.hedbor.evan.classictalents.common.model.Talent
-import tornadofx.*
+import tornadofx.toObservable
 
 
 internal object SpecializationSerializer : KSerializer<Specialization> {
     override val descriptor = SpecializationSurrogate.serializer().descriptor
 
     override fun serialize(encoder: Encoder, value: Specialization) {
-        val talents = value.talents.sortedWith(compareBy<Talent> { it.location.column }.thenBy { it.location.row })
+        val talents = value.talents.sortedWith(compareBy<Talent> { it.location.row }.thenBy { it.location.column })
         val surrogate = with(value) { SpecializationSurrogate(translationKey, backgroundImage, talents) }
         encoder.encodeSerializableValue(SpecializationSurrogate.serializer(), surrogate)
     }

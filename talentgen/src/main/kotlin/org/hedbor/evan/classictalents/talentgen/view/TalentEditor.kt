@@ -1,13 +1,16 @@
 package org.hedbor.evan.classictalents.talentgen.view
 
+import javafx.beans.property.SimpleBooleanProperty
+import javafx.geometry.Insets
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonBar
+import javafx.scene.layout.BorderPane
+import javafx.scene.layout.Region
 import javafx.util.converter.NumberStringConverter
-import org.hedbor.evan.classictalents.talentgen.*
-import org.hedbor.evan.classictalents.talentgen.model.Specialization
-import org.hedbor.evan.classictalents.talentgen.model.SpecializationModel
-import org.hedbor.evan.classictalents.talentgen.model.TalentModel
-import org.hedbor.evan.classictalents.talentgen.model.WowClassModel
+import org.hedbor.evan.classictalents.common.model.*
+import org.hedbor.evan.classictalents.talentgen.INITIAL_ICON_DIRECTORY
+import org.hedbor.evan.classictalents.talentgen.chooseIconFromResources
+import org.hedbor.evan.classictalents.talentgen.formatTranslationKey
 import tornadofx.*
 
 
@@ -18,263 +21,188 @@ class TalentEditor : Fragment("Talent Editor") {
         private const val COMBOBOX_SCALE_FACTOR = 6
     }
 
-    val wowClassModel: WowClassModel by inject()
-    val specModel: SpecializationModel by inject()
-    val model: TalentModel by inject()
+    private val wowClassModel: WowClassModel by inject()
+    private val specModel: SpecializationModel by inject()
+    private val model: TalentModel by inject()
+
+    private val isSpellProperty = SimpleBooleanProperty()
 
     init {
-        model.validated.bind(modelValid)
+        model.translationKey.bind(model.displayName.stringBinding { formatTranslationKey(it) })
     }
 
-    override val root = form {
-        fieldset("General") {
-            field("Display Name") {
-                invisibleCheckbox()
-                textfield(model.displayName) {
-                    isValidName(NameType.DISPLAY_NAME)
-                }
-            }
-            field("Translation Key") {
-                val useCustomTranslationKeyCheckBox = checkbox {
-                    action {
-                        if (!isSelected) {
-                            bindTranslationKey(model.translationKey, model.displayName)
-                        } else {
-                            unbindTranslationKey(model.translationKey)
+    override val root = borderpane {
+        center {
+            vbox {
+                addGeneralInfo()
+                squeezebox {
+                    fold("Spell Info") {
+                        isAnimated = false
+                        heightProperty().addListener { _, _, _ ->
+                            currentStage?.sizeToScene()
                         }
+                        addSpellInfo()
                     }
-
-                }
-                bindTranslationKey(model.translationKey, model.displayName)
-
-                label(wowClassModel.translationKey.stringBinding(specModel.translationKey) {
-                    "$it.${specModel.translationKey.value}."
-                })
-                textfield(model.translationKey) {
-                    isValidName(NameType.TRANSLATION_KEY)
-                    enableWhen(useCustomTranslationKeyCheckBox.selectedProperty())
-                }
-            }
-            field("Icon") {
-                invisibleCheckbox()
-                textfield(model.icon) {
-                    requiredWithSuccess()
-                }
-                button("...") {
-                    action {
-                        val icon = chooseIconFromResources("Choose an icon", INITIAL_ICON_DIRECTORY)
-                        if (icon != null)
-                            model.icon.value = icon
-                    }
-                }
-            }
-            field("Max Rank") {
-                invisibleCheckbox()
-                combobox(model.maxRank, listOf(1, 2, 3, 4, 5)) {
-                    if (selectionModel.selectedItem !in items) {
-                        selectionModel.selectLast()
-                    }
-                    prefWidthProperty().bind(this@field.widthProperty().divide(COMBOBOX_SCALE_FACTOR))
-                    maxWidthProperty().bind(prefWidthProperty())
-                    validator {
-                        if (value !in items)
-                            error("Must select a rank.")
-                        else
-                            success()
-                    }
-                }
-            }
-            field("Prerequisite") {
-                checkbox(property = model.hasPrerequisite)
-                label("Row")
-                textfield(model.prerequisite.row, NumberStringConverter()) {
-                    prefWidthProperty().bind(this@field.widthProperty().divide(SMALL_TEXTBOX_SCALE_FACTOR))
-                    maxWidthProperty().bind(prefWidthProperty())
-                    enableWhen(model.hasPrerequisite)
-                    validator {
-                        val text = text
-                        when {
-                            isDisable -> null
-                            text.isNullOrEmpty() -> error("This field is required.")
-                            text.toIntOrNull() !in 0 until Specialization.ROWS -> error("Row out of bounds.")
-                            else -> success()
-                        }
-                    }
-                }
-                label("Col")
-                textfield(model.prerequisite.column, NumberStringConverter()) {
-                    prefWidthProperty().bind(this@field.widthProperty().divide(SMALL_TEXTBOX_SCALE_FACTOR))
-                    maxWidthProperty().bind(prefWidthProperty())
-                    enableWhen(model.hasPrerequisite)
-                    validator {
-                        val text = text
-                        when {
-                            isDisable -> null
-                            text.isNullOrEmpty() -> error("This field is required.")
-                            text.toIntOrNull() !in 0 until Specialization.ROWS -> error("Column out of bounds.")
-                            else -> success()
-                        }
-                    }
-                }
-            }
-            field("Description *") {
-                invisibleCheckbox()
-                textarea(model.description) {
-                    isWrapText = true
-                    prefRowCount = 5
-                    prefColumnCount = 28
-                    requiredWithSuccess()
                 }
             }
         }
-        fieldset("Spell Info") {
-            field("Is spell") {
-                checkbox(property = model.isSpell)
-            }
-            field("Resource") {
-                enableWhen(model.isSpell)
-                checkbox(property = model.spell.hasResource) {
-                    tooltip("Has resource?")
+        bottom {
+            addButtonBar()
+        }
+        children.forEach {
+            BorderPane.setMargin(it, Insets(0.0, 5.0, 5.0, 5.0))
+        }
+    }
+
+    private fun Region.addGeneralInfo() {
+        form {
+            fieldset("General") {
+                field("Display Name") {
+                    textfield(model.displayName) { mustBePresent() }
                 }
-                textfield(model.spell.resourceCost, NumberStringConverter()) {
-                    prefWidthProperty().bind(this@field.widthProperty().divide(SMALL_TEXTBOX_SCALE_FACTOR))
-                    maxWidthProperty().bind(prefWidthProperty())
-                    enableWhen(model.spell.hasResource)
-                    validator {
-                        val text = text
-                        when {
-                            isDisable -> null
-                            text.isNullOrEmpty() -> error("This field is required.")
-                            else -> {
-                                val integerValue = text.toIntOrNull()
-                                if (integerValue != null && integerValue < 0)
-                                    error("Resource cost must not be negative.")
-                                success()
-                            }
+                field("Translation Key") {
+                    label(wowClassModel.translationKey.stringBinding(specModel.translationKey) {
+                        "$it.${specModel.translationKey.value}."
+                    })
+                    textfield(model.translationKey) { isDisable = true }
+                }
+                field("Icon") {
+                    textfield(model.icon) { mustBePresent() }
+                    button("...") {
+                        action {
+                            val icon = chooseIconFromResources("Choose an icon", INITIAL_ICON_DIRECTORY)
+                            if (icon != null)
+                                model.icon.value = icon
                         }
                     }
                 }
-                combobox(model.spell.resourceType, listOf("mana", "% of base mana", "energy", "rage")) {
-                    prefWidthProperty().bind(this@field.widthProperty().divide(COMBOBOX_SCALE_FACTOR))
-                    maxWidthProperty().bind(prefWidthProperty())
-                    minWidth = 50.0
-                    if (selectionModel.selectedItem !in items) {
-                        selectionModel.selectFirst()
-                    }
-                    enableWhen(model.spell.hasResource)
-                    validator {
-                        when {
-                            isDisable -> null
-                            value.isNullOrEmpty() || value !in items -> error("This field is required.")
-                            else -> success()
+                field("Max Rank") {
+                    combobox(model.maxRank, (Talent.MINIMUM_RANK..Talent.MAXIMUM_PERMISSIBLE_RANK).toList()) {
+                        if (selectionModel.selectedItem !in items) {
+                            selectionModel.selectLast()
                         }
+                        prefWidthProperty().bind(this@field.widthProperty().divide(COMBOBOX_SCALE_FACTOR))
+                        maxWidthProperty().bind(prefWidthProperty())
                     }
                 }
-            }
-            field("Cast Time") {
-                enableWhen(model.isSpell)
-                checkbox(property = model.spell.isNotInstantCast) {
-                    tooltip("Has cast time?")
-                }
-                textfield(model.spell.castTime, NumberStringConverter()) {
-                    prefWidthProperty().bind(this@field.widthProperty().divide(SMALL_TEXTBOX_SCALE_FACTOR))
-                    maxWidthProperty().bind(prefWidthProperty())
-                    enableWhen(model.spell.isNotInstantCast)
-                    validator {
-                        val text = text
-                        when {
-                            isDisable -> null
-                            text.isNullOrEmpty() -> error("This field is required.")
-                            else -> {
-                                val integerValue = text.toDoubleOrNull()
-                                if (integerValue != null && integerValue < 0)
-                                    error("Cast time must not be negative.")
-                                success()
-                            }
-                        }
+                field("Prerequisite") {
+                    label("Row")
+                    textfield(model.prerequisite.select { it.rowProperty }, NumberStringConverter()) {
+                        prefWidthProperty().bind(this@field.widthProperty().divide(SMALL_TEXTBOX_SCALE_FACTOR))
+                        maxWidthProperty().bind(prefWidthProperty())
+                        model.validationContext.mustBeInRange(
+                            this,
+                            0 until wowClassModel.era.value.talentRowCount
+                        )
+                    }
+                    label("Col")
+                    textfield(model.prerequisite.select { it.columnProperty }, NumberStringConverter()) {
+                        prefWidthProperty().bind(this@field.widthProperty().divide(SMALL_TEXTBOX_SCALE_FACTOR))
+                        maxWidthProperty().bind(prefWidthProperty())
+                        model.validationContext.mustBeInRange(this, 0 until Specialization.TALENT_COLUMN_COUNT)
                     }
                 }
-                label("sec") {
-                    enableWhen(model.spell.isNotInstantCast)
-                }
-            }
-            field("Cooldown") {
-                enableWhen(model.isSpell)
-                checkbox(property = model.spell.hasCooldown) {
-                    tooltip("Has cooldown?")
-                }
-                textfield(model.spell.cooldown, NumberStringConverter()) {
-                    prefWidthProperty().bind(this@field.widthProperty().divide(SMALL_TEXTBOX_SCALE_FACTOR))
-                    maxWidthProperty().bind(prefWidthProperty())
-                    enableWhen(model.spell.hasCooldown)
-                    requiredWhen(disableProperty().not())
-                    validator {
-                        val text = text
-                        when {
-                            isDisable -> null
-                            text.isNullOrEmpty() -> error("This field is required.")
-                            else -> {
-                                val integerValue = text.toDoubleOrNull()
-                                if (integerValue != null && integerValue <= 0)
-                                    error("Cooldown must be positive.")
-                                success()
-                            }
-                        }
+                field("Description") {
+                    textarea(model.description) {
+                        isWrapText = true
+                        prefRowCount = 5
+                        prefColumnCount = 28
+                        mustBePresent()
                     }
-                }
-                combobox(model.spell.cooldownUnit, listOf("sec", "min", "hr")) {
-                    prefWidthProperty().bind(this@field.widthProperty().divide(COMBOBOX_SCALE_FACTOR))
-                    maxWidthProperty().bind(prefWidthProperty())
-                    if (selectionModel.selectedItem !in items) {
-                        selectionModel.selectFirst()
-                    }
-                    enableWhen(model.spell.hasCooldown)
-                    validator {
-                        when {
-                            isDisable -> null
-                            value.isNullOrEmpty() || value !in items -> error("This field is required.")
-                            else -> success()
-                        }
-                    }
-                }
-            }
-            field("Range") {
-                enableWhen(model.isSpell)
-                checkbox(property = model.spell.hasRange) {
-                    tooltip("Is self cast?")
-                }
-                textfield(model.spell.range, NumberStringConverter()) {
-                    prefWidthProperty().bind(this@field.widthProperty().divide(SMALL_TEXTBOX_SCALE_FACTOR))
-                    maxWidthProperty().bind(prefWidthProperty())
-                    tooltip("A range of 0 indicates melee range.")
-                    enableWhen(model.spell.hasRange)
-                    requiredWhen(disableProperty().not())
-                    validator {
-                        val text = text
-                        when {
-                            isDisable -> null
-                            text.isNullOrEmpty() -> error("This field is required.")
-                            else -> {
-                                val integerValue = text.toIntOrNull()
-                                if (integerValue != null && integerValue <= 0)
-                                    error("Range must be positive.")
-                                success()
-                            }
-                        }
-                    }
-                }
-                label("yd") {
-                    enableWhen(model.spell.hasRange)
                 }
             }
         }
+    }
+
+    private fun Region.addSpellInfo() {
+        form {
+            fieldset("Spell Info") {
+                field("Is spell") {
+                    checkbox(property = isSpellProperty)
+                }
+                field("Resource") {
+                    textfield(model.spell.select { it.resourceCostProperty }, NumberStringConverter()) {
+                        prefWidthProperty().bind(
+                            this@field.widthProperty().divide(SMALL_TEXTBOX_SCALE_FACTOR)
+                        )
+                        maxWidthProperty().bind(prefWidthProperty())
+                        enableWhen(isSpellProperty)
+                        tooltip("A resource cost of 0 indicates that this spell has no resource cost at all.")
+                        model.validationContext.mustBeNonNegative<Int>(this)
+                    }
+                    combobox(model.spell.select { it.resourceTypeProperty }, ResourceType.values().toList()) {
+                        prefWidthProperty().bind(
+                            this@field.widthProperty().divide(COMBOBOX_SCALE_FACTOR)
+                        )
+                        maxWidthProperty().bind(prefWidthProperty())
+                        enableWhen(isSpellProperty)
+                        minWidth = 50.0
+                        if (selectionModel.selectedItem !in items) {
+                            selectionModel.selectFirst()
+                        }
+                    }
+                }
+                field("Cast Time") {
+                    textfield(model.spell.select { it.castTimeProperty }, NumberStringConverter()) {
+                        prefWidthProperty().bind(
+                            this@field.widthProperty().divide(SMALL_TEXTBOX_SCALE_FACTOR)
+                        )
+                        maxWidthProperty().bind(prefWidthProperty())
+                        enableWhen(isSpellProperty)
+                        tooltip("A cast time of 0 sec indicates that the spell is instant cast.")
+                        model.validationContext.mustBeNonNegative<Double>(this)
+                    }
+                    label("sec") {
+                        enableWhen(isSpellProperty)
+                    }
+                }
+                field("Cooldown") {
+                    textfield(model.spell.select { it.cooldownProperty }, NumberStringConverter()) {
+                        prefWidthProperty().bind(
+                            this@field.widthProperty().divide(SMALL_TEXTBOX_SCALE_FACTOR)
+                        )
+                        maxWidthProperty().bind(prefWidthProperty())
+                        enableWhen(isSpellProperty)
+                        tooltip("A cooldown of 0 indicates that this spell has no cooldown period.")
+                        model.validationContext.mustBeNonNegative<Double>(this)
+                    }
+                    combobox(model.spell.select { it.cooldownUnitProperty }, CooldownUnit.values().toList()) {
+                        prefWidthProperty().bind(
+                            this@field.widthProperty().divide(COMBOBOX_SCALE_FACTOR)
+                        )
+                        maxWidthProperty().bind(prefWidthProperty())
+                        enableWhen(isSpellProperty)
+                        if (selectionModel.selectedItem !in items) {
+                            selectionModel.selectFirst()
+                        }
+                    }
+                }
+                field("Range") {
+                    textfield(model.spell.select { it.rangeProperty }, NumberStringConverter()) {
+                        prefWidthProperty().bind(
+                            this@field.widthProperty().divide(SMALL_TEXTBOX_SCALE_FACTOR)
+                        )
+                        maxWidthProperty().bind(prefWidthProperty())
+                        enableWhen(isSpellProperty)
+                        tooltip("A range of 0 yd indicates self-range, and a range of 5 yd indicates melee range.")
+                        model.validationContext.mustBeNonNegative<Double>(this)
+                    }
+                    label("yd") {
+                        enableWhen(isSpellProperty)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun Region.addButtonBar() {
         buttonbar {
             button("Apply", ButtonBar.ButtonData.APPLY) {
-                enableWhen(modelDirty.and(modelValid))
+                enableWhen(model.dirty.and(model.valid))
                 action { saveEditor() }
             }
             button("OK", ButtonBar.ButtonData.OK_DONE) {
-                enableWhen(modelValid)
+                enableWhen(model.valid)
                 action { saveAndCloseEditor() }
             }
             button("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE) {
@@ -284,32 +212,24 @@ class TalentEditor : Fragment("Talent Editor") {
     }
 
     private fun saveEditor() {
-        model.location.commit()
-        model.prerequisite.commit()
-        model.spell.commit()
         model.commit()
         specModel.markDirty(specModel.talents)
     }
 
     private fun saveAndCloseEditor() {
-        unbindTranslationKey(model.translationKey)
-        model.validated.unbind()
+        model.translationKey.unbind()
         saveEditor()
         close()
     }
 
     private fun closeEditor() {
-        unbindTranslationKey(model.translationKey)
-        model.validated.unbind()
-        model.location.rollback()
-        model.prerequisite.rollback()
-        model.spell.rollback()
+        model.translationKey.unbind()
         model.rollback()
         close()
     }
 
     private fun closeEditorWithWarning() {
-        if (!modelDirty.value) {
+        if (!model.dirty.value) {
             closeEditor()
         } else {
             alert(
@@ -323,16 +243,4 @@ class TalentEditor : Fragment("Talent Editor") {
             }
         }
     }
-
-    private val modelDirty
-        get() = model.dirty
-            .or(model.location.dirty)
-            .or(model.prerequisite.dirty)
-            .or(model.spell.dirty)
-    
-    private val modelValid
-        get() = model.valid
-            .and(model.location.valid)
-            .and(model.prerequisite.valid)
-            .and(model.spell.valid)
 }
