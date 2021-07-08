@@ -17,6 +17,19 @@ internal fun TextInputControl.mustBePresent() {
     }
 }
 
+internal fun TextInputControl.mustBeValidKey() {
+    validator {
+        val text = text
+        if (text.isNullOrBlank()) {
+            null
+        } else if (!text.matches("^[0-9a-z_]+$".toRegex())) {
+            error("Translation keys may only contain lowercase ASCII letters, numbers and underscores.")
+        } else {
+            success()
+        }
+    }
+}
+
 /**
  * Validator function that returns [tornadofx.ValidationContext.error] when the
  * input is not within the specified range.

@@ -4,43 +4,34 @@ import javafx.beans.property.SimpleListProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.ObservableList
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.hedbor.evan.classictalents.common.serialization.WowClassSerializer
+import org.hedbor.evan.classictalents.common.serialization.SimpleListPropertySerializer
+import org.hedbor.evan.classictalents.common.serialization.SimpleObjectPropertySerializer
+import org.hedbor.evan.classictalents.common.serialization.SimpleStringPropertySerializer
 import tornadofx.getValue
 import tornadofx.observableListOf
 import tornadofx.setValue
-import kotlin.Int
-import kotlin.String
-import kotlin.Suppress
 
 
 @Suppress("MemberVisibilityCanBePrivate")
-@Serializable(with = WowClassSerializer::class)
-class WowClass(
-    displayName: String = "",
-    translationKey: String = "",
-    era: Era? = null,
-    specializations: ObservableList<Specialization> = observableListOf()
-) {
-    val displayNameProperty = SimpleStringProperty(this, "displayName", displayName)
-    var displayName: String by displayNameProperty
+@Serializable
+class WowClass {
+    constructor(block: WowClass.() -> Unit) { this.block() }
 
-    val translationKeyProperty = SimpleStringProperty(this, "translationKey", translationKey)
+    @Serializable(with = SimpleStringPropertySerializer::class)
+    @SerialName("key")
+    val translationKeyProperty = SimpleStringProperty(this, "translationKey", "")
     var translationKey: String by translationKeyProperty
 
-    val eraProperty = SimpleObjectProperty<Era>(this, "era", era)
+    @Serializable(with = SimpleObjectPropertySerializer::class)
+    @SerialName("era")
+    val eraProperty = SimpleObjectProperty<Era>(this, "era", Era.CLASSIC)
     var era: Era by eraProperty
 
-    val specializationsProperty: SimpleListProperty<Specialization> =
-        SimpleListProperty(this, "specializations", specializations)
+    @Serializable(with = SimpleListPropertySerializer::class)
+    @SerialName("specs")
+    val specializationsProperty: SimpleListProperty<Specialization> = SimpleListProperty(this, "specializations", observableListOf())
     var specializations: ObservableList<Specialization> by specializationsProperty
 }
 
-/** @see Specialization.TALENT_COLUMN_COUNT */
-enum class Era(val key: String, val talentRowCount: Int) {
-    VANILLA("vanilla", 7),
-    TBC("tbc", 9),
-    WOTLK("wotlk", 11);
-
-    override fun toString() = key
-}

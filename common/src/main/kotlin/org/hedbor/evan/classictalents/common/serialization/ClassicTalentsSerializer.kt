@@ -6,6 +6,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.hedbor.evan.classictalents.common.model.WowClass
 import java.io.File
+import java.io.InputStream
 
 
 object ClassicTalentsSerializer {
@@ -17,15 +18,16 @@ object ClassicTalentsSerializer {
         }
     }
 
-    fun load(dataFile: File, languageFile: File): WowClass {
-        val wowClass = jsonParser.decodeFromString<WowClass>(dataFile.readText())
-        Translations.load(wowClass, languageFile)
-        return wowClass
+    fun loadClass(dataFile: File): WowClass {
+        return jsonParser.decodeFromString(dataFile.readText())
     }
 
-    fun save(wowClass: WowClass, dataFile: File, languageFile: File) {
+    fun loadClassAsStream(dataStream: InputStream): WowClass {
+        val data = dataStream.bufferedReader().use { it.readText() }
+        return jsonParser.decodeFromString(data)
+    }
+
+    fun saveClass(wowClass: WowClass, dataFile: File) {
         dataFile.writeText(jsonParser.encodeToString(wowClass))
-        Translations.save(wowClass, languageFile)
     }
-
 }

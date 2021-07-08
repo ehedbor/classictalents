@@ -2,17 +2,19 @@ package org.hedbor.evan.classictalents.talentgen.view
 
 import javafx.event.EventTarget
 import javafx.geometry.Insets
-import javafx.scene.control.Alert
-import javafx.scene.control.Button
+import javafx.scene.Node
 import javafx.scene.control.ButtonBar
-import javafx.scene.control.OverrunStyle
+import javafx.scene.image.ImageView
+import javafx.scene.layout.BorderPane
+import javafx.scene.layout.Region
 import javafx.scene.layout.StackPane
 import javafx.scene.text.FontWeight
 import org.hedbor.evan.classictalents.common.model.*
+import org.hedbor.evan.classictalents.talentgen.APP_RESOURCES_DIRECTORY
 import org.hedbor.evan.classictalents.talentgen.INITIAL_BACKGROUND_DIRECTORY
 import org.hedbor.evan.classictalents.talentgen.chooseIconFromResources
-import org.hedbor.evan.classictalents.talentgen.formatTranslationKey
 import tornadofx.*
+import java.net.MalformedURLException
 
 
 class SpecializationEditor : Fragment() {
@@ -20,101 +22,77 @@ class SpecializationEditor : Fragment() {
     private val model: SpecializationModel by inject()
 
     init {
-        titleProperty.bind(model.displayName)
-        model.translationKey.bind(model.displayName.stringBinding { formatTranslationKey(it) })
+        title = messages["editor.title.spec"]
     }
 
     override val root = borderpane {
-        center {
-            form {
-                fieldset("Specialization") {
-                    field("Display Name") {
-                        textfield(model.displayName) { mustBePresent() }
-                    }
-                    field("Translation Key") {
-                        label(wowClassModel.translationKey.stringBinding { "$it." })
-                        textfield(model.translationKey) { isDisable = true }
-                    }
-                    field("Background Image") {
-                        textfield(model.backgroundImage) {
-                            mustBePresent()
-                        }
-                        button("...") {
-                            action {
-                                val image = chooseIconFromResources("Choose a Background Image", INITIAL_BACKGROUND_DIRECTORY)
-                                if (image != null) model.backgroundImage.value = image
-                            }
-                        }
-                    }
-                    field("Talents") {
-                        gridpane {
-                            for (row in 0 until wowClassModel.era.value.talentRowCount) {
-                                for (col in 0 until Specialization.TALENT_COLUMN_COUNT) {
-                                    talentbutton(Location(row, col))
-                                }
-                            }
-                        }
+        center { addGeneralInfo() }
+        bottom { addButtonBar() }
+        children.forEach {
+            BorderPane.setMargin(it, Insets(0.0, 5.0, 5.0, 5.0))
+        }
+    }
+
+    private fun Region.addGeneralInfo() = form {
+        fieldset(messages["editor.fieldset.spec"]) {
+            field(messages["editor.field.translation_key"]) {
+                label(wowClassModel.translationKey.stringBinding { "$it." })
+                textfield(model.translationKey) {
+                    mustBePresent()
+                    mustBeValidKey()
+                }
+            }
+            field(messages["editor.field.background"]) {
+                textfield(model.backgroundImage) {
+                    mustBePresent()
+                }
+                button("...") {
+                    action {
+                        val image = chooseIconFromResources(messages["action.file.choose.background"], INITIAL_BACKGROUND_DIRECTORY)
+                        if (image != null) model.backgroundImage.value = image
                     }
                 }
             }
         }
-        bottom {
-            buttonbar {
-                button("Apply", ButtonBar.ButtonData.APPLY) {
-                    enableWhen(model.valid.and(model.dirty))
-                    action { saveEditor() }
-                }
-                button("OK", ButtonBar.ButtonData.OK_DONE) {
-                    enableWhen(model.valid)
-                    action { saveAndCloseEditor() }
-                }
-                button("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE) {
-                    action { closeEditorWithConfirmation() }
+        fieldset(messages["editor.field.talents"]) {
+            gridpane {
+                for (row in 0 until wowClassModel.era.value.talentRowCount) {
+                    for (col in 0 until Specialization.TALENT_COLUMN_COUNT) {
+                        talentbutton(Location(row, col))
+                    }
                 }
             }
         }
     }
 
-    private fun saveEditor() {
-        model.commit {
-            wowClassModel.specializations.invalidate()
+    private fun Region.addButtonBar() = buttonbar {
+        button(messages["action.editor.apply"], ButtonBar.ButtonData.APPLY) {
+            enableWhen(model.valid.and(model.dirty))
+            action { saveEditor() }
         }
-    }
-
-    private fun saveAndCloseEditor() {
-        model.translationKey.unbind()
-        saveEditor()
-        close()
-    }
-
-    private fun closeEditor() {
-        model.translationKey.unbind()
-        model.rollback()
-        close()
-    }
-
-    private fun closeEditorWithConfirmation() {
-        if (!model.dirty.value) {
-            closeEditor()
-        } else {
-            alert(Alert.AlertType.CONFIRMATION, "Discard changes?",
-                "Are you sure you want to discard all changes made to this spec? You will not be able to reverse your decision.") {
-                if (it.buttonData == ButtonBar.ButtonData.OK_DONE)
-                    closeEditor()
-            }
+        button(messages["action.editor.ok"], ButtonBar.ButtonData.OK_DONE) {
+            enableWhen(model.valid)
+            action { saveAndCloseEditor() }
+        }
+        button(messages["action.editor.cancel"], ButtonBar.ButtonData.CANCEL_CLOSE) {
+            action { closeEditor() }
         }
     }
 
     private fun EventTarget.talentbutton(location: Location): StackPane {
-        return stackpane {
+        return stackpane talentButtonRoot@ {
+            val talent = getOrCreateTalentAt(location)
             gridpaneConstraints {
                 columnRowIndex(location.column, location.row)
+                margin = Insets(2.0)
             }
-            val editButton = button(getOrCreateTalentAt(location).displayNameProperty) {
-                textOverrun = OverrunStyle.LEADING_ELLIPSIS
-                prefWidth = 65.0
-                prefHeight = 65.0
-                action { editTalent(getOrCreateTalentAt(location)) }
+            button {
+                prefWidth = 70.0
+                prefHeight = 70.0
+                maxWidthProperty().bind(prefWidthProperty())
+                maxHeightProperty().bind(prefHeightProperty())
+                graphicProperty().bind(talent.iconProperty.objectBinding { getTalentGraphic(it) })
+                action { editTalent(talent) }
             }
             anchorpane {
                 // prevent the anchor pane from eating click events to the editButton
@@ -132,9 +110,28 @@ class SpecializationEditor : Fragment() {
                     prefHeight = 25.0
                     padding = Insets(1.0)
                     action {
-                        resetTalent(location, editButton)
+                        resetTalent(location, this@talentButtonRoot)
                     }
                 }
+            }
+        }
+    }
+
+    private fun getTalentGraphic(icon: String?): Node? {
+        if (icon.isNullOrBlank()) return null
+        return try {
+            val formattedPath = APP_RESOURCES_DIRECTORY.resolve(icon).toURI().toURL().toExternalForm()
+            ImageView(formattedPath).also {
+                it.fitWidth = 50.0
+                it.isPreserveRatio = true
+                it.isSmooth = true
+            }
+        } catch (e: Exception) {
+            when (e) {
+                is IllegalArgumentException,
+                is MalformedURLException,
+                is SecurityException -> null
+                else -> throw e
             }
         }
     }
@@ -142,9 +139,7 @@ class SpecializationEditor : Fragment() {
     private fun getOrCreateTalentAt(location: Location): Talent {
         var talent = model.talents.find { it.location == location  }
         if (talent == null) {
-            talent = Talent(
-                location = location,
-                description = Talent.HELPFUL_DESCRIPTION)
+            talent = Talent { this.location = location }
             model.talents += talent
         }
         return talent
@@ -157,16 +152,46 @@ class SpecializationEditor : Fragment() {
     }
 
     /**
-     * Resets the talent at the given location and rebinds the textProperty of its edit button.
+     * Deletes the original talent and [talentButtonRoot] and creates a new talent button.
      */
-    private fun resetTalent(location: Location, editButton: Button) {
-        alert(Alert.AlertType.CONFIRMATION, "Reset this talent?",
-            "Are you sure you want to reset this talent? You will not be able to reverse your decision."
+    private fun resetTalent(location: Location, talentButtonRoot: Region) {
+        confirm(
+            messages.format("confirm.reset", messages["this.talent"]),
+            messages.format("confirm.reset.content", messages["this.talent"])
         ) {
-            editButton.textProperty().unbind()
+            val parent = talentButtonRoot.parent
+            talentButtonRoot.removeFromParent()
             model.talents.removeIf { it.location == location }
-            val newTalent = getOrCreateTalentAt(location)
-            editButton.textProperty().bind(newTalent.displayNameProperty)
+
+            parent.talentbutton(location)
+        }
+    }
+
+
+    private fun saveEditor() {
+        model.commit {
+            wowClassModel.specializations.invalidate()
+        }
+    }
+
+    private fun saveAndCloseEditor() {
+        saveEditor()
+        close()
+    }
+
+    private fun closeEditor() {
+        fun rollbackAndClose() {
+            model.rollback()
+            this.close()
+        }
+
+        if (!model.dirty.value) {
+            rollbackAndClose()
+        } else {
+            confirm(
+                messages["confirm.discard"],
+                messages.format("confirm.discard.content", messages["this.spec"]),
+                actionFn = ::rollbackAndClose)
         }
     }
 }

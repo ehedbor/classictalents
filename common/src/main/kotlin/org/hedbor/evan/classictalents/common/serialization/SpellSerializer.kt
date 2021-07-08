@@ -10,7 +10,6 @@ import org.hedbor.evan.classictalents.common.model.CooldownUnit
 import org.hedbor.evan.classictalents.common.model.Range
 import org.hedbor.evan.classictalents.common.model.ResourceType
 import org.hedbor.evan.classictalents.common.model.Spell
-import java.lang.IllegalArgumentException
 
 
 internal object SpellSerializer : KSerializer<Spell> {
@@ -19,7 +18,7 @@ internal object SpellSerializer : KSerializer<Spell> {
     override fun serialize(encoder: Encoder, value: Spell) {
         var resourceCost: String? = null
         if (value.resourceType != null && value.resourceCost > 0) {
-            resourceCost = "${value.resourceCost} ${value.resourceType}"
+            resourceCost = "${value.resourceCost} ${value.resourceType!!.serialName}"
         }
 
         val range = when {
@@ -36,7 +35,7 @@ internal object SpellSerializer : KSerializer<Spell> {
 
         var cooldown: String? = null
         if (value.cooldownUnit != null && value.cooldown > 0.0) {
-            cooldown = "${value.cooldown} ${value.cooldownUnit}"
+            cooldown = "${value.cooldown} ${value.cooldownUnit!!.serialName}"
         }
 
         val surrogate = SpellSurrogate(resourceCost, range, castTime, cooldown)
@@ -54,10 +53,10 @@ internal object SpellSerializer : KSerializer<Spell> {
 
             result.resourceCost = substrings[0].toIntOrNull() ?: malformedProperty("resourceCost")
             result.resourceType = when (substrings[1]) {
-                "${ResourceType.MANA}" -> ResourceType.MANA
-                "${ResourceType.PERCENT_OF_BASE_MANA}" -> ResourceType.PERCENT_OF_BASE_MANA
-                "${ResourceType.ENERGY}" -> ResourceType.ENERGY
-                "${ResourceType.RAGE}" -> ResourceType.RAGE
+                ResourceType.MANA.serialName -> ResourceType.MANA
+                ResourceType.PERCENT_OF_BASE_MANA.serialName -> ResourceType.PERCENT_OF_BASE_MANA
+                ResourceType.ENERGY.serialName -> ResourceType.ENERGY
+                ResourceType.RAGE.serialName -> ResourceType.RAGE
                 else -> malformedProperty("resourceCost")
             }
         }
@@ -87,9 +86,9 @@ internal object SpellSerializer : KSerializer<Spell> {
             }
             result.cooldown = substrings[0].toDoubleOrNull() ?: malformedProperty("cooldown")
             result.cooldownUnit = when (substrings[1]) {
-                "${CooldownUnit.HOURS}" -> CooldownUnit.HOURS
-                "${CooldownUnit.MINUTES}" -> CooldownUnit.MINUTES
-                "${CooldownUnit.SECONDS}" -> CooldownUnit.SECONDS
+                CooldownUnit.HOURS.serialName -> CooldownUnit.HOURS
+                CooldownUnit.MINUTES.serialName -> CooldownUnit.MINUTES
+                CooldownUnit.SECONDS.serialName -> CooldownUnit.SECONDS
                 else -> malformedProperty("cooldown")
             }
         }

@@ -3,54 +3,61 @@ package org.hedbor.evan.classictalents.common.model
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.hedbor.evan.classictalents.common.serialization.TalentSerializer
+import kotlinx.serialization.Transient
+import org.hedbor.evan.classictalents.common.serialization.SimpleIntegerPropertySerializer
+import org.hedbor.evan.classictalents.common.serialization.SimpleObjectPropertySerializer
+import org.hedbor.evan.classictalents.common.serialization.SimpleStringPropertySerializer
 import tornadofx.getValue
 import tornadofx.setValue
 import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
+import kotlin.Unit
 
 
 @Suppress("MemberVisibilityCanBePrivate")
-@Serializable(with = TalentSerializer::class)
-class Talent(
-    translationKey: String = "",
-    displayName: String = "",
-    description: String = "",
-    location: Location = Location(),
-    prerequisite: Location? = null,
-    maxRank: Int = 0,
-    icon: String = "",
-    spell: Spell? = null,
-) {
+@Serializable
+class Talent {
     companion object {
         const val MINIMUM_RANK = 1
         const val MAXIMUM_PERMISSIBLE_RANK = 5
-        const val HELPFUL_DESCRIPTION = "{0,choice,1#ONE_POINT|2#TWO_POINTS|3#THREE_POINTS|4#FOUR_POINTS|5#FIVE_POINTS}"
     }
 
-    val translationKeyProperty = SimpleStringProperty(this, "translationKey", translationKey)
+    constructor(block: Talent.() -> Unit) { this.block() }
+
+    @Serializable(with = SimpleStringPropertySerializer::class)
+    @SerialName("key")
+    val translationKeyProperty = SimpleStringProperty(this, "translationKey", "")
     var translationKey: String by translationKeyProperty
 
-    val displayNameProperty = SimpleStringProperty(this, "displayName", displayName)
-    var displayName: String by displayNameProperty
-
-    val descriptionProperty = SimpleStringProperty(this, "description", description)
-    var description: String by descriptionProperty
-
-    val locationProperty = SimpleObjectProperty(this, "location", location)
+    @Serializable(with = SimpleObjectPropertySerializer::class)
+    @SerialName("location")
+    val locationProperty = SimpleObjectProperty(this, "location", Location())
     var location: Location by locationProperty
 
-    val prerequisiteProperty = SimpleObjectProperty<Location>(this, "prerequisite", prerequisite)
+    @Serializable(with = SimpleObjectPropertySerializer::class)
+    @SerialName("requires")
+    val prerequisiteProperty = SimpleObjectProperty<Location>(this, "prerequisite", null)
     var prerequisite: Location? by prerequisiteProperty
 
-    val maxRankProperty = SimpleIntegerProperty(this, "maxRank", maxRank)
+    @Serializable(with = SimpleIntegerPropertySerializer::class)
+    @SerialName("maxRank")
+    val maxRankProperty = SimpleIntegerProperty(this, "maxRank", 0)
     var maxRank: Int by maxRankProperty
 
-    val iconProperty = SimpleStringProperty(this, "icon", icon)
+    @Transient
+    val rankProperty = SimpleIntegerProperty(this, "rank", 0)
+    var rank: Int by rankProperty
+
+    @Serializable(with = SimpleStringPropertySerializer::class)
+    @SerialName("icon")
+    val iconProperty = SimpleStringProperty(this, "icon", "")
     var icon: String by iconProperty
 
-    val spellProperty = SimpleObjectProperty<Spell>(this, "spell", spell)
+    @Serializable(with = SimpleObjectPropertySerializer::class)
+    @SerialName("spell")
+    val spellProperty = SimpleObjectProperty<Spell>(this, "spell", null)
     var spell: Spell? by spellProperty
 }

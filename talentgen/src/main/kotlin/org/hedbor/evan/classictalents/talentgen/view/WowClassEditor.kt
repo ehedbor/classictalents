@@ -1,78 +1,23 @@
 package org.hedbor.evan.classictalents.talentgen.view
 
 import javafx.beans.binding.BooleanExpression
-import javafx.scene.control.Alert
-import javafx.scene.control.ButtonBar
+import javafx.geometry.Insets
+import javafx.scene.layout.BorderPane
+import javafx.scene.layout.Region
+import javafx.util.StringConverter
 import org.hedbor.evan.classictalents.common.model.Era
 import org.hedbor.evan.classictalents.common.model.Specialization
 import org.hedbor.evan.classictalents.common.model.SpecializationModel
 import org.hedbor.evan.classictalents.common.model.WowClassModel
 import org.hedbor.evan.classictalents.talentgen.controller.TalentGenController
-import org.hedbor.evan.classictalents.talentgen.formatTranslationKey
 import tornadofx.*
 
 
-class WowClassEditor : View("Talent Tree Editor") {
+class WowClassEditor : View() {
     private val controller: TalentGenController by inject()
-    private val model: WowClassModel by lazy { controller.model }
+    private val model: WowClassModel by lazy { controller.classModel }
 
     private lateinit var specFieldset: Fieldset
-
-    init {
-        titleProperty.bind(model.displayName)
-        model.translationKey.bind(model.displayName.stringBinding { formatTranslationKey(it) })
-    }
-
-    override val root = borderpane {
-        center {
-            form {
-                fieldset("General") {
-                    field("Display Name") {
-                        textfield(model.displayName) { mustBePresent() }
-                    }
-                    field("Translation Key") {
-                        textfield(model.translationKey) { isDisable = true }
-                    }
-                    field("Era") {
-                        combobox(model.era, Era.values().toList()) {
-                            if (selectedItem !in items) {
-                                selectionModel.selectFirst()
-                            }
-                        }
-                    }
-                }
-                specFieldset = fieldset("Specializations") {
-                    button("Add Specialization") {
-                        action { createNewSpecField(addNewSpec()) }
-                    }
-                }
-            }
-        }
-        bottom {
-            buttonbar {
-                button("Open") {
-                    action { load() }
-                }
-                button("Save") {
-                    enableWhen(model.dirty.and(modelValid))
-                    action {
-                        model.commit()
-                        controller.save()
-                    }
-                }
-                button("Save As") {
-                    enableWhen(model.dirty.and(modelValid))
-                    action {
-                        model.commit()
-                        controller.save(toNewFile = true)
-                    }
-                }
-                button("Quit") {
-                    action { quitWithConfirmation() }
-                }
-            }
-        }
-    }
 
     private val modelValid: BooleanExpression
         get() {
@@ -83,43 +28,119 @@ class WowClassEditor : View("Talent Tree Editor") {
             }
         }
 
-    private fun load() {
-        model.translationKey.unbind()
-        val success = controller.load()
-        if (success) {
-            // remove the old fields and replace them with new ones
-            specFieldset.children.filterIsInstance<Field>().forEach { it.removeFromParent() }
-            model.specializations.forEach { specFieldset.createNewSpecField(it) }
+    init {
+        title = messages["editor.title.class"]
+    }
+
+    override val root = borderpane {
+        top {
+            addMenuBar()
+        }
+        center {
+            addGeneralInfo()
+        }
+        children.forEach {
+            BorderPane.setMargin(it, Insets(0.0, 5.0, 5.0, 5.0))
         }
     }
 
-    private fun quitWithConfirmation() {
-        if (!model.dirty.value) {
-            model.commit()
-            controller.quit()
-        } else {
-            alert(
-                Alert.AlertType.CONFIRMATION,
-                "Discard changes?",
-                "Are you sure you want to discard all changes made to this class? You will not be able to reverse your decision."
-            ) {
-                if (it.buttonData == ButtonBar.ButtonData.OK_DONE) {
-                    model.commit()
-                    controller.quit()
+    private fun Region.addGeneralInfo() = form {
+        fieldset(messages["editor.fieldset.general"]) {
+            field(messages["editor.field.translation_key"]) {
+                textfield(model.translationKey) {
+                    mustBePresent()
+                    mustBeValidKey()
+                }
+            }
+            field(messages["editor.field.era"]) {
+                combobox(model.era, Era.values().toList()) {
+                    converter = object : StringConverter<Era>() {
+                        override fun toString(`object`: Era?): String {
+                            return if (`object` == null) "" else messages[`object`.translationKey]
+                        }
+
+                        override fun fromString(string: String?): Era {
+                            throw IllegalStateException("unreachable")
+                        }
+                    }
+                    if (selectedItem !in items) {
+                        selectionModel.selectFirst()
+                    }
+                }
+            }
+        }
+        specFieldset = fieldset(messages["editor.field.specs"]) {
+            button(messages["action.editor.add_spec"]) {
+                action { createNewSpecField(addNewSpec(), true) }
+            }
+            repeat(3) { createNewSpecField(addNewSpec(), false) }
+        }
+    }
+
+    private fun Region.addMenuBar() = menubar {
+        menu(messages["menu.file"]) {
+            item(messages["action.file.new"], "Ctrl+N") {
+                action { controller.newDataFile() }
+            }
+            item(messages["action.file.open"], "Ctrl+O") {
+                action { open(false) }
+            }
+            item(messages["action.file.open_recent"], "Ctrl+Shift+O") {
+                action { open(true) }
+            }
+            item(messages["action.file.save"], "Ctrl+S") {
+                enableWhen(modelValid)
+                action { controller.saveDataFile(false) }
+            }
+            item(messages["action.file.save_as"], "Ctrl+Shift+S") {
+                enableWhen(modelValid)
+                action { controller.saveDataFile(true) }
+            }
+            separator()
+            item(messages["action.quit"], "Ctrl+Q") {
+                action { controller.quit() }
+            }
+        }
+        menu(messages["menu.bundle"]) {
+            item(messages["action.bundle.new"], "Ctrl+B") {
+                action {
+                    controller.newBundle()
+                    editBundle()
+                }
+            }
+            item(messages["action.bundle.open"], "Ctrl+Shift+B") {
+                action {
+                    val success = controller.openBundle(false)
+                    if (success) editBundle()
+                }
+            }
+            item(messages["action.bundle.open_recent"]) {
+                action {
+                    val success = controller.openBundle(true)
+                    if (success) editBundle()
                 }
             }
         }
     }
 
-    private fun Fieldset.createNewSpecField(spec: Specialization) {
+    private fun open(openRecent: Boolean) {
+        val success = controller.openDataFile(openRecent)
+        if (success) {
+            // remove the old fields and replace them with new ones
+            specFieldset.children.filterIsInstance<Field>().forEach { it.removeFromParent() }
+            model.specializations.forEach { specFieldset.createNewSpecField(it, true) }
+        }
+    }
+
+    private fun Fieldset.createNewSpecField(spec: Specialization, resize: Boolean) {
         val field = Field().apply field@{
-            textProperty.bind(spec.displayNameProperty)
-            button("Edit") {
+            textProperty.bind(spec.translationKeyProperty)
+            button(messages["action.editor.edit"]) {
                 action {
                     editSpec(spec)
                 }
             }
-            button("Delete") {
+            button(messages["action.editor.delete"]) {
                 action {
                     removeSpec(spec)
                     this@field.removeFromParent()
@@ -127,12 +148,12 @@ class WowClassEditor : View("Talent Tree Editor") {
             }
         }
         addChildIfPossible(field, model.specializations.size)
-        currentStage?.sizeToScene()
+        if (resize) currentStage?.sizeToScene()
     }
 
     private fun addNewSpec(): Specialization {
         val index = model.specializations.size
-        val spec = Specialization(displayName = "Spec ${index + 1}")
+        val spec = Specialization { translationKey = "spec${index + 1}" }
         model.specializations += spec
         return spec
     }
@@ -146,5 +167,10 @@ class WowClassEditor : View("Talent Tree Editor") {
         val specModel = SpecializationModel(spec)
         val scope = Scope(model, specModel)
         find<SpecializationEditor>(scope).openModal()
+    }
+
+    private fun editBundle() {
+        val scope = Scope(controller, controller.bundleModel)
+        find<TranslationEditor>(scope).openModal()
     }
 }

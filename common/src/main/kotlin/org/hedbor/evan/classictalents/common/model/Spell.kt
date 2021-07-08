@@ -1,9 +1,18 @@
 package org.hedbor.evan.classictalents.common.model
 
-import javafx.beans.property.*
+import javafx.beans.property.SimpleDoubleProperty
+import javafx.beans.property.SimpleIntegerProperty
+import javafx.beans.property.SimpleObjectProperty
 import kotlinx.serialization.Serializable
 import org.hedbor.evan.classictalents.common.serialization.SpellSerializer
-import tornadofx.*
+import tornadofx.getValue
+import tornadofx.setValue
+import kotlin.Boolean
+import kotlin.Double
+import kotlin.Int
+import kotlin.String
+import kotlin.Suppress
+import kotlin.require
 
 
 @Suppress("MemberVisibilityCanBePrivate")
@@ -35,21 +44,21 @@ class Spell(
     var range: Double by rangeProperty
 }
 
-enum class ResourceType(val key: String) {
-    MANA("mana"),
-    PERCENT_OF_BASE_MANA("percent_of_base_mana"),
-    RAGE("rage"),
-    ENERGY("energy");
+enum class ResourceType(val translationKey: String, val serialName: String) {
+    MANA("unit.resource.mana", "mana"),
+    PERCENT_OF_BASE_MANA("unit.resource.percent_of_base_mana", "%mana"),
+    RAGE("unit.resource.rage", "rage"),
+    ENERGY("unit.resource.energy", "energy");
 
-    override fun toString() = key
+    override fun toString() = translationKey
 }
 
-enum class CooldownUnit(val key: String) {
-    HOURS("hr"),
-    MINUTES("min"),
-    SECONDS("sec");
+enum class CooldownUnit(val translationKey: String, val serialName: String) {
+    HOURS("unit.time.hours", "hr"),
+    MINUTES("unit.time.minutes", "min"),
+    SECONDS("unit.time.seconds", "sec");
 
-    override fun toString() = key
+    override fun toString() = translationKey
 }
 
 object Range {
