@@ -3,7 +3,7 @@ package org.hedbor.evan.classictalents.app.view.styles
 import tornadofx.Stylesheet
 import tornadofx.cssclass
 
-class TalentButtonTooltipStyles : Stylesheet() {
+class TalentTooltipStyles : Stylesheet() {
     companion object {
         val tooltipTitle by cssclass()
         val tooltipSubtitle by cssclass()

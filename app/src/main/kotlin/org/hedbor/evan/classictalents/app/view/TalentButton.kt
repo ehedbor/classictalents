@@ -12,6 +12,7 @@ import javafx.scene.input.MouseButton
 import javafx.scene.layout.StackPane
 import org.hedbor.evan.classictalents.app.model.Talent
 import org.hedbor.evan.classictalents.app.util.generateGrayscaleImage
+import org.hedbor.evan.classictalents.app.view.styles.TalentStyles
 import tornadofx.*
 import java.util.*
 
@@ -46,29 +47,29 @@ class TalentButton(val talent: Talent, messages: ResourceBundle) : ToggleButton(
     private val borderImage = Image(BORDER_IMAGE)
 
     init {
-        addClass(org.hedbor.evan.classictalents.app.view.styles.TalentButtonStyles.talentButton)
+        addClass(TalentStyles.talentButton)
         padding = insets(0)
         inactiveProperty.bind(talent.shouldBeActive.not())
 
         graphic = StackPane().apply {
             backgroundImageView = imageview(getAppropriateBackgroundImage(isInactive)) {
-                addClass(org.hedbor.evan.classictalents.app.view.styles.TalentButtonStyles.talentButtonIcon)
+                addClass(TalentStyles.talentButtonIcon)
             }
             imageview(borderImage) {
-                addClass(org.hedbor.evan.classictalents.app.view.styles.TalentButtonStyles.talentButtonIcon)
+                addClass(TalentStyles.talentButtonIcon)
             }
             imageview(BORDER_HILITE_HOVER_IMAGE) {
-                addClass(org.hedbor.evan.classictalents.app.view.styles.TalentButtonStyles.talentButtonIcon)
+                addClass(TalentStyles.talentButtonIcon)
                 visibleProperty().bind(this@TalentButton.hoverProperty())
             }
             imageview(BORDER_HILITE_ACTIVE_IMAGE) {
-                addClass(org.hedbor.evan.classictalents.app.view.styles.TalentButtonStyles.talentButtonIcon)
+                addClass(TalentStyles.talentButtonIcon)
                 visibleProperty().bind(talent.allocatedPointsProperty().booleanBinding(this@TalentButton.inactiveProperty) { allocatedPoints ->
                     allocatedPoints != talent.maxRank && !this@TalentButton.isInactive
                 })
             }
             imageview(BORDER_HILITE_MAX_RANK_IMAGE) {
-                addClass(org.hedbor.evan.classictalents.app.view.styles.TalentButtonStyles.talentButtonIcon)
+                addClass(TalentStyles.talentButtonIcon)
                 visibleProperty().bind(talent.allocatedPointsProperty().booleanBinding { it == talent.maxRank })
             }
         }

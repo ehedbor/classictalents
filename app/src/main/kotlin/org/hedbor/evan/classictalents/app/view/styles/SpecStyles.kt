@@ -3,10 +3,11 @@ package org.hedbor.evan.classictalents.app.view.styles
 import javafx.scene.layout.BackgroundPosition
 import javafx.scene.layout.BackgroundRepeat
 import javafx.scene.layout.BackgroundSize
-import tornadofx.*
+import tornadofx.Stylesheet
+import tornadofx.cssclass
 
 
-class TalentTreeStyles : Stylesheet() {
+class SpecStyles : Stylesheet() {
     companion object {
         val talentTreeBackground by cssclass()
     }

@@ -6,7 +6,7 @@ import javafx.scene.layout.BackgroundSize
 import javafx.scene.paint.Color
 import tornadofx.*
 
-class TalentButtonStyles : Stylesheet() {
+class TalentStyles : Stylesheet() {
     companion object {
         val talentButton by cssclass()
         val inactive by csspseudoclass()

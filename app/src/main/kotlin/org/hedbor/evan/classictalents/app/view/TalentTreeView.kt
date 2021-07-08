@@ -5,6 +5,7 @@ import javafx.geometry.Insets
 import javafx.scene.layout.StackPane
 import javafx.scene.paint.Color
 import org.hedbor.evan.classictalents.app.model.TalentTree
+import org.hedbor.evan.classictalents.app.view.styles.SpecStyles
 import tornadofx.*
 import java.net.URI
 import java.util.*
@@ -36,7 +37,7 @@ class TalentTreeView(private val talentTree: TalentTree, messages: ResourceBundl
             style {
                 backgroundImage += URI(talentTree.backgroundImage)
             }
-            addClass(org.hedbor.evan.classictalents.app.view.styles.TalentTreeStyles.talentTreeBackground)
+            addClass(SpecStyles.talentTreeBackground)
 
             talentTree.talents.forEach { talent ->
                 talentButtons += labeledtalentbutton(talent, messages) {
