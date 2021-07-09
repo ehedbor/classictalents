@@ -11,21 +11,17 @@ import org.hedbor.evan.classictalents.common.serialization.SimpleObjectPropertyS
 import org.hedbor.evan.classictalents.common.serialization.SimpleStringPropertySerializer
 import tornadofx.getValue
 import tornadofx.setValue
-import kotlin.Int
-import kotlin.String
-import kotlin.Suppress
-import kotlin.Unit
 
 
 @Suppress("MemberVisibilityCanBePrivate")
 @Serializable
-class Talent {
+class Talent() {
     companion object {
         const val MINIMUM_RANK = 1
         const val MAXIMUM_PERMISSIBLE_RANK = 5
     }
 
-    constructor(block: Talent.() -> Unit) { this.block() }
+    constructor(block: Talent.() -> Unit) : this() { this.block() }
 
     @Serializable(with = SimpleStringPropertySerializer::class)
     @SerialName("key")

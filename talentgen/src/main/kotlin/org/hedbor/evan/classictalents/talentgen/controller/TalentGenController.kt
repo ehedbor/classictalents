@@ -106,7 +106,8 @@ class TalentGenController : Controller() {
     fun saveDataFile(toNewFile: Boolean): Boolean {
         val dataFileExists = currentDataFile?.exists() ?: false
         if (toNewFile || !dataFileExists) {
-            selectDataFile(FileChooserMode.Save)
+            val suggestedFileName = "${classModel.translationKey.value}.json"
+            selectDataFile(FileChooserMode.Save, suggestedFileName)
         }
 
         return when (val file = currentDataFile) {
@@ -162,9 +163,12 @@ class TalentGenController : Controller() {
         val bundleFileExists = currentBundleFile?.exists() ?: false
         if (toNewFile || !bundleFileExists) {
             val className = classModel.translationKey.value
-            var locale = bundleModel.item.locale.toString()
-            if (locale.isNotEmpty()) { locale = "_$locale" }
-            val suggestedFileName = "$className$locale.properties"
+            val locale = bundleModel.item.locale.toString()
+
+            var suggestedFileName = className
+            if (locale.isNotEmpty()) { suggestedFileName += "_$locale" }
+            suggestedFileName += ".properties"
+
             selectResourceBundle(FileChooserMode.Save, suggestedFileName)
         }
 
@@ -177,9 +181,13 @@ class TalentGenController : Controller() {
         }
     }
 
-    private fun selectDataFile(mode: FileChooserMode) {
+    private fun selectDataFile(mode: FileChooserMode, suggestedFileName: String? = null) {
         TALENTS_OUTPUT_DIR.mkdirs()
-        val files = chooseFile(messages["action.file.choose.data"], arrayOf(JSON_FILE_FILTER), TALENTS_OUTPUT_DIR, mode)
+        val files = chooseFile(messages["action.file.choose.data"], arrayOf(JSON_FILE_FILTER), TALENTS_OUTPUT_DIR, mode) {
+            if (suggestedFileName != null) {
+                initialFileName = suggestedFileName
+            }
+        }
         val f = files.firstOrNull()
         if (f != null) {
             currentDataFile = f

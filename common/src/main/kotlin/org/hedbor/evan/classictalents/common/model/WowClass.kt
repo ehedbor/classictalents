@@ -16,8 +16,8 @@ import tornadofx.setValue
 
 @Suppress("MemberVisibilityCanBePrivate")
 @Serializable
-class WowClass {
-    constructor(block: WowClass.() -> Unit) { this.block() }
+class WowClass() {
+    constructor(block: WowClass.() -> Unit) : this() { this.block() }
 
     @Serializable(with = SimpleStringPropertySerializer::class)
     @SerialName("key")

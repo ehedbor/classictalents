@@ -44,6 +44,7 @@ class SpecializationEditor : Fragment() {
             }
             field(messages["editor.field.background"]) {
                 textfield(model.backgroundImage) {
+                    isEditable = false
                     mustBePresent()
                 }
                 button("...") {

@@ -13,13 +13,13 @@ import tornadofx.setValue
 
 
 @Serializable
-class Specialization {
+class Specialization() {
     companion object {
         /** @see Era.talentRowCount */
         const val TALENT_COLUMN_COUNT = 4
     }
 
-    constructor(block: Specialization.() -> Unit) { this.block() }
+    constructor(block: Specialization.() -> Unit) : this() { this.block() }
 
     @Serializable(with = SimpleStringPropertySerializer::class)
     @SerialName("key")

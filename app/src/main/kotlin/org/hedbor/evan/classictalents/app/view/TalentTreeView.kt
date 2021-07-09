@@ -4,14 +4,13 @@ import javafx.event.EventTarget
 import javafx.geometry.Insets
 import javafx.scene.layout.StackPane
 import javafx.scene.paint.Color
-import org.hedbor.evan.classictalents.app.model.TalentTree
 import org.hedbor.evan.classictalents.app.view.styles.SpecStyles
+import org.hedbor.evan.classictalents.common.model.Specialization
 import tornadofx.*
 import java.net.URI
-import java.util.*
 
 
-class TalentTreeView(private val talentTree: TalentTree, messages: ResourceBundle) : StackPane() {
+class TalentTreeView(private val spec: Specialization) : StackPane() {
     companion object {
         private const val BUTTON_INSETS = 10.0
         // The button textures have blank pixels along the edges. This alignment variable accounts for that
@@ -35,14 +34,14 @@ class TalentTreeView(private val talentTree: TalentTree, messages: ResourceBundl
     init {
         gridpane {
             style {
-                backgroundImage += URI(talentTree.backgroundImage)
+                backgroundImage += URI(spec.backgroundImage)
             }
             addClass(SpecStyles.talentTreeBackground)
 
-            talentTree.talents.forEach { talent ->
-                talentButtons += labeledtalentbutton(talent, messages) {
+            for (talent in spec.talents) {
+                talentButtons += labeledtalentbutton(talent) {
                     gridpaneConstraints {
-                        columnRowIndex(talent.location.second, talent.location.first)
+                        columnRowIndex(talent.location.column, talent.location.row)
                         padding = Insets(BUTTON_INSETS)
                     }
                 }
@@ -52,14 +51,14 @@ class TalentTreeView(private val talentTree: TalentTree, messages: ResourceBundl
             isMouseTransparent = true
             for (depButton in talentButtons) {
                 val dependency = depButton.talent
-                val prereq = dependency.prerequisite ?: continue
-                val prereqButton = talentButtons.first { it.talent.location == prereq.location }
+                val prereqLocation = dependency.prerequisite ?: continue
+                val prereqButton = talentButtons.first { it.talent.location == prereqLocation }
 
                 val depBounds = depButton.boundsInParentProperty()
                 val prereqBounds = prereqButton.boundsInParentProperty()
 
-                val rowDiff = dependency.location.first - prereq.location.first
-                val colDiff = dependency.location.second - prereq.location.second
+                val rowDiff = dependency.location.row - prereqLocation.row
+                val colDiff = dependency.location.column - prereqLocation.column
 
                 if (rowDiff != 0) {
                     // Vertical arrows always go from top to bottom, so no need to worry about the reverse case.
@@ -135,5 +134,5 @@ class TalentTreeView(private val talentTree: TalentTree, messages: ResourceBundl
     }
 }
 
-fun EventTarget.talenttreeview(talentTree: TalentTree, messages: ResourceBundle, op: TalentTreeView.() -> Unit = {}) =
-    opcr(this, TalentTreeView(talentTree, messages).apply(op))
+fun EventTarget.talenttreeview(spec: Specialization,  op: TalentTreeView.() -> Unit = {}) =
+    opcr(this, TalentTreeView(spec).apply(op))

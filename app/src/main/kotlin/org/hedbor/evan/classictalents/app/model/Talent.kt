@@ -1,11 +1,7 @@
 package org.hedbor.evan.classictalents.app.model
 
-import javafx.beans.binding.Bindings
-import tornadofx.booleanBinding
-import tornadofx.getProperty
-import tornadofx.property
 
-
+/*
 class Talent(val tree: TalentTree, val key: String, val icon: String, val location: Pair<Int, Int>, val maxRank: Int, val spellInfo: SpellInfo? = null, val prerequisiteLocation: Pair<Int, Int>? = null) {
     var allocatedPoints: Int by property(0)
     fun allocatedPointsProperty() = getProperty(Talent::allocatedPoints)
@@ -65,3 +61,4 @@ enum class ResourceType {
     RAGE,
     ENERGY
 }
+*/

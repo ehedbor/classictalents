@@ -3,14 +3,18 @@ package org.hedbor.evan.classictalents.app.view.styles
 import javafx.scene.layout.BackgroundPosition
 import javafx.scene.layout.BackgroundRepeat
 import javafx.scene.layout.BackgroundSize
+import javafx.scene.layout.BorderStrokeStyle
 import javafx.scene.paint.Color
-import tornadofx.*
+import tornadofx.Stylesheet
+import tornadofx.box
+import tornadofx.cssclass
+import tornadofx.px
 
 class TalentStyles : Stylesheet() {
     companion object {
         val talentButton by cssclass()
-        val inactive by csspseudoclass()
         val talentButtonIcon by cssclass()
+        val talentButtonBorder by cssclass()
         val pointCounter by cssclass()
     }
 
@@ -37,15 +41,7 @@ class TalentStyles : Stylesheet() {
             backgroundColor += Color.TRANSPARENT
             borderWidth += box(0.px)
         }
-        talentButton and selected {
-            backgroundColor += Color.TRANSPARENT
-            borderWidth += box(0.px)
-        }
-        talentButton and selected and focused {
-            backgroundColor += Color.TRANSPARENT
-            borderWidth += box(0.px)
-        }
-        talentButton and inactive {
+        talentButton and disabled {
             backgroundColor += Color.TRANSPARENT
             borderWidth += box(0.px)
             opacity = 1.0
@@ -54,6 +50,16 @@ class TalentStyles : Stylesheet() {
             backgroundSize += BackgroundSize(1.0, 1.0, true, true, false, false)
             backgroundPosition += BackgroundPosition.CENTER
             backgroundRepeat += Pair(BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT)
+        }
+        talentButtonBorder {
+            borderInsets += box(4.px)
+            borderWidth += box(2.px)
+            borderStyle += BorderStrokeStyle.SOLID
+            borderColor += box(StyleConstants.TALENT_ACTIVE_BORDER_COLOR)
+            borderRadius += box(5.px)
+            borderWidth += box(36.px)
+            //wowhead border size: 36px square
+            //wowhead icon size: 44px square
         }
         pointCounter {
             textFill = StyleConstants.DESCRIPTION_COLOR

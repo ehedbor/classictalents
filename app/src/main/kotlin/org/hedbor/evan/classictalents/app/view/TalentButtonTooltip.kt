@@ -5,20 +5,22 @@ import javafx.geometry.Pos
 import javafx.scene.control.Tooltip
 import javafx.scene.layout.Region
 import javafx.scene.layout.VBox
-import org.hedbor.evan.classictalents.app.model.ResourceType
-import org.hedbor.evan.classictalents.app.model.SpellInfo
-import org.hedbor.evan.classictalents.app.model.Talent
 import org.hedbor.evan.classictalents.app.view.styles.TalentTooltipStyles
+import org.hedbor.evan.classictalents.common.model.CooldownUnit
+import org.hedbor.evan.classictalents.common.model.Range
+import org.hedbor.evan.classictalents.common.model.ResourceType
+import org.hedbor.evan.classictalents.common.model.Talent
 import tornadofx.*
-import java.util.*
 import kotlin.math.max
 
 
-class TalentButtonTooltip(private val talent: Talent, private val messages: ResourceBundle) : Tooltip() {
+class TalentButtonTooltip(private val talent: Talent) : Tooltip() {
     companion object {
         private const val PREF_WIDTH = 400.0
         private const val PREF_HEIGHT = 600.0
     }
+
+    private val messages get() = FX.messages
 
     init {
         isWrapText = true
@@ -31,113 +33,109 @@ class TalentButtonTooltip(private val talent: Talent, private val messages: Reso
             maxHeight = PREF_HEIGHT
 
             generateHeader()
-            if (talent.spellInfo != null) {
-                generateSpellInfo(talent.spellInfo)
-            }
+            generateSpellInfo()
             generateDescription()
             generateFooter()
-
         }
     }
 
     private fun EventTarget.generateHeader() {
         label {
             addClass(TalentTooltipStyles.tooltipTitle)
-            text = messages[talent.key]
+            text = messages[talent.translationKey]
         }
         label {
             addClass(TalentTooltipStyles.tooltipSubtitle)
-            textProperty().bind(talent.allocatedPointsProperty().stringBinding {
+            textProperty().bind(talent.rankProperty.stringBinding(talent.maxRankProperty) {
                 messages.format("talent.rank", it!!, talent.maxRank)
             })
         }
     }
 
-    private fun EventTarget.generateSpellInfo(info: SpellInfo) {
+    private fun EventTarget.generateSpellInfo() {
+        val spell = talent.spell ?: return
         hbox {
-            if (info.resourceType != null) {
-                generateSpellResource(info.resourceType, info.resourceCost!!)
+            if (spell.resourceType != null) {
+                generateSpellResource(spell.resourceCost, spell.resourceType!!)
             }
-            if (info.rangeYds != null) {
-                generateSpellRange(info.rangeYds, info.resourceType == null)
+            if (!Range.isSelf(spell.range)) {
+                generateSpellRange(spell.range, spell.resourceType == null)
             }
         }
         hbox {
-            val isCasterSpell = info.resourceType == ResourceType.MANA || info.resourceType == ResourceType.PERCENT_OF_BASE_MANA
-            generateSpellCastTime(info.castTimeSec, isCasterSpell)
+            generateSpellCastTime(spell.castTime, spell.resourceType)
 
-            if (info.cooldownSec != null) {
-                generateSpellCooldown(info.cooldownSec)
+            if (spell.cooldownUnit != null) {
+                generateSpellCooldown(spell.cooldown, spell.cooldownUnit!!)
             }
         }
     }
 
-    private fun EventTarget.generateSpellResource(resourceType: ResourceType, resourceCost: Int) {
+    private fun EventTarget.generateSpellResource(resourceCost: Int, resourceType: ResourceType) {
         label {
             addClass(TalentTooltipStyles.tooltipSubtitle)
-            val key = "spell.cost." + when (resourceType) {
-                ResourceType.MANA -> "mana"
-                ResourceType.PERCENT_OF_BASE_MANA -> "percent_of_base_mana"
-                ResourceType.RAGE -> "rage"
-                ResourceType.ENERGY -> "energy"
-            }
-            text = messages.format(key, resourceCost)
+            text = messages.format("spell.cost", resourceCost, messages[resourceType.translationKey])
             prefWidth = PREF_WIDTH / 2.0
         }
     }
 
-    private fun EventTarget.generateSpellRange(rangeYds: Int, shouldAlignLeft: Boolean) {
+    private fun EventTarget.generateSpellRange(range: Double, shouldAlignLeft: Boolean) {
         label {
             addClass(TalentTooltipStyles.tooltipSubtitle)
-            text = if (rangeYds == 0) {
+            text = if (Range.isMelee(range)) {
                 messages["spell.range.melee"]
             } else {
-                messages.format("spell.range.yd", rangeYds)
+                messages.format("spell.range", range, messages["unit.distance.yards"])
             }
             prefWidth = PREF_WIDTH / 2.0
             alignment = if (shouldAlignLeft) Pos.CENTER_LEFT else Pos.CENTER_RIGHT
         }
     }
 
-    private fun EventTarget.generateSpellCastTime(castTimeSec: Int, isCasterSpell: Boolean) {
+    private fun EventTarget.generateSpellCastTime(castTime: Double, resourceType: ResourceType?) {
         label {
             addClass(TalentTooltipStyles.tooltipSubtitle)
-            text = if (castTimeSec == 0) {
+
+            val isCasterSpell = when (resourceType) {
+                ResourceType.MANA, ResourceType.PERCENT_OF_BASE_MANA -> true
+                ResourceType.RAGE, ResourceType.ENERGY -> false
+                null -> false
+            }
+            text = if (castTime == 0.0) {
                 if (isCasterSpell) {
                     messages["spell.cast.instant_cast"]
                 } else {
-                    messages["spell.cast.instant"]
+                    messages["spell.cast.instant_attack"]
                 }
             } else {
-                messages.format("spell.cast.sec", castTimeSec)
+                messages.format("spell.cast", castTime, messages["unit.time.seconds"])
             }
             prefWidth = PREF_WIDTH / 2.0
         }
     }
 
-    private fun EventTarget.generateSpellCooldown(cooldownSec: Int) {
+    private fun EventTarget.generateSpellCooldown(cooldown: Double, cooldownUnit: CooldownUnit) {
         label {
             addClass(TalentTooltipStyles.tooltipSubtitle)
-            text = when {
-                cooldownSec < 60 -> messages.format("spell.cooldown.sec", cooldownSec)
-                cooldownSec < 60 * 60 -> messages.format("spell.cooldown.min", cooldownSec / 60.0)
-                else -> messages.format("spell.cooldown.hr", cooldownSec / 60.0 / 60.0)
-            }
+            text = messages.format("spell.cooldown", cooldown, messages[cooldownUnit.translationKey])
             prefWidth = PREF_WIDTH / 2.0
             alignment = Pos.CENTER_RIGHT
         }
     }
 
     private fun EventTarget.generateDescription() {
+        // show the current rank's description (or rank 1 if the current rank is 0)
         label {
             addClass(TalentTooltipStyles.tooltipDescription)
-            textProperty().bind(talent.allocatedPointsProperty().stringBinding {
-                messages.format("${talent.key}.desc", max(1, it!!))
+            textProperty().bind(talent.rankProperty.stringBinding {
+                messages.format("${talent.translationKey}.desc", max(1, talent.rank))
             })
             isWrapText = true
             prefWidth = PREF_WIDTH
         }
 
+        // show the next rank's description when at least 1 point is allocated,
+        // but not at the max rank yet
         if (talent.maxRank > 1) {
             // spacer
             label {}
@@ -145,20 +143,20 @@ class TalentButtonTooltip(private val talent: Talent, private val messages: Reso
                 addClass(TalentTooltipStyles.tooltipSubtitle)
                 text = messages["talent.rank.next"]
                 visibleWhen {
-                    talent.allocatedPointsProperty().booleanBinding { it in 1 until talent.maxRank }
+                    talent.rankProperty.booleanBinding { talent.rank in 1 until talent.maxRank }
                 }
                 managedWhen(visibleProperty())
             }
             label {
                 addClass(TalentTooltipStyles.tooltipDescription)
-                textProperty().bind(talent.allocatedPointsProperty().stringBinding {
-                    messages.format("${talent.key}.desc", it!! + 1)
+                textProperty().bind(talent.rankProperty.stringBinding {
+                    messages.format("${talent.translationKey}.desc", talent.rank + 1)
                 })
                 isWrapText = true
                 prefWidth = PREF_WIDTH
 
                 visibleWhen {
-                    talent.allocatedPointsProperty().booleanBinding { it in 1 until talent.maxRank }
+                    talent.rankProperty.booleanBinding { talent.rank in 1 until talent.maxRank }
                 }
                 managedWhen(visibleProperty())
             }
@@ -166,6 +164,7 @@ class TalentButtonTooltip(private val talent: Talent, private val messages: Reso
     }
 
     private fun EventTarget.generateFooter() {
+        /*
         // spacer
         label {}
 
@@ -203,5 +202,6 @@ class TalentButtonTooltip(private val talent: Talent, private val messages: Reso
             visibleWhen { talent.canRemovePoints }
             managedWhen(visibleProperty())
         }
+        */
     }
 }

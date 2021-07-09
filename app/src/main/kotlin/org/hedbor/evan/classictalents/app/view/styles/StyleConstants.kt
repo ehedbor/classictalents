@@ -13,4 +13,7 @@ object StyleConstants {
     val DESCRIPTION_COLOR: Color = Color.GOLD
     val ERROR_COLOR: Color = Color.RED
     val CONFIRMATION_COLOR: Color = Color.LIMEGREEN
+
+    val TALENT_ACTIVE_BORDER_COLOR = Color(64.0 / 255.0, 191.0 / 255.0, 64.0 / 255.0, 0.8)
+    val TALENT_MAXED_BORDER_COLOR = Color(255.0 / 255.0, 209.0 / 255.0, 0.0 / 255.0, 0.8)
 }
