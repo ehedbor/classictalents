@@ -7,9 +7,15 @@ import javafx.scene.layout.BorderPane
 import javafx.scene.layout.Region
 import javafx.util.StringConverter
 import javafx.util.converter.NumberStringConverter
-import org.hedbor.evan.classictalents.common.model.*
+import org.hedbor.evan.classictalents.common.model.CooldownUnit
+import org.hedbor.evan.classictalents.common.model.ResourceType
+import org.hedbor.evan.classictalents.common.model.Specialization
+import org.hedbor.evan.classictalents.common.model.Talent
 import org.hedbor.evan.classictalents.talentgen.INITIAL_ICON_DIRECTORY
 import org.hedbor.evan.classictalents.talentgen.chooseIconFromResources
+import org.hedbor.evan.classictalents.talentgen.model.SpecializationModel
+import org.hedbor.evan.classictalents.talentgen.model.TalentModel
+import org.hedbor.evan.classictalents.talentgen.model.WowClassModel
 import tornadofx.*
 
 

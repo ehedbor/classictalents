@@ -1,18 +1,20 @@
 package org.hedbor.evan.classictalents.app.view
 
 import javafx.event.EventTarget
-import javafx.geometry.Insets
 import javafx.scene.layout.StackPane
-import javafx.scene.paint.Color
+import org.hedbor.evan.classictalents.app.model.TalentButtonViewModel
 import org.hedbor.evan.classictalents.app.view.styles.SpecStyles
 import org.hedbor.evan.classictalents.common.model.Specialization
+import org.hedbor.evan.classictalents.common.model.Talent
+import org.hedbor.evan.classictalents.common.model.WowClass
 import tornadofx.*
 import java.net.URI
 
 
-class TalentTreeView(private val spec: Specialization) : StackPane() {
+// TODO: Extend Fragment() and use a ViewModel
+class TalentTreeView(private val wowClass: WowClass, private val spec: Specialization) : StackPane() {
     companion object {
-        private const val BUTTON_INSETS = 10.0
+        private const val BUTTON_INSETS = 15.0
         // The button textures have blank pixels along the edges. This alignment variable accounts for that
         private const val ARROW_ALIGN = 2.0
         private const val ARROW_THICKNESS = 5.0
@@ -29,7 +31,7 @@ class TalentTreeView(private val spec: Specialization) : StackPane() {
         private const val RIGHT_DOWN_ARROW_HILITE = "/images/WowheadTalentCalc/arrows/rightdown2.png"
     }
 
-    private val talentButtons = observableListOf<LabeledTalentButton>()
+    //private val talentButtons = observableListOf<LabeledTalentButton>()
 
     init {
         gridpane {
@@ -38,15 +40,14 @@ class TalentTreeView(private val spec: Specialization) : StackPane() {
             }
             addClass(SpecStyles.talentTreeBackground)
 
-            for (talent in spec.talents) {
-                talentButtons += labeledtalentbutton(talent) {
-                    gridpaneConstraints {
-                        columnRowIndex(talent.location.column, talent.location.row)
-                        padding = Insets(BUTTON_INSETS)
-                    }
-                }
+            for (talent: Talent in spec.talents) {
+                val viewModel = TalentButtonViewModel(wowClass, spec, talent)
+                val scope = Scope(viewModel)
+                val talentButton = find<TalentButtonFragment>(scope)
+                this.add(talentButton.root, talent.location.column, talent.location.row)
             }
         }
+        /*
         pane {
             isMouseTransparent = true
             for (depButton in talentButtons) {
@@ -115,6 +116,7 @@ class TalentTreeView(private val spec: Specialization) : StackPane() {
                 }
             }
         }
+         */
     }
 
     override fun computeMinWidth(height: Double): Double {
@@ -134,5 +136,5 @@ class TalentTreeView(private val spec: Specialization) : StackPane() {
     }
 }
 
-fun EventTarget.talenttreeview(spec: Specialization,  op: TalentTreeView.() -> Unit = {}) =
-    opcr(this, TalentTreeView(spec).apply(op))
+fun EventTarget.talenttreeview(wowClass: WowClass, spec: Specialization,  op: TalentTreeView.() -> Unit = {}) =
+    opcr(this, TalentTreeView(wowClass, spec).apply(op))

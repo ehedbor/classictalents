@@ -3,11 +3,11 @@ package org.hedbor.evan.classictalents.talentgen.controller
 import javafx.application.Platform
 import javafx.stage.FileChooser
 import org.hedbor.evan.classictalents.common.model.WowClass
-import org.hedbor.evan.classictalents.common.model.WowClassModel
 import org.hedbor.evan.classictalents.common.serialization.ClassicTalentsSerializer
 import org.hedbor.evan.classictalents.talentgen.model.Bundle
 import org.hedbor.evan.classictalents.talentgen.model.BundleEntry
 import org.hedbor.evan.classictalents.talentgen.model.BundleModel
+import org.hedbor.evan.classictalents.talentgen.model.WowClassModel
 import org.hedbor.evan.classictalents.talentgen.serialization.BundleSerializer
 import tornadofx.*
 import java.io.File

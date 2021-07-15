@@ -1,5 +1,6 @@
-package org.hedbor.evan.classictalents.common.model
+package org.hedbor.evan.classictalents.talentgen.model
 
+import org.hedbor.evan.classictalents.common.model.WowClass
 import tornadofx.ItemViewModel
 
 

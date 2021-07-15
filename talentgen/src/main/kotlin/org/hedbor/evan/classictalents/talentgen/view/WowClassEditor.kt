@@ -7,9 +7,9 @@ import javafx.scene.layout.Region
 import javafx.util.StringConverter
 import org.hedbor.evan.classictalents.common.model.Era
 import org.hedbor.evan.classictalents.common.model.Specialization
-import org.hedbor.evan.classictalents.common.model.SpecializationModel
-import org.hedbor.evan.classictalents.common.model.WowClassModel
 import org.hedbor.evan.classictalents.talentgen.controller.TalentGenController
+import org.hedbor.evan.classictalents.talentgen.model.SpecializationModel
+import org.hedbor.evan.classictalents.talentgen.model.WowClassModel
 import tornadofx.*
 
 

@@ -9,10 +9,15 @@ import javafx.scene.layout.BorderPane
 import javafx.scene.layout.Region
 import javafx.scene.layout.StackPane
 import javafx.scene.text.FontWeight
-import org.hedbor.evan.classictalents.common.model.*
+import org.hedbor.evan.classictalents.common.model.Location
+import org.hedbor.evan.classictalents.common.model.Specialization
+import org.hedbor.evan.classictalents.common.model.Talent
 import org.hedbor.evan.classictalents.talentgen.APP_RESOURCES_DIRECTORY
 import org.hedbor.evan.classictalents.talentgen.INITIAL_BACKGROUND_DIRECTORY
 import org.hedbor.evan.classictalents.talentgen.chooseIconFromResources
+import org.hedbor.evan.classictalents.talentgen.model.SpecializationModel
+import org.hedbor.evan.classictalents.talentgen.model.TalentModel
+import org.hedbor.evan.classictalents.talentgen.model.WowClassModel
 import tornadofx.*
 import java.net.MalformedURLException
 

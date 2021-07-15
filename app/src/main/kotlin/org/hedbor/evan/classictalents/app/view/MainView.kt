@@ -12,6 +12,8 @@ class MainView : View("Classic WoW Talent Calculator") {
     }
 
     override val root = vbox {
-        talenttreeview(controller.classes.first().specializations.first())
+        val `class` = controller.classes.first()
+        val specs = `class`.specializations.first()
+        talenttreeview(`class`, specs)
     }
 }

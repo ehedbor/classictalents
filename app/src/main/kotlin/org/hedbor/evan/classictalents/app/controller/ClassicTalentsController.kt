@@ -19,6 +19,7 @@ class ClassicTalentsController : Controller() {
     fun setup() {
         setGlobalTooltipBehavior(Duration.ZERO, Duration.INDEFINITE, Duration.ZERO)
         classes += loadClass("/talents/warlock.json")
+        // this causes a crash if a key is not found
         FX.messages = loadBundle("bundles.Messages")
     }
 
