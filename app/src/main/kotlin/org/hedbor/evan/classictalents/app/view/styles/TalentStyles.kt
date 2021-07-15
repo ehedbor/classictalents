@@ -12,6 +12,7 @@ import tornadofx.px
 
 class TalentStyles : Stylesheet() {
     companion object {
+        val talentContainer by cssclass()
         val talentButton by cssclass()
         val talentIcon by cssclass()
         val activeBorder by cssclass()
@@ -20,11 +21,16 @@ class TalentStyles : Stylesheet() {
     }
 
     init {
+        talentContainer {
+            padding = box(15.px)
+        }
         talentButton {
+            padding = box(0.px)
             backgroundColor += Color.TRANSPARENT
             borderWidth += box(0.px)
         }
         talentButton and disabled {
+            padding = box(0.px)
             backgroundColor += Color.TRANSPARENT
             borderWidth += box(0.px)
             opacity = 1.0

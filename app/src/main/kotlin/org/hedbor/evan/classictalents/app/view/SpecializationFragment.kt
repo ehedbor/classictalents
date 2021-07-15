@@ -1,19 +1,15 @@
 package org.hedbor.evan.classictalents.app.view
 
-import javafx.event.EventTarget
-import javafx.scene.layout.StackPane
-import org.hedbor.evan.classictalents.app.model.TalentButtonViewModel
-import org.hedbor.evan.classictalents.app.view.styles.SpecStyles
-import org.hedbor.evan.classictalents.common.model.Specialization
-import org.hedbor.evan.classictalents.common.model.Talent
-import org.hedbor.evan.classictalents.common.model.WowClass
+import javafx.scene.layout.Region
+import javafx.scene.paint.Color
+import org.hedbor.evan.classictalents.app.model.SpecializationViewModel
+import org.hedbor.evan.classictalents.common.model.Location
 import tornadofx.*
-import java.net.URI
 
 
-// TODO: Extend Fragment() and use a ViewModel
-class TalentTreeView(private val wowClass: WowClass, private val spec: Specialization) : StackPane() {
+class SpecializationFragment : Fragment() {
     companion object {
+        // TODO: move styling, etc elsewhere
         private const val BUTTON_INSETS = 15.0
         // The button textures have blank pixels along the edges. This alignment variable accounts for that
         private const val ARROW_ALIGN = 2.0
@@ -31,35 +27,31 @@ class TalentTreeView(private val wowClass: WowClass, private val spec: Specializ
         private const val RIGHT_DOWN_ARROW_HILITE = "/images/WowheadTalentCalc/arrows/rightdown2.png"
     }
 
-    //private val talentButtons = observableListOf<LabeledTalentButton>()
+    private val model by inject<SpecializationViewModel>()
+    private val talentButtons = observableMapOf<Location, Region>()
 
-    init {
+    override val root = stackpane {
         gridpane {
-            style {
-                backgroundImage += URI(spec.backgroundImage)
-            }
-            addClass(SpecStyles.talentTreeBackground)
+            backgroundProperty().bind(model.backgroundImage)
 
-            for (talent: Talent in spec.talents) {
-                val viewModel = TalentButtonViewModel(wowClass, spec, talent)
-                val scope = Scope(viewModel)
+            for (talent in model.talents) {
+                val scope = Scope(model.getViewModel(talent))
                 val talentButton = find<TalentButtonFragment>(scope)
+                talentButtons += talent.location to talentButton.root
                 this.add(talentButton.root, talent.location.column, talent.location.row)
             }
         }
-        /*
         pane {
             isMouseTransparent = true
-            for (depButton in talentButtons) {
-                val dependency = depButton.talent
-                val prereqLocation = dependency.prerequisite ?: continue
-                val prereqButton = talentButtons.first { it.talent.location == prereqLocation }
+            for ((dependencyLocation, dependencyButton) in talentButtons) {
+                val prerequisiteLocation = model.getPrerequisiteLocationFor(dependencyLocation) ?: continue
+                val prerequisiteButton = talentButtons.firstNotNullOf { (loc, but) -> if (loc == prerequisiteLocation) but else null }
 
-                val depBounds = depButton.boundsInParentProperty()
-                val prereqBounds = prereqButton.boundsInParentProperty()
+                val depBounds = dependencyButton.boundsInParentProperty()
+                val prereqBounds = prerequisiteButton.boundsInParentProperty()
 
-                val rowDiff = dependency.location.row - prereqLocation.row
-                val colDiff = dependency.location.column - prereqLocation.column
+                val rowDiff = dependencyLocation.row - prerequisiteLocation.row
+                val colDiff = dependencyLocation.column - prerequisiteLocation.column
 
                 if (rowDiff != 0) {
                     // Vertical arrows always go from top to bottom, so no need to worry about the reverse case.
@@ -116,25 +108,5 @@ class TalentTreeView(private val wowClass: WowClass, private val spec: Specializ
                 }
             }
         }
-         */
-    }
-
-    override fun computeMinWidth(height: Double): Double {
-        return computePrefWidth(height)
-    }
-
-    override fun computeMinHeight(width: Double): Double {
-        return computePrefHeight(width)
-    }
-
-    override fun computeMaxWidth(height: Double): Double {
-        return computePrefWidth(height)
-    }
-
-    override fun computeMaxHeight(width: Double): Double {
-        return computePrefHeight(width)
     }
 }
-
-fun EventTarget.talenttreeview(wowClass: WowClass, spec: Specialization,  op: TalentTreeView.() -> Unit = {}) =
-    opcr(this, TalentTreeView(wowClass, spec).apply(op))

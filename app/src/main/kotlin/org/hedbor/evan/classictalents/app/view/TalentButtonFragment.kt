@@ -11,9 +11,9 @@ class TalentButtonFragment : Fragment() {
     private val model by inject<TalentButtonViewModel>()
 
     override val root = stackpane {
+        addClass(TalentStyles.talentContainer)
         button {
             addClass(TalentStyles.talentButton)
-            padding = insets(0)
 
             prefWidth = model.buttonWidth
             prefHeight = model.buttonHeight

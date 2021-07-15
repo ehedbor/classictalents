@@ -18,14 +18,14 @@ import tornadofx.*
 
 
 class TalentButtonViewModel(initialWowClass: WowClass, initialSpec: Specialization, initialTalent: Talent) : ViewModel() {
-    internal val wowClassProperty = SimpleObjectProperty(initialWowClass)
-    private var wowClass: WowClass by wowClassProperty
+    val wowClassProperty = SimpleObjectProperty(initialWowClass)
+    var wowClass: WowClass by wowClassProperty
 
-    internal val specializationProperty = SimpleObjectProperty(initialSpec)
-    private var specialization: Specialization by specializationProperty
+    val specializationProperty = SimpleObjectProperty(initialSpec)
+    var specialization: Specialization by specializationProperty
 
-    internal val talentProperty = SimpleObjectProperty(initialTalent)
-    private var talent: Talent by talentProperty
+    val talentProperty = SimpleObjectProperty(initialTalent)
+    var talent: Talent by talentProperty
 
     /**
      * The number of talent points that must be allocated in prerequisite rows before this talent is unlocked.
@@ -76,49 +76,48 @@ class TalentButtonViewModel(initialWowClass: WowClass, initialSpec: Specializati
         (it as Int) < pointsAtMaxLevel
     }
 
-    private val isDeallocatableDependencies: Array<Observable> = run {
-        val result = mutableListOf<Observable>()
-
-        result += specialization.talents.map { it.prerequisiteProperty}
-        result += specialization.talents.map { it.rankProperty }
-        result += specialization.talents.map { it.location.rowProperty }
-
-        result.toTypedArray()
-    }
-
     /**
      * Whether or not the user is able to remove talent points from this particular talent.
      * This is true if removing a point from this talent will not make any later talents to become non-allocatable.
      */
-    val isDeallocatable = Bindings.createBooleanBinding({
-        // you cannot remove points if doing so would cause a later talent to not be allocatable
-        // first, check this talent's dependency, if any
-        val dependency = specialization.talents.firstOrNull { talent.location == it.prerequisite }
-        if (dependency != null && dependency.rank > 0) {
-            return@createBooleanBinding false
-        }
+    val isDeallocatable = run {
+        val dependencies: Array<Observable> = mutableListOf<Observable>().apply {
+            this += specialization.talents.map { it.prerequisiteProperty}
+            this += specialization.talents.map { it.rankProperty }
+            this += specialization.talents.map { it.location.rowProperty }
+        }.toTypedArray()
 
-        // next, find the row of the highest allocated talent.
-        // if this talent is in the final row, a point can be removed
-        // and no, past me, this doesn't this ignore the possibility that highestTalent might have a dependency
-        // in the same row. we literally just checked if this talent has a dependency
-        val highestTalent = specialization.talents
-            .filter { it.rank > 0 }
-            .maxByOrNull { it.location.row }
-        if (highestTalent == null || talent.location.row == highestTalent.location.row) {
-            return@createBooleanBinding true
-        }
+        Bindings.createBooleanBinding({
+            // you cannot remove points if doing so would cause a later talent to not be allocatable
+            // first, check this talent's dependency, if any
+            val dependency = specialization.talents.firstOrNull { talent.location == it.prerequisite }
+            if (dependency != null && dependency.rank > 0) {
+                return@createBooleanBinding false
+            }
 
-        // otherwise, determine the total number of allocated points in all tiers lower than the highest.
-        // if removing a point would cause this total to be less than the requirement of the highest talent,
-        // then a point cannot be removed
-        val totalPoints = specialization.talents
-            .filter { it.location.row < highestTalent.location.row }
-            .sumOf { it.rank }
+            // next, find the row of the highest allocated talent.
+            // if this talent is in the final row, a point can be removed
+            // and no, past me, this doesn't this ignore the possibility that highestTalent might have a dependency
+            // in the same row. we literally just checked if this talent has a dependency
+            val highestTalent = specialization.talents
+                .filter { it.rank > 0 }
+                .maxByOrNull { it.location.row }
+            if (highestTalent == null || talent.location.row == highestTalent.location.row) {
+                return@createBooleanBinding true
+            }
 
-        val highestTalentRequirement = highestTalent.location.row * 5
-        totalPoints - 1 >= highestTalentRequirement
-    }, *isDeallocatableDependencies)
+            // otherwise, determine the total number of allocated points in all tiers lower than the highest.
+            // if removing a point would cause this total to be less than the requirement of the highest talent,
+            // then a point cannot be removed
+            val totalPoints = specialization.talents
+                .filter { it.location.row < highestTalent.location.row }
+                .sumOf { it.rank }
+
+            val highestTalentRequirement = highestTalent.location.row * 5
+            
+            totalPoints - 1 >= highestTalentRequirement
+        }, *dependencies)
+    }
 
     /**
      * Whether or not talent points are able to be allocated into this talent. This is true if:
