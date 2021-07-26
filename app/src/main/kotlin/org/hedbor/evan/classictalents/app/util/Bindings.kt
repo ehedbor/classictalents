@@ -46,17 +46,20 @@ fun <T> ObservableValue<T>.selectInteger(nested: (T) -> IntegerExpression): Inte
     }
 }
 
-fun <T, U, TProp, TObs, UObs> TProp.bindWhenNotNull(observable: UObs, defaultValue: T? = null, block: (U) -> TObs): TProp
-        where T : Any, U : Any, TProp : Property<T?>, TObs : ObservableValue<out T?>, UObs : ObservableValue<out U?> {
+fun <T : Any, N : Any, TProp : Property<T?>> TProp.bindWhenNotNull(
+    nested: ObservableValue<out N?>,
+    defaultValue: T? = null,
+    block: (N) -> ObservableValue<out T?>
+): TProp {
 
-    val initialValue = observable.value
+    val initialValue = nested.value
     if (initialValue == null) {
         value = defaultValue
     } else {
         bind(block(initialValue))
     }
 
-    observable.addListener { _, _, newValue ->
+    nested.addListener { _, _, newValue ->
         if (newValue == null) {
             unbind()
             value = defaultValue

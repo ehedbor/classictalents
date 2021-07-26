@@ -33,6 +33,7 @@ internal object TalentSerializer : KSerializer<Talent> {
 private class TalentSurrogate(
     val key: String,
     val location: Location,
+    @SerialName("requires")
     val prerequisite: Location? = null,
     val maxRank: Int,
     val icon: String,

@@ -22,12 +22,13 @@ class TalentGenController : Controller() {
         private val PROPERTIES_FILE_FILTER = FileChooser.ExtensionFilter("Java Properties Files", "*.properties")
 
         private fun Bundle.addMissingEntries(clazz: WowClass) {
-            addDefaultEntry(clazz.translationKey)
+            if (clazz.translationKey.isNotBlank())
+                addDefaultEntry(clazz.translationKey)
 
-            for (spec in clazz.specializations) {
+            for (spec in clazz.specializations.filter { it.translationKey.isNotBlank() }) {
                 addDefaultEntry(clazz.translationKey, spec.translationKey)
 
-                for (talent in spec.talents) {
+                for (talent in spec.talents.filter { it.translationKey.isNotBlank() }) {
                     addDefaultEntry(clazz.translationKey, spec.translationKey, talent.translationKey, addDesc = true)
                 }
             }

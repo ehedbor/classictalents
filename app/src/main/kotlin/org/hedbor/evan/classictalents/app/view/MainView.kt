@@ -11,10 +11,11 @@ class MainView : View("Classic WoW Talent Calculator") {
         model.onSetup()
     }
 
-    override val root = vbox {
-        val `class` = model.classes.first()
-        val spec = `class`.specializations.first()
-        val scope = Scope(SpecializationViewModel(`class`, spec))
-        this += find<SpecializationFragment>(scope)
+    override val root = hbox {
+        val wowClass = model.classes.first()
+        for (spec in wowClass.specializations) {
+            val scope = Scope(SpecializationViewModel(wowClass, spec))
+            this += find<SpecializationFragment>(scope)
+        }
     }
 }

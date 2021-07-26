@@ -7,8 +7,8 @@ import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
+import org.hedbor.evan.classictalents.app.service.ImageService
 import org.hedbor.evan.classictalents.app.util.bindWhenNotNull
-import org.hedbor.evan.classictalents.app.util.generateGrayscaleImage
 import org.hedbor.evan.classictalents.app.util.selectInteger
 import org.hedbor.evan.classictalents.app.view.TalentTooltip
 import org.hedbor.evan.classictalents.common.model.Specialization
@@ -35,7 +35,7 @@ class TalentButtonViewModel(initialWowClass: WowClass, initialSpec: Specializati
     /**
      * The total number of talent points that have been allocated across all specs.
      */
-    internal val totalAllocatedPoints = run {
+    internal val totalPointsForClass = run {
         // note that this will NOT WORK if elements are added or removed!
         // this shouldn't be a problem because this application will not change the models (aside from the talent's rank)
         val allTalentRanks = wowClass.specializations.flatMap { it.talentsProperty }.map { it.rankProperty }.toTypedArray()
@@ -43,9 +43,17 @@ class TalentButtonViewModel(initialWowClass: WowClass, initialSpec: Specializati
     }
 
     /**
+     * The total number of talent points that have been allocated for this spec.
+     */
+    internal val totalPointsForSpec = run {
+        val allTalentRanks = specialization.talentsProperty.map { it.rankProperty }.toTypedArray()
+        Bindings.createIntegerBinding({ allTalentRanks.sumOf { it.value } }, *allTalentRanks)
+    }
+
+    /**
      * Whether or not the prerequisite talent rows for this talent have been filed out.
      */
-    internal val isTalentRowUnlocked = totalAllocatedPoints ge requiredPoints
+    internal val isTalentRowUnlocked = totalPointsForSpec ge requiredPoints
 
     /**
      * This talent's prerequisite, if present.
@@ -71,7 +79,7 @@ class TalentButtonViewModel(initialWowClass: WowClass, initialSpec: Specializati
     /**
      * Whether or not the user still has unassigned talent points.
      */
-    internal val hasUnassignedTalentPoints = totalAllocatedPoints.booleanBinding(wowClass.eraProperty) {
+    internal val hasUnassignedTalentPoints = totalPointsForClass.booleanBinding(wowClass.eraProperty) {
         val pointsAtMaxLevel = wowClass.era.getAvailablePoints(wowClass.era.maxLevel)
         (it as Int) < pointsAtMaxLevel
     }
@@ -146,7 +154,7 @@ class TalentButtonViewModel(initialWowClass: WowClass, initialSpec: Specializati
     val canAcceptPoints = !isMaxedOut and (isAllocatable or hasBeenAllocated)
 
     private val normalBackgroundImage = talent.iconProperty.objectBinding { runCatching { Image(it) }.getOrNull() }
-    private val grayscaleBackgroundImage = normalBackgroundImage.objectBinding { it?.let { generateGrayscaleImage(it) } }
+    private val grayscaleBackgroundImage = normalBackgroundImage.objectBinding { it?.let { ImageService.toGrayscale(it) } }
 
     val backgroundImage = objectBinding(isAllocatable, hasBeenAllocated, normalBackgroundImage, grayscaleBackgroundImage) {
         if (isAllocatable.value || hasBeenAllocated.value) {

@@ -12,10 +12,11 @@ import java.io.InputStream
 object ClassicTalentsSerializer {
     @OptIn(ExperimentalSerializationApi::class)
     private val jsonParser by lazy {
-        Json {
+        /*Json {
             prettyPrint = true
             prettyPrintIndent = "  "
-        }
+        }*/
+        Json
     }
 
     fun loadClass(dataFile: File): WowClass {
