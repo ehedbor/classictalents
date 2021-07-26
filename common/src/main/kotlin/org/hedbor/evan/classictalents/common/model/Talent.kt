@@ -3,57 +3,75 @@ package org.hedbor.evan.classictalents.common.model
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
-import org.hedbor.evan.classictalents.common.serialization.SimpleIntegerPropertySerializer
-import org.hedbor.evan.classictalents.common.serialization.SimpleObjectPropertySerializer
-import org.hedbor.evan.classictalents.common.serialization.SimpleStringPropertySerializer
+import org.hedbor.evan.classictalents.common.serialization.TalentSerializer
 import tornadofx.getValue
 import tornadofx.setValue
 
 
 @Suppress("MemberVisibilityCanBePrivate")
-@Serializable
-class Talent() {
+@Serializable(with = TalentSerializer::class)
+class Talent(
+    translationKey: String = "",
+    location: Location = Location(),
+    prerequisite: Location? = null,
+    maxRank: Int = 0,
+    icon: String = "",
+    spell: Spell? = null
+) {
     companion object {
         const val MINIMUM_RANK = 1
         const val MAXIMUM_PERMISSIBLE_RANK = 5
     }
 
-    constructor(block: Talent.() -> Unit) : this() { this.block() }
-
-    @Serializable(with = SimpleStringPropertySerializer::class)
-    @SerialName("key")
-    val translationKeyProperty = SimpleStringProperty(this, "translationKey", "")
+    val translationKeyProperty = SimpleStringProperty(this, "translationKey", translationKey)
     var translationKey: String by translationKeyProperty
 
-    @Serializable(with = SimpleObjectPropertySerializer::class)
-    @SerialName("location")
-    val locationProperty = SimpleObjectProperty(this, "location", Location())
+    val locationProperty = SimpleObjectProperty(this, "location", location)
     var location: Location by locationProperty
 
-    @Serializable(with = SimpleObjectPropertySerializer::class)
-    @SerialName("requires")
-    val prerequisiteProperty = SimpleObjectProperty<Location>(this, "prerequisite", null)
+    val prerequisiteProperty = SimpleObjectProperty<Location>(this, "prerequisite", prerequisite)
     var prerequisite: Location? by prerequisiteProperty
 
-    @Serializable(with = SimpleIntegerPropertySerializer::class)
-    @SerialName("maxRank")
-    val maxRankProperty = SimpleIntegerProperty(this, "maxRank", 0)
+    val maxRankProperty = SimpleIntegerProperty(this, "maxRank", maxRank)
     var maxRank: Int by maxRankProperty
 
-    @Transient
     val rankProperty = SimpleIntegerProperty(this, "rank", 0)
     var rank: Int by rankProperty
 
-    @Serializable(with = SimpleStringPropertySerializer::class)
-    @SerialName("icon")
-    val iconProperty = SimpleStringProperty(this, "icon", "")
+    val iconProperty = SimpleStringProperty(this, "icon", icon)
     var icon: String by iconProperty
 
-    @Serializable(with = SimpleObjectPropertySerializer::class)
-    @SerialName("spell")
-    val spellProperty = SimpleObjectProperty<Spell>(this, "spell", null)
+    val spellProperty = SimpleObjectProperty<Spell>(this, "spell", spell)
     var spell: Spell? by spellProperty
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Talent) return false
+
+        if (translationKey != other.translationKey) return false
+        if (location != other.location) return false
+        if (prerequisite != other.prerequisite) return false
+        if (maxRank != other.maxRank) return false
+        if (rank != other.rank) return false
+        if (icon != other.icon) return false
+        if (spell != other.spell) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = translationKey.hashCode()
+        result = 31 * result + location.hashCode()
+        result = 31 * result + prerequisite.hashCode()
+        result = 31 * result + maxRank
+        result = 31 * result + rank
+        result = 31 * result + icon.hashCode()
+        result = 31 * result + spell.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "Talent(translationKey='$translationKey', location=$location, prerequisite=$prerequisite, maxRank=$maxRank, rank=$rank, icon='$icon', spell=$spell)"
+    }
 }

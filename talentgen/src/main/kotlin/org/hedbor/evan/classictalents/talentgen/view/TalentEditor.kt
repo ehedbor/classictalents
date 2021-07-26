@@ -7,10 +7,7 @@ import javafx.scene.layout.BorderPane
 import javafx.scene.layout.Region
 import javafx.util.StringConverter
 import javafx.util.converter.NumberStringConverter
-import org.hedbor.evan.classictalents.common.model.CooldownUnit
-import org.hedbor.evan.classictalents.common.model.ResourceType
-import org.hedbor.evan.classictalents.common.model.Specialization
-import org.hedbor.evan.classictalents.common.model.Talent
+import org.hedbor.evan.classictalents.common.model.*
 import org.hedbor.evan.classictalents.talentgen.INITIAL_ICON_DIRECTORY
 import org.hedbor.evan.classictalents.talentgen.chooseIconFromResources
 import org.hedbor.evan.classictalents.talentgen.model.SpecializationModel
@@ -21,8 +18,6 @@ import tornadofx.*
 
 class TalentEditor : Fragment() {
     companion object {
-        private const val SMALL_TEXT_FIELD_PREF_WIDTH = 40.0
-        private const val COMBO_BOX_PREF_WIDTH = 70.0
         private const val ROW_COL_LABEL_MIN_WIDTH = 23.0
         private const val ROW_COL_FIELD_PREF_WIDTH = 50.0
     }
@@ -31,7 +26,17 @@ class TalentEditor : Fragment() {
     private val specModel: SpecializationModel by inject()
     private val model: TalentModel by inject()
 
-    private val isSpellProperty = SimpleBooleanProperty()
+    private val hasPrerequisiteProperty = SimpleBooleanProperty(model.prerequisite.value != null).also {
+        it.addListener { _, _, shouldHavePrereq ->
+            model.prerequisite.value = if (shouldHavePrereq) Location() else null
+        }
+    }
+
+    private val isSpellProperty = SimpleBooleanProperty(model.spell.value != null).also {
+        it.addListener { _, _, shouldBeSpell ->
+            model.spell.value = if (shouldBeSpell) Spell() else null
+        }
+    }
 
     init {
         title = messages["editor.title.talent"]
@@ -77,7 +82,6 @@ class TalentEditor : Fragment() {
             field(messages["editor.field.icon"]) {
                 textfield(model.icon) {
                     mustBePresent()
-                    isEditable = false
                 }
                 button("...") {
                     action {
@@ -89,25 +93,29 @@ class TalentEditor : Fragment() {
             }
             field(messages["editor.field.max_rank"]) {
                 combobox(model.maxRank, (Talent.MINIMUM_RANK..Talent.MAXIMUM_PERMISSIBLE_RANK).toList()) {
-                    // prefWidth = COMBO_BOX_PREF_WIDTH
                     if (selectionModel.selectedItem !in items) {
                         selectionModel.selectLast()
                     }
                 }
             }
             field(messages["editor.field.prerequisite"]) {
+                checkbox(property = hasPrerequisiteProperty)
                 label(messages["editor.field.row"]) {
                     minWidth = ROW_COL_LABEL_MIN_WIDTH
+                    enableWhen(hasPrerequisiteProperty)
                 }
                 textfield(model.prerequisite.select { it.rowProperty }, NumberStringConverter()) {
                     prefWidth = ROW_COL_FIELD_PREF_WIDTH
+                    enableWhen(hasPrerequisiteProperty)
                     model.validationContext.mustBeInRange(this, 0 until wowClassModel.era.value.talentRowCount)
                 }
                 label(messages["editor.field.column"]) {
                     minWidth = ROW_COL_LABEL_MIN_WIDTH
+                    enableWhen(hasPrerequisiteProperty)
                 }
                 textfield(model.prerequisite.select { it.columnProperty }, NumberStringConverter()) {
                     prefWidth = ROW_COL_FIELD_PREF_WIDTH
+                    enableWhen(hasPrerequisiteProperty)
                     model.validationContext.mustBeInRange(this, 0 until Specialization.TALENT_COLUMN_COUNT)
                 }
             }
@@ -125,7 +133,6 @@ class TalentEditor : Fragment() {
             }
             field(messages["editor.field.resource"]) {
                 textfield(model.spell.select { it.resourceCostProperty }, NumberStringConverter()) {
-                    // prefWidth = SMALL_TEXT_FIELD_PREF_WIDTH
                     prefWidthProperty().bind(textFieldWidth)
                     maxWidthProperty().bind(textFieldWidth)
                     enableWhen(isSpellProperty)
@@ -133,7 +140,6 @@ class TalentEditor : Fragment() {
                     model.validationContext.mustBeNonNegative<Int>(this)
                 }
                 combobox(model.spell.select { it.resourceTypeProperty }, ResourceType.values().toList()) {
-                    // prefWidth = COMBO_BOX_PREF_WIDTH
                     prefWidthProperty().bind(comboBoxWidth)
                     maxWidthProperty().bind(comboBoxWidth)
                     enableWhen(isSpellProperty)
@@ -153,7 +159,6 @@ class TalentEditor : Fragment() {
             }
             field(messages["editor.field.cast_time"]) {
                 textfield(model.spell.select { it.castTimeProperty }, NumberStringConverter()) {
-                    // prefWidth = SMALL_TEXT_FIELD_PREF_WIDTH
                     prefWidthProperty().bind(textFieldWidth)
                     maxWidthProperty().bind(textFieldWidth)
                     enableWhen(isSpellProperty)
@@ -161,7 +166,6 @@ class TalentEditor : Fragment() {
                     model.validationContext.mustBeNonNegative<Double>(this)
                 }
                 label(messages["unit.time.seconds"]) {
-                    // prefWidth = COMBO_BOX_PREF_WIDTH
                     prefWidthProperty().bind(comboBoxWidth)
                     maxWidthProperty().bind(comboBoxWidth)
                     enableWhen(isSpellProperty)
@@ -169,7 +173,6 @@ class TalentEditor : Fragment() {
             }
             field(messages["editor.field.cooldown"]) {
                 textfield(model.spell.select { it.cooldownProperty }, NumberStringConverter()) {
-                    // prefWidth = SMALL_TEXT_FIELD_PREF_WIDTH
                     prefWidthProperty().bind(textFieldWidth)
                     maxWidthProperty().bind(textFieldWidth)
                     enableWhen(isSpellProperty)
@@ -177,7 +180,6 @@ class TalentEditor : Fragment() {
                     model.validationContext.mustBeNonNegative<Double>(this)
                 }
                 combobox(model.spell.select { it.cooldownUnitProperty }, CooldownUnit.values().toList()) {
-                    // prefWidth = COMBO_BOX_PREF_WIDTH
                     prefWidthProperty().bind(comboBoxWidth)
                     maxWidthProperty().bind(comboBoxWidth)
                     enableWhen(isSpellProperty)
@@ -197,7 +199,6 @@ class TalentEditor : Fragment() {
             }
             field(messages["editor.field.range"]) {
                 textfield(model.spell.select { it.rangeProperty }, NumberStringConverter()) {
-                    // prefWidth = SMALL_TEXT_FIELD_PREF_WIDTH
                     prefWidthProperty().bind(textFieldWidth)
                     maxWidthProperty().bind(textFieldWidth)
                     enableWhen(isSpellProperty)
@@ -205,7 +206,6 @@ class TalentEditor : Fragment() {
                     model.validationContext.mustBeNonNegative<Double>(this)
                 }
                 label(messages["unit.distance.yards"]) {
-                    // prefWidth = COMBO_BOX_PREF_WIDTH
                     prefWidthProperty().bind(comboBoxWidth)
                     maxWidthProperty().bind(comboBoxWidth)
                     enableWhen(isSpellProperty)

@@ -14,6 +14,7 @@ import org.hedbor.evan.classictalents.common.model.Specialization
 import org.hedbor.evan.classictalents.common.model.Talent
 import org.hedbor.evan.classictalents.talentgen.APP_RESOURCES_DIRECTORY
 import org.hedbor.evan.classictalents.talentgen.INITIAL_BACKGROUND_DIRECTORY
+import org.hedbor.evan.classictalents.talentgen.UNKNOWN_IMAGE
 import org.hedbor.evan.classictalents.talentgen.chooseIconFromResources
 import org.hedbor.evan.classictalents.talentgen.model.SpecializationModel
 import org.hedbor.evan.classictalents.talentgen.model.TalentModel
@@ -49,7 +50,6 @@ class SpecializationEditor : Fragment() {
             }
             field(messages["editor.field.background"]) {
                 textfield(model.backgroundImage) {
-                    isEditable = false
                     mustBePresent()
                 }
                 button("...") {
@@ -126,11 +126,17 @@ class SpecializationEditor : Fragment() {
     private fun getTalentGraphic(icon: String?): Node? {
         if (icon.isNullOrBlank()) return null
         return try {
-            val formattedPath = APP_RESOURCES_DIRECTORY.resolve(icon).toURI().toURL().toExternalForm()
-            ImageView(formattedPath).also {
-                it.fitWidth = 50.0
-                it.isPreserveRatio = true
-                it.isSmooth = true
+            val imageFile = APP_RESOURCES_DIRECTORY.resolve(icon)
+            val path: String = if (imageFile.isFile && imageFile.exists()) {
+                imageFile.toURI().toURL().toExternalForm()
+            } else {
+                UNKNOWN_IMAGE.path
+            }
+
+            ImageView(path).apply {
+                fitWidth = 50.0
+                isPreserveRatio = true
+                isSmooth = true
             }
         } catch (e: Exception) {
             when (e) {
@@ -145,7 +151,7 @@ class SpecializationEditor : Fragment() {
     private fun getOrCreateTalentAt(location: Location): Talent {
         var talent = model.talents.find { it.location == location  }
         if (talent == null) {
-            talent = Talent { this.location = location }
+            talent = Talent(location = location)
             model.talents += talent
         }
         return talent

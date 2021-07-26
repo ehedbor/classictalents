@@ -153,7 +153,7 @@ class WowClassEditor : View() {
 
     private fun addNewSpec(): Specialization {
         val index = model.specializations.size
-        val spec = Specialization { translationKey = "spec${index + 1}" }
+        val spec = Specialization(translationKey = "spec${index + 1}")
         model.specializations += spec
         return spec
     }

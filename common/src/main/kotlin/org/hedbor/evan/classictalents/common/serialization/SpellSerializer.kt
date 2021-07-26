@@ -66,7 +66,7 @@ internal object SpellSerializer : KSerializer<Spell> {
             "melee" -> Range.MELEE
             else -> {
                 val substrings = surrogate.range.split(" ")
-                if (substrings.size != 2) {
+                if (substrings.size != 2 || substrings[1] != "yd") {
                     malformedProperty("range")
                 }
                 substrings[0].toDoubleOrNull() ?: malformedProperty("range")
@@ -76,7 +76,11 @@ internal object SpellSerializer : KSerializer<Spell> {
         result.castTime = if (surrogate.castTime == "instant") {
             0.0
         } else {
-            surrogate.castTime.toDoubleOrNull() ?: malformedProperty("castTime")
+            val substrings = surrogate.castTime.split(" ")
+            if (substrings.size != 2 || substrings[1] != "sec") {
+                malformedProperty("castTime")
+            }
+            substrings[0].toDoubleOrNull() ?: malformedProperty("castTime")
         }
 
         if (surrogate.cooldown != null) {

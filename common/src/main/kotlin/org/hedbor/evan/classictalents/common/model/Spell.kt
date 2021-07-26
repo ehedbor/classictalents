@@ -7,12 +7,6 @@ import kotlinx.serialization.Serializable
 import org.hedbor.evan.classictalents.common.serialization.SpellSerializer
 import tornadofx.getValue
 import tornadofx.setValue
-import kotlin.Boolean
-import kotlin.Double
-import kotlin.Int
-import kotlin.String
-import kotlin.Suppress
-import kotlin.require
 
 
 @Suppress("MemberVisibilityCanBePrivate")
@@ -42,6 +36,34 @@ class Spell(
 
     val rangeProperty = SimpleDoubleProperty(this, "range", range)
     var range: Double by rangeProperty
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Spell) return false
+
+        if (resourceCost != other.resourceCost) return false
+        if (resourceType != other.resourceType) return false
+        if (castTime != other.castTime) return false
+        if (cooldown != other.cooldown) return false
+        if (cooldownUnit != other.cooldownUnit) return false
+        if (range != other.range) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = resourceCost
+        result = 31 * result + (resourceType?.hashCode() ?: 0)
+        result = 31 * result + castTime.hashCode()
+        result = 31 * result + cooldown.hashCode()
+        result = 31 * result + (cooldownUnit?.hashCode() ?: 0)
+        result = 31 * result + range.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "Spell(resourceCost=$resourceCost, resourceType=$resourceType, castTime=$castTime, cooldown=$cooldown, cooldownUnit=$cooldownUnit, range=$range)"
+    }
 }
 
 enum class ResourceType(val translationKey: String, val serialName: String) {

@@ -59,7 +59,7 @@ class TalentGenController : Controller() {
         }
     }
 
-    var classModel = WowClassModel(WowClass { translationKey = "new_class" })
+    var classModel = WowClassModel(WowClass(translationKey = "new_class"))
         private set
     
     var bundleModel = BundleModel(Bundle())
@@ -83,7 +83,7 @@ class TalentGenController : Controller() {
         }
 
         if (shouldClearData) {
-            classModel.item = WowClass { translationKey = "new_class" }
+            classModel.item = WowClass(translationKey = "new_class")
         }
         return shouldClearData
     }

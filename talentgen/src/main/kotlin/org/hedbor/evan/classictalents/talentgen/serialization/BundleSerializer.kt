@@ -32,16 +32,25 @@ object BundleSerializer {
 }
 
 private class OrderedProperties : Properties() {
-    val orderedKeys = LinkedHashSet<Any?>()
+    private val orderedEntries = LinkedHashMap<Any?, Any?>()
 
-    @Synchronized
-    override fun keys(): Enumeration<Any> {
-        return Collections.enumeration(orderedKeys)
+    override fun keys() = Collections.enumeration(orderedEntries.keys) as Enumeration<Any?>
+    override val keys = orderedEntries.keys
+    override val values = orderedEntries.values
+    override val entries = orderedEntries.entries
+
+    override fun put(key: Any?, value: Any?): Any? {
+        orderedEntries[key] = value
+        return super.put(key, value)
     }
 
-    @Synchronized
-    override fun put(key: Any?, value: Any?): Any? {
-        orderedKeys += key
-        return super.put(key, value)
+    override fun remove(key: Any?): Any? {
+        orderedEntries.remove(key)
+        return super.remove(key)
+    }
+
+    override fun clear() {
+        orderedEntries.clear()
+        super.clear()
     }
 }
