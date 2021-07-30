@@ -18,6 +18,7 @@ import javafx.scene.shape.Rectangle
 import org.hedbor.evan.classictalents.app.model.SpecializationViewModel
 import org.hedbor.evan.classictalents.app.view.styles.SpecStyles
 import org.hedbor.evan.classictalents.app.view.styles.TalentStyles
+import org.hedbor.evan.classictalents.app.view.styles.TalentTooltipStyles
 import org.hedbor.evan.classictalents.common.model.Location
 import tornadofx.*
 
@@ -75,6 +76,10 @@ class SpecializationFragment : Fragment() {
             alignment = Pos.BASELINE_CENTER
             button {
                 addClass(SpecStyles.specResetButton)
+                setOnMouseClicked(model::onResetButtonClicked)
+                tooltip(model.resetButtonTooltip) {
+                    addClass(TalentTooltipStyles.tooltipError)
+                }
             }
         }
     }

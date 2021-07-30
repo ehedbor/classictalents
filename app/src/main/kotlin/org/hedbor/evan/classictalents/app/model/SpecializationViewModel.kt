@@ -14,6 +14,8 @@ package org.hedbor.evan.classictalents.app.model
 import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
+import javafx.scene.input.MouseButton
+import javafx.scene.input.MouseEvent
 import javafx.scene.layout.*
 import org.hedbor.evan.classictalents.app.view.styles.StyleConstants
 import org.hedbor.evan.classictalents.common.model.Location
@@ -40,9 +42,10 @@ class SpecializationViewModel(initialClass: WowClass, initialSpec: Specializatio
 
     private val classKey = bind { wowClass.translationKeyProperty }
     private val specKey = classKey.stringBinding(specialization.translationKeyProperty) { "$it.${specialization.translationKey}" }
-    val specTitleText = specKey.stringBinding { messages[it!!] }
 
+    val specTitleText = specKey.stringBinding { messages[it!!] }
     val pointCounterText = totalPointsForSpec.stringBinding { "($it)" }
+    val resetButtonTooltip = messages["spec.reset"]
 
     val backgroundImage = specialization.backgroundImageProperty.objectBinding { path ->
         if (path == null) return@objectBinding null
@@ -72,5 +75,13 @@ class SpecializationViewModel(initialClass: WowClass, initialSpec: Specializatio
         val dep = talents.firstOrNull { it.location == dependencyLocation } ?: return null
         val req = talents.firstOrNull { it.location == dep.prerequisite }
         return req?.location
+    }
+
+    fun onResetButtonClicked(event: MouseEvent) {
+        if (event.button == MouseButton.PRIMARY) {
+            talents.forEach {
+                it.rank = 0
+            }
+        }
     }
 }

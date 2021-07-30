@@ -61,7 +61,7 @@ class SpecStyles : Stylesheet() {
         }
         specResetButton {
             backgroundColor += Color.TRANSPARENT
-            padding = box(1.px)
+            padding = box(5.px)
             graphic = URI("/images/other/cancel_x_20by20.png")
         }
         specResetButton and hover {
