@@ -9,13 +9,20 @@
  * You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.hedbor.evan.classictalents.app
+package org.hedbor.evan.classictalents.app.view.styles
 
-import org.hedbor.evan.classictalents.app.view.MainView
-import org.hedbor.evan.classictalents.app.view.styles.ClassStyles
-import org.hedbor.evan.classictalents.app.view.styles.SpecStyles
-import org.hedbor.evan.classictalents.app.view.styles.TalentStyles
-import org.hedbor.evan.classictalents.app.view.styles.TalentTooltipStyles
-import tornadofx.App
+import tornadofx.Stylesheet
+import tornadofx.cssclass
 
-class ClassicTalentsApp : App(MainView::class, ClassStyles::class, SpecStyles::class, TalentStyles::class, TalentTooltipStyles::class)
+
+class ClassStyles : Stylesheet() {
+    companion object {
+        val classBackground by cssclass()
+    }
+
+    init {
+        classBackground {
+            backgroundColor += StyleConstants.DARK_BACKGROUND_COLOR
+        }
+    }
+}

@@ -57,7 +57,7 @@ class TalentStyles : Stylesheet() {
             borderInsets += box(3.px)
             borderWidth += box(2.px)
             borderStyle += BorderStrokeStyle.SOLID
-            borderColor += box(StyleConstants.TALENT_ACTIVE_BORDER_COLOR)
+            borderColor += box(StyleConstants.ACTIVE_TALENT_BORDER_COLOR)
             borderRadius += box(7.px)
             //wowhead border size: 36px square
             //wowhead icon size: 44px square
@@ -68,20 +68,20 @@ class TalentStyles : Stylesheet() {
             borderInsets += box(3.px)
             borderWidth += box(2.px)
             borderStyle += BorderStrokeStyle.SOLID
-            borderColor += box(StyleConstants.TALENT_MAXED_BORDER_COLOR)
+            borderColor += box(StyleConstants.MAXED_TALENT_BORDER_COLOR)
             borderRadius += box(7.px)
         }
         rankCounter {
-            textFill = StyleConstants.DESCRIPTION_COLOR
+            textFill = StyleConstants.DESCRIPTION_TEXT_COLOR
             fontFamily = StyleConstants.UI_FONT
-            fontSize = StyleConstants.SMALL_LABEL_TEXT
+            fontSize = StyleConstants.SMALL_LABEL_FONT_SIZE
 
             backgroundColor += Color.BLACK
             backgroundRadius += box(5.px)
 
             padding = box(0.px, 3.px)
             borderWidth += box(1.px)
-            borderColor += box(StyleConstants.DESCRIPTION_COLOR)
+            borderColor += box(StyleConstants.DESCRIPTION_TEXT_COLOR)
             borderRadius += box(5.px)
         }
         rankCounter and disabled {

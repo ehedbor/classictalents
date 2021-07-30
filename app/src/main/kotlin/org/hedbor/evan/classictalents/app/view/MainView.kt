@@ -13,6 +13,7 @@ package org.hedbor.evan.classictalents.app.view
 
 import org.hedbor.evan.classictalents.app.model.MainViewModel
 import org.hedbor.evan.classictalents.app.model.SpecializationViewModel
+import org.hedbor.evan.classictalents.app.view.styles.ClassStyles
 import tornadofx.*
 
 class MainView : View("Classic WoW Talent Calculator") {
@@ -23,10 +24,16 @@ class MainView : View("Classic WoW Talent Calculator") {
     }
 
     override val root = hbox {
+        addClass(ClassStyles.classBackground)
+        padding = insets(10)
+
         val wowClass = model.classes.first()
-        for (spec in wowClass.specializations) {
+        for ((index, spec) in wowClass.specializations.withIndex()) {
             val scope = Scope(SpecializationViewModel(wowClass, spec))
             this += find<SpecializationFragment>(scope)
+            if (index < wowClass.specializations.lastIndex) {
+                spacer { paddingAll = 5 }
+            }
         }
     }
 }

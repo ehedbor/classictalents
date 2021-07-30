@@ -25,29 +25,29 @@ class TalentTooltipStyles : Stylesheet() {
 
     init {
         tooltipTitle {
-            textFill = StyleConstants.NORMAL_COLOR
+            textFill = StyleConstants.NORMAL_TEXT_COLOR
             fontFamily = StyleConstants.UI_FONT
-            fontSize = StyleConstants.LARGE_LABEL_TEXT
+            fontSize = StyleConstants.LARGE_LABEL_FONT_SIZE
         }
         tooltipSubtitle {
-            textFill = StyleConstants.NORMAL_COLOR
+            textFill = StyleConstants.NORMAL_TEXT_COLOR
             fontFamily = StyleConstants.UI_FONT
-            fontSize = StyleConstants.SMALL_LABEL_TEXT
+            fontSize = StyleConstants.SMALL_LABEL_FONT_SIZE
         }
         tooltipDescription {
-            textFill = StyleConstants.DESCRIPTION_COLOR
+            textFill = StyleConstants.DESCRIPTION_TEXT_COLOR
             fontFamily = StyleConstants.UI_FONT
-            fontSize = StyleConstants.SMALL_LABEL_TEXT
+            fontSize = StyleConstants.SMALL_LABEL_FONT_SIZE
         }
         tooltipError {
-            textFill = StyleConstants.ERROR_COLOR
+            textFill = StyleConstants.ERROR_TEXT_COLOR
             fontFamily = StyleConstants.UI_FONT
-            fontSize = StyleConstants.SMALL_LABEL_TEXT
+            fontSize = StyleConstants.SMALL_LABEL_FONT_SIZE
         }
         tooltipConfirmation {
-            textFill = StyleConstants.CONFIRMATION_COLOR
+            textFill = StyleConstants.CONFIRMATION_TEXT_COLOR
             fontFamily = StyleConstants.UI_FONT
-            fontSize = StyleConstants.SMALL_LABEL_TEXT
+            fontSize = StyleConstants.SMALL_LABEL_FONT_SIZE
         }
     }
 }

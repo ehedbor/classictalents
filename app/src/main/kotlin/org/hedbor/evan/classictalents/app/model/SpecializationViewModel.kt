@@ -11,9 +11,11 @@
 
 package org.hedbor.evan.classictalents.app.model
 
+import javafx.beans.binding.Bindings
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
 import javafx.scene.layout.*
+import org.hedbor.evan.classictalents.app.view.styles.StyleConstants
 import org.hedbor.evan.classictalents.common.model.Location
 import org.hedbor.evan.classictalents.common.model.Specialization
 import org.hedbor.evan.classictalents.common.model.Talent
@@ -28,7 +30,19 @@ class SpecializationViewModel(initialClass: WowClass, initialSpec: Specializatio
     val specializationProperty = SimpleObjectProperty(initialSpec)
     var specialization by specializationProperty
 
-    val talents = specialization.talentsProperty
+    val talents = bind { specialization.talentsProperty }
+
+    // TODO: find a way to share spec properties with talents -- have TalentButtonViewModel take a SpecViewModel, perhaps?
+    private val totalPointsForSpec = run {
+        val allTalentRanks = specialization.talentsProperty.map { it.rankProperty }.toTypedArray()
+        Bindings.createIntegerBinding({ allTalentRanks.sumOf { it.value } }, *allTalentRanks)
+    }
+
+    private val classKey = bind { wowClass.translationKeyProperty }
+    private val specKey = classKey.stringBinding(specialization.translationKeyProperty) { "$it.${specialization.translationKey}" }
+    val specTitleText = specKey.stringBinding { messages[it!!] }
+
+    val pointCounterText = totalPointsForSpec.stringBinding { "($it)" }
 
     val backgroundImage = specialization.backgroundImageProperty.objectBinding { path ->
         if (path == null) return@objectBinding null
@@ -37,10 +51,15 @@ class SpecializationViewModel(initialClass: WowClass, initialSpec: Specializatio
         // TODO: Find a way to specify this part via CSS while still allowing the background image to be dynamically modified
         val repeat = BackgroundRepeat.NO_REPEAT
         val pos = BackgroundPosition.CENTER
-        val size = BackgroundSize(1.0, 1.0, true, true, false, false)
+        val size = BackgroundSize(1.0, 1.0, true, true, true, true)
         val backgroundImage = BackgroundImage(image, repeat, repeat, pos, size)
-        Background(backgroundImage)
+        val backgroundFill = BackgroundFill(StyleConstants.LIGHT_BACKGROUND_COLOR, null, null)
+        Background(listOf(backgroundFill), listOf(backgroundImage))
     }
+
+    // TODO: load an icon image somehow
+    val iconImage = SimpleObjectProperty(Image("/images/Classic/Spells/Spell_Fire_MeteorStorm.png"))
+    val borderImage = SimpleObjectProperty(Image("/images/Icon/large/border/default.png"))
 
     init {
         rebindOnChange(wowClassProperty)
