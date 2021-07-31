@@ -31,14 +31,6 @@ class SpecStyles : Stylesheet() {
 
     init {
         specBackground {
-            // specified in code because i couldn't figure out how to dynamically load the background
-            // without overriding the existing background css
-            //backgroundPosition += BackgroundPosition.CENTER
-            //backgroundRepeat += Pair(BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT)
-            //backgroundSize += BackgroundSize(1.0, 1.0, true, true, false, false)
-//            borderColor += box(StyleConstants.LIGHT_BACKGROUND_COLOR)
-//            borderWidth += box(5.px)
-//            borderStyle += BorderStrokeStyle.SOLID
             backgroundColor += StyleConstants.LIGHT_BACKGROUND_COLOR
             borderColor += box(StyleConstants.LIGHT_BACKGROUND_COLOR)
         }
@@ -51,7 +43,6 @@ class SpecStyles : Stylesheet() {
         specHeader {
             backgroundColor += StyleConstants.LIGHT_BACKGROUND_COLOR
             borderColor += box(StyleConstants.LIGHT_BACKGROUND_COLOR)
-            //borderWidth += box(5.px)
             borderStyle += BorderStrokeStyle.SOLID
         }
         specTitle {
@@ -67,10 +58,5 @@ class SpecStyles : Stylesheet() {
         specResetButton and hover {
             graphic = URI("/images/other/cancel_x_20by20_hover.png")
         }
-//        specResetButton and hover {
-//            backgroundColor += Color.TRANSPARENT
-//            padding = box(1.px)
-//            graphic = URI("/images.other.cancel_x_20by20_hover.png")
-//        }
     }
 }

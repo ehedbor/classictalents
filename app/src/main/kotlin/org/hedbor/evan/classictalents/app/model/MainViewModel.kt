@@ -32,9 +32,9 @@ class MainViewModel : ViewModel() {
 
     fun onSetup() {
         TooltipService.setGlobalTooltipBehavior(Duration.ZERO, Duration.INDEFINITE, Duration.ZERO)
-        classes = FileService.loadClasses("/talents/warlock.json").toObservable()
+        classes = FileService.loadClasses("/talents/warlock.json", "/talents/test_class.json").toObservable()
         // this causes a crash if a key is not found
-        FX.messages = FileService.loadBundles("AllMessages", "bundles.Messages", "bundles.warlock")
+        FX.messages = FileService.loadBundles("AllMessages", "bundles.Messages", "bundles.warlock", "bundles.test_class")
     }
 
     fun onExit() {

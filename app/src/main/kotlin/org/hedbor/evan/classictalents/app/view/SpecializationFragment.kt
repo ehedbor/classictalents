@@ -12,8 +12,8 @@
 package org.hedbor.evan.classictalents.app.view
 
 import javafx.geometry.Pos
+import javafx.geometry.Rectangle2D
 import javafx.scene.layout.Region
-import javafx.scene.paint.Color
 import javafx.scene.shape.Rectangle
 import org.hedbor.evan.classictalents.app.model.SpecializationViewModel
 import org.hedbor.evan.classictalents.app.view.styles.SpecStyles
@@ -26,10 +26,8 @@ import tornadofx.*
 class SpecializationFragment : Fragment() {
     companion object {
         // TODO: move styling, etc elsewhere
-        private const val BUTTON_INSETS = 15.0
-        // The button textures have blank pixels along the edges. This alignment variable accounts for that
-        private const val ARROW_ALIGN = 2.0
-        private const val ARROW_THICKNESS = 5.0
+        // internal insets of the button + 2 extra pixels to make room for the transparent space around the button
+        private const val BUTTON_INSETS = 15.0 + 2.0
     }
 
     private val model by inject<SpecializationViewModel>()
@@ -116,57 +114,70 @@ class SpecializationFragment : Fragment() {
             val rowDiff = dependencyLocation.row - prerequisiteLocation.row
             val colDiff = dependencyLocation.column - prerequisiteLocation.column
 
-            if (rowDiff != 0) {
+            val isVertical = rowDiff != 0
+            val isTopToBottom = rowDiff > 0
+            val isHorizontal = colDiff != 0
+            val isLeftToRight = colDiff > 0
+
+            if (isVertical) {
                 // Vertical arrows always go from top to bottom, so no need to worry about the reverse case.
-                rectangle {
-                    fill = Color.MAGENTA
-                    width = ARROW_THICKNESS
-                    heightProperty().bind(prereqBounds.doubleBinding(depBounds) {
-                        var newHeight = depBounds.get().minY - it!!.maxY + (BUTTON_INSETS + ARROW_ALIGN)
-                        newHeight += if (colDiff != 0)
-                            depBounds.get().height / 2.0
+                check(isTopToBottom) { "Attempted to draw vertical arrow from bottom to top -- this is not allowed." }
+
+                imageview("images/WowheadTalentCalc/arrows/down.png") {
+                    viewportProperty().bind(objectBinding(prereqBounds, depBounds, image.widthProperty(), image.heightProperty()) {
+                        val width = image.width
+                        val yDiff = depBounds.value.minY - prereqBounds.value.maxY
+                        val height = yDiff + if (isHorizontal)
+                            depBounds.value.height / 2.0 + BUTTON_INSETS
                         else
-                            BUTTON_INSETS + ARROW_ALIGN
-                        newHeight
+                            BUTTON_INSETS * 2
+
+                        val minX = 0.0
+                        val minY = image.height - height
+
+                        if (width >= 0 && height >= 0)
+                            Rectangle2D(minX, minY, width, height)
+                        else null
                     })
-                    xProperty().bind(prereqBounds.doubleBinding { (it!!.minX + it.maxX) / 2.0 - ARROW_THICKNESS / 2.0 })
-                    yProperty().bind(prereqBounds.doubleBinding { it!!.maxY - (BUTTON_INSETS + ARROW_ALIGN) })
+                    xProperty().bind(prereqBounds.doubleBinding(image.widthProperty()) { (it!!.minX + it.maxX - image.width) / 2.0 })
+                    yProperty().bind(prereqBounds.doubleBinding { it!!.maxY - BUTTON_INSETS })
                 }
             }
-            if (colDiff != 0) {
-                // horizontal
-                rectangle {
-                    fill = Color.RED
-                    widthProperty().bind(prereqBounds.doubleBinding(depBounds) {
-                        val xDiff = if (colDiff > 0)
+            if (isHorizontal) {
+                val imageLocation = if (isLeftToRight) "images/WowheadTalentCalc/arrows/right.png" else "images/WowheadTalentCalc/arrows/left.png"
+                imageview(imageLocation) {
+                    viewportProperty().bind(objectBinding(prereqBounds, depBounds, image.widthProperty(), image.heightProperty()) {
+                        val height = image.height
+
+                        val xDiff = if (isLeftToRight)
                             depBounds.get().minX - prereqBounds.get().maxX
                         else
                             prereqBounds.get().minX - depBounds.get().maxX
 
-                        var newWidth = xDiff + (BUTTON_INSETS + ARROW_ALIGN)
-
-                        newWidth += if (rowDiff != 0)
-                            depBounds.get().width / 2.0
+                        val width = xDiff + if (isVertical)
+                            depBounds.get().width / 2.0 + BUTTON_INSETS
                         else
-                            (BUTTON_INSETS + ARROW_ALIGN)
+                            BUTTON_INSETS + BUTTON_INSETS
 
-                        newWidth
+                        val minY = 0.0
+                        val minX = if (isLeftToRight) image.width - width else 0.0
+
+                        if (width >= 0 && height >= 0)
+                            Rectangle2D(minX, minY, width, height)
+                        else null
                     })
-                    height = ARROW_THICKNESS
                     xProperty().bind(depBounds.doubleBinding {
-                        if (colDiff > 0) {
-                            // left--->right
-                            if (rowDiff != 0)
+                        if (isLeftToRight) {
+                            if (isVertical)
                                 it!!.minX - depBounds.get().width / 2.0
                             else
-                                it!!.minX - (BUTTON_INSETS + ARROW_ALIGN)
+                                it!!.minX - BUTTON_INSETS
                         } else {
-                            //right<---left
-                            it!!.maxX - (BUTTON_INSETS + ARROW_ALIGN)
+                            it!!.maxX - BUTTON_INSETS
                         }
                     })
 
-                    yProperty().bind(depBounds.doubleBinding { (it!!.minY + it.maxY) / 2.0 - ARROW_THICKNESS / 2.0 })
+                    yProperty().bind(depBounds.doubleBinding(image.heightProperty()) { (it!!.minY + it.maxY - image.height) / 2.0 })
                 }
             }
         }
