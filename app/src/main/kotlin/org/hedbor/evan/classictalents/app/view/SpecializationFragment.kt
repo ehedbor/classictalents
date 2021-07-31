@@ -95,7 +95,7 @@ class SpecializationFragment : Fragment() {
         }
 
         for (talent in model.talents) {
-            val scope = Scope(model.getViewModel(talent))
+            val scope = Scope(model.getTalentViewModel(talent))
             val talentButton = find<TalentButtonFragment>(scope)
             talentButtons += talent.location to talentButton.root
             this.add(talentButton.root, talent.location.column, talent.location.row)
@@ -105,81 +105,97 @@ class SpecializationFragment : Fragment() {
     private fun Region.generateTalentArrowOverlay() = pane {
         isMouseTransparent = true
         for ((dependencyLocation, dependencyButton) in talentButtons) {
-            val prerequisiteLocation = model.getPrerequisiteLocationFor(dependencyLocation) ?: continue
-            val prerequisiteButton = talentButtons.firstNotNullOf { (loc, but) -> if (loc == prerequisiteLocation) but else null }
+            val prerequisite = model.getPrerequisiteFor(dependencyLocation) ?: continue
+            val prerequisiteButton = talentButtons.firstNotNullOf { (loc, but) -> if (loc == prerequisite.location) but else null }
 
-            val depBounds = dependencyButton.boundsInParentProperty()
             val prereqBounds = prerequisiteButton.boundsInParentProperty()
+            val dependBounds = dependencyButton.boundsInParentProperty()
 
-            val rowDiff = dependencyLocation.row - prerequisiteLocation.row
-            val colDiff = dependencyLocation.column - prerequisiteLocation.column
+            val rowDiff = dependencyLocation.row - prerequisite.location.row
+            val colDiff = dependencyLocation.column - prerequisite.location.column
 
-            val isVertical = rowDiff != 0
-            val isTopToBottom = rowDiff > 0
-            val isHorizontal = colDiff != 0
-            val isLeftToRight = colDiff > 0
+            val context = model.getArrowContext(prerequisite, prereqBounds, dependBounds, rowDiff, colDiff)
 
-            if (isVertical) {
-                // Vertical arrows always go from top to bottom, so no need to worry about the reverse case.
-                check(isTopToBottom) { "Attempted to draw vertical arrow from bottom to top -- this is not allowed." }
-
-                imageview("images/WowheadTalentCalc/arrows/down.png") {
-                    viewportProperty().bind(objectBinding(prereqBounds, depBounds, image.widthProperty(), image.heightProperty()) {
-                        val width = image.width
-                        val yDiff = depBounds.value.minY - prereqBounds.value.maxY
-                        val height = yDiff + if (isHorizontal)
-                            depBounds.value.height / 2.0 + BUTTON_INSETS
-                        else
-                            BUTTON_INSETS * 2
-
-                        val minX = 0.0
-                        val minY = image.height - height
-
-                        if (width >= 0 && height >= 0)
-                            Rectangle2D(minX, minY, width, height)
-                        else null
-                    })
-                    xProperty().bind(prereqBounds.doubleBinding(image.widthProperty()) { (it!!.minX + it.maxX - image.width) / 2.0 })
-                    yProperty().bind(prereqBounds.doubleBinding { it!!.maxY - BUTTON_INSETS })
-                }
-            }
-            if (isHorizontal) {
-                val imageLocation = if (isLeftToRight) "images/WowheadTalentCalc/arrows/right.png" else "images/WowheadTalentCalc/arrows/left.png"
-                imageview(imageLocation) {
-                    viewportProperty().bind(objectBinding(prereqBounds, depBounds, image.widthProperty(), image.heightProperty()) {
-                        val height = image.height
-
-                        val xDiff = if (isLeftToRight)
-                            depBounds.get().minX - prereqBounds.get().maxX
-                        else
-                            prereqBounds.get().minX - depBounds.get().maxX
-
-                        val width = xDiff + if (isVertical)
-                            depBounds.get().width / 2.0 + BUTTON_INSETS
-                        else
-                            BUTTON_INSETS + BUTTON_INSETS
-
-                        val minY = 0.0
-                        val minX = if (isLeftToRight) image.width - width else 0.0
-
-                        if (width >= 0 && height >= 0)
-                            Rectangle2D(minX, minY, width, height)
-                        else null
-                    })
-                    xProperty().bind(depBounds.doubleBinding {
-                        if (isLeftToRight) {
-                            if (isVertical)
-                                it!!.minX - depBounds.get().width / 2.0
-                            else
-                                it!!.minX - BUTTON_INSETS
-                        } else {
-                            it!!.maxX - BUTTON_INSETS
-                        }
-                    })
-
-                    yProperty().bind(depBounds.doubleBinding(image.heightProperty()) { (it!!.minY + it.maxY - image.height) / 2.0 })
-                }
-            }
+            if (context.isVertical) generateVerticalArrow(context)
+            if (context.isHorizontal) generateHorizontalArrow(context)
         }
+    }
+
+    private fun Region.generateVerticalArrow(ctx: SpecializationViewModel.ArrowContext) = imageview {
+        // Vertical arrows always go from top to bottom, so no need to worry about the reverse case.
+        check(ctx.isTopToBottom) { "Attempted to draw vertical arrow from bottom to top -- this is not allowed." }
+
+        imageProperty().bind(ctx.verticalImageProperty)
+        viewportProperty().bind(objectBinding(ctx.prereqBoundsProperty, ctx.dependBoundsProperty, imageProperty(), ctx.horizontalImageProperty) {
+            val width = image.width
+            val yDiff = ctx.dependBounds.minY - ctx.prereqBounds.maxY
+            val height = yDiff + if (ctx.isHorizontal)
+                (ctx.dependBounds.height - ctx.horizontalImage.height) / 2.0 + BUTTON_INSETS
+            else
+                BUTTON_INSETS * 2
+
+            val minX = 0.0
+            val minY = image.height - height
+
+            if (width >= 0 && height >= 0)
+                Rectangle2D(minX, minY, width, height)
+            else null
+        })
+        xProperty().bind(doubleBinding(ctx.prereqBoundsProperty, ctx.dependBoundsProperty, imageProperty()) {
+            if (ctx.isHorizontal && !ctx.isLeftToRight) {
+                ctx.dependBounds.maxX - (ctx.prereqBounds.width + image.width) / 2.0
+            } else {
+                ctx.dependBounds.minX + (ctx.dependBounds.width - image.width) / 2.0
+            }
+        })
+        yProperty().bind(doubleBinding(ctx.prereqBoundsProperty) {
+            if (ctx.isHorizontal) {
+                ctx.prereqBounds.maxY - (ctx.prereqBounds.height - image.width) / 2.0
+            } else {
+                ctx.prereqBounds.maxY - BUTTON_INSETS
+            }
+        })
+    }
+
+    private fun Region.generateHorizontalArrow(ctx: SpecializationViewModel.ArrowContext) = imageview {
+        imageProperty().bind(ctx.horizontalImageProperty)
+        viewportProperty().bind(objectBinding(ctx.prereqBoundsProperty, ctx.dependBoundsProperty, imageProperty(), ctx.verticalImageProperty) {
+            val height = image.height
+
+            val xDiff = if (ctx.isLeftToRight)
+                ctx.dependBounds.minX - ctx.prereqBounds.maxX
+            else
+                ctx.prereqBounds.minX - ctx.dependBounds.maxX
+
+            val width = xDiff + if (ctx.isVertical)
+                (ctx.dependBounds.width + ctx.verticalImage.width) / 2.0  + BUTTON_INSETS
+            else
+                BUTTON_INSETS + BUTTON_INSETS
+
+            val minY = 0.0
+            val minX = if (ctx.isLeftToRight) image.width - width else 0.0
+
+            if (width >= 0 && height >= 0)
+                Rectangle2D(minX, minY, width, height)
+            else null
+        })
+        xProperty().bind(doubleBinding(ctx.prereqBoundsProperty, ctx.dependBoundsProperty, ctx.verticalImageProperty) {
+            if (ctx.isVertical) {
+                if (ctx.isLeftToRight) {
+                    ctx.prereqBounds.maxX - BUTTON_INSETS
+                } else {
+                    ctx.dependBounds.maxX - (ctx.prereqBounds.width + ctx.verticalImage.width) / 2.0
+                }
+            } else {
+                if (ctx.isLeftToRight) {
+                    ctx.prereqBounds.maxX - BUTTON_INSETS
+                } else {
+                    ctx.dependBounds.maxX - BUTTON_INSETS
+                }
+            }
+        })
+        yProperty().bind(doubleBinding(ctx.dependBoundsProperty, ctx.prereqBoundsProperty, imageProperty()) {
+            (ctx.prereqBounds.minY + ctx.prereqBounds.maxY - image.height) / 2.0
+        })
     }
 }

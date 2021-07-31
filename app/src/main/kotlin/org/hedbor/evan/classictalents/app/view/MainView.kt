@@ -27,7 +27,7 @@ class MainView : View("Classic WoW Talent Calculator") {
         addClass(ClassStyles.classBackground)
         padding = insets(10)
 
-        val wowClass = model.classes.first { it.translationKey == "test_class" }
+        val wowClass = model.classes.first { it.translationKey == "warlock" }
         for ((index, spec) in wowClass.specializations.withIndex()) {
             val scope = Scope(SpecializationViewModel(wowClass, spec))
             this += find<SpecializationFragment>(scope)

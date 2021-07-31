@@ -12,7 +12,10 @@
 package org.hedbor.evan.classictalents.app.model
 
 import javafx.beans.binding.Bindings
+import javafx.beans.binding.ObjectBinding
+import javafx.beans.property.ReadOnlyObjectProperty
 import javafx.beans.property.SimpleObjectProperty
+import javafx.geometry.Bounds
 import javafx.scene.image.Image
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
@@ -69,12 +72,11 @@ class SpecializationViewModel(initialClass: WowClass, initialSpec: Specializatio
         rebindOnChange(specializationProperty)
     }
 
-    fun getViewModel(talent: Talent) = TalentButtonViewModel(wowClass, specialization, talent)
+    fun getTalentViewModel(talent: Talent) = TalentButtonViewModel(wowClass, specialization, talent)
 
-    fun getPrerequisiteLocationFor(dependencyLocation: Location): Location? {
+    fun getPrerequisiteFor(dependencyLocation: Location): Talent? {
         val dep = talents.firstOrNull { it.location == dependencyLocation } ?: return null
-        val req = talents.firstOrNull { it.location == dep.prerequisite }
-        return req?.location
+        return talents.firstOrNull { it.location == dep.prerequisite }
     }
 
     fun onResetButtonClicked(event: MouseEvent) {
@@ -82,6 +84,62 @@ class SpecializationViewModel(initialClass: WowClass, initialSpec: Specializatio
             talents.forEach {
                 it.rank = 0
             }
+        }
+    }
+
+    fun getArrowContext(
+        prerequisite: Talent,
+        prereqBounds: ReadOnlyObjectProperty<Bounds>,
+        dependBounds: ReadOnlyObjectProperty<Bounds>,
+        rowDiff: Int,
+        colDiff: Int
+    ) = ArrowContext(prerequisite, prereqBounds, dependBounds, rowDiff, colDiff)
+
+    inner class ArrowContext(
+        prereq: Talent,
+        prereqBounds: ReadOnlyObjectProperty<Bounds>,
+        dependBounds: ReadOnlyObjectProperty<Bounds>,
+        rowDiff: Int,
+        colDiff: Int
+    ) {
+        val isVertical = rowDiff != 0
+        val isTopToBottom = rowDiff > 0
+        val isHorizontal = colDiff != 0
+        val isLeftToRight = colDiff > 0
+
+        val prereqBoundsProperty: ReadOnlyObjectProperty<Bounds> = SimpleObjectProperty<Bounds>().apply { bind(prereqBounds) }
+        val prereqBounds: Bounds by prereqBoundsProperty
+
+        val dependBoundsProperty: ReadOnlyObjectProperty<Bounds> = SimpleObjectProperty<Bounds>().apply { bind(dependBounds) }
+        val dependBounds: Bounds by dependBoundsProperty
+
+        val verticalImageProperty: ReadOnlyObjectProperty<Image> = SimpleObjectProperty<Image>().apply { bind(getVerticalImageFor(prereq)) }
+        val verticalImage: Image by verticalImageProperty
+
+        val horizontalImageProperty: ReadOnlyObjectProperty<Image> = SimpleObjectProperty<Image>().apply { bind(getHorizontalImageFor(prereq, isVertical, isLeftToRight)) }
+        val horizontalImage: Image by horizontalImageProperty
+
+        @Suppress("UNCHECKED_CAST")
+        private fun getVerticalImageFor(prerequisite: Talent): ObjectBinding<Image> {
+            return objectBinding(prerequisite.rankProperty, prerequisite.maxRankProperty) {
+                if (prerequisite.rank < prerequisite.maxRank) {
+                    Image("images/WowheadTalentCalc/arrows/down.png")
+                } else {
+                    Image("images/WowheadTalentCalc/arrows/down2.png")
+                }
+            } as ObjectBinding<Image>
+        }
+
+        @Suppress("UNCHECKED_CAST")
+        private fun getHorizontalImageFor(prerequisite: Talent, isVertical: Boolean, isLeftToRight: Boolean): ObjectBinding<Image> {
+            return objectBinding(prerequisite.rankProperty, prerequisite.maxRankProperty) {
+                val horizontalComponent = if (isLeftToRight) "right" else "left"
+                val verticalComponent = if (isVertical) "down" else ""
+                val maxRankComponent = if (prerequisite.rank >= prerequisite.maxRank) "2" else ""
+
+                val imageName = "$horizontalComponent$verticalComponent$maxRankComponent.png".also { println(it) }
+                Image("images/WowheadTalentCalc/arrows/$imageName")
+            } as ObjectBinding<Image>
         }
     }
 }
