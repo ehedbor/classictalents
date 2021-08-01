@@ -65,7 +65,7 @@ class TalentTooltipViewModel(private val talentButtonViewModel: TalentButtonView
         }
     }
 
-    val shouldShowLearnTalentText = talentButtonViewModel.isAllocatable
+    val shouldShowLearnTalentText = talentButtonViewModel.canAcceptPoints and talentButtonViewModel.hasUnassignedTalentPoints
     val learnTalentText = messages["talent.learn"]!!
 
     val shouldShowUnlearnTalentText = talentButtonViewModel.isDeallocatable and talentButtonViewModel.hasBeenAllocated

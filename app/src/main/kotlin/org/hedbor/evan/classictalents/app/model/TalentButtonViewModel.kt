@@ -83,7 +83,7 @@ class TalentButtonViewModel(private val specializationViewModel: SpecializationV
     /**
      * Whether the user still has unassigned talent points.
      */
-    private val hasUnassignedTalentPoints = totalPointsForClass.booleanBinding(specializationViewModel.era) { totalPoints ->
+    val hasUnassignedTalentPoints = totalPointsForClass.booleanBinding(specializationViewModel.era) { totalPoints ->
         val era = specializationViewModel.era.value
         val pointsAtMaxLevel = era.getAvailablePoints(era.maxLevel)
         (totalPoints as Int) < pointsAtMaxLevel

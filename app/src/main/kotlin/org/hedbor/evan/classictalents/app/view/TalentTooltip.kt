@@ -111,7 +111,13 @@ class TalentTooltip(private val model: TalentTooltipViewModel) : Tooltip() {
 
     private fun EventTarget.generateFooter() {
         // spacer
-        label {}
+        label {
+            visibleAndManagedWhen(
+                model.shouldShowRequiresSpecText
+                    .or(model.shouldShowRequiresPrerequisiteText)
+                    .or(model.shouldShowLearnTalentText)
+                    .or(model.shouldShowUnlearnTalentText))
+        }
 
         label(model.requiresSpecText) {
             addClass(TalentTooltipStyles.tooltipError)

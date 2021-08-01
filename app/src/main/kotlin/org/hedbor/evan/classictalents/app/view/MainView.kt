@@ -26,10 +26,6 @@ class MainView : View("Classic WoW Talent Calculator") {
 
     private val fragments = observableMapOf<String, WowClassFragment>()
 
-    init {
-        model.onSetup()
-    }
-
     override val root = vbox {
         addClass(ClassStyles.classBackground)
         // the nested hbox prevents the inner hbox from expanding to fill all horizontal space

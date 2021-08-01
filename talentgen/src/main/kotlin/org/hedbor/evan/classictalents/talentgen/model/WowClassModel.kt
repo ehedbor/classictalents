@@ -16,8 +16,8 @@ import tornadofx.ItemViewModel
 
 
 class WowClassModel(initialValue: WowClass? = null) : ItemViewModel<WowClass>(initialValue) {
-    val translationKey = bind(WowClass::translationKeyProperty)
-    val icon = bind(WowClass::iconProperty)
-    val era = bind(WowClass::eraProperty)
-    val specializations = bind(WowClass::specializationsProperty)
+    val translationKey = bind(WowClass::translationKeyProperty, autocommit = true)
+    val icon = bind(WowClass::iconProperty, autocommit = true)
+    val era = bind(WowClass::eraProperty, autocommit = true)
+    val specializations = bind(WowClass::specializationsProperty, autocommit = true)
 }

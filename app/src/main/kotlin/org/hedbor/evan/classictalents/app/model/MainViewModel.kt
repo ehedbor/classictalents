@@ -11,7 +11,6 @@
 
 package org.hedbor.evan.classictalents.app.model
 
-import javafx.application.Platform
 import javafx.beans.property.SimpleListProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.beans.value.ObservableValue
@@ -21,29 +20,29 @@ import org.hedbor.evan.classictalents.app.service.FileService
 import org.hedbor.evan.classictalents.app.service.TooltipService
 import org.hedbor.evan.classictalents.common.model.WowClass
 import tornadofx.*
-import kotlin.system.exitProcess
 
 
 class MainViewModel : ViewModel() {
     val classesProperty = SimpleListProperty(observableListOf<WowClass>())
     var classes: ObservableList<WowClass> by classesProperty
 
-    val activeClassKey = SimpleStringProperty("warlock")
+    val activeClassKey = SimpleStringProperty()
 
     init {
         rebindOnChange(classesProperty)
-    }
 
-    fun onSetup() {
         TooltipService.setGlobalTooltipBehavior(Duration.ZERO, Duration.INDEFINITE, Duration.ZERO)
-        classes = FileService.loadClasses("/talents/warlock.json", "/talents/test_class.json").toObservable()
-        // this causes a crash if a key is not found
-        FX.messages = FileService.loadBundles("AllMessages", "bundles.Messages", "bundles.warlock", "bundles.test_class")
-    }
+        classes = FileService.loadClasses(
+            "/talents/druid.json",
+            "/talents/warlock.json",
+            "/talents/test_class.json").toObservable()
+        FX.messages = FileService.loadBundles("AllMessages",
+            "bundles.Messages",
+            "bundles.druid",
+            "bundles.warlock",
+            "bundles.test_class")
 
-    fun onExit() {
-        Platform.exit()
-        exitProcess(0)
+        activeClassKey.value = classes.first().translationKey
     }
 
     fun onClassButtonClicked(wowClassKey: ObservableValue<String>) {
