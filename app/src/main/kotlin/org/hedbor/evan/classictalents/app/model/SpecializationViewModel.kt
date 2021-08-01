@@ -24,35 +24,33 @@ import org.hedbor.evan.classictalents.app.view.styles.StyleConstants
 import org.hedbor.evan.classictalents.common.model.Location
 import org.hedbor.evan.classictalents.common.model.Specialization
 import org.hedbor.evan.classictalents.common.model.Talent
-import org.hedbor.evan.classictalents.common.model.WowClass
 import tornadofx.*
 
 
-class SpecializationViewModel(initialClass: WowClass, initialSpec: Specialization) : ViewModel() {
-    val wowClassProperty = SimpleObjectProperty(initialClass)
-    var wowClass by wowClassProperty
+class SpecializationViewModel(private val wowClassViewModel: WowClassViewModel, initialSpec: Specialization) : ViewModel() {
+    private val specializationProperty = SimpleObjectProperty(initialSpec)
+    private var specialization by specializationProperty
 
-    val specializationProperty = SimpleObjectProperty(initialSpec)
-    var specialization by specializationProperty
+    val era  = bind { wowClassViewModel.era }
 
+    val specializations = bind { wowClassViewModel.specializations }
     val talents = bind { specialization.talentsProperty }
 
-    // TODO: find a way to share spec properties with talents -- have TalentButtonViewModel take a SpecViewModel, perhaps?
-    private val totalPointsForSpec = run {
+    val totalPointsForClass = wowClassViewModel.totalAllocatedPoints
+    val totalPointsForSpec = run {
         val allTalentRanks = specialization.talentsProperty.map { it.rankProperty }.toTypedArray()
-        Bindings.createIntegerBinding({ allTalentRanks.sumOf { it.value } }, *allTalentRanks)
+        Bindings.createIntegerBinding({ allTalentRanks.sumOf { it.value } }, *allTalentRanks)!!
     }
 
-    private val classKey = bind { wowClass.translationKeyProperty }
-    private val specKey = classKey.stringBinding(specialization.translationKeyProperty) { "$it.${specialization.translationKey}" }
+    val classKey = bind { wowClassViewModel.translationKey }
+    val specKey = bind { specialization.translationKeyProperty }.stringBinding(classKey) { "${classKey.value}.$it" }
 
     val specTitleText = specKey.stringBinding { messages[it!!] }
     val pointCounterText = totalPointsForSpec.stringBinding { "($it)" }
-    val resetButtonTooltip = messages["spec.reset"]
+    val resetButtonTooltip = messages["spec.reset"]!!
 
-    val backgroundImage = specialization.backgroundImageProperty.objectBinding { path ->
-        if (path == null) return@objectBinding null
-        val image = runCatching { Image(path) }.getOrNull() ?: return@objectBinding null
+    val backgroundImage = bind { specialization.backgroundImageProperty }.objectBinding { path ->
+        val image = path?.runCatching { Image(path) }?.getOrNull() ?: return@objectBinding null
 
         // TODO: Find a way to specify this part via CSS while still allowing the background image to be dynamically modified
         val repeat = BackgroundRepeat.NO_REPEAT
@@ -63,15 +61,15 @@ class SpecializationViewModel(initialClass: WowClass, initialSpec: Specializatio
         Background(listOf(backgroundFill), listOf(backgroundImage))
     }
 
-    val iconImage = specialization.iconProperty.objectBinding { it?.runCatching { Image(this) }?.getOrNull() }
+    val iconImage = bind { specialization.iconProperty }.objectBinding { it?.runCatching { Image(this) }?.getOrNull() }
+
     val borderImage = SimpleObjectProperty(Image("/images/Icon/large/border/default.png"))
 
     init {
-        rebindOnChange(wowClassProperty)
         rebindOnChange(specializationProperty)
     }
 
-    fun getTalentViewModel(talent: Talent) = TalentButtonViewModel(wowClass, specialization, talent)
+    fun getTalentViewModel(talent: Talent) = TalentButtonViewModel(this, talent)
 
     fun getPrerequisiteFor(dependencyLocation: Location): Talent? {
         val dep = talents.firstOrNull { it.location == dependencyLocation } ?: return null
@@ -136,7 +134,7 @@ class SpecializationViewModel(initialClass: WowClass, initialSpec: Specializatio
                 val verticalComponent = if (isVertical) "down" else ""
                 val maxRankComponent = if (prerequisite.rank >= prerequisite.maxRank) "2" else ""
 
-                val imageName = "$horizontalComponent$verticalComponent$maxRankComponent.png".also { println(it) }
+                val imageName = "$horizontalComponent$verticalComponent$maxRankComponent.png"
                 Image("images/WowheadTalentCalc/arrows/$imageName")
             } as ObjectBinding<Image>
         }

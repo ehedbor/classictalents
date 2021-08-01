@@ -47,7 +47,7 @@ class SpecializationFragment : Fragment() {
     private fun Region.generateHeader() = borderpane {
         addClass(SpecStyles.specHeader)
         center = hbox {
-            alignment = Pos.BASELINE_CENTER
+            alignment = Pos.CENTER
             spacing = 5.0
             stackpane {
                 val imageSize = 27.0
@@ -71,7 +71,7 @@ class SpecializationFragment : Fragment() {
             }
         }
         right = hbox {
-            alignment = Pos.BASELINE_CENTER
+            alignment = Pos.CENTER
             button {
                 addClass(SpecStyles.specResetButton)
                 setOnMouseClicked(model::onResetButtonClicked)

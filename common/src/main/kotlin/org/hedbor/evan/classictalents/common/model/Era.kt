@@ -29,4 +29,10 @@ enum class Era(val translationKey: String, val talentRowCount: Int, val maxLevel
         if (level < 10) return 0
         return level - 9
     }
+
+    fun getRequiredLevel(points: Int): Int {
+        val level = points + 9
+        require(level in 1..maxLevel)
+        return level
+    }
 }

@@ -13,6 +13,8 @@ package org.hedbor.evan.classictalents.app.model
 
 import javafx.application.Platform
 import javafx.beans.property.SimpleListProperty
+import javafx.beans.property.SimpleStringProperty
+import javafx.beans.value.ObservableValue
 import javafx.collections.ObservableList
 import javafx.util.Duration
 import org.hedbor.evan.classictalents.app.service.FileService
@@ -25,6 +27,8 @@ import kotlin.system.exitProcess
 class MainViewModel : ViewModel() {
     val classesProperty = SimpleListProperty(observableListOf<WowClass>())
     var classes: ObservableList<WowClass> by classesProperty
+
+    val activeClassKey = SimpleStringProperty("warlock")
 
     init {
         rebindOnChange(classesProperty)
@@ -40,5 +44,10 @@ class MainViewModel : ViewModel() {
     fun onExit() {
         Platform.exit()
         exitProcess(0)
+    }
+
+    fun onClassButtonClicked(wowClassKey: ObservableValue<String>) {
+        activeClassKey.unbind()
+        activeClassKey.bind(wowClassKey)
     }
 }

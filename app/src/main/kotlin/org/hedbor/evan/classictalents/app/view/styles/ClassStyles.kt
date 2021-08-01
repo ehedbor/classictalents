@@ -11,18 +11,36 @@
 
 package org.hedbor.evan.classictalents.app.view.styles
 
+import javafx.scene.layout.BorderStrokeStyle
 import tornadofx.Stylesheet
+import tornadofx.box
 import tornadofx.cssclass
+import tornadofx.px
 
 
 class ClassStyles : Stylesheet() {
     companion object {
         val classBackground by cssclass()
+        val classFooter by cssclass()
+        val classDescriptionText by cssclass()
     }
 
     init {
         classBackground {
             backgroundColor += StyleConstants.DARK_BACKGROUND_COLOR
+        }
+        classFooter {
+            backgroundColor += StyleConstants.LIGHT_BACKGROUND_COLOR
+            borderColor += box(StyleConstants.LIGHT_BACKGROUND_COLOR)
+            borderWidth += box(5.px)
+            backgroundRadius += box(10.px)
+            borderRadius += box(10.px)
+            borderStyle += BorderStrokeStyle.SOLID
+        }
+        classDescriptionText {
+            textFill = StyleConstants.NORMAL_TEXT_COLOR
+            fontFamily = StyleConstants.UI_FONT
+            fontSize = StyleConstants.LARGE_LABEL_FONT_SIZE
         }
     }
 }

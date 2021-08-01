@@ -22,94 +22,89 @@ import org.hedbor.evan.classictalents.app.service.ImageService
 import org.hedbor.evan.classictalents.app.util.bindWhenNotNull
 import org.hedbor.evan.classictalents.app.util.selectInteger
 import org.hedbor.evan.classictalents.app.view.TalentTooltip
-import org.hedbor.evan.classictalents.common.model.Specialization
 import org.hedbor.evan.classictalents.common.model.Talent
-import org.hedbor.evan.classictalents.common.model.WowClass
 import tornadofx.*
 
 
-class TalentButtonViewModel(initialWowClass: WowClass, initialSpec: Specialization, initialTalent: Talent) : ViewModel() {
-    val wowClassProperty = SimpleObjectProperty(initialWowClass)
-    var wowClass: WowClass by wowClassProperty
+class TalentButtonViewModel(private val specializationViewModel: SpecializationViewModel, initialTalent: Talent) : ViewModel() {
+    private val talentProperty = SimpleObjectProperty(initialTalent)
+    private var talent: Talent by talentProperty
 
-    val specializationProperty = SimpleObjectProperty(initialSpec)
-    var specialization: Specialization by specializationProperty
+    val classKey = specializationViewModel.classKey
+    val specKey = specializationViewModel.specKey
+    val talentKey = bind { talent.translationKeyProperty }.stringBinding(specKey) { "${specKey.value}.$it" }
 
-    val talentProperty = SimpleObjectProperty(initialTalent)
-    var talent: Talent by talentProperty
+    val rank = bind { talent.rankProperty }
+    val maxRank = bind { talent.maxRankProperty }
+
+    val spell = bind { talent.spellProperty }
 
     /**
      * The number of talent points that must be allocated in prerequisite rows before this talent is unlocked.
      */
-    internal val requiredPoints = talent.locationProperty.selectInteger { it.rowProperty }.multiply(5)
+    val requiredPoints = bind { talent.locationProperty }.selectInteger { it.rowProperty }.multiply(5)!!
 
     /**
      * The total number of talent points that have been allocated across all specs.
      */
-    internal val totalPointsForClass = run {
-        // note that this will NOT WORK if elements are added or removed!
-        // this shouldn't be a problem because this application will not change the models (aside from the talent's rank)
-        val allTalentRanks = wowClass.specializations.flatMap { it.talentsProperty }.map { it.rankProperty }.toTypedArray()
-        Bindings.createIntegerBinding({ allTalentRanks.sumOf { it.value } }, *allTalentRanks)
-    }
+    private val totalPointsForClass = specializationViewModel.totalPointsForClass
 
     /**
      * The total number of talent points that have been allocated for this spec.
      */
-    internal val totalPointsForSpec = run {
-        val allTalentRanks = specialization.talentsProperty.map { it.rankProperty }.toTypedArray()
-        Bindings.createIntegerBinding({ allTalentRanks.sumOf { it.value } }, *allTalentRanks)
-    }
+    private val totalPointsForSpec = specializationViewModel.totalPointsForSpec
 
     /**
-     * Whether or not the prerequisite talent rows for this talent have been filed out.
+     * Whether the prerequisite talent rows for this talent have been filed out.
      */
-    internal val isTalentRowUnlocked = totalPointsForSpec ge requiredPoints
+    val isTalentRowUnlocked = totalPointsForSpec ge requiredPoints
 
     /**
      * This talent's prerequisite, if present.
      */
-    internal val prerequisite = objectBinding(specialization.talentsProperty, talent.prerequisiteProperty) {
-        if (talent.prerequisite != null && !specialization.talents.isNullOrEmpty()) {
-            specialization.talents.find { it.location == talent.prerequisite }
+    val prerequisite = objectBinding(specializationViewModel.talents, talent.prerequisiteProperty) {
+        if (talent.prerequisite != null && !specializationViewModel.talents.isEmpty()) {
+            specializationViewModel.talents.find { it.location == talent.prerequisite }
         } else {
             null
         }
     }
 
     /**
-     * Whether or not this talent's prerequisite has been maxed out.
+     * Whether this talent's prerequisite has been maxed out.
      * If the talent does not have a prerequisite, this is true.
      */
-    internal val isPrerequisiteMaxedOut = SimpleBooleanProperty().bindWhenNotNull(prerequisite, true) { prerequisite ->
+    val isPrerequisiteMaxedOut = SimpleBooleanProperty().bindWhenNotNull(prerequisite, true) { prerequisite ->
         booleanBinding(prerequisite.rankProperty, prerequisite.maxRankProperty) {
             prerequisite.rank >= prerequisite.maxRank
         }
     }
 
     /**
-     * Whether or not the user still has unassigned talent points.
+     * Whether the user still has unassigned talent points.
      */
-    internal val hasUnassignedTalentPoints = totalPointsForClass.booleanBinding(wowClass.eraProperty) {
-        val pointsAtMaxLevel = wowClass.era.getAvailablePoints(wowClass.era.maxLevel)
-        (it as Int) < pointsAtMaxLevel
+    private val hasUnassignedTalentPoints = totalPointsForClass.booleanBinding(specializationViewModel.era) { totalPoints ->
+        val era = specializationViewModel.era.value
+        val pointsAtMaxLevel = era.getAvailablePoints(era.maxLevel)
+        (totalPoints as Int) < pointsAtMaxLevel
     }
 
     /**
-     * Whether or not the user is able to remove talent points from this particular talent.
+     * Whether the user is able to remove talent points from this particular talent.
      * This is true if removing a point from this talent will not make any later talents to become non-allocatable.
      */
     val isDeallocatable = run {
+        val talents = specializationViewModel.talents
         val dependencies: Array<Observable> = mutableListOf<Observable>().apply {
-            this += specialization.talents.map { it.prerequisiteProperty}
-            this += specialization.talents.map { it.rankProperty }
-            this += specialization.talents.map { it.location.rowProperty }
+            this += talents.map { it.prerequisiteProperty}
+            this += talents.map { it.rankProperty }
+            this += talents.map { it.location.rowProperty }
         }.toTypedArray()
 
         Bindings.createBooleanBinding({
             // you cannot remove points if doing so would cause a later talent to not be allocatable
             // first, check this talent's dependency, if any
-            val dependency = specialization.talents.firstOrNull { talent.location == it.prerequisite }
+            val dependency = talents.firstOrNull { talent.location == it.prerequisite }
             if (dependency != null && dependency.rank > 0) {
                 return@createBooleanBinding false
             }
@@ -118,9 +113,7 @@ class TalentButtonViewModel(initialWowClass: WowClass, initialSpec: Specializati
             // if this talent is in the final row, a point can be removed
             // and no, past me, this doesn't this ignore the possibility that highestTalent might have a dependency
             // in the same row. we literally just checked if this talent has a dependency
-            val highestTalent = specialization.talents
-                .filter { it.rank > 0 }
-                .maxByOrNull { it.location.row }
+            val highestTalent = talents.filter { it.rank > 0 }.maxByOrNull { it.location.row }
             if (highestTalent == null || talent.location.row == highestTalent.location.row) {
                 return@createBooleanBinding true
             }
@@ -128,18 +121,15 @@ class TalentButtonViewModel(initialWowClass: WowClass, initialSpec: Specializati
             // otherwise, determine the total number of allocated points in all tiers lower than the highest.
             // if removing a point would cause this total to be less than the requirement of the highest talent,
             // then a point cannot be removed
-            val totalPoints = specialization.talents
-                .filter { it.location.row < highestTalent.location.row }
-                .sumOf { it.rank }
-
+            val totalPoints = talents.filter { it.location.row < highestTalent.location.row }.sumOf { it.rank }
             val highestTalentRequirement = highestTalent.location.row * 5
             
             totalPoints - 1 >= highestTalentRequirement
-        }, *dependencies)
+        }, *dependencies)!!
     }
 
     /**
-     * Whether or not talent points are able to be allocated into this talent. This is true if:
+     * Whether talent points can be allocated into this talent. This is true if:
      * A) This talent's row is unlocked,
      * B) This talent's [prerequisite][Talent.prerequisite] (if any) is maxed out, and
      * C) The user still has unassigned talent points.
@@ -152,19 +142,19 @@ class TalentButtonViewModel(initialWowClass: WowClass, initialSpec: Specializati
     /**
      * True if at least one talent point has been allocated into this talent.
      */
-    val hasBeenAllocated = talent.rankProperty ge 1
+    val hasBeenAllocated = rank ge 1
 
     /**
      * True if [Talent.maxRank] points have been allocated into this talent.
      */
-    val isMaxedOut = talent.rankProperty ge talent.maxRankProperty
+    val isMaxedOut = rank ge maxRank
 
     /**
-     * Whether or not the user can actually add more points to this talent.
+     * Whether the user can actually add more points to this talent.
      */
     val canAcceptPoints = !isMaxedOut and (isAllocatable or hasBeenAllocated)
 
-    private val normalBackgroundImage = talent.iconProperty.objectBinding { runCatching { Image(it) }.getOrNull() }
+    private val normalBackgroundImage = bind { talent.iconProperty }.objectBinding { it?.runCatching { Image(this) }?.getOrNull() }
     private val grayscaleBackgroundImage = normalBackgroundImage.objectBinding { it?.let { ImageService.toGrayscale(it) } }
 
     val backgroundImage = objectBinding(isAllocatable, hasBeenAllocated, normalBackgroundImage, grayscaleBackgroundImage) {
@@ -181,13 +171,11 @@ class TalentButtonViewModel(initialWowClass: WowClass, initialSpec: Specializati
     val buttonWidth = borderImage.width
     val buttonHeight = borderImage.height
 
-    val rankCounterText = talent.rankProperty.asString()!!
+    val rankCounterText = rank.asString()!!
 
     val tooltip = TalentTooltip(TalentTooltipViewModel(this))
 
     init {
-        rebindOnChange(wowClassProperty)
-        rebindOnChange(specializationProperty)
         rebindOnChange(talentProperty)
     }
 
