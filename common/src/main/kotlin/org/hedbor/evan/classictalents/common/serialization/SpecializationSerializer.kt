@@ -28,13 +28,13 @@ internal class SpecializationSerializer : KSerializer<Specialization> {
         val talents = value.talents
             .filter { it.translationKey.isNotBlank() }
             .sortedWith(compareBy<Talent> { it.location.row }.thenBy { it.location.column })
-        val surrogate = with(value) { SpecializationSurrogate(translationKey, backgroundImage, talents) }
+        val surrogate = with(value) { SpecializationSurrogate(translationKey, icon, backgroundImage, talents) }
         encoder.encodeSerializableValue(SpecializationSurrogate.serializer(), surrogate)
     }
 
     override fun deserialize(decoder: Decoder): Specialization {
         val surrogate = decoder.decodeSerializableValue(SpecializationSurrogate.serializer())
-        return with(surrogate) { Specialization(key, backgroundImage, talents.toObservable()) }
+        return with(surrogate) { Specialization(key, icon, backgroundImage, talents.toObservable()) }
     }
 }
 
@@ -42,6 +42,7 @@ internal class SpecializationSerializer : KSerializer<Specialization> {
 @SerialName("Specialization")
 private class SpecializationSurrogate(
     val key: String,
+    val icon: String,
     val backgroundImage: String,
     val talents: List<Talent>
 )

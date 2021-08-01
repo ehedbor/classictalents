@@ -1,9 +1,11 @@
 {
   "key": "test_class",
+  "icon": "images/icon/large/classicon_mage.jpg",
   "era": "classic",
   "specs": [
     {
       "key": "spec1",
+      "icon": "images/Classic/Spells/Spell_Frost_ChainsOfIce.png",
       "backgroundImage": "images/backgrounds/mage_frost.jpg",
       "talents": [
         {

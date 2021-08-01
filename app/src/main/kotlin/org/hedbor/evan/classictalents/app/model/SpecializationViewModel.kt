@@ -63,8 +63,7 @@ class SpecializationViewModel(initialClass: WowClass, initialSpec: Specializatio
         Background(listOf(backgroundFill), listOf(backgroundImage))
     }
 
-    // TODO: load an icon image somehow
-    val iconImage = SimpleObjectProperty(Image("/images/Classic/Spells/Spell_Fire_MeteorStorm.png"))
+    val iconImage = specialization.iconProperty.objectBinding { it?.runCatching { Image(this) }?.getOrNull() }
     val borderImage = SimpleObjectProperty(Image("/images/Icon/large/border/default.png"))
 
     init {

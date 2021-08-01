@@ -17,6 +17,7 @@ import tornadofx.ItemViewModel
 
 class SpecializationModel(initialValue: Specialization? = null) : ItemViewModel<Specialization>(initialValue) {
     val translationKey = bind(Specialization::translationKeyProperty)
+    val icon = bind(Specialization::iconProperty)
     val backgroundImage = bind(Specialization::backgroundImageProperty)
     val talents = bind(Specialization::talentsProperty)
 }

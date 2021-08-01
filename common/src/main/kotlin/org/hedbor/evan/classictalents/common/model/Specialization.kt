@@ -24,6 +24,7 @@ import tornadofx.setValue
 @Serializable(with = SpecializationSerializer::class)
 class Specialization(
     translationKey: String = "",
+    icon: String = "",
     backgroundImage: String = "",
     talents: ObservableList<Talent> = observableListOf()
 ) {
@@ -34,6 +35,9 @@ class Specialization(
 
     val translationKeyProperty = SimpleStringProperty(this, "translationKey", translationKey)
     var translationKey: String by translationKeyProperty
+
+    val iconProperty = SimpleStringProperty(this, "icon", icon)
+    var icon: String by iconProperty
 
     val backgroundImageProperty = SimpleStringProperty(this, "backgroundImage", backgroundImage)
     var backgroundImage: String by backgroundImageProperty
@@ -46,6 +50,7 @@ class Specialization(
         if (other !is Specialization) return false
 
         if (translationKey != other.translationKey) return false
+        if (icon != other.icon) return false
         if (backgroundImage != other.backgroundImage) return false
         if (talents != other.talents) return false
 
@@ -54,12 +59,13 @@ class Specialization(
 
     override fun hashCode(): Int {
         var result = translationKey.hashCode()
+        result = 31 * result + icon.hashCode()
         result = 31 * result + backgroundImage.hashCode()
         result = 31 * result + talents.hashCode()
         return result
     }
 
     override fun toString(): String {
-        return "Specialization(translationKey='$translationKey', backgroundImage='$backgroundImage', talents=$talents)"
+        return "Specialization(translationKey='$translationKey', icon'$icon', backgroundImage='$backgroundImage', talents=$talents)"
     }
 }

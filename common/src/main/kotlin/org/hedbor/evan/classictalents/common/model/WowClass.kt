@@ -26,11 +26,15 @@ import tornadofx.setValue
 @Serializable(with = WowClassSerializer::class)
 class WowClass(
     translationKey: String = "",
+    icon: String = "",
     era: Era = Era.CLASSIC,
     specializations: ObservableList<Specialization> = observableListOf()
 ) {
     val translationKeyProperty = SimpleStringProperty(this, "translationKey", translationKey)
     var translationKey: String by translationKeyProperty
+
+    val iconProperty = SimpleStringProperty(this, "icon", icon)
+    var icon by iconProperty
 
     val eraProperty = SimpleObjectProperty<Era>(this, "era", era)
     var era: Era by eraProperty
@@ -43,6 +47,7 @@ class WowClass(
         if (other !is WowClass) return false
 
         if (translationKey != other.translationKey) return false
+        if (icon != other.icon) return false
         if (era != other.era) return false
         if (specializations != other.specializations) return false
 
@@ -51,13 +56,14 @@ class WowClass(
 
     override fun hashCode(): Int {
         var result = translationKey.hashCode()
+        result = 31 * result + icon.hashCode()
         result = 31 * result + era.hashCode()
         result = 31 * result + specializations.hashCode()
         return result
     }
 
     override fun toString(): String {
-        return "WowClass(translationKey='$translationKey', era=$era, specializations=$specializations)"
+        return "WowClass(translationKey='$translationKey', icon='$icon', era=$era, specializations=$specializations)"
     }
 }
 

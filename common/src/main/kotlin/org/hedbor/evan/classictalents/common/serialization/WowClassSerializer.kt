@@ -27,14 +27,14 @@ internal object WowClassSerializer : KSerializer<WowClass> {
 
     override fun serialize(encoder: Encoder, value: WowClass) {
         val specs = value.specializations.sortedBy { it.translationKey }
-        val surrogate = WowClassSurrogate(value.translationKey, value.era, specs)
+        val surrogate = WowClassSurrogate(value.translationKey, value.icon, value.era, specs)
         encoder.encodeSerializableValue(WowClassSurrogate.serializer(), surrogate)
 
     }
 
     override fun deserialize(decoder: Decoder): WowClass {
         val surrogate = decoder.decodeSerializableValue(WowClassSurrogate.serializer())
-        return with(surrogate) { WowClass(key, era, specs.toObservable()) }
+        return with(surrogate) { WowClass(key, icon, era, specs.toObservable()) }
     }
 }
 
@@ -42,6 +42,7 @@ internal object WowClassSerializer : KSerializer<WowClass> {
 @SerialName("Class")
 private class WowClassSurrogate(
     val key: String,
+    val icon: String,
     val era: Era,
     val specs: List<Specialization>
 )

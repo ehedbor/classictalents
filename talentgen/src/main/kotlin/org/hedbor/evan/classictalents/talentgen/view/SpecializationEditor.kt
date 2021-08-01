@@ -23,10 +23,7 @@ import javafx.scene.text.FontWeight
 import org.hedbor.evan.classictalents.common.model.Location
 import org.hedbor.evan.classictalents.common.model.Specialization
 import org.hedbor.evan.classictalents.common.model.Talent
-import org.hedbor.evan.classictalents.talentgen.APP_RESOURCES_DIRECTORY
-import org.hedbor.evan.classictalents.talentgen.INITIAL_BACKGROUND_DIRECTORY
-import org.hedbor.evan.classictalents.talentgen.UNKNOWN_IMAGE
-import org.hedbor.evan.classictalents.talentgen.chooseIconFromResources
+import org.hedbor.evan.classictalents.talentgen.*
 import org.hedbor.evan.classictalents.talentgen.model.SpecializationModel
 import org.hedbor.evan.classictalents.talentgen.model.TalentModel
 import org.hedbor.evan.classictalents.talentgen.model.WowClassModel
@@ -57,6 +54,17 @@ class SpecializationEditor : Fragment() {
                 textfield(model.translationKey) {
                     mustBePresent()
                     mustBeValidKey()
+                }
+            }
+            field(messages["editor.field.icon"]) {
+                textfield(model.icon) {
+                    mustBePresent()
+                }
+                button("...") {
+                    action {
+                        val image = chooseIconFromResources(messages["action.file.choose.icon"], INITIAL_ICON_DIRECTORY)
+                        if (image != null) model.icon.value = image
+                    }
                 }
             }
             field(messages["editor.field.background"]) {

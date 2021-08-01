@@ -18,6 +18,8 @@ import javafx.scene.layout.Region
 import javafx.util.StringConverter
 import org.hedbor.evan.classictalents.common.model.Era
 import org.hedbor.evan.classictalents.common.model.Specialization
+import org.hedbor.evan.classictalents.talentgen.INITIAL_ICON_DIRECTORY
+import org.hedbor.evan.classictalents.talentgen.chooseIconFromResources
 import org.hedbor.evan.classictalents.talentgen.controller.TalentGenController
 import org.hedbor.evan.classictalents.talentgen.model.SpecializationModel
 import org.hedbor.evan.classictalents.talentgen.model.WowClassModel
@@ -61,6 +63,17 @@ class WowClassEditor : View() {
                 textfield(model.translationKey) {
                     mustBePresent()
                     mustBeValidKey()
+                }
+            }
+            field(messages["editor.field.icon"]) {
+                textfield(model.icon) {
+                    mustBePresent()
+                }
+                button("...") {
+                    action {
+                        val image = chooseIconFromResources(messages["action.file.choose.icon"], INITIAL_ICON_DIRECTORY)
+                        if (image != null) model.icon.value = image
+                    }
                 }
             }
             field(messages["editor.field.era"]) {
