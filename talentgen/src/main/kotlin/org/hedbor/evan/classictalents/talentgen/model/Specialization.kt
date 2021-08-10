@@ -9,30 +9,25 @@
  * You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.hedbor.evan.classictalents.common.model
+package org.hedbor.evan.classictalents.talentgen.model
 
 import javafx.beans.property.SimpleListProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.ObservableList
-import kotlinx.serialization.Serializable
-import org.hedbor.evan.classictalents.common.serialization.SpecializationSerializer
+import org.hedbor.evan.classictalents.common.model.SpecializationData
+import org.hedbor.evan.classictalents.common.serialization.ModelFor
+import tornadofx.asObservable
 import tornadofx.getValue
 import tornadofx.observableListOf
 import tornadofx.setValue
 
 
-@Serializable(with = SpecializationSerializer::class)
 class Specialization(
     translationKey: String = "",
     icon: String = "",
     backgroundImage: String = "",
     talents: ObservableList<Talent> = observableListOf()
-) {
-    companion object {
-        /** @see Era.talentRowCount */
-        const val TALENT_COLUMN_COUNT = 4
-    }
-
+) : ModelFor<SpecializationData> {
     val translationKeyProperty = SimpleStringProperty(this, "translationKey", translationKey)
     var translationKey: String by translationKeyProperty
 
@@ -44,6 +39,31 @@ class Specialization(
 
     val talentsProperty = SimpleListProperty(this, "talents", talents)
     var talents: ObservableList<Talent> by talentsProperty
+
+    override fun toData(): SpecializationData {
+        val talentsData = talents
+            .filter { it.translationKey.isNotBlank() }
+            .sortedWith(compareBy<Talent> { it.location.row }.thenBy { it.location.column })
+            .map { it.toData() }
+
+        return SpecializationData(
+            translationKey,
+            icon,
+            backgroundImage,
+            talentsData
+        )
+    }
+
+    override fun fromData(data: SpecializationData): Specialization {
+        translationKey = data.translationKey
+        icon = data.icon
+        backgroundImage = data.backgroundImage
+        talents = data.talents
+            .mapTo(ArrayList(data.talents.size)) { Talent().fromData(it) }
+            .asObservable()
+
+        return this
+    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

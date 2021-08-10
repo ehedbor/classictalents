@@ -13,8 +13,8 @@ package org.hedbor.evan.classictalents.app.view
 
 import javafx.geometry.Pos
 import javafx.scene.layout.StackPane
-import org.hedbor.evan.classictalents.app.model.TalentButtonViewModel
 import org.hedbor.evan.classictalents.app.view.styles.TalentStyles
+import org.hedbor.evan.classictalents.app.viewmodel.TalentButtonViewModel
 import tornadofx.*
 
 
@@ -49,8 +49,8 @@ class TalentButtonFragment : Fragment() {
                     visibleWhen(this@button.hoverProperty())
                 }
                 region {
-                    toggleClass(TalentStyles.activeBorder, model.canAcceptPoints)
-                    toggleClass(TalentStyles.maxedOutBorder, model.isMaxedOut)
+                    toggleClass(TalentStyles.activeBorder, model.useActiveBorder)
+                    toggleClass(TalentStyles.maxedOutBorder, model.useMaxedOutBorder)
                 }
             }
         }
@@ -58,7 +58,7 @@ class TalentButtonFragment : Fragment() {
         label(model.rankCounterText) {
             addClass(TalentStyles.rankCounter)
             isMouseTransparent = true
-            enableWhen(model.isAllocatable or model.hasBeenAllocated)
+            enableWhen(model.useRankCounterText)
         }
     }
 }

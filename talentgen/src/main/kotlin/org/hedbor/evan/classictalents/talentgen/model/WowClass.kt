@@ -9,27 +9,28 @@
  * You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.hedbor.evan.classictalents.common.model
+package org.hedbor.evan.classictalents.talentgen.model
 
 import javafx.beans.property.SimpleListProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.ObservableList
-import kotlinx.serialization.Serializable
-import org.hedbor.evan.classictalents.common.serialization.WowClassSerializer
+import org.hedbor.evan.classictalents.common.model.Era
+import org.hedbor.evan.classictalents.common.model.WowClassData
+import org.hedbor.evan.classictalents.common.serialization.ModelFor
+import tornadofx.asObservable
 import tornadofx.getValue
 import tornadofx.observableListOf
 import tornadofx.setValue
 
 
 @Suppress("MemberVisibilityCanBePrivate")
-@Serializable(with = WowClassSerializer::class)
 class WowClass(
     translationKey: String = "",
     icon: String = "",
     era: Era = Era.CLASSIC,
     specializations: ObservableList<Specialization> = observableListOf()
-) {
+) : ModelFor<WowClassData> {
     val translationKeyProperty = SimpleStringProperty(this, "translationKey", translationKey)
     var translationKey: String by translationKeyProperty
 
@@ -41,6 +42,31 @@ class WowClass(
 
     val specializationsProperty: SimpleListProperty<Specialization> = SimpleListProperty(this, "specializations", specializations)
     var specializations: ObservableList<Specialization> by specializationsProperty
+
+    override fun toData(): WowClassData {
+        val specsData = specializations
+            .filter { it.translationKey.isNotBlank() }
+            .sortedBy { it.translationKey }
+            .map { it.toData() }
+
+        return WowClassData(
+            translationKey,
+            icon,
+            era,
+            specsData
+        )
+    }
+
+    override fun fromData(data: WowClassData): WowClass {
+        translationKey = data.translationKey
+        icon = data.icon
+        era = data.era
+        specializations = data.specializations
+            .mapTo(ArrayList(data.specializations.size)) { Specialization().fromData(it) }
+            .asObservable()
+
+        return this
+    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -18,8 +18,8 @@ import javafx.scene.Node
 import javafx.scene.control.Tooltip
 import javafx.scene.layout.Region
 import javafx.scene.layout.VBox
-import org.hedbor.evan.classictalents.app.model.TalentTooltipViewModel
 import org.hedbor.evan.classictalents.app.view.styles.TalentTooltipStyles
+import org.hedbor.evan.classictalents.app.viewmodel.TalentTooltipViewModel
 import tornadofx.*
 
 
@@ -61,13 +61,13 @@ class TalentTooltip(private val model: TalentTooltipViewModel) : Tooltip() {
             label(model.spellCostText) {
                 addClass(TalentTooltipStyles.tooltipSubtitle)
                 prefWidth = PREF_WIDTH / 2.0
-                visibleAndManagedWhen(textProperty().isNotNull)
+                visibleAndManagedWhen(model.hasSpellCost)
             }
             label(model.spellRangeText) {
                 addClass(TalentTooltipStyles.tooltipSubtitle)
                 prefWidth = PREF_WIDTH / 2.0
-                alignmentProperty().bind(model.spellRangeAlignment)
-                visibleAndManagedWhen(textProperty().isNotNull)
+                alignment = model.spellRangeAlignment
+                visibleAndManagedWhen(model.hasSpellRange)
             }
         }
         hbox {
@@ -75,12 +75,13 @@ class TalentTooltip(private val model: TalentTooltipViewModel) : Tooltip() {
             label(model.spellCastTimeText) {
                 addClass(TalentTooltipStyles.tooltipSubtitle)
                 prefWidth = PREF_WIDTH / 2.0
+                visibleAndManagedWhen(model.hasSpellCastTime)
             }
             label(model.spellCooldownText) {
                 addClass(TalentTooltipStyles.tooltipSubtitle)
                 prefWidth = PREF_WIDTH / 2.0
                 alignment = Pos.CENTER_RIGHT
-                visibleAndManagedWhen(textProperty().isNotNull)
+                visibleAndManagedWhen(model.hasSpellCooldown)
             }
         }
     }
@@ -95,17 +96,17 @@ class TalentTooltip(private val model: TalentTooltipViewModel) : Tooltip() {
         // next rank description
         //spacer
         label {
-            visibleAndManagedWhen(model.shouldShowNextRankDesc)
+            visibleAndManagedWhen(model.hasNextRank)
         }
         label(model.nextRankTitle) {
             addClass(TalentTooltipStyles.tooltipSubtitle)
-            visibleAndManagedWhen(model.shouldShowNextRankDesc)
+            visibleAndManagedWhen(model.hasNextRank)
         }
         label(model.nextRankDescription) {
             addClass(TalentTooltipStyles.tooltipDescription)
             isWrapText = true
             prefWidth = PREF_WIDTH
-            visibleAndManagedWhen(model.shouldShowNextRankDesc)
+            visibleAndManagedWhen(model.hasNextRank)
         }
     }
 
@@ -113,27 +114,27 @@ class TalentTooltip(private val model: TalentTooltipViewModel) : Tooltip() {
         // spacer
         label {
             visibleAndManagedWhen(
-                model.shouldShowRequiresSpecText
-                    .or(model.shouldShowRequiresPrerequisiteText)
-                    .or(model.shouldShowLearnTalentText)
-                    .or(model.shouldShowUnlearnTalentText))
+                model.requiresSpec
+                    .or(model.requiresPrerequisite)
+                    .or(model.canLearnTalent)
+                    .or(model.canUnlearnTalent))
         }
 
         label(model.requiresSpecText) {
             addClass(TalentTooltipStyles.tooltipError)
-            visibleAndManagedWhen(model.shouldShowRequiresSpecText)
+            visibleAndManagedWhen(model.requiresSpec)
         }
         label(model.requiresPrerequisiteText) {
             addClass(TalentTooltipStyles.tooltipError)
-            visibleAndManagedWhen(model.shouldShowRequiresPrerequisiteText)
+            visibleAndManagedWhen(model.requiresPrerequisite)
         }
         label(model.learnTalentText) {
             addClass(TalentTooltipStyles.tooltipConfirmation)
-            visibleAndManagedWhen(model.shouldShowLearnTalentText)
+            visibleAndManagedWhen(model.canLearnTalent)
         }
         label(model.unlearnTalentText) {
             addClass(TalentTooltipStyles.tooltipError)
-            visibleAndManagedWhen(model.shouldShowUnlearnTalentText)
+            visibleAndManagedWhen(model.canUnlearnTalent)
         }
     }
 

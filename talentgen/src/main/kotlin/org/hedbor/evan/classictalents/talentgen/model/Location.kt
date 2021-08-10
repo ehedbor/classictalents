@@ -9,27 +9,32 @@
  * You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.hedbor.evan.classictalents.common.model
+package org.hedbor.evan.classictalents.talentgen.model
 
 import javafx.beans.property.SimpleIntegerProperty
-import kotlinx.serialization.Serializable
-import org.hedbor.evan.classictalents.common.serialization.LocationSerializer
+import org.hedbor.evan.classictalents.common.model.LocationData
+import org.hedbor.evan.classictalents.common.serialization.ModelFor
 import tornadofx.getValue
 import tornadofx.setValue
-import kotlin.Any
-import kotlin.Boolean
-import kotlin.Int
-import kotlin.Suppress
 
 
 @Suppress("MemberVisibilityCanBePrivate")
-@Serializable(with = LocationSerializer::class)
-class Location(row: Int = 0, column: Int = 0)  {
+class Location(row: Int = 0, column: Int = 0) : ModelFor<LocationData>  {
     val rowProperty = SimpleIntegerProperty(this, "row", row)
     var row by rowProperty
 
     val columnProperty = SimpleIntegerProperty(this, "column", column)
     var column by columnProperty
+
+    override fun toData(): LocationData {
+        return LocationData(row, column)
+    }
+
+    override fun fromData(data: LocationData): Location {
+        row = data.row
+        column = data.column
+        return this
+    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

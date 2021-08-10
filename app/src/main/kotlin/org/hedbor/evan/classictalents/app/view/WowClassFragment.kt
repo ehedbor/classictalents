@@ -13,9 +13,9 @@ package org.hedbor.evan.classictalents.app.view
 
 import javafx.geometry.Pos
 import javafx.scene.layout.Priority
-import org.hedbor.evan.classictalents.app.model.SpecializationViewModel
-import org.hedbor.evan.classictalents.app.model.WowClassViewModel
 import org.hedbor.evan.classictalents.app.view.styles.ClassStyles
+import org.hedbor.evan.classictalents.app.viewmodel.SpecializationViewModel
+import org.hedbor.evan.classictalents.app.viewmodel.WowClassViewModel
 import tornadofx.*
 
 
@@ -28,7 +28,7 @@ class WowClassFragment : Fragment() {
             spacing = 10.0
             alignment = Pos.CENTER
             for (spec in model.specializations) {
-                val specViewModel = SpecializationViewModel(model, spec)
+                val specViewModel = SpecializationViewModel(model.wowClass, spec)
                 this += find<SpecializationFragment>(Scope(specViewModel)).also {
                     it.root.hgrow = Priority.NEVER
                 }

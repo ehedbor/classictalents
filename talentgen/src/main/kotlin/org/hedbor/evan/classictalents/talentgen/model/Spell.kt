@@ -9,19 +9,21 @@
  * You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.hedbor.evan.classictalents.common.model
+package org.hedbor.evan.classictalents.talentgen.model
 
 import javafx.beans.property.SimpleDoubleProperty
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleObjectProperty
-import kotlinx.serialization.Serializable
-import org.hedbor.evan.classictalents.common.serialization.SpellSerializer
+import org.hedbor.evan.classictalents.common.model.CooldownUnit
+import org.hedbor.evan.classictalents.common.model.Range
+import org.hedbor.evan.classictalents.common.model.ResourceType
+import org.hedbor.evan.classictalents.common.model.SpellData
+import org.hedbor.evan.classictalents.common.serialization.ModelFor
 import tornadofx.getValue
 import tornadofx.setValue
 
 
 @Suppress("MemberVisibilityCanBePrivate")
-@Serializable(with = SpellSerializer::class)
 class Spell(
     resourceCost: Int = 0,
     resourceType: ResourceType? = null,
@@ -29,7 +31,7 @@ class Spell(
     cooldown: Double = 0.0,
     cooldownUnit: CooldownUnit? = null,
     range: Double = 0.0
-) {
+) : ModelFor<SpellData> {
     val resourceCostProperty = SimpleIntegerProperty(this, "resourceCost", resourceCost)
     var resourceCost: Int by resourceCostProperty
 
@@ -47,6 +49,21 @@ class Spell(
 
     val rangeProperty = SimpleDoubleProperty(this, "range", range)
     var range: Double by rangeProperty
+
+    override fun toData(): SpellData {
+        return SpellData(resourceCost, resourceType, Range(range), castTime, cooldown, cooldownUnit)
+    }
+
+    override fun fromData(data: SpellData): Spell {
+        resourceCost = data.resourceCost
+        resourceType = data.resourceType
+        castTime = data.castTime
+        cooldown = data.cooldown
+        cooldownUnit = data.cooldownUnit
+        range = data.range.distanceYds
+
+        return this
+    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -77,34 +94,3 @@ class Spell(
     }
 }
 
-enum class ResourceType(val translationKey: String, val serialName: String) {
-    MANA("unit.resource.mana", "mana"),
-    PERCENT_OF_BASE_MANA("unit.resource.percent_of_base_mana", "%mana"),
-    RAGE("unit.resource.rage", "rage"),
-    ENERGY("unit.resource.energy", "energy");
-
-    override fun toString() = translationKey
-}
-
-enum class CooldownUnit(val translationKey: String, val serialName: String) {
-    HOURS("unit.time.hours", "hr"),
-    MINUTES("unit.time.minutes", "min"),
-    SECONDS("unit.time.seconds", "sec");
-
-    override fun toString() = translationKey
-}
-
-object Range {
-    const val SELF = 0.0
-    const val MELEE = 5.0
-
-    fun isSelf(range: Double): Boolean {
-        require(range >= 0.0) { "Range must be positive or zero." }
-        return range == 0.0
-    }
-
-    fun isMelee(range: Double): Boolean {
-        require(range >= 0.0) { "Range must be positive or zero." }
-        return range > 0.0 && range <= 5.0
-    }
-}

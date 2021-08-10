@@ -16,6 +16,29 @@ import javafx.scene.image.WritableImage
 
 
 object ImageService {
+    val unknownImage by lazy {
+        try {
+            Image("images/Classic/Items/INV_Misc_QuestionMark.png")
+        } catch (e: IllegalArgumentException) {
+            throw IllegalArgumentException("Fatal error: Could not load fallback image", e)
+        }
+    }
+
+    fun loadImage(
+        url: String?,
+        requestedWidth: Double = 0.0,
+        requestedHeight: Double = 0.0,
+        preserveRatio: Boolean = false,
+        smooth: Boolean = false,
+        backgroundLoading: Boolean = false
+    ): Image {
+        return if (url == null) {
+            unknownImage
+        } else {
+            runCatching { Image(url, requestedWidth, requestedHeight, preserveRatio, smooth, backgroundLoading) }.getOrDefault(unknownImage)
+        }
+    }
+
     fun toGrayscale(source: Image): Image {
         val width = source.width.toInt()
         val height = source.height.toInt()

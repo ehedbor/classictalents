@@ -9,19 +9,18 @@
  * You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.hedbor.evan.classictalents.common.model
+package org.hedbor.evan.classictalents.talentgen.model
 
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
-import kotlinx.serialization.Serializable
-import org.hedbor.evan.classictalents.common.serialization.TalentSerializer
+import org.hedbor.evan.classictalents.common.model.TalentData
+import org.hedbor.evan.classictalents.common.serialization.ModelFor
 import tornadofx.getValue
 import tornadofx.setValue
 
 
 @Suppress("MemberVisibilityCanBePrivate")
-@Serializable(with = TalentSerializer::class)
 class Talent(
     translationKey: String = "",
     location: Location = Location(),
@@ -29,12 +28,7 @@ class Talent(
     maxRank: Int = 0,
     icon: String = "",
     spell: Spell? = null
-) {
-    companion object {
-        const val MINIMUM_RANK = 1
-        const val MAXIMUM_PERMISSIBLE_RANK = 5
-    }
-
+) : ModelFor<TalentData> {
     val translationKeyProperty = SimpleStringProperty(this, "translationKey", translationKey)
     var translationKey: String by translationKeyProperty
 
@@ -47,14 +41,25 @@ class Talent(
     val maxRankProperty = SimpleIntegerProperty(this, "maxRank", maxRank)
     var maxRank: Int by maxRankProperty
 
-    val rankProperty = SimpleIntegerProperty(this, "rank", 0)
-    var rank: Int by rankProperty
-
     val iconProperty = SimpleStringProperty(this, "icon", icon)
     var icon: String by iconProperty
 
     val spellProperty = SimpleObjectProperty<Spell>(this, "spell", spell)
     var spell: Spell? by spellProperty
+
+    override fun toData(): TalentData {
+        return TalentData(translationKey, location.toData(), prerequisite?.toData(), maxRank, icon, spell?.toData())
+    }
+
+    override fun fromData(data: TalentData): Talent {
+        translationKey = data.translationKey
+        location.fromData(data.location)
+        prerequisite = data.prerequisite?.let { Location().fromData(it) }
+        maxRank = data.maxRank
+        icon = data.icon
+        spell = data.spell?.let { Spell().fromData(it) }
+        return this
+    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -64,7 +69,6 @@ class Talent(
         if (location != other.location) return false
         if (prerequisite != other.prerequisite) return false
         if (maxRank != other.maxRank) return false
-        if (rank != other.rank) return false
         if (icon != other.icon) return false
         if (spell != other.spell) return false
 
@@ -76,13 +80,12 @@ class Talent(
         result = 31 * result + location.hashCode()
         result = 31 * result + prerequisite.hashCode()
         result = 31 * result + maxRank
-        result = 31 * result + rank
         result = 31 * result + icon.hashCode()
         result = 31 * result + spell.hashCode()
         return result
     }
 
     override fun toString(): String {
-        return "Talent(translationKey='$translationKey', location=$location, prerequisite=$prerequisite, maxRank=$maxRank, rank=$rank, icon='$icon', spell=$spell)"
+        return "Talent(translationKey='$translationKey', location=$location, prerequisite=$prerequisite, maxRank=$maxRank, icon='$icon', spell=$spell)"
     }
 }

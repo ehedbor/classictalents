@@ -9,9 +9,8 @@
  * You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.hedbor.evan.classictalents.app.model
+package org.hedbor.evan.classictalents.app.viewmodel
 
-import javafx.beans.binding.Bindings
 import javafx.beans.binding.ObjectBinding
 import javafx.beans.property.ReadOnlyObjectProperty
 import javafx.beans.property.SimpleObjectProperty
@@ -20,37 +19,26 @@ import javafx.scene.image.Image
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.*
+import org.hedbor.evan.classictalents.app.model.Location
+import org.hedbor.evan.classictalents.app.model.Specialization
+import org.hedbor.evan.classictalents.app.model.Talent
+import org.hedbor.evan.classictalents.app.model.WowClass
+import org.hedbor.evan.classictalents.app.service.ImageService
 import org.hedbor.evan.classictalents.app.view.styles.StyleConstants
-import org.hedbor.evan.classictalents.common.model.Location
-import org.hedbor.evan.classictalents.common.model.Specialization
-import org.hedbor.evan.classictalents.common.model.Talent
 import tornadofx.*
 
 
-class SpecializationViewModel(private val wowClassViewModel: WowClassViewModel, initialSpec: Specialization) : ViewModel() {
-    private val specializationProperty = SimpleObjectProperty(initialSpec)
-    private var specialization by specializationProperty
+class SpecializationViewModel(val wowClass: WowClass, val specialization: Specialization) : ViewModel() {
+    private val specKey = "${wowClass.translationKey}.${specialization.translationKey}"
 
-    val era  = bind { wowClassViewModel.era }
+    val talents get() = specialization.talents
 
-    val specializations = bind { wowClassViewModel.specializations }
-    val talents = bind { specialization.talentsProperty }
-
-    val totalPointsForClass = wowClassViewModel.totalAllocatedPoints
-    val totalPointsForSpec = run {
-        val allTalentRanks = specialization.talentsProperty.map { it.rankProperty }.toTypedArray()
-        Bindings.createIntegerBinding({ allTalentRanks.sumOf { it.value } }, *allTalentRanks)!!
-    }
-
-    val classKey = bind { wowClassViewModel.translationKey }
-    val specKey = bind { specialization.translationKeyProperty }.stringBinding(classKey) { "${classKey.value}.$it" }
-
-    val specTitleText = specKey.stringBinding { messages[it!!] }
-    val pointCounterText = totalPointsForSpec.stringBinding { "($it)" }
+    val specTitleText = messages[specKey]!!
+    val pointCounterText = specialization.totalPointsProperty.stringBinding { "($it)" }
     val resetButtonTooltip = messages["spec.reset"]!!
 
-    val backgroundImage = bind { specialization.backgroundImageProperty }.objectBinding { path ->
-        val image = path?.runCatching { Image(path) }?.getOrNull() ?: return@objectBinding null
+    val backgroundImage = SimpleObjectProperty<Background>().apply {
+        val image = ImageService.loadImage(specialization.backgroundImage)
 
         // TODO: Find a way to specify this part via CSS while still allowing the background image to be dynamically modified
         val repeat = BackgroundRepeat.NO_REPEAT
@@ -58,28 +46,23 @@ class SpecializationViewModel(private val wowClassViewModel: WowClassViewModel, 
         val size = BackgroundSize(1.0, 1.0, true, true, true, true)
         val backgroundImage = BackgroundImage(image, repeat, repeat, pos, size)
         val backgroundFill = BackgroundFill(StyleConstants.LIGHT_BACKGROUND_COLOR, null, null)
-        Background(listOf(backgroundFill), listOf(backgroundImage))
+
+        value = Background(listOf(backgroundFill), listOf(backgroundImage))
     }
 
-    val iconImage = bind { specialization.iconProperty }.objectBinding { it?.runCatching { Image(this) }?.getOrNull() }
+    val iconImage = ImageService.loadImage(specialization.icon)
 
-    val borderImage = SimpleObjectProperty(Image("/images/Icon/large/border/default.png"))
-
-    init {
-        rebindOnChange(specializationProperty)
-    }
-
-    fun getTalentViewModel(talent: Talent) = TalentButtonViewModel(this, talent)
+    val borderImage = ImageService.loadImage("/images/Icon/large/border/default.png")
 
     fun getPrerequisiteFor(dependencyLocation: Location): Talent? {
-        val dep = talents.firstOrNull { it.location == dependencyLocation } ?: return null
-        return talents.firstOrNull { it.location == dep.prerequisite }
+        val dep = specialization.talents.firstOrNull { it.location == dependencyLocation } ?: return null
+        return specialization.talents.firstOrNull { it.location == dep.prerequisite }
     }
 
     fun onResetButtonClicked(event: MouseEvent) {
         if (event.button == MouseButton.PRIMARY) {
-            talents.forEach {
-                it.rank = 0
+            specialization.talents.forEach { talent ->
+                talent.rank = 0
             }
         }
     }
@@ -118,7 +101,7 @@ class SpecializationViewModel(private val wowClassViewModel: WowClassViewModel, 
 
         @Suppress("UNCHECKED_CAST")
         private fun getVerticalImageFor(prerequisite: Talent): ObjectBinding<Image> {
-            return objectBinding(prerequisite.rankProperty, prerequisite.maxRankProperty) {
+            return prerequisite.rankProperty.objectBinding {
                 if (prerequisite.rank < prerequisite.maxRank) {
                     Image("images/WowheadTalentCalc/arrows/down.png")
                 } else {
@@ -129,7 +112,7 @@ class SpecializationViewModel(private val wowClassViewModel: WowClassViewModel, 
 
         @Suppress("UNCHECKED_CAST")
         private fun getHorizontalImageFor(prerequisite: Talent, isVertical: Boolean, isLeftToRight: Boolean): ObjectBinding<Image> {
-            return objectBinding(prerequisite.rankProperty, prerequisite.maxRankProperty) {
+            return prerequisite.rankProperty.objectBinding {
                 val horizontalComponent = if (isLeftToRight) "right" else "left"
                 val verticalComponent = if (isVertical) "down" else ""
                 val maxRankComponent = if (prerequisite.rank >= prerequisite.maxRank) "2" else ""

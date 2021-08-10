@@ -9,37 +9,26 @@
  * You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.hedbor.evan.classictalents.common.serialization
+package org.hedbor.evan.classictalents.talentgen.serialization
 
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import org.hedbor.evan.classictalents.common.model.WowClass
+import org.hedbor.evan.classictalents.common.model.WowClassData
+import org.hedbor.evan.classictalents.talentgen.model.WowClass
 import java.io.File
-import java.io.InputStream
 
 
-object ClassicTalentsSerializer {
-    @OptIn(ExperimentalSerializationApi::class)
-    private val jsonParser by lazy {
-        /*Json {
-            prettyPrint = true
-            prettyPrintIndent = "  "
-        }*/
-        Json
+object TalentGenSerializer {
+    fun loadClass(file: File): WowClass {
+        val text = file.readText()
+        val data = Json.decodeFromString<WowClassData>(text)
+        return WowClass().fromData(data)
     }
 
-    fun loadClass(dataFile: File): WowClass {
-        return jsonParser.decodeFromString(dataFile.readText())
-    }
-
-    fun loadClassAsStream(dataStream: InputStream): WowClass {
-        val data = dataStream.bufferedReader().use { it.readText() }
-        return jsonParser.decodeFromString(data)
-    }
-
-    fun saveClass(wowClass: WowClass, dataFile: File) {
-        dataFile.writeText(jsonParser.encodeToString(wowClass))
+    fun saveClass(wowClass: WowClass, file: File) {
+        val text = Json.encodeToString(wowClass.toData())
+        file.mkdirs()
+        file.writeText(text)
     }
 }

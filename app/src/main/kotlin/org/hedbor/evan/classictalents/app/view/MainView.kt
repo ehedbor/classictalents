@@ -15,10 +15,10 @@ import javafx.geometry.Pos
 import javafx.scene.layout.Priority
 import javafx.scene.layout.Region
 import javafx.scene.layout.StackPane
-import org.hedbor.evan.classictalents.app.model.MainViewModel
-import org.hedbor.evan.classictalents.app.model.WowClassViewModel
 import org.hedbor.evan.classictalents.app.view.styles.ClassStyles
 import org.hedbor.evan.classictalents.app.view.styles.TalentStyles
+import org.hedbor.evan.classictalents.app.viewmodel.MainViewModel
+import org.hedbor.evan.classictalents.app.viewmodel.WowClassViewModel
 import tornadofx.*
 
 class MainView : View("Classic WoW Talent Calculator") {
@@ -86,12 +86,12 @@ class MainView : View("Classic WoW Talent Calculator") {
                     else
                         removeClass(TalentStyles.maxedOutBorder)
                 }
-                addOrRemoveClass(model.activeClassKey.value, wowClassModel.translationKey.value)
+                addOrRemoveClass(model.activeClassKey.value, wowClassModel.fullKey)
                 model.activeClassKey.onChange { newKey ->
-                    addOrRemoveClass(newKey!!, wowClassModel.translationKey.value)
+                    addOrRemoveClass(newKey!!, wowClassModel.fullKey)
                 }
             }
         }
-        action { model.onClassButtonClicked(wowClassModel.translationKey) }
+        action { model.onClassButtonClicked(wowClassModel.fullKey) }
     }
 }

@@ -13,13 +13,9 @@ package org.hedbor.evan.classictalents.talentgen.controller
 
 import javafx.application.Platform
 import javafx.stage.FileChooser
-import org.hedbor.evan.classictalents.common.model.WowClass
-import org.hedbor.evan.classictalents.common.serialization.ClassicTalentsSerializer
-import org.hedbor.evan.classictalents.talentgen.model.Bundle
-import org.hedbor.evan.classictalents.talentgen.model.BundleEntry
-import org.hedbor.evan.classictalents.talentgen.model.BundleModel
-import org.hedbor.evan.classictalents.talentgen.model.WowClassModel
+import org.hedbor.evan.classictalents.talentgen.model.*
 import org.hedbor.evan.classictalents.talentgen.serialization.BundleSerializer
+import org.hedbor.evan.classictalents.talentgen.serialization.TalentGenSerializer
 import tornadofx.*
 import java.io.File
 import kotlin.system.exitProcess
@@ -109,7 +105,7 @@ class TalentGenController : Controller() {
         return when (val file = currentDataFile) {
             null -> false
             else -> {
-                classModel.item = ClassicTalentsSerializer.loadClass(file)
+                classModel.item = TalentGenSerializer.loadClass(file)
                 true
             }
         }
@@ -125,7 +121,7 @@ class TalentGenController : Controller() {
         return when (val file = currentDataFile) {
             null -> false
             else -> {
-                ClassicTalentsSerializer.saveClass(classModel.item, file)
+                TalentGenSerializer.saveClass(classModel.item, file)
                 true
             }
         }

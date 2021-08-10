@@ -9,16 +9,11 @@
  * You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.hedbor.evan.classictalents.talentgen.model
-
-import tornadofx.ItemViewModel
+package org.hedbor.evan.classictalents.common.serialization
 
 
-class TalentModel(initialValue: Talent? = null) : ItemViewModel<Talent>(initialValue) {
-    val translationKey = bind(Talent::translationKeyProperty)
-    val location = bind(Talent::locationProperty)
-    val prerequisite = bind(Talent::prerequisiteProperty)
-    val maxRank = bind(Talent::maxRankProperty)
-    val icon = bind(Talent::iconProperty)
-    val spell = bind(Talent::spellProperty)
+interface ModelFor<T> {
+    fun toData(): T
+
+    fun fromData(data: T): ModelFor<T>
 }

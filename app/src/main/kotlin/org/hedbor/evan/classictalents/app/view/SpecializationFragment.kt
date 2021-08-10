@@ -15,24 +15,25 @@ import javafx.geometry.Pos
 import javafx.geometry.Rectangle2D
 import javafx.scene.layout.Region
 import javafx.scene.shape.Rectangle
-import org.hedbor.evan.classictalents.app.model.SpecializationViewModel
+import org.hedbor.evan.classictalents.app.model.Location
 import org.hedbor.evan.classictalents.app.view.styles.SpecStyles
 import org.hedbor.evan.classictalents.app.view.styles.TalentStyles
 import org.hedbor.evan.classictalents.app.view.styles.TalentTooltipStyles
-import org.hedbor.evan.classictalents.common.model.Location
+import org.hedbor.evan.classictalents.app.viewmodel.SpecializationViewModel
+import org.hedbor.evan.classictalents.app.viewmodel.TalentButtonViewModel
 import tornadofx.*
 
 
 class SpecializationFragment : Fragment() {
     companion object {
-        // TODO: move styling, etc elsewhere
-        // internal insets of the button + 2 extra pixels to make room for the transparent space around the button
-        private const val BUTTON_INSETS = 15.0 + 2.0
+        private const val BUTTON_INSETS = 15.0
+        private const val BUTTON_ALIGNMENT = (TalentButtonViewModel.BORDER_SIZE - TalentButtonViewModel.INNER_ICON_SIZE) / 4.0
+        private const val ADJUSTED_BUTTON_INSETS = BUTTON_INSETS + BUTTON_ALIGNMENT
     }
 
     private val model by inject<SpecializationViewModel>()
     private val talentButtons = observableMapOf<Location, Region>()
-
+    
     override val root = borderpane {
         addClass(SpecStyles.specBorder)
 
@@ -95,10 +96,12 @@ class SpecializationFragment : Fragment() {
         }
 
         for (talent in model.talents) {
-            val scope = Scope(model.getTalentViewModel(talent))
-            val talentButton = find<TalentButtonFragment>(scope)
-            talentButtons += talent.location to talentButton.root
-            this.add(talentButton.root, talent.location.column, talent.location.row)
+            val scope = Scope(TalentButtonViewModel(model.wowClass, model.specialization, talent))
+            val fragment = find<TalentButtonFragment>(scope)
+            val root = fragment.root
+
+            talentButtons += talent.location to root
+            this.add(fragment.root, talent.location.column, talent.location.row)
         }
     }
 
@@ -130,9 +133,9 @@ class SpecializationFragment : Fragment() {
             val width = image.width
             val yDiff = ctx.dependBounds.minY - ctx.prereqBounds.maxY
             val height = yDiff + if (ctx.isHorizontal)
-                (ctx.dependBounds.height - ctx.horizontalImage.height) / 2.0 + BUTTON_INSETS
+                (ctx.dependBounds.height - ctx.horizontalImage.height) / 2.0 + ADJUSTED_BUTTON_INSETS
             else
-                BUTTON_INSETS * 2
+                ADJUSTED_BUTTON_INSETS * 2
 
             val minX = 0.0
             val minY = image.height - height
@@ -152,7 +155,7 @@ class SpecializationFragment : Fragment() {
             if (ctx.isHorizontal) {
                 ctx.prereqBounds.maxY - (ctx.prereqBounds.height - image.width) / 2.0
             } else {
-                ctx.prereqBounds.maxY - BUTTON_INSETS
+                ctx.prereqBounds.maxY - ADJUSTED_BUTTON_INSETS
             }
         })
     }
@@ -168,9 +171,9 @@ class SpecializationFragment : Fragment() {
                 ctx.prereqBounds.minX - ctx.dependBounds.maxX
 
             val width = xDiff + if (ctx.isVertical)
-                (ctx.dependBounds.width + ctx.verticalImage.width) / 2.0  + BUTTON_INSETS
+                (ctx.dependBounds.width + ctx.verticalImage.width) / 2.0  + ADJUSTED_BUTTON_INSETS
             else
-                BUTTON_INSETS + BUTTON_INSETS
+                ADJUSTED_BUTTON_INSETS + ADJUSTED_BUTTON_INSETS
 
             val minY = 0.0
             val minX = if (ctx.isLeftToRight) image.width - width else 0.0
@@ -182,15 +185,15 @@ class SpecializationFragment : Fragment() {
         xProperty().bind(doubleBinding(ctx.prereqBoundsProperty, ctx.dependBoundsProperty, ctx.verticalImageProperty) {
             if (ctx.isVertical) {
                 if (ctx.isLeftToRight) {
-                    ctx.prereqBounds.maxX - BUTTON_INSETS
+                    ctx.prereqBounds.maxX - ADJUSTED_BUTTON_INSETS
                 } else {
                     ctx.dependBounds.maxX - (ctx.prereqBounds.width + ctx.verticalImage.width) / 2.0
                 }
             } else {
                 if (ctx.isLeftToRight) {
-                    ctx.prereqBounds.maxX - BUTTON_INSETS
+                    ctx.prereqBounds.maxX - ADJUSTED_BUTTON_INSETS
                 } else {
-                    ctx.dependBounds.maxX - BUTTON_INSETS
+                    ctx.dependBounds.maxX - ADJUSTED_BUTTON_INSETS
                 }
             }
         })

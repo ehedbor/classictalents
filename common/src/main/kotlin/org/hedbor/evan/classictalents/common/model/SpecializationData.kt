@@ -9,16 +9,22 @@
  * You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.hedbor.evan.classictalents.talentgen.model
+package org.hedbor.evan.classictalents.common.model
 
-import tornadofx.ItemViewModel
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 
-class TalentModel(initialValue: Talent? = null) : ItemViewModel<Talent>(initialValue) {
-    val translationKey = bind(Talent::translationKeyProperty)
-    val location = bind(Talent::locationProperty)
-    val prerequisite = bind(Talent::prerequisiteProperty)
-    val maxRank = bind(Talent::maxRankProperty)
-    val icon = bind(Talent::iconProperty)
-    val spell = bind(Talent::spellProperty)
+@Serializable
+@SerialName("Specialization")
+data class SpecializationData(
+    @SerialName("key") val translationKey: String,
+    val icon: String,
+    val backgroundImage: String,
+    val talents: List<TalentData>
+) {
+    companion object {
+        /** @see Era.talentRowCount */
+        const val TALENT_COLUMN_COUNT = 4
+    }
 }

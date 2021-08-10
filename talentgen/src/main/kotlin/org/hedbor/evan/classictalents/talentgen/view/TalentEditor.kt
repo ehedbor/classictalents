@@ -18,12 +18,13 @@ import javafx.scene.layout.BorderPane
 import javafx.scene.layout.Region
 import javafx.util.StringConverter
 import javafx.util.converter.NumberStringConverter
-import org.hedbor.evan.classictalents.common.model.*
+import org.hedbor.evan.classictalents.common.model.CooldownUnit
+import org.hedbor.evan.classictalents.common.model.ResourceType
+import org.hedbor.evan.classictalents.common.model.SpecializationData
+import org.hedbor.evan.classictalents.common.model.TalentData
 import org.hedbor.evan.classictalents.talentgen.INITIAL_ICON_DIRECTORY
 import org.hedbor.evan.classictalents.talentgen.chooseIconFromResources
-import org.hedbor.evan.classictalents.talentgen.model.SpecializationModel
-import org.hedbor.evan.classictalents.talentgen.model.TalentModel
-import org.hedbor.evan.classictalents.talentgen.model.WowClassModel
+import org.hedbor.evan.classictalents.talentgen.model.*
 import tornadofx.*
 
 
@@ -103,7 +104,7 @@ class TalentEditor : Fragment() {
                 }
             }
             field(messages["editor.field.max_rank"]) {
-                combobox(model.maxRank, (Talent.MINIMUM_RANK..Talent.MAXIMUM_PERMISSIBLE_RANK).toList()) {
+                combobox(model.maxRank, (TalentData.MINIMUM_RANK..TalentData.MAXIMUM_PERMISSIBLE_RANK).toList()) {
                     if (selectionModel.selectedItem !in items) {
                         selectionModel.selectLast()
                     }
@@ -127,7 +128,7 @@ class TalentEditor : Fragment() {
                 textfield(model.prerequisite.select { it.columnProperty }, NumberStringConverter()) {
                     prefWidth = ROW_COL_FIELD_PREF_WIDTH
                     enableWhen(hasPrerequisiteProperty)
-                    model.validationContext.mustBeInRange(this, 0 until Specialization.TALENT_COLUMN_COUNT)
+                    model.validationContext.mustBeInRange(this, 0 until SpecializationData.TALENT_COLUMN_COUNT)
                 }
             }
         }

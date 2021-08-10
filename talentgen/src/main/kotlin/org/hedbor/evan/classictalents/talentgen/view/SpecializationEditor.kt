@@ -20,13 +20,9 @@ import javafx.scene.layout.BorderPane
 import javafx.scene.layout.Region
 import javafx.scene.layout.StackPane
 import javafx.scene.text.FontWeight
-import org.hedbor.evan.classictalents.common.model.Location
-import org.hedbor.evan.classictalents.common.model.Specialization
-import org.hedbor.evan.classictalents.common.model.Talent
+import org.hedbor.evan.classictalents.common.model.SpecializationData
 import org.hedbor.evan.classictalents.talentgen.*
-import org.hedbor.evan.classictalents.talentgen.model.SpecializationModel
-import org.hedbor.evan.classictalents.talentgen.model.TalentModel
-import org.hedbor.evan.classictalents.talentgen.model.WowClassModel
+import org.hedbor.evan.classictalents.talentgen.model.*
 import tornadofx.*
 import java.net.MalformedURLException
 
@@ -82,7 +78,7 @@ class SpecializationEditor : Fragment() {
         fieldset(messages["editor.field.talents"]) {
             gridpane {
                 for (row in 0 until wowClassModel.era.value.talentRowCount) {
-                    for (col in 0 until Specialization.TALENT_COLUMN_COUNT) {
+                    for (col in 0 until SpecializationData.TALENT_COLUMN_COUNT) {
                         talentbutton(Location(row, col))
                     }
                 }

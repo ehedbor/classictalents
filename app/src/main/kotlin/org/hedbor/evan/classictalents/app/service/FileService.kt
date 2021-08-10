@@ -11,9 +11,11 @@
 
 package org.hedbor.evan.classictalents.app.service
 
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
+import org.hedbor.evan.classictalents.app.model.WowClass
 import org.hedbor.evan.classictalents.app.util.MultiResourceBundle
-import org.hedbor.evan.classictalents.common.model.WowClass
-import org.hedbor.evan.classictalents.common.serialization.ClassicTalentsSerializer
+import org.hedbor.evan.classictalents.common.model.WowClassData
 import java.io.IOException
 import java.util.*
 
@@ -23,7 +25,9 @@ object FileService {
         return paths.map { path ->
             val stream = this::class.java.getResourceAsStream(path)
                 ?: throw IOException("Fatal Error: Could not load resource at \"$path\".")
-            ClassicTalentsSerializer.loadClassAsStream(stream)
+            val rawText = stream.bufferedReader().use { it.readText() }
+            val wowClassData = Json.decodeFromString<WowClassData>(rawText)
+            return@map WowClass().fromData(wowClassData)
         }
     }
 

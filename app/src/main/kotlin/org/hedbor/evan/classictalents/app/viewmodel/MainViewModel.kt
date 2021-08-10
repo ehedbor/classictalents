@@ -9,16 +9,15 @@
  * You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.hedbor.evan.classictalents.app.model
+package org.hedbor.evan.classictalents.app.viewmodel
 
 import javafx.beans.property.SimpleListProperty
 import javafx.beans.property.SimpleStringProperty
-import javafx.beans.value.ObservableValue
 import javafx.collections.ObservableList
 import javafx.util.Duration
+import org.hedbor.evan.classictalents.app.model.WowClass
 import org.hedbor.evan.classictalents.app.service.FileService
 import org.hedbor.evan.classictalents.app.service.TooltipService
-import org.hedbor.evan.classictalents.common.model.WowClass
 import tornadofx.*
 
 
@@ -34,19 +33,16 @@ class MainViewModel : ViewModel() {
         TooltipService.setGlobalTooltipBehavior(Duration.ZERO, Duration.INDEFINITE, Duration.ZERO)
         classes = FileService.loadClasses(
             "/talents/druid.json",
-            "/talents/warlock.json",
-            "/talents/test_class.json").toObservable()
+            "/talents/warlock.json").toObservable()
         FX.messages = FileService.loadBundles("AllMessages",
             "bundles.Messages",
             "bundles.druid",
-            "bundles.warlock",
-            "bundles.test_class")
+            "bundles.warlock")
 
         activeClassKey.value = classes.first().translationKey
     }
 
-    fun onClassButtonClicked(wowClassKey: ObservableValue<String>) {
-        activeClassKey.unbind()
-        activeClassKey.bind(wowClassKey)
+    fun onClassButtonClicked(wowClassKey: String) {
+        activeClassKey.value = wowClassKey
     }
 }
