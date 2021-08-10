@@ -36,14 +36,12 @@ class Specialization(
     val talentsProperty = SimpleListProperty(FXCollections.observableList(talents.toMutableList()) { arrayOf(it.rankProperty) })
     var talents by talentsProperty
 
-    val totalPointsProperty = SimpleIntegerProperty()
-    val totalPoints by totalPointsProperty
-
-    init {
-        totalPointsProperty.bind(talentsProperty.integerBinding { allTalents ->
+    val totalPointsProperty = SimpleIntegerProperty().apply {
+        bind(talentsProperty.integerBinding { allTalents ->
             allTalents!!.sumOf { it.rank }
         })
     }
+    val totalPoints by totalPointsProperty
 
     override fun toData(): SpecializationData {
         val talentsData = talents

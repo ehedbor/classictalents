@@ -19,6 +19,7 @@ import org.hedbor.evan.classictalents.common.model.WowClassData
 import org.hedbor.evan.classictalents.common.serialization.ModelFor
 import tornadofx.booleanBinding
 import tornadofx.getValue
+import tornadofx.integerBinding
 import tornadofx.setValue
 
 
@@ -35,10 +36,16 @@ class WowClass(
     var era = era
         private set
 
-    val specializationsProperty = SimpleListProperty(FXCollections.observableList(specs.toMutableList()) { arrayOf(it.talentsProperty) })
+    val specializationsProperty = SimpleListProperty(
+        FXCollections.observableList(specs.toMutableList()) { spec ->
+            arrayOf(spec.talentsProperty)
+        })
     var specializations by specializationsProperty
 
-    val totalPointsProperty = SimpleIntegerProperty()
+    val totalPointsProperty = SimpleIntegerProperty().apply {
+        bind(specializationsProperty.integerBinding { allSpecs ->
+            allSpecs!!.sumOf { it.totalPoints }
+        })}
     val totalPoints by totalPointsProperty
 
     val hasUnassignedPointsProperty = totalPointsProperty.booleanBinding {
@@ -46,6 +53,10 @@ class WowClass(
         totalPoints < pointsAtMax
     }
     val hasUnassignedPoints by hasUnassignedPointsProperty
+
+    init {
+        totalPointsProperty
+    }
 
     override fun toData(): WowClassData {
         val specsData = specializations

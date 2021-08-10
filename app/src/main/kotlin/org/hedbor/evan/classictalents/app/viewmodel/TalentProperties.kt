@@ -37,9 +37,9 @@ class TalentProperties(val wowClass: WowClass, val spec: Specialization, val tal
     val requiredPoints get() = talent.location.row * 5
 
     /**
-     * Whether the prerequisite talent rows for this talent have been filed out.
+     * Whether the prerequisite talent rows for this talent have been filled out.
      */
-    val isTalentRowUnlocked = spec.totalPoints <= requiredPoints
+    val isTalentRowUnlocked = spec.totalPointsProperty ge requiredPoints
 
     /**
      * This talent's prerequisite, if present.

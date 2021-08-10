@@ -42,7 +42,7 @@ class TalentTooltipViewModel(private val props: TalentProperties) : ViewModel() 
         messages.format("${props.fullKey}.desc", nextRank)
     }
 
-    val requiresSpec = SimpleBooleanProperty(!props.isTalentRowUnlocked)
+    val requiresSpec = props.isTalentRowUnlocked.not()
     val requiresSpecText = messages.format("talent.requires.spec", props.requiredPoints, messages[props.specKey])
 
     val requiresPrerequisite = props.isPrerequisiteMaxedOut.not()
