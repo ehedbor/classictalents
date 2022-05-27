@@ -37,8 +37,8 @@ class TalentTooltipViewModel(private val props: TalentProperties) : ViewModel() 
 
     val hasNextRank = props.hasBeenAllocated and props.isMaxedOut.not()
     val nextRankTitle = messages["talent.rank.next"]
-    val nextRankDescription = run {
-        val nextRank = min(max(TalentData.MINIMUM_RANK, talent.rank + 1), talent.maxRank)
+    val nextRankDescription = talent.rankProperty.stringBinding { rank ->
+        val nextRank = min(max(TalentData.MINIMUM_RANK, rank as Int + 1), talent.maxRank)
         messages.format("${props.fullKey}.desc", nextRank)
     }
 

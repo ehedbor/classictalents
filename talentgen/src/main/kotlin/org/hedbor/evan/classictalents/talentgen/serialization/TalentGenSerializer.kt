@@ -28,7 +28,7 @@ object TalentGenSerializer {
 
     fun saveClass(wowClass: WowClass, file: File) {
         val text = Json.encodeToString(wowClass.toData())
-        file.mkdirs()
+        file.parentFile.mkdirs()
         file.writeText(text)
     }
 }

@@ -13,6 +13,7 @@ package org.hedbor.evan.classictalents.common.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.math.roundToInt
 
 
 @Serializable
@@ -60,5 +61,5 @@ value class Range(val distanceYds: Double) {
     val isSelf get() = (distanceYds == 0.0)
     val isMelee get()  = (!isSelf && distanceYds <= 5.0)
 
-    override fun toString() = distanceYds.toString()
+    override fun toString() = distanceYds.roundToInt().toString()
 }

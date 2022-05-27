@@ -33,10 +33,12 @@ class MainViewModel : ViewModel() {
         TooltipService.setGlobalTooltipBehavior(Duration.ZERO, Duration.INDEFINITE, Duration.ZERO)
         classes = FileService.loadClasses(
             "/talents/druid.json",
+            "/talents/paladin.json",
             "/talents/warlock.json").toObservable()
         FX.messages = FileService.loadBundles("AllMessages",
             "bundles.Messages",
             "bundles.druid",
+            "bundles.paladin",
             "bundles.warlock")
 
         activeClassKey.value = classes.first().translationKey

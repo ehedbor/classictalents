@@ -28,6 +28,9 @@ class TalentGenController : Controller() {
         private val JSON_FILE_FILTER = FileChooser.ExtensionFilter("Json Files", "*.json")
         private val PROPERTIES_FILE_FILTER = FileChooser.ExtensionFilter("Java Properties Files", "*.properties")
 
+        /** Words that should always be lowercase when written in a title */
+        private val ALWAYS_LOWERCASE = arrayOf("a", "an", "the", "for", "and", "to", "in", "on", "of", "or", "nor", "as", "but")
+
         private fun Bundle.addMissingEntries(clazz: WowClass) {
             if (clazz.translationKey.isNotBlank())
                 addDefaultEntry(clazz.translationKey)
@@ -49,14 +52,11 @@ class TalentGenController : Controller() {
                 return
             }
 
-            // the most likely words to occur that should not be capitalized
-            val blacklist = listOf("a", "an", "the", "for", "and", "to", "in", "on")
-
             val defaultDisplayName = allKeys
                 .last()
                 .split('_')
                 .joinToString(" ") { word ->
-                    if (word in blacklist) word
+                    if (word in ALWAYS_LOWERCASE) word
                     else word.replaceFirstChar { it.titlecase() }
                 }.replaceFirstChar { it.titlecase() }
 
@@ -112,6 +112,7 @@ class TalentGenController : Controller() {
     }
 
     fun saveDataFile(toNewFile: Boolean): Boolean {
+        classModel.commit()
         val dataFileExists = currentDataFile?.exists() ?: false
         if (toNewFile || !dataFileExists) {
             val suggestedFileName = "${classModel.translationKey.value}.json"
