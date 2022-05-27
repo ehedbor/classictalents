@@ -1,1 +1,535 @@
-{"key":"druid","icon":"images/icons/large/classicon_druid.jpg","era":"classic","specs":[{"key":"balance","icon":"images/Classic/Spells/Spell_Nature_StarFall.png","backgroundImage":"images/backgrounds/druid_balance.jpg","talents":[{"key":"improved_wrath","location":{"row":0,"col":0},"maxRank":5,"icon":"images/Classic/Spells/Spell_Nature_AbolishMagic.png"},{"key":"natures_grasp","location":{"row":0,"col":1},"maxRank":1,"icon":"images/Classic/Spells/Spell_Nature_NaturesWrath.png","spell":{"castTime":0.0,"cooldown":1.0,"cooldownUnit":"min"}},{"key":"improved_natures_grasp","location":{"row":0,"col":2},"requires":{"row":0,"col":1},"maxRank":4,"icon":"images/Classic/Spells/Spell_Nature_NaturesWrath.png"},{"key":"improved_entangling_roots","location":{"row":1,"col":0},"maxRank":3,"icon":"images/Classic/Spells/Spell_Nature_StrangleVines.png"},{"key":"improved_moonfire","location":{"row":1,"col":1},"maxRank":5,"icon":"images/Classic/Spells/Spell_Nature_StarFall.png"},{"key":"natural_weapons","location":{"row":1,"col":2},"maxRank":5,"icon":"images/Classic/Weapons/INV_Staff_01.png"},{"key":"natural_shapeshifter","location":{"row":1,"col":3},"maxRank":3,"icon":"images/Classic/Spells/Spell_Nature_WispSplode.png"},{"key":"improved_thorns","location":{"row":2,"col":0},"maxRank":3,"icon":"images/Classic/Spells/Spell_Nature_Thorns.png"},{"key":"omen_of_clarity","location":{"row":2,"col":2},"requires":{"row":2,"col":1},"maxRank":1,"icon":"images/Classic/Spells/Spell_Nature_CrystalBall.png","spell":{"castTime":0.0}},{"key":"natures_reach","location":{"row":2,"col":3},"maxRank":2,"icon":"images/Classic/Spells/Spell_Nature_NatureTouchGrow.png"},{"key":"vengeance","location":{"row":3,"col":1},"requires":{"row":1,"col":1},"maxRank":5,"icon":"images/Classic/Spells/Spell_Nature_Purge.png"},{"key":"improved_starfire","location":{"row":3,"col":2},"maxRank":5,"icon":"images/Classic/Spells/Spell_Arcane_StarFire.png"},{"key":"natures_grace","location":{"row":4,"col":1},"maxRank":1,"icon":"images/Classic/Spells/Spell_Nature_NaturesBlessing.png"},{"key":"moonglow","location":{"row":4,"col":2},"maxRank":3,"icon":"images/Classic/Spells/Spell_Nature_Sentinal.png"},{"key":"moonfury","location":{"row":5,"col":1},"maxRank":5,"icon":"images/Classic/Spells/Spell_Nature_MoonGlow.png"},{"key":"moonkin_form","location":{"row":6,"col":1},"maxRank":1,"icon":"images/Classic/Spells/Spell_Nature_ForceOfNature.png","spell":{"resourceCost":35,"resourceType":"%mana","castTime":0.0}}]},{"key":"feral","icon":"images/Classic/Abilities/Ability_Racial_BearForm.png","backgroundImage":"images/backgrounds/druid_feral.jpg","talents":[{"key":"ferocity","location":{"row":0,"col":1},"maxRank":5,"icon":"images/Classic/Abilities/Ability_Hunter_Pet_Hyena.png"},{"key":"feral_aggression","location":{"row":0,"col":2},"maxRank":5,"icon":"images/Classic/Abilities/Ability_Druid_DemoralizingRoar.png"},{"key":"feral_instinct","location":{"row":1,"col":0},"maxRank":5,"icon":"images/Classic/Abilities/Ability_Ambush.png"},{"key":"brutal_impact","location":{"row":1,"col":1},"maxRank":2,"icon":"images/Classic/Abilities/Ability_Druid_Bash.png"},{"key":"thick_hide","location":{"row":1,"col":2},"maxRank":5,"icon":"images/Classic/Trade/INV_Misc_Pelt_Bear_03.png"},{"key":"feline_swiftness","location":{"row":2,"col":0},"maxRank":2,"icon":"images/Classic/Spells/Spell_Nature_SpiritWolf.png"},{"key":"feral_charge","location":{"row":2,"col":1},"maxRank":1,"icon":"images/Classic/Abilities/Ability_Hunter_Pet_Bear.png","spell":{"resourceCost":5,"resourceType":"rage","range":25.0,"castTime":0.0,"cooldown":15.0,"cooldownUnit":"sec"}},{"key":"sharpened_claws","location":{"row":2,"col":2},"maxRank":3,"icon":"images/Classic/Items/INV_Misc_MonsterClaw_04.png"},{"key":"improved_shred","location":{"row":3,"col":0},"maxRank":2,"icon":"images/Classic/Items/INV_Misc_MonsterFang_01.png"},{"key":"predatory_strikes","location":{"row":3,"col":1},"maxRank":3,"icon":"images/Classic/Abilities/Ability_Hunter_Pet_Cat.png"},{"key":"blood_frenzy","location":{"row":3,"col":2},"requires":{"row":2,"col":2},"maxRank":2,"icon":"images/Classic/Abilities/Ability_GhoulFrenzy.png"},{"key":"primal_fury","location":{"row":3,"col":3},"requires":{"row":2,"col":2},"maxRank":2,"icon":"images/Classic/Abilities/Ability_Racial_Cannibalize.png"},{"key":"savage_fury","location":{"row":4,"col":0},"maxRank":2,"icon":"images/Classic/Abilities/Ability_Druid_Ravage.png"},{"key":"feral_faerie_fire","location":{"row":4,"col":2},"maxRank":1,"icon":"images/Classic/Spells/Spell_Nature_FaerieFire.png","spell":{"range":30.0,"castTime":0.0,"cooldown":6.0,"cooldownUnit":"sec"}},{"key":"heart_of_the_wild","location":{"row":5,"col":1},"requires":{"row":3,"col":1},"maxRank":5,"icon":"images/Classic/Spells/Spell_Holy_BlessingOfAgility.png"},{"key":"leader_of_the_pack","location":{"row":6,"col":1},"maxRank":1,"icon":"images/Classic/Spells/Spell_Nature_UnyeildingStamina.png"}]},{"key":"restoration","icon":"images/Classic/Spells/Spell_Nature_HealingTouch.png","backgroundImage":"images/backgrounds/druid_restoration.jpg","talents":[{"key":"improved_mark_of_the_wild","location":{"row":0,"col":1},"maxRank":5,"icon":"images/Classic/Spells/Spell_Nature_Regeneration.png"},{"key":"furor","location":{"row":0,"col":2},"maxRank":5,"icon":"images/Classic/Spells/Spell_Holy_BlessingOfStamina.png"},{"key":"improved_healing_touch","location":{"row":1,"col":0},"maxRank":5,"icon":"images/Classic/Spells/Spell_Nature_HealingTouch.png"},{"key":"natures_focus","location":{"row":1,"col":1},"maxRank":5,"icon":"images/Classic/Spells/Spell_Nature_HealingWaveGreater.png"},{"key":"improved_enrage","location":{"row":1,"col":2},"maxRank":2,"icon":"images/Classic/Abilities/Ability_Druid_Enrage.png"},{"key":"reflection","location":{"row":2,"col":1},"maxRank":3,"icon":"images/Classic/Spells/Spell_Frost_WindWalkOn.png"},{"key":"insect_swarm","location":{"row":2,"col":2},"maxRank":1,"icon":"images/icons/large/spell_nature_insectswarm.jpg","spell":{"resourceCost":45,"resourceType":"mana","range":30.0,"castTime":0.0}},{"key":"subtlety","location":{"row":2,"col":3},"maxRank":5,"icon":"images/Classic/Abilities/Ability_EyeOfTheOwl.png"},{"key":"tranquil_spirit","location":{"row":3,"col":1},"maxRank":5,"icon":"images/icons/large/spell_holy_elunesgrace.jpg"},{"key":"improved_rejuvenation","location":{"row":3,"col":3},"maxRank":3,"icon":"images/Classic/Spells/Spell_Nature_Rejuvenation.png"},{"key":"natures_swiftness","location":{"row":4,"col":0},"requires":{"row":1,"col":0},"maxRank":1,"icon":"images/Classic/Spells/Spell_Nature_RavenForm.png","spell":{"castTime":0.0,"cooldown":3.0,"cooldownUnit":"min"}},{"key":"gift_of_nature","location":{"row":4,"col":2},"requires":{"row":2,"col":2},"maxRank":5,"icon":"images/Classic/Spells/Spell_Nature_ProtectionformNature.png"},{"key":"improved_tranquility","location":{"row":4,"col":3},"maxRank":2,"icon":"images/Classic/Spells/Spell_Nature_Tranquility.png"},{"key":"improved_regrowth","location":{"row":5,"col":2},"maxRank":5,"icon":"images/Classic/Spells/Spell_Nature_ResistNature.png"},{"key":"swiftmend","location":{"row":6,"col":1},"requires":{"row":3,"col":1},"maxRank":1,"icon":"images/icons/large/inv_relics_idolofrejuvenation.jpg","spell":{"resourceCost":"20","resourceType":"%mana","range":40.0,"castTime":0.0,"cooldown":15.0,"cooldownUnit":"sec"}}]}]}
+{
+  "key": "druid",
+  "icon": "images/icons/large/classicon_druid.jpg",
+  "era": "classic",
+  "specs": [
+    {
+      "key": "balance",
+      "icon": "images/Classic/Spells/Spell_Nature_StarFall.png",
+      "backgroundImage": "images/backgrounds/druid_balance.jpg",
+      "talents": [
+        {
+          "key": "improved_wrath",
+          "location": {
+            "row": 0,
+            "col": 0
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Nature_AbolishMagic.png"
+        },
+        {
+          "key": "natures_grasp",
+          "location": {
+            "row": 0,
+            "col": 1
+          },
+          "maxRank": 1,
+          "icon": "images/Classic/Spells/Spell_Nature_NaturesWrath.png",
+          "spell": {
+            "resourceCost": 50,
+            "resourceType": "mana",
+            "castTime": 0.0,
+            "cooldown": 1.0,
+            "cooldownUnit": "min"
+          }
+        },
+        {
+          "key": "improved_natures_grasp",
+          "location": {
+            "row": 0,
+            "col": 2
+          },
+          "requires": {
+            "row": 0,
+            "col": 1
+          },
+          "maxRank": 4,
+          "icon": "images/Classic/Spells/Spell_Nature_NaturesWrath.png"
+        },
+        {
+          "key": "improved_entangling_roots",
+          "location": {
+            "row": 1,
+            "col": 0
+          },
+          "maxRank": 3,
+          "icon": "images/Classic/Spells/Spell_Nature_StrangleVines.png"
+        },
+        {
+          "key": "improved_moonfire",
+          "location": {
+            "row": 1,
+            "col": 1
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Nature_StarFall.png"
+        },
+        {
+          "key": "natural_weapons",
+          "location": {
+            "row": 1,
+            "col": 2
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Weapons/INV_Staff_01.png"
+        },
+        {
+          "key": "natural_shapeshifter",
+          "location": {
+            "row": 1,
+            "col": 3
+          },
+          "maxRank": 3,
+          "icon": "images/Classic/Spells/Spell_Nature_WispSplode.png"
+        },
+        {
+          "key": "improved_thorns",
+          "location": {
+            "row": 2,
+            "col": 0
+          },
+          "maxRank": 3,
+          "icon": "images/Classic/Spells/Spell_Nature_Thorns.png"
+        },
+        {
+          "key": "omen_of_clarity",
+          "location": {
+            "row": 2,
+            "col": 2
+          },
+          "requires": {
+            "row": 2,
+            "col": 1
+          },
+          "maxRank": 1,
+          "icon": "images/Classic/Spells/Spell_Nature_CrystalBall.png",
+          "spell": {
+            "resourceCost": 120,
+            "resourceType": "mana",
+            "castTime": 0.0
+          }
+        },
+        {
+          "key": "natures_reach",
+          "location": {
+            "row": 2,
+            "col": 3
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Spells/Spell_Nature_NatureTouchGrow.png"
+        },
+        {
+          "key": "vengeance",
+          "location": {
+            "row": 3,
+            "col": 1
+          },
+          "requires": {
+            "row": 1,
+            "col": 1
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Nature_Purge.png"
+        },
+        {
+          "key": "improved_starfire",
+          "location": {
+            "row": 3,
+            "col": 2
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Arcane_StarFire.png"
+        },
+        {
+          "key": "natures_grace",
+          "location": {
+            "row": 4,
+            "col": 1
+          },
+          "maxRank": 1,
+          "icon": "images/Classic/Spells/Spell_Nature_NaturesBlessing.png"
+        },
+        {
+          "key": "moonglow",
+          "location": {
+            "row": 4,
+            "col": 2
+          },
+          "maxRank": 3,
+          "icon": "images/Classic/Spells/Spell_Nature_Sentinal.png"
+        },
+        {
+          "key": "moonfury",
+          "location": {
+            "row": 5,
+            "col": 1
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Nature_MoonGlow.png"
+        },
+        {
+          "key": "moonkin_form",
+          "location": {
+            "row": 6,
+            "col": 1
+          },
+          "maxRank": 1,
+          "icon": "images/Classic/Spells/Spell_Nature_ForceOfNature.png",
+          "spell": {
+            "resourceCost": 35,
+            "resourceType": "%mana",
+            "castTime": 0.0
+          }
+        }
+      ]
+    }, {
+      "key": "feral",
+      "icon": "images/Classic/Abilities/Ability_Racial_BearForm.png",
+      "backgroundImage": "images/backgrounds/druid_feral.jpg",
+      "talents": [
+        {
+          "key": "ferocity",
+          "location": {
+            "row": 0,
+            "col": 1
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Abilities/Ability_Hunter_Pet_Hyena.png"
+        },
+        {
+          "key": "feral_aggression",
+          "location": {
+            "row": 0,
+            "col": 2
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Abilities/Ability_Druid_DemoralizingRoar.png"
+        },
+        {
+          "key": "feral_instinct",
+          "location": {
+            "row": 1,
+            "col": 0
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Abilities/Ability_Ambush.png"
+        },
+        {
+          "key": "brutal_impact",
+          "location": {
+            "row": 1,
+            "col": 1
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Abilities/Ability_Druid_Bash.png"
+        },
+        {
+          "key": "thick_hide",
+          "location": {
+            "row": 1,
+            "col": 2
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Trade/INV_Misc_Pelt_Bear_03.png"
+        },
+        {
+          "key": "feline_swiftness",
+          "location": {
+            "row": 2,
+            "col": 0
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Spells/Spell_Nature_SpiritWolf.png"
+        },
+        {
+          "key": "feral_charge",
+          "location": {
+            "row": 2,
+            "col": 1
+          },
+          "maxRank": 1,
+          "icon": "images/Classic/Abilities/Ability_Hunter_Pet_Bear.png",
+          "spell": {
+            "resourceCost": 5,
+            "resourceType": "rage",
+            "range": 25.0,
+            "castTime": 0.0,
+            "cooldown": 15.0,
+            "cooldownUnit": "sec"
+          }
+        },
+        {
+          "key": "sharpened_claws",
+          "location": {
+            "row": 2,
+            "col": 2
+          },
+          "maxRank": 3,
+          "icon": "images/Classic/Items/INV_Misc_MonsterClaw_04.png"
+        },
+        {
+          "key": "improved_shred",
+          "location": {
+            "row": 3,
+            "col": 0
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Items/INV_Misc_MonsterFang_01.png"
+        },
+        {
+          "key": "predatory_strikes",
+          "location": {
+            "row": 3,
+            "col": 1
+          },
+          "maxRank": 3,
+          "icon": "images/Classic/Abilities/Ability_Hunter_Pet_Cat.png"
+        },
+        {
+          "key": "blood_frenzy",
+          "location": {
+            "row": 3,
+            "col": 2
+          },
+          "requires": {
+            "row": 2,
+            "col": 2
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Abilities/Ability_GhoulFrenzy.png"
+        },
+        {
+          "key": "primal_fury",
+          "location": {
+            "row": 3,
+            "col": 3
+          },
+          "requires": {
+            "row": 2,
+            "col": 2
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Abilities/Ability_Racial_Cannibalize.png"
+        },
+        {
+          "key": "savage_fury",
+          "location": {
+            "row": 4,
+            "col": 0
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Abilities/Ability_Druid_Ravage.png"
+        },
+        {
+          "key": "feral_faerie_fire",
+          "location": {
+            "row": 4,
+            "col": 2
+          },
+          "maxRank": 1,
+          "icon": "images/Classic/Spells/Spell_Nature_FaerieFire.png",
+          "spell": {
+            "range": 30.0,
+            "castTime": 0.0,
+            "cooldown": 6.0,
+            "cooldownUnit": "sec"
+          }
+        },
+        {
+          "key": "heart_of_the_wild",
+          "location": {
+            "row": 5,
+            "col": 1
+          },
+          "requires": {
+            "row": 3,
+            "col": 1
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Holy_BlessingOfAgility.png"
+        },
+        {
+          "key": "leader_of_the_pack",
+          "location": {
+            "row": 6,
+            "col": 1
+          },
+          "maxRank": 1,
+          "icon": "images/Classic/Spells/Spell_Nature_UnyeildingStamina.png"
+        }
+      ]
+    }, {
+      "key": "restoration",
+      "icon": "images/Classic/Spells/Spell_Nature_HealingTouch.png",
+      "backgroundImage": "images/backgrounds/druid_restoration.jpg",
+      "talents": [
+        {
+          "key": "improved_mark_of_the_wild",
+          "location": {
+            "row": 0,
+            "col": 1
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Nature_Regeneration.png"
+        },
+        {
+          "key": "furor",
+          "location": {
+            "row": 0,
+            "col": 2
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Holy_BlessingOfStamina.png"
+        },
+        {
+          "key": "improved_healing_touch",
+          "location": {
+            "row": 1,
+            "col": 0
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Nature_HealingTouch.png"
+        },
+        {
+          "key": "natures_focus",
+          "location": {
+            "row": 1,
+            "col": 1
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Nature_HealingWaveGreater.png"
+        },
+        {
+          "key": "improved_enrage",
+          "location": {
+            "row": 1,
+            "col": 2
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Abilities/Ability_Druid_Enrage.png"
+        },
+        {
+          "key": "reflection",
+          "location": {
+            "row": 2,
+            "col": 1
+          },
+          "maxRank": 3,
+          "icon": "images/Classic/Spells/Spell_Frost_WindWalkOn.png"
+        },
+        {
+          "key": "insect_swarm",
+          "location": {
+            "row": 2,
+            "col": 2
+          },
+          "maxRank": 1,
+          "icon": "images/icons/large/spell_nature_insectswarm.jpg",
+          "spell": {
+            "resourceCost": 45,
+            "resourceType": "mana",
+            "range": 30.0,
+            "castTime": 0.0
+          }
+        },
+        {
+          "key": "subtlety",
+          "location": {
+            "row": 2,
+            "col": 3
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Abilities/Ability_EyeOfTheOwl.png"
+        },
+        {
+          "key": "tranquil_spirit",
+          "location": {
+            "row": 3,
+            "col": 1
+          },
+          "maxRank": 5,
+          "icon": "images/icons/large/spell_holy_elunesgrace.jpg"
+        },
+        {
+          "key": "improved_rejuvenation",
+          "location": {
+            "row": 3,
+            "col": 3
+          },
+          "maxRank": 3,
+          "icon": "images/Classic/Spells/Spell_Nature_Rejuvenation.png"
+        },
+        {
+          "key": "natures_swiftness",
+          "location": {
+            "row": 4,
+            "col": 0
+          },
+          "requires": {
+            "row": 1,
+            "col": 0
+          },
+          "maxRank": 1,
+          "icon": "images/Classic/Spells/Spell_Nature_RavenForm.png",
+          "spell": {
+            "castTime": 0.0,
+            "cooldown": 3.0,
+            "cooldownUnit": "min"
+          }
+        },
+        {
+          "key": "gift_of_nature",
+          "location": {
+            "row": 4,
+            "col": 2
+          },
+          "requires": {
+            "row": 2,
+            "col": 2
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Nature_ProtectionformNature.png"
+        },
+        {
+          "key": "improved_tranquility",
+          "location": {
+            "row": 4,
+            "col": 3
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Spells/Spell_Nature_Tranquility.png"
+        },
+        {
+          "key": "improved_regrowth",
+          "location": {
+            "row": 5,
+            "col": 2
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Nature_ResistNature.png"
+        },
+        {
+          "key": "swiftmend",
+          "location": {
+            "row": 6,
+            "col": 1
+          },
+          "requires": {
+            "row": 3,
+            "col": 1
+          },
+          "maxRank": 1,
+          "icon": "images/icons/large/inv_relics_idolofrejuvenation.jpg",
+          "spell": {
+            "resourceCost": "20",
+            "resourceType": "%mana",
+            "range": 40.0,
+            "castTime": 0.0,
+            "cooldown": 15.0,
+            "cooldownUnit": "sec"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -15,7 +15,6 @@ import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Pos
 import org.hedbor.evan.classictalents.app.util.bindWhenNotNull
-import org.hedbor.evan.classictalents.common.model.ResourceType
 import org.hedbor.evan.classictalents.common.model.TalentData
 import tornadofx.*
 import kotlin.math.max
@@ -72,7 +71,9 @@ class TalentTooltipViewModel(private val props: TalentProperties) : ViewModel() 
 
     val spellRangeText = if (talent.spell != null) {
         val range = talent.spell!!.range
-        if (range.isMelee) {
+        if (range.isSelf) {
+            ""
+        } else if (range.isMelee) {
             messages["spell.range.melee"]
         } else {
             messages.format("spell.range", range, messages["unit.distance.yards"])
@@ -88,20 +89,11 @@ class TalentTooltipViewModel(private val props: TalentProperties) : ViewModel() 
     } else null
 
     val spellCastTimeText = if (talent.spell != null) {
-        val isCasterSpell = when (talent.spell!!.resourceType) {
-            ResourceType.MANA, ResourceType.PERCENT_OF_BASE_MANA -> true
-            ResourceType.ENERGY, ResourceType.RAGE -> false
-            null -> false
-        }
         val castTime = talent.spell!!.castTime
         if (castTime > 0.0) {
             messages.format("spell.cast", castTime, messages["unit.time.seconds"])
         } else {
-            if (isCasterSpell) {
-                messages["spell.cast.instant_cast"]
-            } else {
-                messages["spell.cast.instant_attack"]
-            }
+            messages["spell.cast.instant"]
         }
     } else ""
     val hasSpellCastTime = SimpleBooleanProperty(spellCastTimeText.isNotBlank())

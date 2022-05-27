@@ -65,9 +65,9 @@ class TalentProperties(val wowClass: WowClass, val spec: Specialization, val tal
     /**
      * Whether the user still has unassigned talent points.
      */
-    val hasUnassignedTalentPoints by lazy {
+    val hasUnassignedTalentPoints = wowClass.totalPointsProperty.booleanBinding { totalPoints ->
         val pointsAtMaxLevel = wowClass.era.getAvailablePoints(wowClass.era.maxLevel)
-        wowClass.totalPoints < pointsAtMaxLevel
+        (totalPoints as Int) < pointsAtMaxLevel
     }
 
     /**

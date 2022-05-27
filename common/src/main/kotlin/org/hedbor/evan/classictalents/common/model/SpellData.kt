@@ -13,6 +13,7 @@ package org.hedbor.evan.classictalents.common.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.math.abs
 import kotlin.math.roundToInt
 
 
@@ -21,7 +22,7 @@ import kotlin.math.roundToInt
 data class SpellData(
     val resourceCost: Int = 0,
     val resourceType: ResourceType? = null,
-    val range: Range = Range(0.0),
+    val range: Range = Range.SELF,
     val castTime: Double = 0.0,
     val cooldown: Double = 0.0,
     val cooldownUnit: CooldownUnit? = null,
@@ -58,8 +59,8 @@ value class Range(val distanceYds: Double) {
         require(distanceYds >= 0.0) { "Range must be positive or zero." }
     }
 
-    val isSelf get() = (distanceYds == 0.0)
-    val isMelee get()  = (!isSelf && distanceYds <= 5.0)
+    val isSelf get() = (abs(distanceYds) <= 0.0001)
+    val isMelee get()  = (!isSelf && abs(distanceYds - 5.0) <= 0.0001)
 
     override fun toString() = distanceYds.roundToInt().toString()
 }
