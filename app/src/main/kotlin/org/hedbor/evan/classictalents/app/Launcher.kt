@@ -11,12 +11,8 @@
 
 package org.hedbor.evan.classictalents.app
 
-import org.hedbor.evan.classictalents.app.view.MainView
-import org.hedbor.evan.classictalents.app.view.styles.ClassStyles
-import org.hedbor.evan.classictalents.app.view.styles.SpecStyles
-import org.hedbor.evan.classictalents.app.view.styles.TalentStyles
-import org.hedbor.evan.classictalents.app.view.styles.TalentTooltipStyles
-import tornadofx.App
+import tornadofx.launch
 
-class ClassicTalentsApp : App(MainView::class,
-    ClassStyles::class, SpecStyles::class, TalentStyles::class, TalentTooltipStyles::class)
+fun main(args: Array<String>) {
+    launch<ClassicTalentsApp>(args)
+}

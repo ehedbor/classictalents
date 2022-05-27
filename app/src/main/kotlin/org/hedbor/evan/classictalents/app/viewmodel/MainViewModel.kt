@@ -14,10 +14,8 @@ package org.hedbor.evan.classictalents.app.viewmodel
 import javafx.beans.property.SimpleListProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.ObservableList
-import javafx.util.Duration
 import org.hedbor.evan.classictalents.app.model.WowClass
 import org.hedbor.evan.classictalents.app.service.FileService
-import org.hedbor.evan.classictalents.app.service.TooltipService
 import tornadofx.*
 
 
@@ -30,7 +28,6 @@ class MainViewModel : ViewModel() {
     init {
         rebindOnChange(classesProperty)
 
-        TooltipService.setGlobalTooltipBehavior(Duration.ZERO, Duration.INDEFINITE, Duration.ZERO)
         classes = FileService.loadClasses(
             "/talents/druid.json",
             "/talents/paladin.json",
