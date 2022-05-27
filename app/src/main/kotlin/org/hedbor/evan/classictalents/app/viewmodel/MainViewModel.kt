@@ -34,11 +34,13 @@ class MainViewModel : ViewModel() {
         classes = FileService.loadClasses(
             "/talents/druid.json",
             "/talents/paladin.json",
+            "/talents/shaman.json",
             "/talents/warlock.json").toObservable()
         FX.messages = FileService.loadBundles("AllMessages",
             "bundles.Messages",
             "bundles.druid",
             "bundles.paladin",
+            "bundles.shaman",
             "bundles.warlock")
 
         activeClassKey.value = classes.first().translationKey
