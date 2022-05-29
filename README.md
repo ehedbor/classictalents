@@ -21,7 +21,7 @@ The program can be run with `java -jar classictalents-X.Y.Z.jar` (where `X.Y.Z` 
     Certain UI graphics were also taken from Wowhead.
 - teebling, for his [WoW Classic icon pack](https://www.warcrafttavern.com/community/art-resources/icon-pack-2000-wow-vanilla-classic-icons-in-png/).
     The original artwork belongs to Blizzard Entertainment.
-- Blizzard, for making a 
+- Blizzard, for making a fun game
 
 ## License
 This program is distributed under the GNU GPLv3. See LICENSE.txt for details.
