@@ -18,7 +18,6 @@ import javafx.scene.Node
 import javafx.scene.control.Tooltip
 import javafx.scene.layout.Region
 import javafx.scene.layout.VBox
-import javafx.util.Duration
 import org.hedbor.evan.classictalents.app.view.styles.TalentTooltipStyles
 import org.hedbor.evan.classictalents.app.viewmodel.TalentTooltipViewModel
 import tornadofx.*
@@ -31,10 +30,6 @@ class TalentTooltip(private val model: TalentTooltipViewModel) : Tooltip() {
     }
 
     init {
-        hideDelay = Duration.ZERO
-        showDuration = Duration.INDEFINITE
-        showDelay = Duration.ZERO
-
         isWrapText = true
         prefWidth = PREF_WIDTH
         maxHeight = PREF_HEIGHT
