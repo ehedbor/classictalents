@@ -2,7 +2,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm")
+    application
     id("org.openjfx.javafxplugin")
+}
+
+application {
+    mainClass.set("org.hedbor.evan.classictalents.talentgen.LauncherKt")
 }
 
 javafx {

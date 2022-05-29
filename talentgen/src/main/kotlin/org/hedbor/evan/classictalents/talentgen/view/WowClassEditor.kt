@@ -15,6 +15,7 @@ import javafx.beans.binding.BooleanExpression
 import javafx.geometry.Insets
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.Region
+import javafx.scene.layout.VBox
 import javafx.util.StringConverter
 import org.hedbor.evan.classictalents.common.model.Era
 import org.hedbor.evan.classictalents.talentgen.INITIAL_ICON_DIRECTORY
@@ -30,7 +31,7 @@ class WowClassEditor : View() {
     private val controller: TalentGenController by inject()
     private val model: WowClassModel by lazy { controller.classModel }
 
-    private lateinit var specFieldset: Fieldset
+    private lateinit var specFieldset: VBox
 
     private val modelValid: BooleanExpression
         get() {
@@ -93,11 +94,13 @@ class WowClassEditor : View() {
                 }
             }
         }
-        specFieldset = fieldset(messages["editor.field.specs"]) {
+        fieldset(messages["editor.field.specs"]) {
             button(messages["action.editor.add_spec"]) {
-                action { createNewSpecField(addNewSpec(), true) }
+                action { specFieldset.createNewSpecField(addNewSpec(), true) }
             }
-            repeat(3) { createNewSpecField(addNewSpec(), false) }
+            specFieldset = vbox {
+                repeat(3) { createNewSpecField(addNewSpec(), false) }
+            }
         }
     }
 
@@ -152,13 +155,20 @@ class WowClassEditor : View() {
         if (success) {
             // remove the old fields and replace them with new ones
             specFieldset.children.filterIsInstance<Field>().forEach { it.removeFromParent() }
-            model.specializations.forEach { specFieldset.createNewSpecField(it, true) }
+            model.specializations
+                .sortedBy { it.translationKey }
+                .forEach { specFieldset.createNewSpecField(it, true) }
         }
     }
 
-    private fun Fieldset.createNewSpecField(spec: Specialization, resize: Boolean) {
+    private fun VBox.createNewSpecField(spec: Specialization, resize: Boolean) {
         val field = Field().apply field@{
             textProperty.bind(spec.translationKeyProperty)
+            textProperty.addListener { _, _, _ ->
+                // re-sort the children if the name changes
+                specFieldset.children.sortBy { (it as? Field)?.text }
+            }
+
             button(messages["action.editor.edit"]) {
                 action {
                     editSpec(spec)

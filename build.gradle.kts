@@ -5,9 +5,10 @@ plugins {
 
 allprojects {
     group = "org.hedbor.evan"
-    version = "0.1.0"
+    version = "0.2"
 
     repositories {
         mavenCentral()
+        maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
     }
 }

@@ -10,7 +10,7 @@ pluginManagement {
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
-            library("tornadofx", "no.tornado:tornadofx:1.7.20")
+            library("tornadofx", "no.tornado:tornadofx:2.0.0-SNAPSHOT")
             library("kotlinx-serialization", "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
         }
     }

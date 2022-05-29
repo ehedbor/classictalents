@@ -51,7 +51,34 @@ class Spell(
     var range: Double by rangeProperty
 
     override fun toData(): SpellData {
-        return SpellData(resourceCost, resourceType, Range(range), castTime, cooldown, cooldownUnit)
+        // Fix bug where invalid fields were being serialized
+        var resourceCost = 0
+        var resourceType: ResourceType? = null
+        if (resourceCostProperty.value != null && this.resourceCost != 0 &&
+            resourceTypeProperty.value != null) {
+            resourceCost = this.resourceCost
+            resourceType = this.resourceType
+        }
+
+        var range: Range = Range.SELF
+        if (rangeProperty.value != null) {
+            range = Range(this.range)
+        }
+
+        var castTime = 0.0
+        if (castTimeProperty.value != null) {
+            castTime = this.castTime
+        }
+
+        var cooldown = 0.0
+        var cooldownUnit: CooldownUnit? = null
+        if (cooldownProperty.value != null && this.cooldown != 0.0 &&
+            cooldownUnitProperty.value != null) {
+            cooldown = this.cooldown
+            cooldownUnit = this.cooldownUnit
+        }
+
+        return SpellData(resourceCost, resourceType, range, castTime, cooldown, cooldownUnit)
     }
 
     override fun fromData(data: SpellData): Spell {

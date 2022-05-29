@@ -11,6 +11,7 @@
 
 package org.hedbor.evan.classictalents.talentgen
 
+import javafx.scene.image.Image
 import javafx.stage.FileChooser
 import tornadofx.chooseFile
 import java.io.File
@@ -18,10 +19,18 @@ import java.io.File
 
 private val IMAGE_FILES_FILTER = FileChooser.ExtensionFilter("Image Files", "*.bmp", "*.gif", "*.jpg", "*.png")
 
-internal val APP_RESOURCES_DIRECTORY = File("./app/src/main/resources").absoluteFile
+internal val APP_RESOURCES_DIRECTORY: File = run {
+    val dir = System.getenv("APP_RESOURCES_DIR") ?: throw IllegalStateException("""
+        Environment variable APP_RESOURCES_DIR not set!
+        Please declare this environment variable and point it to the resources directory of the classictalents app.
+        """.trimIndent())
+    File(dir).absoluteFile
+}
 internal val INITIAL_ICON_DIRECTORY = APP_RESOURCES_DIRECTORY.resolve("images/Classic")
 internal val INITIAL_BACKGROUND_DIRECTORY = APP_RESOURCES_DIRECTORY.resolve("images/backgrounds")
-internal val UNKNOWN_IMAGE = File("INV_Misc_QuestionMark.png")
+
+internal val UNKNOWN_IMAGE = Image(
+    Thread.currentThread().contextClassLoader.getResourceAsStream("INV_Misc_QuestionMark.png"))
 
 internal fun chooseIconFromResources(prompt: String, initialDirectory: File): String? {
     val files = chooseFile(prompt, arrayOf(IMAGE_FILES_FILTER), initialDirectory)

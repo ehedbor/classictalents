@@ -15,6 +15,7 @@ import javafx.event.EventTarget
 import javafx.geometry.Insets
 import javafx.scene.Node
 import javafx.scene.control.ButtonBar
+import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.Region
@@ -142,13 +143,13 @@ class SpecializationEditor : Fragment() {
         if (icon.isNullOrBlank()) return null
         return try {
             val imageFile = APP_RESOURCES_DIRECTORY.resolve(icon)
-            val path: String = if (imageFile.isFile && imageFile.exists()) {
-                imageFile.toURI().toURL().toExternalForm()
+            val image = if (imageFile.isFile && imageFile.exists()) {
+                Image(imageFile.toURI().toURL().toExternalForm())
             } else {
-                UNKNOWN_IMAGE.path
+                UNKNOWN_IMAGE
             }
 
-            ImageView(path).apply {
+            ImageView(image).apply {
                 fitWidth = 50.0
                 isPreserveRatio = true
                 isSmooth = true

@@ -63,7 +63,8 @@
           "icon": "images/Classic/Spells/Spell_Holy_InnerFire.png",
           "spell": {
             "resourceCost": 135,
-            "cooldown": 8.0
+            "cooldown": 8.0,
+            "castTime": 0.0
           }
         },
         {
@@ -118,7 +119,8 @@
             "resourceCost": 4,
             "resourceType": "%mana",
             "cooldown": 2.0,
-            "cooldownUnit": "min"
+            "cooldownUnit": "min",
+            "castTime": 0.0
           }
         },
         {
@@ -155,7 +157,8 @@
             "resourceCost": 225,
             "resourceType": "mana",
             "range": 20.0,
-            "cooldown": 30.0
+            "cooldown": 30.0,
+            "castTime": 0.0
           }
         }
       ]
@@ -220,7 +223,8 @@
           "spell": {
             "resourceCost": 8,
             "resourceType": "%mana",
-            "range": 30.0
+            "range": 30.0,
+            "castTime": 0.0
           }
         },
         {
@@ -282,7 +286,9 @@
           "icon": "images/Classic/Spells/Spell_Nature_LightningShield.png",
           "spell": {
             "resourceCost": 60,
-            "range": 30.0
+            "resourceType": "mana",
+            "range": 30.0,
+            "castTime": 0.0
           }
         },
         {
@@ -319,7 +325,8 @@
             "resourceCost": 150,
             "resourceType": "mana",
             "cooldown": 10.0,
-            "cooldownUnit": "sec"
+            "cooldownUnit": "sec",
+            "castTime": 0.0
           }
         }
       ]
@@ -401,7 +408,8 @@
           "icon": "images/Classic/Abilities/Ability_Warrior_InnerRage.png",
           "spell": {
             "resourceCost": 65,
-            "resourceType": "mana"
+            "resourceType": "mana",
+            "castTime": 0.0
           }
         },
         {
@@ -448,7 +456,9 @@
           },
           "maxRank": 1,
           "icon": "images/Classic/Spells/Spell_Holy_MindVision.png",
-          "spell": {}
+          "spell": {
+            "castTime": 0.0
+          }
         },
         {
           "key": "vengeance",
@@ -476,7 +486,8 @@
             "resourceType": "mana",
             "range": 20.0,
             "cooldown": 1.0,
-            "cooldownUnit": "min"
+            "cooldownUnit": "min",
+            "castTime": 0.0
           }
         }
       ]

@@ -23,7 +23,8 @@ data class SpellData(
     val resourceCost: Int = 0,
     val resourceType: ResourceType? = null,
     val range: Range = Range.SELF,
-    val castTime: Double = 0.0,
+    // cast time cannot have a default value. The JSON serializer doesn't serialize default values, and it must be present in the file.
+    val castTime: Double,
     val cooldown: Double = 0.0,
     val cooldownUnit: CooldownUnit? = null,
 )

@@ -152,7 +152,8 @@
           "icon": "images/Classic/Spells/Spell_Nature_WispHeal.png",
           "spell": {
             "cooldown": 3.0,
-            "cooldownUnit": "min"
+            "cooldownUnit": "min",
+            "castTime": 0.0
           }
         }
       ]
@@ -317,7 +318,8 @@
             "resourceType": "%mana",
             "range": 5.0,
             "cooldown": 20.0,
-            "cooldownUnit": "sec"
+            "cooldownUnit": "sec",
+            "castTime": 0.0
           }
         }
       ]
@@ -468,7 +470,8 @@
             "resourceCost": 20,
             "resourceType": "mana",
             "cooldown": 5.0,
-            "cooldownUnit": "min"
+            "cooldownUnit": "min",
+            "castTime": 0.0
           }
         }
       ]

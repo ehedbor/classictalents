@@ -31,11 +31,10 @@ class MultiResourceBundle(private val delegates: List<ResourceBundle> = emptyLis
     }
 
     override fun handleGetObject(key: String): Any? {
-        val obj = delegates
+        return delegates
             .filter { it.containsKey(key) }
             .map { it.getObject(key) }
             .firstOrNull()
-        return obj
     }
 
     override fun getKeys(): Enumeration<String> {

@@ -192,11 +192,9 @@ class TalentGenController : Controller() {
 
     private fun selectDataFile(mode: FileChooserMode, suggestedFileName: String? = null) {
         TALENTS_OUTPUT_DIR.mkdirs()
-        val files = chooseFile(messages["action.file.choose.data"], arrayOf(JSON_FILE_FILTER), TALENTS_OUTPUT_DIR, mode) {
-            if (suggestedFileName != null) {
-                initialFileName = suggestedFileName
-            }
-        }
+        val files = chooseFile(messages["action.file.choose.data"], arrayOf(JSON_FILE_FILTER),
+            TALENTS_OUTPUT_DIR, suggestedFileName, mode)
+        
         val f = files.firstOrNull()
         if (f != null) {
             currentDataFile = f
@@ -205,11 +203,8 @@ class TalentGenController : Controller() {
 
     private fun selectResourceBundle(mode: FileChooserMode, suggestedFileName: String? = null) {
         LANG_OUTPUT_DIR.mkdirs()
-        val files = chooseFile(messages["action.file.choose.resource_bundle"], arrayOf(PROPERTIES_FILE_FILTER), LANG_OUTPUT_DIR, mode) {
-            if (suggestedFileName != null) {
-                initialFileName = suggestedFileName
-            }
-        }
+        val files = chooseFile(messages["action.file.choose.resource_bundle"], arrayOf(PROPERTIES_FILE_FILTER),
+            LANG_OUTPUT_DIR, suggestedFileName, mode)
         val f = files.firstOrNull()
         if (f != null) {
             currentBundleFile = f
