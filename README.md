@@ -5,13 +5,13 @@ Currently, only a few of the classes are supported. In the future, I plan to sup
 (Vanilla, TBC, WotLK).
                      
 ## Installation
-First, make sure to install Java 17.
+First, make sure to install Java 1.8.
 Next, download the latest classictalents.jar from the releases tab. 
 The program can be run with `java -jar classictalents-X.Y.Z.jar` (where `X.Y.Z` is the project version).
 
 
 ## Building from source
-1. Install Java 17.
+1. Install Java 1.8.
 2. Clone the project with `git clone`.
 3. In the project directory, build the project with `./gradlew :app:shadowJar`.
 4. The compiled jar file will be in the subdirectory "app/build/libs"
