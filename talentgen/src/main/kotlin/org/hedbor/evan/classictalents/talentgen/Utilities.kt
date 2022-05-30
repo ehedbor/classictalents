@@ -24,7 +24,7 @@ internal val APP_RESOURCES_DIRECTORY: File = run {
         Environment variable APP_RESOURCES_DIR not set!
         Please declare this environment variable and point it to the resources directory of the classictalents app.
         """.trimIndent())
-    File(dir).absoluteFile
+    File(dir.trim()).absoluteFile
 }
 internal val INITIAL_ICON_DIRECTORY = APP_RESOURCES_DIRECTORY.resolve("images/Classic")
 internal val INITIAL_BACKGROUND_DIRECTORY = APP_RESOURCES_DIRECTORY.resolve("images/backgrounds")
@@ -33,6 +33,7 @@ internal val UNKNOWN_IMAGE = Image(
     Thread.currentThread().contextClassLoader.getResourceAsStream("INV_Misc_QuestionMark.png"))
 
 internal fun chooseIconFromResources(prompt: String, initialDirectory: File): String? {
+    println(initialDirectory)
     val files = chooseFile(prompt, arrayOf(IMAGE_FILES_FILTER), initialDirectory)
     if (files.isEmpty()) return null
     val file = files[0]
