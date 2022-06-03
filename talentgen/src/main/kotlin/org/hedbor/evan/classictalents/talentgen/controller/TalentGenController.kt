@@ -96,11 +96,8 @@ class TalentGenController : Controller() {
         return shouldClearData
     }
 
-    fun openDataFile(openRecent: Boolean): Boolean {
-        val dataFileExists = currentDataFile?.exists() ?: false
-        if (!openRecent || (openRecent && !dataFileExists)) {
-            selectDataFile(FileChooserMode.Single)
-        }
+    fun openDataFile(): Boolean {
+        selectDataFile(FileChooserMode.Single)
 
         return when (val file = currentDataFile) {
             null -> false
@@ -152,12 +149,8 @@ class TalentGenController : Controller() {
         bundleModel.item.addMissingEntries(classModel.item)
     }
 
-    fun openBundle(openRecent: Boolean): Boolean {
-        val bundleFileExists = currentBundleFile?.exists() ?: false
-        if (!openRecent || (openRecent && !bundleFileExists)) {
-            selectResourceBundle(FileChooserMode.Single)
-        }
-
+    fun openBundle(): Boolean {
+        selectResourceBundle(FileChooserMode.Single)
         return when (val file = currentBundleFile) {
             null -> false
             else -> {

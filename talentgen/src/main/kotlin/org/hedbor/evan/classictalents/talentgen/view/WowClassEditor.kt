@@ -43,7 +43,10 @@ class WowClassEditor : View() {
         }
 
     init {
-        title = messages["editor.title.class"]
+        titleProperty.bind(model.dirty.stringBinding { dirty ->
+            val title = messages["editor.title.class"]
+            if (dirty == true) "* $title" else title
+        })
     }
 
     override val root = borderpane {
@@ -110,17 +113,13 @@ class WowClassEditor : View() {
                 action { controller.newDataFile() }
             }
             item(messages["action.file.open"], "Ctrl+O") {
-                action { open(false) }
-            }
-            item(messages["action.file.open_recent"], "Ctrl+Shift+O") {
-                action { open(true) }
+                action { open() }
             }
             item(messages["action.file.save"], "Ctrl+S") {
                 enableWhen(modelValid)
                 action { controller.saveDataFile(false) }
             }
             item(messages["action.file.save_as"], "Ctrl+Shift+S") {
-                enableWhen(modelValid)
                 action { controller.saveDataFile(true) }
             }
             separator()
@@ -137,21 +136,15 @@ class WowClassEditor : View() {
             }
             item(messages["action.bundle.open"], "Ctrl+Shift+B") {
                 action {
-                    val success = controller.openBundle(false)
-                    if (success) editBundle()
-                }
-            }
-            item(messages["action.bundle.open_recent"]) {
-                action {
-                    val success = controller.openBundle(true)
+                    val success = controller.openBundle()
                     if (success) editBundle()
                 }
             }
         }
     }
 
-    private fun open(openRecent: Boolean) {
-        val success = controller.openDataFile(openRecent)
+    private fun open() {
+        val success = controller.openDataFile()
         if (success) {
             // remove the old fields and replace them with new ones
             specFieldset.children.filterIsInstance<Field>().forEach { it.removeFromParent() }

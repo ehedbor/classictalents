@@ -54,10 +54,9 @@ class Spell(
         // Fix bug where invalid fields were being serialized
         var resourceCost = 0
         var resourceType: ResourceType? = null
-        if (resourceCostProperty.value != null && this.resourceCost != 0 &&
-            resourceTypeProperty.value != null) {
+        if (resourceCostProperty.value != null && this.resourceCost != 0) {
             resourceCost = this.resourceCost
-            resourceType = this.resourceType
+            resourceType = this.resourceType ?: ResourceType.MANA
         }
 
         var range: Range = Range.SELF
@@ -72,10 +71,9 @@ class Spell(
 
         var cooldown = 0.0
         var cooldownUnit: CooldownUnit? = null
-        if (cooldownProperty.value != null && this.cooldown != 0.0 &&
-            cooldownUnitProperty.value != null) {
+        if (cooldownProperty.value != null && this.cooldown != 0.0) {
             cooldown = this.cooldown
-            cooldownUnit = this.cooldownUnit
+            cooldownUnit = this.cooldownUnit ?: CooldownUnit.SECONDS
         }
 
         return SpellData(resourceCost, resourceType, range, castTime, cooldown, cooldownUnit)
