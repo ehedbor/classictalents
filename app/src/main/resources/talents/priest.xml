@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<class key="priest"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="class.xsd">
+  <name>Priest</name>
+  <icon>images/icons/large/classicon_priest.jpg</icon>
+  <classic>
+    <specs>
+      <spec key="discipline">
+        <name>Discipline</name>
+        <icon>images/Classic/Spells/Spell_Holy_WordFortitude.png</icon>
+        <background>images/backgrounds/priest_discipline.jpg</background>
+        <talents>
+          <row>
+            <placeholder/>
+            <talent key="unbreakable_will">
+              <name>Unbreakable Will</name>
+              <desc>
+                Increases your chance to resist Stun, Fear, and Silence effects
+                by an additional <choice if1="3" if2="6" if3="9" if4="12" if5="15"/>%.
+              </desc>
+              <icon>images/Classic/Spells/Spell_Magic_MageArmor.png</icon>
+              <max_rank>5</max_rank>
+            </talent>
+            <talent key="wand_specialization">
+              <name>Wand Specialization</name>
+              <desc>
+                Reduces the cost of your Heroic Strike ability by <choice>1 rage point; 2 rage points; 3 rage points</choice>
+              </desc>
+              <icon>images/Classic/Weapons/INV_Wand_01.png</icon>
+              <max_rank>5</max_rank>
+              <requires>unbreakable_will</requires>
+            </talent>
+            <placeholder/>
+          </row>
+          <row>
+            <talent key="power_infusion">
+              <name>Power Infusion</name>
+              <desc>Infuses the target with power, increasing their spell damage and healing by 20%. Lasts 15 sec.</desc>
+              <icon>images/Classic/Spells/Spell_Holy_PowerInfusion.png</icon>
+              <max_rank>1</max_rank>
+              <spell>
+                <cost resource="% of base mana">20</cost>
+                <cast_time>30</cast_time>
+                <cooldown unit="min">3</cooldown>
+                <range>30</range>
+              </spell>
+            </talent>
+          </row>
+        </talents>
+      </spec>
+    </specs>
+  </classic>
+</class>

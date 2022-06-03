@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+           vc:minVersion="1.1"
+           elementFormDefault="qualified">
+  <xs:element name="class">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:element ref="icon"/>
+        <xs:element name="classic">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="specs"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute ref="key" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="specs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="spec" minOccurs="1" maxOccurs="4">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="name"/>
+              <xs:element ref="icon"/>
+              <xs:element ref="background"/>
+              <xs:element ref="talents"/>
+            </xs:sequence>
+            <xs:attribute ref="key" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="talents">
+    <xs:complexType>
+      <xs:sequence minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="row">
+          <xs:complexType>
+            <xs:choice minOccurs="4" maxOccurs="4">
+              <xs:element name="placeholder">
+                <xs:complexType/>
+              </xs:element>
+              <xs:element ref="talent"/>
+            </xs:choice>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="talent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:element ref="desc"/>
+        <xs:element ref="icon"/>
+        <xs:element ref="max_rank"/>
+        <xs:element name="requires" type="keyType" minOccurs="0"/>
+        <xs:element ref="spell" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute ref="key" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="spell">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="cost" minOccurs="0" type="costType"/>
+        <xs:element name="cast_time" type="castTimeType"/>
+        <xs:element name="cooldown" minOccurs="0" type="cooldownType"/>
+        <xs:element name="range" minOccurs="0" type="rangeType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="costType">
+    <xs:simpleContent>
+      <xs:extension base="xs:integer">
+        <xs:attribute name="resource" use="required">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="% of base mana"/>
+              <xs:enumeration value="mana"/>
+              <xs:enumeration value="rage"/>
+              <xs:enumeration value="energy"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="castTimeType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:float">
+          <xs:minInclusive value="0.5"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="instant"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:complexType name="cooldownType">
+    <xs:simpleContent>
+      <xs:extension base="xs:float">
+        <xs:attribute name="unit">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="sec"/>
+              <xs:enumeration value="min"/>
+              <xs:enumeration value="hr"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="rangeType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:minInclusive value="6"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="melee"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+
+
+  <xs:attribute name="key" type="keyType"/>
+  <xs:simpleType name="keyType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-z_]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="name" type="xs:string"/>
+  <xs:element name="desc">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element name="choice" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="icon" type="xs:anyURI"/>
+  <xs:element name="background" type="xs:anyURI"/>
+  <xs:element name="max_rank">
+    <xs:simpleType>
+      <xs:restriction base="xs:integer">
+        <xs:minInclusive value="1"/>
+        <xs:maxExclusive value="6"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+
+
+</xs:schema>
