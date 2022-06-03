@@ -1,0 +1,537 @@
+{
+  "key": "priest",
+  "icon": "images/icons/large/classicon_priest.jpg",
+  "era": "classic",
+  "specs": [
+    {
+      "key": "discipline",
+      "icon": "images/Classic/Spells/Spell_Holy_WordFortitude.png",
+      "backgroundImage": "images/backgrounds/priest_discipline.jpg",
+      "talents": [
+        {
+          "key": "unbreakable_will",
+          "location": {
+            "row": 0,
+            "col": 1
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Magic_MageArmor.png"
+        },
+        {
+          "key": "wand_specialization",
+          "location": {
+            "row": 0,
+            "col": 2
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Weapons/INV_Wand_01.png"
+        },
+        {
+          "key": "silent_resolve",
+          "location": {
+            "row": 1,
+            "col": 0
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Nature_ManaRegenTotem.png"
+        },
+        {
+          "key": "improved_power_word_fortitude",
+          "location": {
+            "row": 1,
+            "col": 1
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Spells/Spell_Holy_WordFortitude.png"
+        },
+        {
+          "key": "improved_power_word_shield",
+          "location": {
+            "row": 1,
+            "col": 2
+          },
+          "maxRank": 3,
+          "icon": "images/Classic/Spells/Spell_Holy_PowerWordShield.png"
+        },
+        {
+          "key": "martyrdom",
+          "location": {
+            "row": 1,
+            "col": 3
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Spells/Spell_Nature_Tranquility.png"
+        },
+        {
+          "key": "inner_focus",
+          "location": {
+            "row": 2,
+            "col": 1
+          },
+          "maxRank": 1,
+          "icon": "images/Classic/Spells/Spell_Frost_WindWalkOn.png",
+          "spell": {
+            "castTime": 0.0,
+            "cooldown": 3.0,
+            "cooldownUnit": "min"
+          }
+        },
+        {
+          "key": "meditation",
+          "location": {
+            "row": 2,
+            "col": 2
+          },
+          "maxRank": 3,
+          "icon": "images/Classic/Spells/Spell_Nature_Sleep.png"
+        },
+        {
+          "key": "improved_inner_fire",
+          "location": {
+            "row": 3,
+            "col": 0
+          },
+          "maxRank": 3,
+          "icon": "images/Classic/Spells/Spell_Holy_InnerFire.png"
+        },
+        {
+          "key": "mental_agility",
+          "location": {
+            "row": 3,
+            "col": 1
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Abilities/Ability_Hibernation.png"
+        },
+        {
+          "key": "improved_mana_burn",
+          "location": {
+            "row": 3,
+            "col": 3
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Spells/Spell_Shadow_ManaBurn.png"
+        },
+        {
+          "key": "mental_strength",
+          "location": {
+            "row": 4,
+            "col": 1
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Nature_EnchantArmor.png"
+        },
+        {
+          "key": "divine_spirit",
+          "location": {
+            "row": 4,
+            "col": 2
+          },
+          "requires": {
+            "row": 2,
+            "col": 2
+          },
+          "maxRank": 1,
+          "icon": "images/icons/large/spell_holy_divinespirit.jpg",
+          "spell": {
+            "resourceCost": 285,
+            "resourceType": "mana",
+            "range": 30.0,
+            "castTime": 0.0
+          }
+        },
+        {
+          "key": "force_of_will",
+          "location": {
+            "row": 5,
+            "col": 2
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Nature_SlowingTotem.png"
+        },
+        {
+          "key": "power_infusion",
+          "location": {
+            "row": 6,
+            "col": 1
+          },
+          "requires": {
+            "row": 4,
+            "col": 1
+          },
+          "maxRank": 1,
+          "icon": "images/icons/large/spell_holy_powerinfusion.jpg",
+          "spell": {
+            "resourceCost": 20,
+            "resourceType": "%mana",
+            "range": 30.0,
+            "castTime": 0.0,
+            "cooldown": 3.0,
+            "cooldownUnit": "min"
+          }
+        }
+      ]
+    },
+    {
+      "key": "holy",
+      "icon": "images/Classic/Spells/Spell_Holy_HolyBolt.png",
+      "backgroundImage": "images/backgrounds/priest_discipline.jpg",
+      "talents": [
+        {
+          "key": "healing_focus",
+          "location": {
+            "row": 0,
+            "col": 0
+          },
+          "maxRank": 2,
+          "icon": "images/icons/large/spell_holy_healingfocus.jpg"
+        },
+        {
+          "key": "improved_renew",
+          "location": {
+            "row": 0,
+            "col": 1
+          },
+          "maxRank": 3,
+          "icon": "images/Classic/Spells/Spell_Holy_Renew.png"
+        },
+        {
+          "key": "holy_specialization",
+          "location": {
+            "row": 0,
+            "col": 2
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Holy_SealOfSalvation.png"
+        },
+        {
+          "key": "spell_warding",
+          "location": {
+            "row": 1,
+            "col": 1
+          },
+          "maxRank": 5,
+          "icon": "images/icons/large/spell_holy_spellwarding.jpg"
+        },
+        {
+          "key": "divine_fury",
+          "location": {
+            "row": 1,
+            "col": 2
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Holy_SealOfWrath.png"
+        },
+        {
+          "key": "holy_nova",
+          "location": {
+            "row": 2,
+            "col": 0
+          },
+          "maxRank": 1,
+          "icon": "images/icons/large/spell_holy_holynova.jpg",
+          "spell": {
+            "resourceCost": 185,
+            "resourceType": "mana",
+            "castTime": 0.0
+          }
+        },
+        {
+          "key": "blessed_recovery",
+          "location": {
+            "row": 2,
+            "col": 1
+          },
+          "maxRank": 3,
+          "icon": "images/icons/large/spell_holy_blessedrecovery.jpg"
+        },
+        {
+          "key": "inspiration",
+          "location": {
+            "row": 2,
+            "col": 3
+          },
+          "maxRank": 3,
+          "icon": "images/Classic/Spells/Spell_Holy_LayOnHands.png"
+        },
+        {
+          "key": "holy_reach",
+          "location": {
+            "row": 3,
+            "col": 0
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Spells/Spell_Holy_Purify.png"
+        },
+        {
+          "key": "improved_healing",
+          "location": {
+            "row": 3,
+            "col": 1
+          },
+          "maxRank": 3,
+          "icon": "images/Classic/Spells/Spell_Holy_Heal02.png"
+        },
+        {
+          "key": "searing_light",
+          "location": {
+            "row": 3,
+            "col": 2
+          },
+          "requires": {
+            "row": 1,
+            "col": 2
+          },
+          "maxRank": 2,
+          "icon": "images/icons/large/spell_holy_searinglightpriest.jpg"
+        },
+        {
+          "key": "improved_prayer_of_healing",
+          "location": {
+            "row": 4,
+            "col": 0
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Spells/Spell_Holy_PrayerOfHealing02.png"
+        },
+        {
+          "key": "spirit_of_redemption",
+          "location": {
+            "row": 4,
+            "col": 1
+          },
+          "maxRank": 1,
+          "icon": "images/Classic/Trade/INV_Enchant_EssenceEternalLarge.png"
+        },
+        {
+          "key": "spiritual_guidance",
+          "location": {
+            "row": 4,
+            "col": 2
+          },
+          "maxRank": 5,
+          "icon": "images/icons/large/spell_holy_spiritualguidence.jpg"
+        },
+        {
+          "key": "spiritual_healing",
+          "location": {
+            "row": 5,
+            "col": 2
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Nature_MoonGlow.png"
+        },
+        {
+          "key": "lightwell",
+          "location": {
+            "row": 6,
+            "col": 1
+          },
+          "requires": {
+            "row": 4,
+            "col": 1
+          },
+          "maxRank": 1,
+          "icon": "images/icons/large/spell_holy_summonlightwell.jpg",
+          "spell": {
+            "resourceCost": 225,
+            "resourceType": "mana",
+            "castTime": 1.5,
+            "cooldown": 10.0,
+            "cooldownUnit": "min"
+          }
+        }
+      ]
+    },
+    {
+      "key": "shadow",
+      "icon": "images/Classic/Spells/Spell_Shadow_ShadowWordPain.png",
+      "backgroundImage": "images/backgrounds/priest_shadow.jpg",
+      "talents": [
+        {
+          "key": "spirit_tap",
+          "location": {
+            "row": 0,
+            "col": 1
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Shadow_Requiem.png"
+        },
+        {
+          "key": "blackout",
+          "location": {
+            "row": 0,
+            "col": 2
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Shadow_GatherShadows.png"
+        },
+        {
+          "key": "shadow_affinity",
+          "location": {
+            "row": 1,
+            "col": 0
+          },
+          "maxRank": 3,
+          "icon": "images/Classic/Spells/Spell_Shadow_ShadowWard.png"
+        },
+        {
+          "key": "improved_shadow_word_pain",
+          "location": {
+            "row": 1,
+            "col": 1
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Spells/Spell_Shadow_ShadowWordPain.png"
+        },
+        {
+          "key": "shadow_focus",
+          "location": {
+            "row": 1,
+            "col": 2
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Shadow_BurningSpirit.png"
+        },
+        {
+          "key": "improved_psychic_scream",
+          "location": {
+            "row": 2,
+            "col": 0
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Spells/Spell_Shadow_PsychicScream.png"
+        },
+        {
+          "key": "improved_mind_blast",
+          "location": {
+            "row": 2,
+            "col": 1
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Shadow_UnholyFrenzy.png"
+        },
+        {
+          "key": "mind_flay",
+          "location": {
+            "row": 2,
+            "col": 2
+          },
+          "maxRank": 1,
+          "icon": "images/Classic/Spells/Spell_Shadow_SiphonMana.png",
+          "spell": {
+            "resourceCost": 45,
+            "resourceType": "mana",
+            "range": 20.0,
+            "castTime": 3.0
+          }
+        },
+        {
+          "key": "improved_fade",
+          "location": {
+            "row": 3,
+            "col": 1
+          },
+          "maxRank": 2,
+          "icon": "images/Classic/Spells/Spell_Magic_LesserInvisibilty.png"
+        },
+        {
+          "key": "shadow_reach",
+          "location": {
+            "row": 3,
+            "col": 2
+          },
+          "maxRank": 3,
+          "icon": "images/Classic/Spells/Spell_Shadow_ChillTouch.png"
+        },
+        {
+          "key": "shadow_weaving",
+          "location": {
+            "row": 3,
+            "col": 3
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Shadow_BlackPlague.png"
+        },
+        {
+          "key": "silence",
+          "location": {
+            "row": 4,
+            "col": 0
+          },
+          "requires": {
+            "row": 2,
+            "col": 0
+          },
+          "maxRank": 1,
+          "icon": "images/Classic/Spells/Spell_Shadow_ImpPhaseShift.png",
+          "spell": {
+            "resourceCost": 225,
+            "resourceType": "mana",
+            "range": 20.0,
+            "castTime": 0.0
+          }
+        },
+        {
+          "key": "vampiric_embrace",
+          "location": {
+            "row": 4,
+            "col": 1
+          },
+          "maxRank": 1,
+          "icon": "images/Classic/Spells/Spell_Shadow_UnsummonBuilding.png",
+          "spell": {
+            "resourceCost": 40,
+            "resourceType": "mana",
+            "range": 30.0,
+            "castTime": 0.0,
+            "cooldown": 10,
+            "cooldownUnit": "sec"
+          }
+        },
+        {
+          "key": "improved_vampiric_embrace",
+          "location": {
+            "row": 4,
+            "col": 2
+          },
+          "requires": {
+            "row": 4,
+            "col": 1
+          },
+          "maxRank": 2,
+          "icon": "images/icons/large/spell_shadow_improvedvampiricembrace.jpg"
+        },
+        {
+          "key": "darkness",
+          "location": {
+            "row": 5,
+            "col": 2
+          },
+          "maxRank": 5,
+          "icon": "images/Classic/Spells/Spell_Shadow_Twilight.png"
+        },
+        {
+          "key": "shadowform",
+          "location": {
+            "row": 6,
+            "col": 1
+          },
+          "requires": {
+            "row": 4,
+            "col": 1
+          },
+          "maxRank": 1,
+          "icon": "images/Classic/Spells/Spell_Shadow_Shadowform.png",
+          "spell": {
+            "resourceCost": 40,
+            "resourceType": "%mana",
+            "castTime": 0.0,
+            "cooldown": 1.5,
+            "cooldownUnit": "sec"
+          }
+        }
+      ]
+    }
+  ]
+}
