@@ -1,45 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.hedbor.evan.classictalents.controller.MainViewController"
-      stylesheets="@ClassStyles.css,@TalentStyles.css"
-      styleClass="classBackground">
+      styleClass="class-background">
   <!-- The nested hbox here prevents the inner hbox from expanding to fill all horizontal space -->
   <HBox alignment="CENTER">
     <padding>
       <Insets top="20" bottom="20"/>
     </padding>
-    <HBox spacing="30" alignment="CENTER" HBox.hgrow="NEVER" styleClass="classFooter">
+    <HBox fx:id="classButtonsPane" styleClass="class-footer"
+          spacing="30" alignment="CENTER" HBox.hgrow="NEVER">
       <padding>
         <Insets top="10" right="15" bottom="10" left="15"/>
       </padding>
-      <Button HBox.hgrow="NEVER" styleClass="talentButton">
-        <graphic>
-          <StackPane>
-            <ImageView>
-              <Image url="@../images/test/classic_temp.jpg"/>
-            </ImageView>
-            <ImageView>
-              <Image url="@../images/button/border.png"/>
-            </ImageView>
-            <ImageView>
-              <Image url="@../images/button/highlight_hover.png"/>
-            </ImageView>
-          </StackPane>
-        </graphic>
-      </Button>
+      <fx:include source="TalentButtonView.fxml"/>
+      <fx:include source="TalentButtonView.fxml"/>
+      <fx:include source="TalentButtonView.fxml"/>
     </HBox>
   </HBox>
-  <HBox alignment="CENTER">
-    <fx:include source="WowClass.fxml"/>
+  <HBox fx:id="classViewPane" alignment="CENTER">
+    <fx:include source="WowClassView.fxml"/>
   </HBox>
 </VBox>

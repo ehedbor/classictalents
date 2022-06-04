@@ -3,8 +3,19 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.6.21"
     application
+    id("io.freefair.sass-java") version "6.4.3"
     id("org.openjfx.javafxplugin") version "0.0.13"
     id("org.beryx.jlink") version "2.24.4"
+}
+
+group = "org.hedbor.evan"
+version = "2.0.0"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
 }
 
 application {
@@ -23,17 +34,7 @@ jlink {
     }
 }
 
-group = "org.hedbor.evan"
-version = "2.0.0-alpha"
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-}
-
-tasks.withType<Jar> {
+tasks.jar {
     archiveBaseName.set(rootProject.name)
     manifest {
         attributes["Name"] = "org/hedbor/evan/classictalents"
@@ -46,11 +47,13 @@ tasks.withType<Jar> {
     }
 }
 
-//tasks.withType<Link> {
-//    archiveClassifier.set("")
-//}
+tasks.jar.configure {
+    exclude("**/*.sass")
+    exclude("**/*.scss")
+    exclude("**/*.css.map")
+}
 
-tasks.withType<KotlinCompile> {
+tasks.compileKotlin {
     kotlinOptions.jvmTarget = "17"
     kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
 }

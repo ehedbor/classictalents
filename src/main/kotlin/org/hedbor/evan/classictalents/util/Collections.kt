@@ -13,6 +13,11 @@ fun <K, V> observableMapOf(vararg entries: Pair<K, V>): ObservableMap<K, V> =
 fun <E> observableSetOf(vararg items: E): ObservableSet<E> =
     FXCollections.observableSet(*items)
 
-fun <E> emptyObservableList(): ObservableList<E> = observableListOf()
-fun <K, V> emptyObservableMap(): ObservableMap<K, V> = emptyObservableMap()
-fun <E> emptyObservableSet(): ObservableSet<E> = emptyObservableSet()
+fun <E> emptyObservableList(mutable: Boolean = true): ObservableList<E> =
+    if (mutable) observableListOf() else FXCollections.emptyObservableList()
+
+fun <K, V> emptyObservableMap(mutable: Boolean = true): ObservableMap<K, V> =
+    if (mutable) observableMapOf() else FXCollections.emptyObservableMap()
+
+fun <E> emptyObservableSet(mutable: Boolean = true): ObservableSet<E> =
+    if (mutable) observableSetOf() else FXCollections.emptyObservableSet()

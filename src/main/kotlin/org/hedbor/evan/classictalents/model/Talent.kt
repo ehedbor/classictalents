@@ -9,10 +9,13 @@ class Talent {
     var name by property<String>()
     fun nameProperty() = getProperty(Talent::name)
 
-    var location by property<Pair<Int, Int>>()
-    fun locationProperty() = getProperty(Talent::location)
+    var row by property<Int>()
+    fun rowProperty() = getProperty(Talent::row)
 
-    var prerequisite by property<String>()
+    var column by property<Int>()
+    fun columnProperty() = getProperty(Talent::column)
+
+    var prerequisite by property<Talent?>()
     fun prerequisiteProperty() = getProperty(Talent::prerequisite)
 
     var maxRank by property<Int>()
@@ -27,6 +30,6 @@ class Talent {
     var description by property<String>()
     fun descriptionProperty() = getProperty(Talent::description)
 
-    var spell by property<Spell>()
+    var spell by property<Spell?>()
     fun spellProperty() = getProperty(Talent::spell)
 }

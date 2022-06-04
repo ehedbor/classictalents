@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.hedbor.evan.classictalents.controller.WowClassController">
+  <HBox fx:id="specsPane" spacing="10" alignment="CENTER">
+    <padding>
+      <Insets topRightBottomLeft="20"/>
+    </padding>
+    <fx:include source="SpecializationView.fxml" HBox.hgrow="NEVER"/>
+    <fx:include source="SpecializationView.fxml" HBox.hgrow="NEVER"/>
+    <fx:include source="SpecializationView.fxml" HBox.hgrow="NEVER"/>
+  </HBox>
+  <HBox alignment="CENTER">
+    <padding>
+      <Insets right="10" bottom="20" left="10"/>
+    </padding>
+    <VBox styleClass="class-footer" alignment="CENTER">
+      <padding>
+        <Insets right="10" left="10"/>
+      </padding>
+      <Label styleClass="class-description-text" text="Talent Info:" VBox.vgrow="NEVER"/>
+      <Label fx:id="requiredLevelLabel" styleClass="class-description-text" VBox.vgrow="NEVER"/>
+      <Label fx:id="remainingPointsLabel" styleClass="class-description-text" VBox.vgrow="NEVER"/>
+    </VBox>
+  </HBox>
+</VBox>
