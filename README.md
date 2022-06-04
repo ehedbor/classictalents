@@ -1,8 +1,8 @@
 # WoW Classic Talent Calculator
 A small hobby project built with Kotlin and TornadoFX to practice application development in a practical context.
 This program is a talent calculator for the original version of World of Warcraft that was re-released with WoW: Classic.
-Currently, only a few of the classes are supported. In the future, I plan to support all classes across three expansions
-(Vanilla, TBC, WotLK).
+Currently, all Vanilla classes are supported. In the future, I plan to support all classes across three expansions
+(TBC, WotLK).
                      
 ## Installation
 First, make sure to install Java 1.8.
