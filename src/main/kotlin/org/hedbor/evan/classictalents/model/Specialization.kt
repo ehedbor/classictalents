@@ -2,6 +2,7 @@ package org.hedbor.evan.classictalents.model
 
 import org.hedbor.evan.classictalents.util.emptyObservableList
 import org.hedbor.evan.classictalents.util.getProperty
+import org.hedbor.evan.classictalents.util.observableListOf
 import org.hedbor.evan.classictalents.util.property
 
 
@@ -16,6 +17,6 @@ class Specialization {
     var background by property<String>()
     fun backgroundProperty() = getProperty(Specialization::background)
 
-    var talents by property(emptyObservableList<Talent>())
+    var talents by property(observableListOf<Talent>())
     fun talentsProperty() = getProperty(Specialization::talents)
 }

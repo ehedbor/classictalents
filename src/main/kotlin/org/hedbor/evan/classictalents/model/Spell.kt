@@ -29,10 +29,10 @@ class Spell {
     var cooldownUnit by property<CooldownUnit>()
     fun cooldownUnitProperty() = getProperty(Spell::cooldownUnit)
 
-    var reagents by property(emptyObservableList<String>())
+    var reagents by property(observableListOf<String>())
     fun reagentsProperty() = getProperty<String>(Spell::reagents)
 
-    var tools by property(emptyObservableList<String>())
+    var tools by property(observableListOf<String>())
     fun toolsProperty() = getProperty<String>(Spell::tools)
 }
 

@@ -7,8 +7,8 @@ import javafx.scene.layout.StackPane
 import javafx.scene.layout.VBox
 import javafx.stage.Stage
 
-internal const val ASSETS_ROOT = "/org/hedbor/evan/classictalents"
 
+internal const val ASSETS_ROOT = "/org/hedbor/evan/classictalents"
 
 class ClassicTalentsApp : Application() {
     override fun start(primaryStage: Stage) {

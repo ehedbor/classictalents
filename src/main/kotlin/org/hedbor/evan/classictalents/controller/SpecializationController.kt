@@ -17,7 +17,7 @@ import org.hedbor.evan.classictalents.model.Talent
 import org.hedbor.evan.classictalents.util.doubleBinding
 import org.hedbor.evan.classictalents.util.objectBinding
 
-class SpecializationViewController {
+class SpecializationController {
     companion object {
         /** adjusted button insets */
         private const val ADJUSTED_INSETS: Double = 5.0
@@ -42,7 +42,7 @@ class SpecializationViewController {
 
     @FXML
     private fun onResetButtonClicked(event: MouseEvent) {
-
+        TODO()
     }
 
     private fun initializeTalentGrid() {
@@ -51,8 +51,11 @@ class SpecializationViewController {
                 Image("$ASSETS_ROOT/$path"),
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
-                    BackgroundPosition.CENTER,
-                BackgroundSize(100.0, 100.0, true, true, false, false)
+                BackgroundPosition.CENTER,
+                BackgroundSize(
+                    100.0, 100.0,
+                    true, true,
+                    false, false)
             ))
         })
 

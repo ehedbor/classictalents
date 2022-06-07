@@ -29,6 +29,6 @@ class TalentButtonController {
 
     @FXML
     private fun onMouseClicked(event: MouseEvent) {
-        
+        TODO()
     }
 }

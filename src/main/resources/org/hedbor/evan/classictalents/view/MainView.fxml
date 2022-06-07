@@ -6,7 +6,7 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.hedbor.evan.classictalents.controller.MainViewController"
+      fx:controller="org.hedbor.evan.classictalents.controller.MainController"
       styleClass="class-background">
   <!-- The nested hbox here prevents the inner hbox from expanding to fill all horizontal space -->
   <HBox alignment="CENTER">
@@ -18,12 +18,10 @@
       <padding>
         <Insets top="10" right="15" bottom="10" left="15"/>
       </padding>
-      <fx:include source="TalentButtonView.fxml"/>
-      <fx:include source="TalentButtonView.fxml"/>
-      <fx:include source="TalentButtonView.fxml"/>
+      <!-- include class selection buttons here -->
     </HBox>
   </HBox>
   <HBox fx:id="classViewPane" alignment="CENTER">
-    <fx:include source="WowClassView.fxml"/>
+    <!-- include current class view here -->
   </HBox>
 </VBox>

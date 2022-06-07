@@ -12,9 +12,7 @@
     <padding>
       <Insets topRightBottomLeft="20"/>
     </padding>
-    <fx:include source="SpecializationView.fxml" HBox.hgrow="NEVER"/>
-    <fx:include source="SpecializationView.fxml" HBox.hgrow="NEVER"/>
-    <fx:include source="SpecializationView.fxml" HBox.hgrow="NEVER"/>
+    <!-- include specs here -->
   </HBox>
   <HBox alignment="CENTER">
     <padding>
