@@ -2,12 +2,12 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 
-<?import javafx.scene.control.Tooltip?>
 <StackPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="org.hedbor.evan.classictalents.controller.TalentButtonController"
@@ -27,9 +27,7 @@
     </tooltip>
     <graphic>
       <StackPane>
-        <ImageView fx:id="iconView" styleClass="talent-icon">
-          <Image url="@../images/test/classic_temp.jpg"/>
-        </ImageView>
+        <ImageView fx:id="iconView" styleClass="talent-icon"/>
         <ImageView styleClass="talent-icon">
           <Image url="@../images/button/border.png"/>
         </ImageView>

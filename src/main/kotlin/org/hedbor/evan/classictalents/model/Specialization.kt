@@ -1,6 +1,5 @@
 package org.hedbor.evan.classictalents.model
 
-import org.hedbor.evan.classictalents.util.emptyObservableList
 import org.hedbor.evan.classictalents.util.getProperty
 import org.hedbor.evan.classictalents.util.observableListOf
 import org.hedbor.evan.classictalents.util.property

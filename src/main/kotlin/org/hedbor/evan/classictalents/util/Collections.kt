@@ -18,3 +18,15 @@ fun <E> emptyObservableList(): ObservableList<E> = FXCollections.emptyObservable
 fun <K, V> emptyObservableMap(): ObservableMap<K, V> = FXCollections.emptyObservableMap()
 
 fun <E> emptyObservableSet(): ObservableSet<E> = FXCollections.emptyObservableSet()
+
+fun <E> Iterable<E>.toObservableList(): ObservableList<E> =
+    observableListOf<E>().also { it.addAll(this) }
+
+fun <K, V> Map<K, V>.toObservableMap(): ObservableMap<K, V> =
+    observableMapOf<K, V>().also { it.putAll(this) }
+
+fun <K, V> Iterable<Pair<K, V>>.toObservableMap(): ObservableMap<K, V> =
+    observableMapOf<K, V>().also { it.putAll(this) }
+
+fun <E> Iterable<E>.toObservableSet(): ObservableSet<E> =
+    observableSetOf<E>().also { it.addAll(this) }
