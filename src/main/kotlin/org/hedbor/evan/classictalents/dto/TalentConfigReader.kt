@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import javafx.scene.image.Image
-import javafx.scene.layout.Background
 import javafx.scene.paint.Color
 import org.hedbor.evan.classictalents.ASSETS_ROOT
 import org.hedbor.evan.classictalents.model.*
@@ -40,7 +39,7 @@ class TalentConfigReader {
         val errorPath = "in file '$filePath', class '$className'"
 
         wowClass.name = className
-        wowClass.icon = Image(validateAssetFile(errorPath, classDto.icon))
+        wowClass.icon = getImage(errorPath, classDto.icon)
         wowClass.color = try {
             Color.web(classDto.color)
         } catch (e: IllegalArgumentException) {
@@ -57,8 +56,8 @@ class TalentConfigReader {
     private fun readSpec(errorPath: String, specName: String, specDto: SpecDto): Specialization {
         val spec = Specialization()
         spec.name = specName
-        spec.icon = Image(validateAssetFile(errorPath, specDto.icon))
-        spec.background = Image(validateAssetFile(errorPath, specDto.background))
+        spec.icon = getImage(errorPath, specDto.icon)
+        spec.background = getImage(errorPath, specDto.background)
 
         for ((talentName, talentDto) in specDto.talents) {
             require(specDto.talents.count { it.value.location == talentDto.location } == 1) {
@@ -71,7 +70,17 @@ class TalentConfigReader {
         // now that all talents have been loaded, resolve prerequisites
         for ((_, talentDto) in specDto.talents) {
             if (talentDto.requires == null) continue
-            TODO()
+            val talent = spec.talents.firstOrNull { it.row == talentDto.location[0] && it.column == talentDto.location[1] }
+            val prereq = spec.talents.firstOrNull { it.name == talentDto.requires }
+
+            require(talent != null) {
+                "Couldn't find talent at (${talentDto.location[0]}, ${talentDto.location[1]})." +
+                    " This should not happen.\n\t$errorPath"
+            }
+            require(prereq != null) {
+                "Couldn't find prerequisite talent called '${talentDto.requires}'\n\t$errorPath, talent '${talent.name}'"
+            }
+            talent.prerequisite = prereq
         }
 
         return spec
@@ -103,7 +112,7 @@ class TalentConfigReader {
         }
         talent.maxRank = talentDto.maxRank
 
-        talent.icon = Image(validateAssetFile(errorPath, talentDto.icon))
+        talent.icon = getImage(errorPath, talentDto.icon)
 
         // TODO: validate choice format
         talent.description = talentDto.description
@@ -171,7 +180,7 @@ class TalentConfigReader {
         } else {
             val errorMsg = {
                 "Spell cast time must be of the form [Instant|<time:float> sec] " +
-                    "(got '${spellDto.range}')\n\t$errorPath"
+                    "(got '${spellDto.castTime}')\n\t$errorPath"
             }
 
             val timeMatch = Regex("^\\d+(\\.\\d+)?").find(castTimeString)
@@ -194,7 +203,7 @@ class TalentConfigReader {
             require(cooldownMatch != null, errorMsg)
             spell.cooldown = cooldownMatch.value.toDouble()
 
-            val unit = cooldownString.substring(cooldownMatch.range.last + 1)
+            val unit = cooldownString.substring(cooldownMatch.range.last + 1).trim()
             spell.cooldownUnit = when (unit) {
                 "sec", "secs", "second", "seconds" -> CooldownUnit.SECONDS
                 "min", "mins", "minute", "minutes" -> CooldownUnit.MINUTES
@@ -206,15 +215,17 @@ class TalentConfigReader {
         return spell
     }
 
-    private fun validateAssetFile(errorPath: String, path: String): String {
+    private fun getImage(errorPath: String, path: String): Image {
         val actualPath = if (path.startsWith("/")) {
             path
         } else {
             "$ASSETS_ROOT/$path"
         }
-        require(javaClass.getResource(path) != null) {
-            "Could not find asset at '$path' (absolute='$actualPath')\n\t$errorPath"
+
+        val resource = javaClass.getResourceAsStream(actualPath)
+        require(resource != null) {
+            "Could not find image at '$path' (absolute='$actualPath')\n\t$errorPath"
         }
-        return actualPath
+        return Image(resource)
     }
 }

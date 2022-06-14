@@ -1,21 +1,21 @@
 Rogue:
-  Icon: "images/icons/large/classicon_rogue.jpg"
+  Icon: "images/rogue/ClassIcon.png"
   Color: "#FFF468"
   Classic:
     Specializations:
       Assassination:
-        Icon: "images/Classic/Abilities/Ability_Rogue_Eviscerate.png"
+        Icon: "images/rogue/Eviscerate.png"
         Background: "images/backgrounds/rogue_assassination.jpg"
         Talents:
           Improved Eviscerate:
             Location: [0, 0]
             Max Rank: 3
-            Icon: "images/Classic/Abilities/Ability_Rogue_Eviscerate.png"
+            Icon: "images/rogue/Eviscerate.png"
             Description: Increases the damage done by your Eviscerate ability by {:|5,10,15}%.
           Remorseless Attacks:
             Location: [0, 1]
             Max Rank: 2
-            Icon: "images/Classic/Abilities/Ability_FiegnDead.png"
+            Icon: "images/rogue/RemorselessAttacks.png"
             Description: >-
               After killing an opponent that yields experience or honor, gives you a {:|20,40}% 
               increased critical strike chance on your next Sinister Strike, Backstab, Ambush, or 
@@ -23,61 +23,61 @@ Rogue:
           Malice:
             Location: [0, 2]
             Max Rank: 5
-            Icon: "images/Classic/Abilities/Ability_Racial_BloodRage.png"
+            Icon: "images/warrior/BloodRage.png"
             Description: Increases your critical strike chance by {:|1,2,3,4,5}%.
           Ruthlessness:
             Location: [1, 0]
             Max Rank: 3
-            Icon: "images/Classic/Abilities/Ability_Druid_Disembowel.png"
+            Icon: "images/druid/Rake.png"
             Description: >-
               Gives your finishing moves a {:|20,40,60}% chance to add a combo point to your target.
           Murder:
             Location: [1, 1]
             Max Rank: 2
-            Icon: "images/Classic/Spells/Spell_Shadow_DeathScream.png"
+            Icon: "images/skills/ResurrectionSickness.png"
             Description: >-
               Increases all damage cause against Humanoid, Giant, Beast and Dragonkin targets by 
               {:|1,2}%.
           Improved Slice and Dice:
             Location: [1, 3]
             Max Rank: 3
-            Icon: "images/Classic/Abilities/Ability_Rogue_SliceDice.png"
+            Icon: "images/rogue/SliceAndDice.png"
             Description: Increases the duration of your Slice and Dice ability by {:|15,30,45}%.
           Relentless Strikes:
             Location: [2, 0]
             Max Rank: 1
-            Icon: "images/Classic/Abilities/Ability_Warrior_DecisiveStrike.png"
+            Icon: "images/warrior/Slam.png"
             Description: >-
               Your finishing moves have a 20% chance per combo point to restore 25 Energy.
           Improved Expose Armor:
             Location: [2, 1]
             Max Rank: 2
-            Icon: "images/Classic/Abilities/Ability_Warrior_Riposte.png"
+            Icon: "images/rogue/ExposeArmor.png"
             Description: Increases the armor reduced by your Expose Armor ability by {:|25,50}%.
           Lethality:
             Location: [2, 2]
-            Requires: Pos 0, 2
+            Requires: Malice
             Max Rank: 5
-            Icon: "images/Classic/Abilities/Ability_CriticalStrike.png"
+            Icon: "images/rogue/Lethality.png"
             Description: >-
               Increases the critical strike damage bonus of your Sinister Strike, Gouge, Backstab, 
               Ghostly Strike, and Hemorrhage abilities by {:|6,12,18,24,30}%.
           Vile Poisons:
             Location: [3, 1]
             Max Rank: 5
-            Icon: "images/Classic/Abilities/Ability_Rogue_FeignDeath.png"
+            Icon: "images/hunter/FeignDeath.png"
             Description: >-
               Increases the damage dealt by your poisons by {:|4,8,12,16,20}% and gives your poisons 
               an additional {:|8,16,24,32,40}% chance to resist dispel effects.
           Improved Poisons:
             Location: [3, 2]
             Max Rank: 5
-            Icon: "images/Classic/Abilities/Ability_Poisons.png"
+            Icon: "images/rogue/Poisons.png"
             Description: Increases the chance to apply poisons to your target by {:|2,4,6,8,10}%.
           Cold Blood:
             Location: [4, 1]
             Max Rank: 1
-            Icon: "images/Classic/Spells/Spell_Ice_Lament.png"
+            Icon: "images/mage/IceBarrier.png"
             Description: >-
               When activated, increases the critical strike chance of your next Sinister Strike, 
               Backstab, Ambush, or Eviscerate by 100%.
@@ -87,69 +87,69 @@ Rogue:
           Improved Kidney Shot:
             Location: [4, 2]
             Max Rank: 3
-            Icon: "images/Classic/Abilities/Ability_Rogue_KidneyShot.png"
+            Icon: "images/rogue/KidneyShot.png"
             Description: >-
               While affected by your Kidney Shot ability, the target receives an additional 
               {:|3,6,9}% damage from all sources.
           Seal Fate:
             Location: [5, 1]
-            Requires: Pos 4, 1
+            Requires: Cold Blood
             Max Rank: 5
-            Icon: "images/Classic/Spells/Spell_Shadow_ChillTouch.png"
+            Icon: "images/warlock/CurseOfTheElements.png"
             Description: >-
               Your critical strikes from abilities that add combo points have a {:|20,40,60,80,100}% 
               chance to add an additional combo point.
           Vigor:
             Location: [6, 1]
             Max Rank: 1
-            Icon: "images/Classic/Spells/Spell_Nature_EarthBindTotem.png"
+            Icon: "images/shaman/StrengthOfEarthTotem.png"
             Description: Increases your maximum Energy by 10.
       Combat:
-        Icon: "images/Classic/Abilities/Ability_BackStab.png"
+        Icon: "images/rogue/Backstab.png"
         Background: "images/backgrounds/rogue_combat.jpg"
         Talents:
           Improved Gouge:
             Location: [0, 0]
             Max Rank: 3
-            Icon: "images/Classic/Abilities/Ability_Gouge.png"
+            Icon: "images/rogue/Gouge.png"
             Description: Increases the effect duration of your Gouge ability by {:|0.5,1,1.5} sec.
           Improved Sinister Strike:
             Location: [0, 1]
             Max Rank: 2
-            Icon: "images/Classic/Spells/Spell_Shadow_RitualOfSacrifice.png"
+            Icon: "images/rogue/SinisterStrike.png"
             Description: Reduces the Energy cost of your Sinister Strike ability by {:|3,5}.
           Lightning Reflexes:
             Location: [0, 2]
             Max Rank: 5
-            Icon: "images/Classic/Spells/Spell_Nature_Invisibilty.png"
+            Icon: "images/hunter/LightningReflexes.png"
             Description: Increases your Dodge chance by {:|1,2,3,4,5}%.
           Improved Backstab:
             Location: [1, 0]
             Max Rank: 3
-            Icon: "images/Classic/Abilities/Ability_BackStab.png"
+            Icon: "images/rogue/Backstab.png"
             Description: >-
               Increases the critical strike chance of your Backstab ability by {:|10,20,30}%.
           Deflection:
             Location: [1, 1]
             Max Rank: 5
-            Icon: "images/Classic/Abilities/Ability_Parry.png"
+            Icon: "images/skills/Parry.png"
             Description: Increases your Parry chance by {:|1,2,3,4,5}%.
           Precision:
             Location: [1, 2]
             Max Rank: 5
-            Icon: "images/Classic/Abilities/Ability_Marksmanship.png"
+            Icon: "images/skills/Marksmanship.png"
             Description: Increases your chance to hit with melee weapons by {:|1,2,3,4,5}%.
           Endurance:
             Location: [2, 0]
             Max Rank: 2
-            Icon: "images/Classic/Spells/Spell_Shadow_ShadowWard.png"
+            Icon: "images/rogue/Evasion.png"
             Description: >-
               Reduces the cooldown of your Sprint and Evasion abilities by {:|45 sec,1.5 min}.
           Riposte:
             Location: [2, 1]
-            Requires: Pos 1, 1
+            Requires: Deflection
             Max Rank: 1
-            Icon: "images/Classic/Abilities/Ability_Warrior_Challange.png"
+            Icon: "images/warrior/Retaliation.png"
             Description: >-
               A strike that becomes active after parrying an opponent's attack. This attack deals 
               150% weapon damage and disarms the target for 6 sec.
@@ -160,39 +160,39 @@ Rogue:
           Improved Sprint:
             Location: [2, 3]
             Max Rank: 2
-            Icon: "images/Classic/Abilities/Ability_Rogue_Sprint.png"
+            Icon: "images/rogue/Sprint.png"
             Description: >-
               Gives a {:|50,100}% chance to remove all movement impairing effects when you activate 
               your Sprint ability.
           Improved Kick:
             Location: [3, 0]
             Max Rank: 2
-            Icon: "images/Classic/Abilities/Ability_Kick.png"
+            Icon: "images/rogue/Kick.png"
             Description: >-
               Gives your Kick ability a {:|50,100}% chance to silence the target for 2 sec.
           Dagger Specialization:
             Location: [3, 1]
             Max Rank: 5
-            Icon: "images/Classic/Weapons/INV_Weapon_ShortBlade_05.png"
+            Icon: "images/skills/DaggerSpecialization.png"
             Description: >-
               Increases your chance to get a critical strike with Daggers by {:|1,2,3,4,5}%.
           Dual Wield Specialization:
             Location: [3, 2]
-            Requires: Pos 1, 2
+            Requires: Precision
             Max Rank: 5
-            Icon: "images/Classic/Abilities/Ability_DualWield.png"
+            Icon: "images/skills/DualWield.png"
             Description: Increases the damage done by your offhand weapon by {:|10,20,30,40,50}%.
           Mace Specialization:
             Location: [4, 0]
             Max Rank: 5
-            Icon: "images/Classic/Weapons/INV_Mace_01.png"
+            Icon: "images/skills/MaceSpecialization.png"
             Description: >-
               Increases your skill with Maces by {:|1,2,3,4,5}, and gives you a {:|1,2,3,4,5}% 
               chance to stun your target for 3 sec with a mace.
           Blade Flurry:
             Location: [4, 1]
             Max Rank: 1
-            Icon: "images/Classic/Abilities/Ability_Warrior_PunishingBlow.png"
+            Icon: "images/warrior/MockingBlow.png"
             Description: >-
               Increases your attack speed by 20%. In addition, attacks strike an additional nearby 
               opponent. Lasts 15 sec.
@@ -203,85 +203,85 @@ Rogue:
           Sword Specialization:
             Location: [4, 2]
             Max Rank: 5
-            Icon: "images/Classic/Weapons/INV_Sword_27.png"
+            Icon: "images/skills/SwordSpecialization.png"
             Description: >-
               Gives you a {:|1,2,3,4,5}% chance to get an extra attack on the same target after 
               dealing damage with your Sword.
           Fist Weapon Specialization:
             Location: [4, 3]
             Max Rank: 5
-            Icon: "images/Classic/Armor/INV_Gauntlets_04.png"
+            Icon: "images/skills/FistWeaponSpecialization.png"
             Description: >-
               Increases your chance to get a critical strike with Fist Weapons by {:|1,2,3,4,5}%.
           Weapon Expertise:
             Location: [5, 1]
-            Requires: Pos 4, 1
+            Requires: Blade Flurry
             Max Rank: 2
-            Icon: "images/Classic/Spells/Spell_Holy_BlessingOfStrength.png"
+            Icon: "images/paladin/Reckoning.png"
             Description: Increases your skill with Sword, Fist and Dagger weapons by {:|3,5}.
           Aggression:
             Location: [5, 2]
             Max Rank: 3
-            Icon: "images/Classic/Abilities/Ability_Racial_Avatar.png"
+            Icon: "images/rogue/Aggression.png"
             Description: >-
               Increases the damage of your Sinister Strike and Eviscerate abilities by {:|2,4,6}%.
           Adrenaline Rush:
             Location: [6, 1]
             Max Rank: 1
-            Icon: "images/Classic/Spells/Spell_Shadow_ShadowWordDominate.png"
+            Icon: "images/priest/MindBlast.png"
             Description: Increases your Energy regeneration rate by 100% for 15 sec.
             Spell:
               Cast Time: Instant
               Cooldown: 5 min
       Sublety:
-        Icon: "images/Classic/Abilities/Ability_Stealth.png"
+        Icon: "images/rogue/Stealth.png"
         Background: "images/backgrounds/rogue_subtlety.jpg"
         Talents:
           Master of Deception:
             Location: [0, 1]
             Max Rank: 5
-            Icon: "images/Classic/Spells/Spell_Shadow_Charm.png"
+            Icon: "images/warlock/Fear.png"
             Description: >-
               Reduces the chance enemies have to detect you while in Stealth mode.
               {0:?1:,>1:More effective than Master of Deception (Rank '{0:|1,2,3,4}').}
           Opportunity:
             Location: [0, 2]
             Max Rank: 5
-            Icon: "images/Classic/Abilities/Ability_Warrior_WarCry.png"
+            Icon: "images/warrior/DemoralizingShout.png"
             Description: >-
               Increases the damage dealt when striking from behind with your Backstab, Garrote, or 
               Ambush abilities by {:|4,8,12,16,20}%.
           Sleight of Hand:
             Location: [1, 0]
             Max Rank: 2
-            Icon: "images/Classic/Abilities/Ability_Rogue_Feint.png"
+            Icon: "images/rogue/Feint.png"
             Description: >-
               Reduces the chance you are critically hit by melee and ranged attacks by {:|1,2}% and 
               increases the threat reduction of your Feint ability by {:|10,20}%.
           Elusiveness:
             Location: [1, 1]
             Max Rank: 2
-            Icon: "images/Classic/Spells/Spell_Magic_LesserInvisibilty.png"
+            Icon: "images/priest/Fade.png"
             Description: >-
               Reduces the cooldown of your Vanish and Blind abilities by {:|45 sec,1.5 min}.
           Camouflage:
             Location: [1, 2]
             Max Rank: 5
-            Icon: "images/Classic/Abilities/Ability_Stealth.png"
+            Icon: "images/rogue/Stealth.png"
             Description: >-
               Increases your speed while stealthed by {:|3,6,9,12,15}% and reduces the cooldown of 
               your Stealth ability by {:|1,2,3,4,5} sec.
           Initiative:
             Location: [2, 0]
             Max Rank: 3
-            Icon: "images/Classic/Spells/Spell_Shadow_Fumble.png"
+            Icon: "images/rogue/Initiative.png"
             Description: >-
               Gives you a {:|25,30}% chance to add an additional combo point to your target when 
               using your Ambush, Garrote, or Cheap Shot ability.
           Ghostly Strike:
             Location: [2, 1]
             Max Rank: 1
-            Icon: "images/Classic/Spells/Spell_Shadow_Curse.png"
+            Icon: "images/warlock/SuccubusLashOfPain.png"
             Description: >-
               A strike that deals 125% weapon damage and increases your chance to dodge by 15% for 
               7 sec. Awards 1 combo point.
@@ -293,27 +293,27 @@ Rogue:
           Improved Ambush:
             Location: [2, 2]
             Max Rank: 3
-            Icon: "images/Classic/Abilities/Ability_Rogue_Ambush.png"
+            Icon: "images/rogue/Ambush.png"
             Description: >-
               Increases the critical strike chance of your Ambush ability by {:|15,30,45}%.
           Setup:
             Location: [3, 0]
             Max Rank: 3
-            Icon: "images/Classic/Spells/Spell_Nature_MirrorImage.png"
+            Icon: "images/warrior/Anticipation.png"
             Description: >-
               Gives you a {:|15,30,45}% chance to add a combo point to your target after dodging 
               their attack or fully resisting one of their spells.
           Improved Sap:
             Location: [3, 1]
             Max Rank: 3
-            Icon: "images/Classic/Abilities/Ability_Sap.png"
+            Icon: "images/rogue/Sap.png"
             Description: >-
               Gives you a {:|30,60,90}% chance to return to stealth mode after using your Sap 
               ability.
           Serrated Blades:
             Location: [3, 2]
             Max Rank: 3
-            Icon: "images/Classic/Weapons/INV_Sword_17.png"
+            Icon: "images/rogue/SerratedBlades.png"
             Description: >-
               Causes your attacks to ignore 0 of your target's Armor and increases the damage dealt 
               by your Rupture ability by {:|10,20,30}%. The amount of Armor reduced increases with
@@ -321,14 +321,14 @@ Rogue:
           Heightened Senses:
             Location: [4, 0]
             Max Rank: 2
-            Icon: "images/Classic/Abilities/Ability_Ambush.png"
+            Icon: "images/druid/Prowl.png"
             Description: >-
               Increases your Stealth detection and reduces the chance you are hit by spells and 
               ranged attacks by {0:|1,2}%. {0:?=2:More effective than Heightened Senses (Rank 1).}
           Preparation:
             Location: [4, 1]
             Max Rank: 1
-            Icon: "images/Classic/Spells/Spell_Shadow_AntiShadow.png"
+            Icon: "images/warlock/ShadowWard.png"
             Description: >-
               When activated, this ability immediately finishes the cooldown on your other Rogue 
               abilities.
@@ -338,14 +338,14 @@ Rogue:
           Dirty Deeds:
             Location: [4, 2]
             Max Rank: 2
-            Icon: "images/Classic/Spells/Spell_Shadow_SummonSuccubus.png"
+            Icon: "images/warlock/SummonSuccubus.png"
             Description: >-
               Reduces the Energy cost of your Cheap Shot and Garrote abilities by {:|10,20}.
           Hemorrhage:
             Location: [4, 3]
-            Requires: Pos 3, 2
+            Requires: Serrated Blades
             Max Rank: 1
-            Icon: "images/Classic/Spells/Spell_Shadow_LifeDrain.png"
+            Icon: "images/warlock/HealthFunnel.png"
             Description: >-
               An instant strike that damages the opponent and causes the target to hemorrhage, 
               increasing any Physical damage dealt to the target by up to 3. Lasts 30 charges or 
@@ -357,14 +357,14 @@ Rogue:
           Deadliness:
             Location: [5, 2]
             Max Rank: 5
-            Icon: "images/icons/large/inv_weapon_crossbow_11.jpg"
+            Icon: "images/rogue/Deadliness.jpg"
             Description: >-
               Increases your attack power by {:|2,4,6,8,10}%.
           Premeditation:
             Location: [6, 1]
-            Requires: Pos 4, 1
+            Requires: Preparation
             Max Rank: 1
-            Icon: "images/Classic/Spells/Spell_Shadow_Possession.png"
+            Icon: "images/rogue/Premeditation.png"
             Description: >-
               When used, adds 2 combo points to your target. You must add to or use those combo 
               points within 10 sec or the combo points are lost.

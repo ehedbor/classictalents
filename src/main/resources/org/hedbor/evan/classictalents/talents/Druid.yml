@@ -1,21 +1,21 @@
 Druid:
-  Icon: "images/icons/large/classicon_druid.jpg"
+  Icon: "images/druid/ClassIcon.jpg"
   Color: "#FF7C0A"
   Classic:
     Specializations:
       Balance:
-        Icon: "images/Classic/Spells/Spell_Nature_StarFall.png"
+        Icon: "images/druid/Moonfire.png"
         Background: "images/backgrounds/druid_balance.jpg"
         Talents:
           Improved Wrath:
             Location: [0, 0]
             Max Rank: 5
-            Icon: "images/Classic/Spells/Spell_Nature_AbolishMagic.png"
+            Icon: "images/druid/Wrath.png"
             Description: Reduces the cast time of your Wrath spell by 0.{:|1,2,3,4,5} sec.
           Nature's Grasp:
             Location: [0, 1]
             Max Rank: 1
-            Icon: "images/Classic/Spells/Spell_Nature_NaturesWrath.png"
+            Icon: "images/druid/NaturesGrasp.png"
             Description: >-
               While active, any time an enemy strikes the caster they have a 35% chance to become 
               afflicted by Entangling Roots (Rank 1). Only usable outdoors. 1 charge. Lasts 45 sec.
@@ -25,46 +25,46 @@ Druid:
               Cooldown: 1 min
           Improved Nature's Grasp:
             Location: [0, 2]
-            Requires: Pos 0, 1
+            Requires: Nature's Grasp
             Max Rank: 4
-            Icon: "images/Classic/Spells/Spell_Nature_NaturesWrath.png"
+            Icon: "images/druid/NaturesGrasp.png"
             Description: >-
               Increases the chance for your Nature's Grasp to entangle an enemy by {:|15,30,45,60}%.
           Improved Entangling Roots:
             Location: [1, 0]
             Max Rank: 3
-            Icon: "images/Classic/Spells/Spell_Nature_StrangleVines.png"
+            Icon: "images/druid/EntanglingRoots.png"
             Description: >-
               Gives you a {:|40,70,100}% chance to avoid interruption caused by damage while casting
               Entangling Roots.
           Improved Moonfire:
             Location: [1, 1]
             Max Rank: 5
-            Icon: "images/Classic/Spells/Spell_Nature_StarFall.png"
+            Icon: "images/druid/Moonfire.png"
             Description: >-
               Increases the damage and critical strike chance of your Moonfire spell by 
               {:|2,4,6,8,10}%.
           Natural Weapons:
             Location: [1, 2]
             Max Rank: 5
-            Icon: "images/Classic/Weapons/INV_Staff_01.png"
+            Icon: "images/druid/FocusedStarlight.png"
             Description: >-
               Increases the damage you deal with physical attacks in all forms by {:|2,4,6,8,10}%.
           Natural Shapeshifter:
             Location: [1, 3]
             Max Rank: 3
-            Icon: "images/Classic/Spells/Spell_Nature_WispSplode.png"
+            Icon: "images/mage/ArcaneExplosion.png"
             Description: Reduces the mana cost of all shapeshifting by {:|1,2,3}0%.
           Improved Thorns:
             Location: [2, 0]
             Max Rank: 3
-            Icon: "images/Classic/Spells/Spell_Nature_Thorns.png"
+            Icon: "images/druid/Thorns.png"
             Description: Increases damage caused by your Thorns spell by {:|25,50,75}%
           Omen Of Clarity:
             Location: [2, 2]
-            Requires: Pos 2, 1
+            Requires: Natural Weapons
             Max Rank: 1
-            Icon: "images/Classic/Spells/Spell_Nature_CrystalBall.png"
+            Icon: "images/druid/OmenOfClarity.png"
             Description: >-
               Imbues the Druid with natural energy. Each of the Druid's melee attacks has a chance 
               of causing the caster to enter a Clearcasting state. The Clearcasting state reduces 
@@ -76,50 +76,50 @@ Druid:
           Nature's Reach:
             Location: [2, 3]
             Max Rank: 2
-            Icon: "images/Classic/Spells/Spell_Nature_NatureTouchGrow.png"
+            Icon: "images/skills/HerbGathering.png"
             Description: >-
               Increases the range of your Wrath, Entangling Roots, Faerie Fire, Moonfire, Starfire, 
               and Hurricane spells by {:|10,20}%.
           Vengeance:
             Location: [3, 1]
-            Requires: Pos 1, 1
+            Requires: Improved Moonfire
             Max Rank: 5
-            Icon: "images/Classic/Spells/Spell_Nature_Purge.png"
+            Icon: "images/mage/Evocation.png"
             Description: >-
               Increases the critical strike damage bonus of your Starfire, Moonfire, and Wrath 
               spells by {:|2,4,6,8,10}0%.
           Improved Starfire:
             Location: [3, 2]
             Max Rank: 5
-            Icon: "images/Classic/Spells/Spell_Arcane_StarFire.png"
+            Icon: "images/druid/Starfire.png"
             Description: >-
               Reduces the cast time of Starfire by 0.{:|1,2,3,4,5} sec and has a {:|3,6,9,12,15}% 
               chance to stun the target for 3 sec.
           Nature's Grace:
             Location: [4, 1]
             Max Rank: 1
-            Icon: "images/Classic/Spells/Spell_Nature_NaturesBlessing.png"
+            Icon: "images/druid/NaturesGrace.png"
             Description: >-
               All spell criticals grace you with a blesing of nature, reducing the casting time of 
               your next spell by 0.5 sec.
           Moonglow:
             Location: [4, 2]
             Max Rank: 3
-            Icon: "images/Classic/Spells/Spell_Nature_Sentinal.png"
+            Icon: "images/druid/Moonglow.png"
             Description: >-
               Reduces the Mana cost of your Moonfire, Starfire, Wrath, Healing Touch, Regrowth and 
               Rejuvenation spells by {:|3,6,9}%.
           Moonfury:
             Location: [5, 1]
             Max Rank: 5
-            Icon: "images/Classic/Spells/Spell_Nature_MoonGlow.png"
+            Icon: "images/druid/MoonkinAura.png"
             Description: >-
               Increases the damage done by your Starfire, Moonfire and Wrath spells by 
               {:|2,4,6,8,10}%.
           Moonkin Form:
             Location: [6, 1]
             Max Rank: 1
-            Icon: "images/Classic/Spells/Spell_Nature_ForceOfNature.png"
+            Icon: "images/druid/MoonkinForm.png"
             Description: >-
               Transforms the Druid into Moonkin Form. While in this form the armor contribution from 
               items is increased by 360% and all party members within 30 yards have their spell 
@@ -131,52 +131,52 @@ Druid:
               Cost: 35% of Base Mana
               Cast Time: Instant
       Feral Combat:
-        Icon: "images/Classic/Abilities/Ability_Racial_BearForm.png"
+        Icon: "images/druid/BearForm.png"
         Background: "images/backgrounds/druid_feral.jpg"
         Talents:
           Ferocity:
             Location: [0, 1]
             Max Rank: 5
-            Icon: "images/Classic/Abilities/Ability_Hunter_Pet_Hyena.png"
+            Icon: "images/hunter/Hyena.png"
             Description: >-
               Reduces the cost of your Maul, Swipe, Claw, and Rake abilities by {:|1,2,3,4,5} Rage 
               or Energy.
           Feral Aggression:
             Location: [0, 2]
             Max Rank: 5
-            Icon: "images/Classic/Abilities/Ability_Druid_DemoralizingRoar.png"
+            Icon: "images/druid/DemoralizingRoar.png"
             Description: >-
               Increases the Attack Power reduction of your Demoralizing Roar by {:|8,16,24,32,40}% 
               and the damage caused by your Ferocious Bite by {:|3,6,9,12,15}%.
           Feral Instinct:
             Location: [1, 0]
             Max Rank: 5
-            Icon: "images/Classic/Abilities/Ability_Ambush.png"
+            Icon: "images/druid/Prowl.png"
             Description: >-
               Increases threat caused in Bear and Dire Bear Form by {:|3,6,9,12,15}% and reduces the 
               chance enemies have to detect you while Prowling.
           Brutal Impact:
             Location: [1, 1]
             Max Rank: 2
-            Icon: "images/Classic/Abilities/Ability_Druid_Bash.png"
+            Icon: "images/druid/Bash.png"
             Description: >-
               Increases the stun duration of your Bash and Pounce abilities by {:|0.5,1} sec.
           Thick Hide:
             Location: [1, 2]
             Max Rank: 5
-            Icon: "images/Classic/Trade/INV_Misc_Pelt_Bear_03.png"
+            Icon: "images/druid/ThickHide.png"
             Description: Increases your Armor contribution from items by {:|2,4,6,8,10}%.
           Feline Swiftness:
             Location: [2, 0]
             Max Rank: 2
-            Icon: "images/Classic/Spells/Spell_Nature_SpiritWolf.png"
+            Icon: "images/shaman/GhostWolf.png"
             Description: >-
               Increases your movement speed by 15% while outdoors in Cat Form and increases your 
               chance to dodge while in Cat Form by {:|2,4}%.
           Feral Charge:
             Location: [2, 1]
             Max Rank: 1
-            Icon: "images/Classic/Abilities/Ability_Hunter_Pet_Bear.png"
+            Icon: "images/hunter/Bear.png"
             Description: >-
               Causes you to charge an enemy, immobilizing and interrupting any spell being cast for 
               4 sec.
@@ -188,48 +188,48 @@ Druid:
           Sharpened Claws:
             Location: [2, 2]
             Max Rank: 3
-            Icon: "images/Classic/Items/INV_Misc_MonsterClaw_04.png"
+            Icon: "images/hunter/Ferocity.png"
             Description: >-
               Increases your critical strike chance while in Bear, Dire Bear or Cat Form by 
               {:|2,4,6}%.
           Improved Shred:
             Location: [3, 0]
             Max Rank: 2
-            Icon: "images/Classic/Items/INV_Misc_MonsterFang_01.png"
+            Icon: "images/druid/Shred.png"
             Description: Reduces the Energy cost of your Shred ability by {:|6,12}.
           Predatory Strikes:
             Location: [3, 1]
             Max Rank: 3
-            Icon: "images/Classic/Abilities/Ability_Hunter_Pet_Cat.png"
+            Icon: "images/hunter/Cat.png"
             Description: >-
               Increases your melee attack power in Cat, Bear and Dire Bear Forms by {:|50,100,150}% 
               of your level.
           Blood Frenzy:
             Location: [3, 2]
-            Requires: Pos 2, 2
+            Requires: Sharpened Claws
             Max Rank: 2
-            Icon: "images/Classic/Abilities/Ability_GhoulFrenzy.png"
+            Icon: "images/druid/Rip.png"
             Description: >-
               Your critical strikes from Cat Form abilities that add combo points have a {:|50,100}% 
               chance to add an additional combo point.
           Primal Fury:
             Location: [3, 3]
-            Requires: Pos 2, 2
+            Requires: Sharpened Claws
             Max Rank: 2
-            Icon: "images/Classic/Abilities/Ability_Racial_Cannibalize.png"
+            Icon: "images/skills/Cannibalize.png"
             Description: >-
               Gives you a {:|50,100}% chance to gain an additional 5 Rage anytime you get a critical 
               strike while in Bear and Dire Bear Form.
           Savage Fury:
             Location: [4, 0]
             Max Rank: 2
-            Icon: "images/Classic/Abilities/Ability_Druid_Ravage.png"
+            Icon: "images/druid/Ravage.png"
             Description: >-
               Increases the damage caused by your Claw, Rake, Maul and Swipe abilities by {:|10,20}%.
           Faerie Fire (Feral):
             Location: [4, 2]
             Max Rank: 1
-            Icon: "images/Classic/Spells/Spell_Nature_FaerieFire.png"
+            Icon: "images/druid/FaerieFire.png"
             Description: >-
               Decrease the armor of the target by 175 for 40 sec. While affected, the target cannot 
               stealth or turn invisible.
@@ -239,9 +239,9 @@ Druid:
               Cooldown: 6 sec
           Heart Of the Wild:
             Location: [5, 1]
-            Requires: Pos 3, 1
+            Requires: Predatory Strikes
             Max Rank: 5
-            Icon: "images/Classic/Spells/Spell_Holy_BlessingOfAgility.png"
+            Icon: "images/druid/HeartOfTheWild.png"
             Description: >-
               Increases your Intellect by {:|4,8,12,16,20}%. In addition, while in Bear or Dire Bear 
               Form your Stamina is increased by {:|4,8,12,16,20}% and while in Cat Form your 
@@ -249,55 +249,55 @@ Druid:
           Leader Of the Pack:
             Location: [6, 1]
             Max Rank: 1
-            Icon: "images/Classic/Spells/Spell_Nature_UnyeildingStamina.png"
+            Icon: "images/druid/LeaderOfThePack.png"
             Description: >-
               While in Cat, Bear or Dire Bear Form, the Leader of the Pack increases ranged and 
               melee critical chance of all party members within 45 yards by 3%.
       Restoration:
-        Icon: "images/Classic/Spells/Spell_Nature_HealingTouch.png"
+        Icon: "images/druid/HealingTouch.png"
         Background: "images/backgrounds/druid_restoration.jpg"
         Talents:
           Improved Mark Of the Wild:
             Location: [0, 1]
             Max Rank: 5
-            Icon: "images/Classic/Spells/Spell_Nature_Regeneration.png"
+            Icon: "images/druid/MarkOfTheWild.png"
             Description: >-
               Increases the effect of your Mark of the Wild and Gift of the Wild spells by 
               {:|7,14,21,28,35}%.
           Furor:
             Location: [0, 2]
             Max Rank: 5
-            Icon: "images/Classic/Spells/Spell_Holy_BlessingOfStamina.png"
+            Icon: "images/druid/Furor.png"
             Description: >-
               Gives you a {:|20,40,60,80,100}% chance to gain 10 Rage when you shapeshift into Bear 
               and Dire Bear Form or 40 Energy when you shapeshift into Cat Form.
           Improved Healing Touch:
             Location: [1, 0]
             Max Rank: 5
-            Icon: "images/Classic/Spells/Spell_Nature_HealingTouch.png"
+            Icon: "images/druid/HealingTouch.png"
             Description: >-
               Reduces the cast time of your Healing Touch spell by {:|0.1,0.2,0.3,0.4,0.5} sec.
           Nature's Focus:
             Location: [1, 1]
             Max Rank: 5
-            Icon: "images/Classic/Spells/Spell_Nature_HealingWaveGreater.png"
+            Icon: "images/shaman/ChainHeal.png"
             Description: >-
               Gives you a {:|14,28,42,56,70}% chance to avoid interruption caused by damage while 
               casting the Healing Touch, Regrowth and Tranquility spells.
           Improved Enrage:
             Location: [1, 2]
             Max Rank: 2
-            Icon: "images/Classic/Abilities/Ability_Druid_Enrage.png"
+            Icon: "images/druid/Enrage.png"
             Description: The Enrage ability now instantly generates {:|5,10} Rage.
           Reflection:
             Location: [2, 1]
             Max Rank: 3
-            Icon: "images/Classic/Spells/Spell_Frost_WindWalkOn.png"
+            Icon: "images/shaman/WaterWalking.png"
             Description: Allows {:|5,10,15}% of your Mana regeneration to continue while casting.
           Insect Swarm:
             Location: [2, 2]
             Max Rank: 1
-            Icon: "images/icons/large/spell_nature_insectswarm.jpg"
+            Icon: "images/druid/InsectSwarm.jpg"
             Description: >-
               The enemy target is swarmed by insects, decreasing their chance to hit by 2% and 
               causing 66 Nature damage over 12 sec.
@@ -308,50 +308,50 @@ Druid:
           Subtlety:
             Location: [2, 3]
             Max Rank: 5
-            Icon: "images/Classic/Abilities/Ability_EyeOfTheOwl.png"
+            Icon: "images/hunter/EyesOfTheBeast.png"
             Description:  Reduces the threat generated by your Healing spells by {:|4,8,12,16,20}%.
           Tranquil Spirit:
             Location: [3, 1]
             Max Rank: 5
-            Icon: "images/icons/large/spell_holy_elunesgrace.jpg"
+            Icon: "images/druid/TranquilSpirit.jpg"
             Description: >-
               Reduces the Mana cost of your Healing Touch and Tranquility spells by {:|2,4,6,8,10}%.
           Improved Rejuvenation:
             Location: [3, 3]
             Max Rank: 3
-            Icon: "images/Classic/Spells/Spell_Nature_Rejuvenation.png"
+            Icon: "images/druid/Rejuvenation.png"
             Description: Increases the effect of your Rejuvenation spell by {:|5,10,15}%.
           Nature's Swiftness:
             Location: [4, 0]
-            Requires: Pos 1, 0
+            Requires: Improved Healing Touch
             Max Rank: 1
-            Icon: "images/Classic/Spells/Spell_Nature_RavenForm.png"
+            Icon: "images/hunter/AspectOfTheHawk.png"
             Description: When activated, your next Nature spell becomes an instant cast spell.
             Spell:
               Cast Time: Instant
               Cooldown: 3 min
           Gift Of Nature:
             Location: [4, 2]
-            Requires: Pos 2, 2
+            Requires: Insect Swarm
             Max Rank: 5
-            Icon: "images/Classic/Spells/Spell_Nature_ProtectionformNature.png"
+            Icon: "images/hunter/AspectOfTheWild.png"
             Description: Increases the effect of all healing spells by {:|2,4,6,8,10}%.
           Improved Tranquility:
             Location: [4, 3]
             Max Rank: 2
-            Icon: "images/Classic/Spells/Spell_Nature_Tranquility.png"
+            Icon: "images/druid/Tranquility.png"
             Description: Reduces threat caused by Tranquility by {:|50,100}%.
           Improved Regrowth:
             Location: [5, 2]
             Max Rank: 5
-            Icon: "images/Classic/Spells/Spell_Nature_ResistNature.png"
+            Icon: "images/druid/Regrowth.png"
             Description: >-
               Increases the critical effect chance of your Regrowth spell by {:|10,20,30,40,50}%
           Swiftmend:
             Location: [6, 1]
-            Requires: Pos 3, 1
+            Requires: Tranquil Spirit
             Max Rank: 1
-            Icon: "images/icons/large/inv_relics_idolofrejuvenation.jpg"
+            Icon: "images/druid/Swiftmend.jpg"
             Description: >-
               Consumes a Rejuvenation or Regrowth effect on a friendly target to instantly heal them 
               an amount equal to 12 sec. of Rejuvenation or 18 sec. of Regrowth.
