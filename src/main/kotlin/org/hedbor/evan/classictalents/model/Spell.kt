@@ -30,10 +30,10 @@ class Spell {
     fun cooldownUnitProperty() = getProperty(Spell::cooldownUnit)
 
     var reagents by property(observableListOf<String>())
-    fun reagentsProperty() = getProperty<String>(Spell::reagents)
+    fun reagentsProperty() = getProperty(Spell::reagents)
 
     var tools by property(observableListOf<String>())
-    fun toolsProperty() = getProperty<String>(Spell::tools)
+    fun toolsProperty() = getProperty(Spell::tools)
 }
 
 enum class ResourceType {

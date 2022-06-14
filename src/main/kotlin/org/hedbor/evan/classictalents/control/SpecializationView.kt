@@ -1,6 +1,8 @@
-package org.hedbor.evan.classictalents.controller
+package org.hedbor.evan.classictalents.control
 
+import javafx.beans.value.ChangeListener
 import javafx.beans.value.ObservableValue
+import javafx.collections.ListChangeListener
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.geometry.Rectangle2D
@@ -8,22 +10,20 @@ import javafx.scene.Node
 import javafx.scene.control.Label
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
+import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.*
 import javafx.scene.shape.Rectangle
 import org.hedbor.evan.classictalents.ASSETS_ROOT
 import org.hedbor.evan.classictalents.model.Specialization
 import org.hedbor.evan.classictalents.model.Talent
-import org.hedbor.evan.classictalents.util.doubleBinding
-import org.hedbor.evan.classictalents.util.objectBinding
+import org.hedbor.evan.classictalents.util.*
 
-class SpecializationController {
+class SpecializationView(private val model: Specialization) : BorderPane() {
     companion object {
         /** adjusted button insets */
         private const val ADJUSTED_INSETS: Double = 5.0
     }
-
-    lateinit var specialization: Specialization
 
     @FXML private lateinit var iconView: ImageView
     @FXML private lateinit var specLabel: Label
@@ -31,34 +31,34 @@ class SpecializationController {
     @FXML private lateinit var talentGrid: GridPane
     @FXML private lateinit var arrowOverlay: Pane
 
+    private val arrows = mutableMapOf<Talent, Node>()
+    private val prereqChangedListeners = mutableMapOf<Talent, ChangeListener<Talent?>>()
+
+    init {
+        val loader = FXMLLoader(javaClass.getResource("$ASSETS_ROOT/view/SpecializationView.fxml"))
+        loader.setRoot(this)
+        loader.setController(this)
+        loader.load<BorderPane>()
+    }
+
     @FXML
     private fun initialize() {
+        iconView.image = Image("$ASSETS_ROOT/images/test/classic_temp.jpg")
         specLabel.text = "Affliction"
         pointCounterLabel.text = "31 points"
 
-        initializeTalentGrid()
-        initializeTalentArrowOverlay()
-    }
-
-    @FXML
-    private fun onResetButtonClicked(event: MouseEvent) {
-        TODO()
-    }
-
-    private fun initializeTalentGrid() {
-        talentGrid.backgroundProperty().bind(specialization.backgroundProperty().objectBinding { path ->
-            Background(BackgroundImage(
-                Image("$ASSETS_ROOT/$path"),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                BackgroundSize(
-                    100.0, 100.0,
-                    true, true,
-                    false, false)
-            ))
+        talentGrid.backgroundProperty().bind(model.backgroundProperty().objectBinding { img ->
+            Background(
+                BackgroundImage(
+                    img,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.CENTER,
+                    BackgroundSize(
+                        100.0, 100.0,
+                        true, true,
+                        false, false)))
         })
-
         talentGrid.shape = Rectangle().apply {
             arcWidth = 20.0
             arcHeight = 20.0
@@ -66,50 +66,104 @@ class SpecializationController {
             heightProperty().bind(talentGrid.heightProperty())
         }
 
-        val loader = FXMLLoader(javaClass.getResource("$ASSETS_ROOT/views/TalentButtonView.fxml"))
-        for (talent in specialization.talents) {
-            val controller = TalentButtonController().also { it.talent = talent }
-            loader.setController(controller)
+        model.talents.forEach { addTalent(it) }
+        model.talents.addListener(ListChangeListener { c ->
+            while (c.next()) {
+                if (c.wasPermutated()) {
+                    // do nothing; order is irrelevant
+                } else if (c.wasUpdated()) {
+                    // shouldn't need to be handled directly
+                } else {
+                    for (talent in c.removed) {
+                        removeTalent(talent)
+                    }
+                    for (talent in c.addedSubList) {
+                        addTalent(talent)
+                    }
+                }
+            }
+        })
+    }
 
-            val button = loader.load<Region>()
-            talentGrid.add(button, talent.column, talent.row)
+    @FXML
+    private fun onResetButtonClicked(event: MouseEvent) {
+        if (event.button == MouseButton.PRIMARY) {
+            TODO("unallocate all points")
         }
     }
 
-    private fun initializeTalentArrowOverlay() {
-        for (talentButton in talentGrid.children) {
-            val row = GridPane.getRowIndex(talentButton)
-            val column = GridPane.getColumnIndex(talentButton)
-            val talent = specialization.talents.first { it.row == row && it.column == column }
+    private fun addTalent(talent: Talent) {
+        val button = TalentButton(talent)
+        talentGrid.add(button, talent.column, talent.row)
 
-            // only generate arrows for talents with a requirement
-            val prerequisite = talent.prerequisite ?: continue
-
-            val prerequisiteButton = talentGrid.children.first { child ->
-                prerequisite.row == GridPane.getRowIndex(child) &&
-                    prerequisite.column == GridPane.getColumnIndex(child)
-            }
-
-            val arrow = if (talent.row != prerequisite.row) {
-                createVerticalArrow(talent, talentButton, prerequisite, prerequisiteButton)
-            } else if (talent.column != prerequisite.column) {
-                createHorizontalArrow(talent, talentButton, prerequisite, prerequisiteButton)
-            } else {
-                throw IllegalStateException("Talent '${talent.name}' (in spec '${specialization.name}')" +
-                    " has itself as a prerequisite")
-            }
-
-            arrowOverlay.children.add(arrow)
+        // generate an arrow for talents with a prerequisite
+        if (talent.prerequisite != null) {
+            addArrow(talent)
         }
+
+        // add/remove arrow if prerequisite prop changes
+        val prereqListener = ChangeListener<Talent?> { _, old, new ->
+            if (old != null) removeArrow(talent)
+            if (new != null) addArrow(talent)
+        }
+        prereqChangedListeners[talent] = prereqListener
+        talent.prerequisiteProperty().addListener(prereqListener)
     }
 
+    private fun removeTalent(talent: Talent) {
+        talentGrid.children.removeAll {
+            GridPane.getRowIndex(it) == talent.row &&
+                GridPane.getColumnIndex(it) == talent.column
+        }
+
+        removeArrow(talent)
+        val listener = prereqChangedListeners.remove(talent)
+        talent.prerequisiteProperty().removeListener(listener)
+    }
+
+    private fun addArrow(talent: Talent) {
+        val talentButton = talentGrid.children.first {
+            GridPane.getRowIndex(it) == talent.row &&
+                GridPane.getColumnIndex(it) == talent.column
+        }
+
+        val prereq = talent.prerequisite!!
+        val prereqButton = talentGrid.children.first { child ->
+            prereq.row == GridPane.getRowIndex(child) &&
+                prereq.column == GridPane.getColumnIndex(child)
+        }
+
+        // TODO: just completely regenerate arrow if row or col changes.
+        val arrow = if (talent.row != prereq.row) {
+            createVerticalArrow(talent, talentButton, prereq, prereqButton)
+        } else if (talent.column != prereq.column) {
+            createHorizontalArrow(talent, talentButton, prereq, prereqButton)
+        } else {
+            throw IllegalStateException("Talent '${talent.name}' has itself as a prerequisite")
+        }
+
+        arrowOverlay.children.add(arrow)
+        arrows[talent] = arrow
+    }
+
+    private fun removeArrow(talent: Talent) {
+        talentGrid.children.removeIf {
+            talent.row == GridPane.getRowIndex(it) &&
+                talent.column == GridPane.getColumnIndex(it)
+        }
+
+        val arrow = arrows.remove(talent)
+        arrowOverlay.children.removeIf { it == arrow }
+    }
 
     private fun createVerticalArrow(
         talent: Talent, talentButton: Node,
         prereq: Talent, prereqButton: Node,
     ): Node {
         // Vertical arrows always go from top to bottom, so no need to worry about the reverse case.
-        check(talent.row > prereq.row) { "Attempted to draw vertical arrow from bottom to top -- this is not allowed." }
+        check(talent.row > prereq.row) {
+            "Attempted to draw vertical arrow from bottom to top -- this is not allowed."
+        }
 
         val talentBoundsProp = talentButton.boundsInParentProperty()
         val prereqBoundsProp = prereqButton.boundsInParentProperty()
@@ -122,10 +176,7 @@ class SpecializationController {
 
         // Resize the arrow as needed
         arrow.viewportProperty().bind(arrow.imageProperty().objectBinding(
-            talentBoundsProp, talent.columnProperty(),
-            prereqBoundsProp, prereq.columnProperty(),
-            horizImageProp,
-        ) { image ->
+            horizImageProp, talentBoundsProp, prereqBoundsProp) { image ->
             // Calculate width and height
             val width = image.width
 
@@ -149,9 +200,7 @@ class SpecializationController {
 
         // Move the arrow as needed
         arrow.xProperty().bind(arrow.imageProperty().doubleBinding(
-            talentBoundsProp, talent.columnProperty(),
-            prereqBoundsProp, prereq.columnProperty(),
-        ) { image ->
+            talentBoundsProp, prereqBoundsProp) { image ->
             if (talent.column < prereq.column) { // right to left
                 talentBoundsProp.value.maxX - (prereqBoundsProp.value.width + image.width) / 2.0
             } else {
@@ -160,9 +209,7 @@ class SpecializationController {
         })
 
         arrow.yProperty().bind(arrow.imageProperty().doubleBinding(
-            talentBoundsProp, talent.columnProperty(),
-            prereqBoundsProp, prereq.columnProperty(),
-        ) { image ->
+            talentBoundsProp, prereqBoundsProp) { image ->
             if (talent.column != prereq.column) { // horizontal
                 prereqBoundsProp.value.maxY - (prereqBoundsProp.value.height - image.width) / 2.0
             } else {
@@ -188,10 +235,7 @@ class SpecializationController {
 
         // Resize the arrow as needed
         arrow.viewportProperty().bind(arrow.imageProperty().objectBinding(
-            vertImageProp,
-            prereqBoundsProp, prereq.rowProperty(), prereq.columnProperty(),
-            talentBoundsProp, talent.rowProperty(), talent.columnProperty(),
-        ) { image ->
+            vertImageProp, prereqBoundsProp, talentBoundsProp) { image ->
             // determine width/height
             val height = image.height
 
@@ -220,10 +264,7 @@ class SpecializationController {
 
         // move the arrow as needed
         arrow.xProperty().bind(doubleBinding(
-            vertImageProp,
-            talentBoundsProp, talent.rowProperty(), talent.columnProperty(),
-            prereqBoundsProp, prereq.rowProperty(), prereq.columnProperty(),
-        ) {
+            vertImageProp, talentBoundsProp, prereqBoundsProp) {
             if (talent.row != prereq.row) { // vertical
                 if (talent.column > prereq.column) { // left to right
                     prereqBoundsProp.value.maxX - ADJUSTED_INSETS
@@ -257,15 +298,10 @@ class SpecializationController {
         }
     }
 
-
     private fun getHorizontalArrowImageProperty(
         talent: Talent, prereq: Talent
     ): ObservableValue<Image> {
-        return objectBinding(
-            prereq.rankProperty(), prereq.maxRankProperty(),
-            talent.rowProperty(), talent.columnProperty(),
-            prereq.rowProperty(), prereq.columnProperty()
-        ) {
+        return objectBinding(prereq.rankProperty(), prereq.maxRankProperty()) {
             val horizComponent = if (talent.column > prereq.column) "right" else "left"
             val vertComponent = if (talent.row > prereq.row) "down" else ""
             val rankComponent = if (prereq.rank < prereq.maxRank) "" else "2"

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.hedbor.evan.classictalents.controller.WowClassController">
+<fx:root xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         type="javafx.scene.layout.VBox">
   <HBox fx:id="specsPane" spacing="10" alignment="CENTER">
     <padding>
       <Insets topRightBottomLeft="20"/>
@@ -22,9 +21,9 @@
       <padding>
         <Insets right="10" left="10"/>
       </padding>
-      <Label styleClass="class-description-text" text="Talent Info:" VBox.vgrow="NEVER"/>
+      <Label text="Talent Info:" styleClass="class-description-text" VBox.vgrow="NEVER"/>
       <Label fx:id="requiredLevelLabel" styleClass="class-description-text" VBox.vgrow="NEVER"/>
       <Label fx:id="remainingPointsLabel" styleClass="class-description-text" VBox.vgrow="NEVER"/>
     </VBox>
   </HBox>
-</VBox>
+</fx:root>

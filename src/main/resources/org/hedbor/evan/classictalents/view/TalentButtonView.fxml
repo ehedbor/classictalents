@@ -1,30 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<StackPane xmlns="http://javafx.com/javafx"
-           xmlns:fx="http://javafx.com/fxml"
-           fx:controller="org.hedbor.evan.classictalents.controller.TalentButtonController"
-           styleClass="talent-container">
-  <Button fx:id="talentButton" styleClass="talent-button"
+<fx:root xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         type="javafx.scene.layout.StackPane"
+         styleClass="talent-container">
+  <Button fx:id="button" styleClass="talent-button"
           prefWidth="34" prefHeight="34"
           minWidth="34" maxWidth="34"
           minHeight="34" maxHeight="34"
           onMouseClicked="#onMouseClicked">
-    <tooltip>
-      <!-- showDuration="INDEFINITE" doesn't seem to work,
-           but setting the duration to a ridiculously high number does.
-           That number is equal to  3x10^29 centuries. -->
-      <Tooltip fx:id="talentButtonTooltip"
-               showDelay="0s" hideDelay="0s"
-               showDuration="999999999999999999999999999999999999999s"/>
-    </tooltip>
+<!--    <tooltip>-->
+<!--      &lt;!&ndash; showDuration="INDEFINITE" doesn't seem to work,-->
+<!--           but setting the duration to a ridiculously high number does.-->
+<!--           That number is equal to  3x10^29 centuries. &ndash;&gt;-->
+<!--      <Tooltip fx:id="buttonTooltip"-->
+<!--               showDelay="0s" hideDelay="0s"-->
+<!--               showDuration="999999999999999999999999999999999999999s"/>-->
+<!--    </tooltip>-->
     <graphic>
       <StackPane>
         <ImageView fx:id="iconView" styleClass="talent-icon"/>
@@ -34,11 +30,11 @@
         <ImageView fx:id="highlightView" styleClass="talent-icon">
           <Image url="@../images/button/highlight_hover.png"/>
         </ImageView>
-        <Region fx:id="activeBorderRegion" styleClass="active-border"/>
+        <Region fx:id="activeBorderRegion"/>
       </StackPane>
     </graphic>
   </Button>
   <alignment>BOTTOM_RIGHT</alignment>
   <Label fx:id="rankCounterLabel" styleClass="rank-counter"
          alignment="BOTTOM_RIGHT" mouseTransparent="true"/>
-</StackPane>
+</fx:root>

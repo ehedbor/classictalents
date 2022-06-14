@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         type="javafx.scene.control.Button"
+         fx:id="button" styleClass="talent-button"
+         prefWidth="34" prefHeight="34"
+         minWidth="34" maxWidth="34"
+         minHeight="34" maxHeight="34">
+<!--  <tooltip>-->
+<!--    &lt;!&ndash; showDuration="INDEFINITE" doesn't seem to work,-->
+<!--           but setting the duration to a ridiculously high number does.-->
+<!--           That number is equal to  3x10^29 centuries. &ndash;&gt;-->
+<!--    <Tooltip fx:id="buttonTooltip"-->
+<!--             showDelay="0s" hideDelay="0s"-->
+<!--             showDuration="999999999999999999999999999999999999999s"/>-->
+<!--  </tooltip>-->
+  <graphic>
+    <StackPane>
+      <ImageView fx:id="iconView" styleClass="talent-icon"/>
+      <ImageView styleClass="talent-icon">
+        <Image url="@../images/button/border.png"/>
+      </ImageView>
+      <ImageView fx:id="highlightView" styleClass="talent-icon">
+        <Image url="@../images/button/highlight_hover.png"/>
+      </ImageView>
+      <Region fx:id="activeBorderRegion"/>
+    </StackPane>
+  </graphic>
+</fx:root>

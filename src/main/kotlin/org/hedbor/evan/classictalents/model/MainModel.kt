@@ -6,12 +6,12 @@ import org.hedbor.evan.classictalents.util.getProperty
 import org.hedbor.evan.classictalents.util.observableListOf
 import org.hedbor.evan.classictalents.util.property
 
-class WowClassModel {
+class MainModel {
     var classes by property(observableListOf<WowClass>())
-    fun classesProperty() = getProperty(WowClassModel::classes)
+    fun classesProperty() = getProperty(MainModel::classes)
 
-    var activeClass by property<WowClass>()
-    fun activeClassProperty() = getProperty(WowClassModel::activeClass)
+    var selectedClass by property<WowClass?>()
+    fun selectedClassProperty() = getProperty(MainModel::selectedClass)
 
     fun loadClasses() {
         check(classes.isEmpty()) { "Cannot load classes more than once" }
@@ -28,8 +28,10 @@ class WowClassModel {
             "$ASSETS_ROOT/talents/Warrior.yml",
         )
         val reader = TalentConfigReader()
-        classFileNames.map { reader.readClass(it) }.toCollection(classes)
-    }
-    
+        classFileNames
+            .map { reader.readClass(it) }
+            .sortedBy { it.name }
+            .toCollection(classes)
 
+    }
 }

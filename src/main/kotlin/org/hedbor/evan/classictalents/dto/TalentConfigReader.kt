@@ -3,9 +3,12 @@ package org.hedbor.evan.classictalents.dto
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import javafx.scene.image.Image
+import javafx.scene.layout.Background
 import javafx.scene.paint.Color
 import org.hedbor.evan.classictalents.ASSETS_ROOT
 import org.hedbor.evan.classictalents.model.*
+import org.hedbor.evan.classictalents.util.observableListOf
 import org.hedbor.evan.classictalents.util.toObservableList
 
 class TalentConfigReader {
@@ -15,6 +18,8 @@ class TalentConfigReader {
     /**
      * Reads a talent file from the specified resource location.
      *
+     * @param filePath a path to a resource file
+     * @return the parsed [WowClass]
      * @throws IllegalStateException if an error is found while parsing
      */
     fun readClass(filePath: String): WowClass {
@@ -35,7 +40,7 @@ class TalentConfigReader {
         val errorPath = "in file '$filePath', class '$className'"
 
         wowClass.name = className
-        wowClass.icon = validateAssetFile(errorPath, classDto.icon)
+        wowClass.icon = Image(validateAssetFile(errorPath, classDto.icon))
         wowClass.color = try {
             Color.web(classDto.color)
         } catch (e: IllegalArgumentException) {
@@ -52,8 +57,8 @@ class TalentConfigReader {
     private fun readSpec(errorPath: String, specName: String, specDto: SpecDto): Specialization {
         val spec = Specialization()
         spec.name = specName
-        spec.icon = validateAssetFile(errorPath, specDto.icon)
-        spec.background = validateAssetFile(errorPath, specDto.background)
+        spec.icon = Image(validateAssetFile(errorPath, specDto.icon))
+        spec.background = Image(validateAssetFile(errorPath, specDto.background))
 
         for ((talentName, talentDto) in specDto.talents) {
             require(specDto.talents.count { it.value.location == talentDto.location } == 1) {
@@ -98,7 +103,7 @@ class TalentConfigReader {
         }
         talent.maxRank = talentDto.maxRank
 
-        talent.icon = validateAssetFile(errorPath, talentDto.icon)
+        talent.icon = Image(validateAssetFile(errorPath, talentDto.icon))
 
         // TODO: validate choice format
         talent.description = talentDto.description
@@ -113,8 +118,8 @@ class TalentConfigReader {
     private fun readSpell(errorPath: String, spellDto: SpellDto): Spell {
         val spell = Spell()
 
-        spell.tools = spellDto.tools.toObservableList()
-        spell.reagents = spellDto.reagents.toObservableList()
+        spell.tools = spellDto.tools?.toObservableList() ?: observableListOf()
+        spell.reagents = spellDto.reagents?.toObservableList() ?: observableListOf()
 
         if (spellDto.cost != null) {
             val costString = spellDto.cost.replace("\\s+".toRegex(), "").lowercase()

@@ -3,18 +3,19 @@ package org.hedbor.evan.classictalents
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
-import javafx.scene.layout.StackPane
-import javafx.scene.layout.VBox
 import javafx.stage.Stage
+import org.hedbor.evan.classictalents.control.MainViewController
+import org.hedbor.evan.classictalents.model.MainModel
 
 
 internal const val ASSETS_ROOT = "/org/hedbor/evan/classictalents"
 
 class ClassicTalentsApp : Application() {
     override fun start(primaryStage: Stage) {
-        val root = FXMLLoader.load<VBox>(
-            javaClass.getResource("$ASSETS_ROOT/view/MainView.fxml"))
-        val scene = Scene(root)
+        val loader = FXMLLoader(javaClass.getResource("$ASSETS_ROOT/view/MainView.fxml"))
+        val model = MainModel().also { it.loadClasses() }
+        loader.setController(MainViewController(model))
+        val scene = Scene(loader.load())
 
         val stylesheets = arrayOf(
             "$ASSETS_ROOT/styles/ClassStyles.css",
@@ -23,8 +24,10 @@ class ClassicTalentsApp : Application() {
             "$ASSETS_ROOT/styles/TalentTooltipStyles.css",
         )
         stylesheets
-            .map { javaClass.getResource(it)?.toExternalForm()
-                ?: throw IllegalStateException("Could not load stylesheet '$it'") }
+            .map { path ->
+                javaClass.getResource(path)?.toExternalForm()
+                    ?: throw IllegalStateException("Could not load stylesheet '$path'")
+            }
             .forEach { scene.stylesheets.add(it) }
 
         primaryStage.title = "WoW Classic Talent Calculator"

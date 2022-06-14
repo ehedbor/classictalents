@@ -1,5 +1,6 @@
 package org.hedbor.evan.classictalents.model
 
+import javafx.scene.image.Image
 import org.hedbor.evan.classictalents.util.getProperty
 import org.hedbor.evan.classictalents.util.property
 
@@ -24,7 +25,7 @@ class Talent {
     var rank by property<Int>()
     fun rankProperty() = getProperty(Talent::rank)
 
-    var icon by property<String>()
+    var icon by property<Image>()
     fun iconProperty() = getProperty(Talent::icon)
 
     var description by property<String>()

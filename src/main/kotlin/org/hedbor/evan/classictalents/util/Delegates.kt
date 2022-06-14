@@ -8,6 +8,8 @@ import org.hedbor.evan.classictalents.model.Spell
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KMutableProperty1
 import kotlin.reflect.KProperty
+import kotlin.reflect.KProperty1
+import kotlin.reflect.full.memberProperties
 
 // See tornadofx for original implementation:
 // https://github.com/edvin/tornadofx/blob/master/src/main/java/tornadofx/Properties.kt
@@ -42,25 +44,39 @@ class PropertyDelegate<T>(internal val javafxProperty : Property<T>) : ReadWrite
 }
 
 private fun <T> Any.getDelegate(prop: KMutableProperty1<*, T>): PropertyDelegate<T> {
-    // avoid kotlin-reflect dependency
-    val field = requireNotNull(javaClass.getField("${prop.name}\$delegate")) { "No delegate field with name '${prop.name}' found" }
-
+    val field = javaClass.getDeclaredField("${prop.name}\$delegate")
     field.isAccessible = true
     @Suppress("UNCHECKED_CAST")
     return field.get(this) as PropertyDelegate<T>
 }
 
-fun <T> Any.getProperty(prop: KMutableProperty1<*, T>) = getDelegate(prop).javafxProperty as ObjectProperty<T>
+@Suppress("UNCHECKED_CAST")
+fun <T> Any.getProperty(prop: KMutableProperty1<*, T>) = getDelegate(prop).javafxProperty
 
-fun Any.getProperty(prop: KMutableProperty1<*, Boolean>) = getDelegate(prop).javafxProperty as BooleanProperty
-fun Any.getProperty(prop: KMutableProperty1<*, Double>) = getDelegate(prop).javafxProperty as DoubleProperty
-fun Any.getProperty(prop: KMutableProperty1<*, Float>) = getDelegate(prop).javafxProperty as FloatProperty
-fun Any.getProperty(prop: KMutableProperty1<*, Int>) = getDelegate(prop).javafxProperty as IntegerProperty
-fun Any.getProperty(prop: KMutableProperty1<*, String>) = getDelegate(prop).javafxProperty as StringProperty
+//fun Any.getProperty(prop: KMutableProperty1<*, Boolean>) = getDelegate(prop).javafxProperty as BooleanProperty
+//fun Any.getProperty(prop: KMutableProperty1<*, Double>) = getDelegate(prop).javafxProperty as DoubleProperty
+//fun Any.getProperty(prop: KMutableProperty1<*, Float>) = getDelegate(prop).javafxProperty as FloatProperty
+//fun Any.getProperty(prop: KMutableProperty1<*, Int>) = getDelegate(prop).javafxProperty as IntegerProperty
+//fun Any.getProperty(prop: KMutableProperty1<*, String>) = getDelegate(prop).javafxProperty as StringProperty
+//
+//@Suppress("UNCHECKED_CAST")
+//fun <E> Any.getProperty(prop: KMutableProperty1<Spell, ObservableList<E>>) = getDelegate(prop).javafxProperty as ListProperty<E>
+//@Suppress("UNCHECKED_CAST")
+//fun <K, V> Any.getProperty(prop: KMutableProperty1<*, Map<K, V>>) = getDelegate(prop).javafxProperty as MapProperty<K, V>
+//@Suppress("UNCHECKED_CAST")
+//fun <E> Any.getProperty(prop: KMutableProperty1<*, Set<E>>) = getDelegate(prop).javafxProperty as SetProperty<E>
 
-@Suppress("UNCHECKED_CAST")
-fun <E> Any.getProperty(prop: KMutableProperty1<Spell, ObservableList<String>>) = getDelegate(prop).javafxProperty as ListProperty<E>
-@Suppress("UNCHECKED_CAST")
-fun <K, V> Any.getProperty(prop: KMutableProperty1<*, Map<K, V>>) = getDelegate(prop).javafxProperty as MapProperty<K, V>
-@Suppress("UNCHECKED_CAST")
-fun <E> Any.getProperty(prop: KMutableProperty1<*, Set<E>>) = getDelegate(prop).javafxProperty as SetProperty<E>
+//fun <T> Any.getProperty(prop: KProperty1<*, T>) = getDelegate(prop).javafxProperty as ObjectProperty<T>
+//
+//fun Any.getProperty(prop: KProperty1<*, Boolean>) = getDelegate(prop).javafxProperty as BooleanProperty
+//fun Any.getProperty(prop: KProperty1<*, Double>) = getDelegate(prop).javafxProperty as DoubleProperty
+//fun Any.getProperty(prop: KProperty1<*, Float>) = getDelegate(prop).javafxProperty as FloatProperty
+//fun Any.getProperty(prop: KProperty1<*, Int>) = getDelegate(prop).javafxProperty as IntegerProperty
+//fun Any.getProperty(prop: KProperty1<*, String>) = getDelegate(prop).javafxProperty as StringProperty
+//
+//@Suppress("UNCHECKED_CAST")
+//fun <E> Any.getProperty(prop: KProperty1<Spell, ObservableList<String>>) = getDelegate(prop).javafxProperty as ListProperty<E>
+//@Suppress("UNCHECKED_CAST")
+//fun <K, V> Any.getProperty(prop: KProperty1<*, Map<K, V>>) = getDelegate(prop).javafxProperty as MapProperty<K, V>
+//@Suppress("UNCHECKED_CAST")
+//fun <E> Any.getProperty(prop: KProperty1<*, Set<E>>) = getDelegate(prop).javafxProperty as SetProperty<E>

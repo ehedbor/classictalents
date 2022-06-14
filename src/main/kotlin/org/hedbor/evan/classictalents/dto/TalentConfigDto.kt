@@ -23,19 +23,19 @@ data class SpecDto(
 
 data class TalentDto(
     @JsonProperty("Location") val location: List<Int>,
-    @JsonProperty("Requires") val requires: String? = null,
+    @JsonProperty("Requires") val requires: String?,
     @JsonProperty("Max Rank") val maxRank: Int,
     @JsonProperty("Icon") val icon: String,
     @JsonProperty("Description") val description: String,
-    @JsonProperty("Spell") val spell: SpellDto? = null,
+    @JsonProperty("Spell") val spell: SpellDto?,
 )
 
 data class SpellDto(
-    @JsonProperty("Tools") val tools: List<String> = emptyList(),
-    @JsonProperty("Reagents") val reagents: List<String> = emptyList(),
-    @JsonProperty("Cost") val cost: String? = null,
-    @JsonProperty("Range") val range: String? = null,
+    @JsonProperty("Tools") val tools: List<String>?,
+    @JsonProperty("Reagents") val reagents: List<String>?,
+    @JsonProperty("Cost") val cost: String?,
+    @JsonProperty("Range") val range: String?,
     @JsonProperty("Cast Time") val castTime: String,
-    @JsonProperty("Cooldown") val cooldown: String? = null
+    @JsonProperty("Cooldown") val cooldown: String?,
 )
 

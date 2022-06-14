@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.*?>
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.hedbor.evan.classictalents.controller.MainController"
+      fx:controller="org.hedbor.evan.classictalents.control.MainViewController"
       styleClass="class-background">
   <!-- The nested hbox here prevents the inner hbox from expanding to fill all horizontal space -->
   <HBox alignment="CENTER">
