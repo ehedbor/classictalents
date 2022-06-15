@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -13,14 +14,18 @@
           minWidth="34" maxWidth="34"
           minHeight="34" maxHeight="34"
           onMouseClicked="#onMouseClicked">
-<!--    <tooltip>-->
-<!--      &lt;!&ndash; showDuration="INDEFINITE" doesn't seem to work,-->
-<!--           but setting the duration to a ridiculously high number does.-->
-<!--           That number is equal to  3x10^29 centuries. &ndash;&gt;-->
-<!--      <Tooltip fx:id="buttonTooltip"-->
-<!--               showDelay="0s" hideDelay="0s"-->
-<!--               showDuration="999999999999999999999999999999999999999s"/>-->
-<!--    </tooltip>-->
+    <tooltip>
+      <!-- showDuration="INDEFINITE" doesn't seem to work,
+           but setting the duration to a ridiculously high number does.
+           That number is equal to  3x10^29 centuries. -->
+      <Tooltip fx:id="buttonTooltip" styleClass="tooltip-description"
+               showDelay="0s" hideDelay="0s"
+               showDuration="999999999999999999999999999999999999999s">
+        <text>
+          Spell description here.
+        </text>
+      </Tooltip>
+    </tooltip>
     <graphic>
       <StackPane>
         <ImageView fx:id="iconView" styleClass="talent-icon"/>

@@ -16,7 +16,7 @@
     <padding>
       <Insets right="10" bottom="20" left="10"/>
     </padding>
-    <VBox styleClass="class-footer" alignment="CENTER">
+    <VBox fx:id="footer" styleClass="class-footer" alignment="CENTER">
       <padding>
         <Insets right="10" left="10"/>
       </padding>

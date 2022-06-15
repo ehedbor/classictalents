@@ -5,6 +5,7 @@ import javafx.beans.value.ObservableValue
 import javafx.collections.ListChangeListener
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
+import javafx.geometry.Insets
 import javafx.geometry.Rectangle2D
 import javafx.scene.Node
 import javafx.scene.control.Label
@@ -21,8 +22,7 @@ import org.hedbor.evan.classictalents.util.*
 
 class SpecializationView(private val model: Specialization) : BorderPane() {
     companion object {
-        /** adjusted button insets */
-        private const val ADJUSTED_INSETS: Double = 5.0
+        private const val OVERLAP: Double = 2.0
     }
 
     @FXML private lateinit var iconView: ImageView
@@ -46,11 +46,11 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
         iconView.imageProperty().bind(model.iconProperty())
         specLabel.textProperty().bind(model.nameProperty())
         pointCounterLabel.textProperty().bind(
-            model.allocatedPointsProperty().stringBinding { "$it points" })
+            model.allocatedPointsProperty().stringBinding { "($it)" })
 
-        talentGrid.backgroundProperty().bind(model.backgroundProperty().objectBinding { img ->
-            Background(
-                BackgroundImage(
+        talentGrid.backgroundProperty().bind(
+            model.backgroundProperty().objectBinding { img ->
+                Background(BackgroundImage(
                     img,
                     BackgroundRepeat.NO_REPEAT,
                     BackgroundRepeat.NO_REPEAT,
@@ -58,8 +58,8 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
                     BackgroundSize(
                         100.0, 100.0,
                         true, true,
-                        false, false)))
-        })
+                        true, true)))
+            })
         talentGrid.shape = Rectangle().apply {
             arcWidth = 20.0
             arcHeight = 20.0
@@ -96,6 +96,7 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
     private fun addTalent(talent: Talent) {
         val button = TalentButton(talent)
         talentGrid.add(button, talent.column, talent.row)
+        GridPane.setMargin(button, Insets(15.0))
 
         // generate an arrow for talents with a prerequisite
         if (talent.prerequisite != null) {
@@ -135,16 +136,16 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
         }
 
         // TODO: just completely regenerate arrow if row or col changes.
-        val arrow = if (talent.row != prereq.row) {
-            createVerticalArrow(talent, talentButton, prereq, prereqButton)
-        } else if (talent.column != prereq.column) {
-            createHorizontalArrow(talent, talentButton, prereq, prereqButton)
-        } else {
-            throw IllegalStateException("Talent '${talent.name}' has itself as a prerequisite")
+        val arrowHolder = Pane()
+        if (talent.row != prereq.row) {
+            arrowHolder.children += createVerticalArrow(talent, talentButton, prereq, prereqButton)
+        }
+        if (talent.column != prereq.column) {
+            arrowHolder.children += createHorizontalArrow(talent, talentButton, prereq, prereqButton)
         }
 
-        arrowOverlay.children.add(arrow)
-        arrows[talent] = arrow
+        arrowOverlay.children.add(arrowHolder)
+        arrows[talent] = arrowHolder
     }
 
     private fun removeArrow(talent: Talent) {
@@ -183,9 +184,9 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
 
             val deltaY = talentBoundsProp.value.minY - prereqBoundsProp.value.maxY
             val height = deltaY + if (talent.column != prereq.column) { // horizontal
-                (talentBoundsProp.value.height - horizImageProp.value.height) / 2.0 + ADJUSTED_INSETS
+                (talentBoundsProp.value.height - horizImageProp.value.height) / 2.0 + OVERLAP
             } else {
-                ADJUSTED_INSETS * 2.0
+                OVERLAP * 2.0
             }
 
             // Calculate minimum x/y
@@ -202,10 +203,13 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
         // Move the arrow as needed
         arrow.xProperty().bind(arrow.imageProperty().doubleBinding(
             talentBoundsProp, prereqBoundsProp) { image ->
+            //isHoriz && !leftToRight
+            //isHoriz => talent.col != prereq.col
+            // leftToRight => talent.col > prereq.col
             if (talent.column < prereq.column) { // right to left
                 talentBoundsProp.value.maxX - (prereqBoundsProp.value.width + image.width) / 2.0
             } else {
-                prereqBoundsProp.value.maxX - (talentBoundsProp.value.width - image.width) / 2.0
+                talentBoundsProp.value.minX + (talentBoundsProp.value.width - image.width) / 2.0
             }
         })
 
@@ -214,7 +218,7 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
             if (talent.column != prereq.column) { // horizontal
                 prereqBoundsProp.value.maxY - (prereqBoundsProp.value.height - image.width) / 2.0
             } else {
-                prereqBoundsProp.value.maxY - ADJUSTED_INSETS
+                prereqBoundsProp.value.maxY - OVERLAP
             }
         })
 
@@ -247,9 +251,9 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
             }
 
             val width = deltaX + if (talent.row != prereq.row) { // vertical
-                (talentBoundsProp.value.minX + vertImageProp.value.width) / 2.0 + ADJUSTED_INSETS
+                (talentBoundsProp.value.width + vertImageProp.value.width) / 2.0 + OVERLAP
             } else {
-                ADJUSTED_INSETS * 2.0
+                OVERLAP * 2.0
             }
 
             // determine min x/y
@@ -268,15 +272,15 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
             vertImageProp, talentBoundsProp, prereqBoundsProp) {
             if (talent.row != prereq.row) { // vertical
                 if (talent.column > prereq.column) { // left to right
-                    prereqBoundsProp.value.maxX - ADJUSTED_INSETS
+                    prereqBoundsProp.value.maxX - OVERLAP
                 } else {
                     talentBoundsProp.value.maxX - (prereqBoundsProp.value.width + vertImageProp.value.width) / 2.0
                 }
             } else {
                 if (talent.column > prereq.column) { // left to right
-                    prereqBoundsProp.value.maxX - ADJUSTED_INSETS
+                    prereqBoundsProp.value.maxX - OVERLAP
                 } else {
-                    talentBoundsProp.value.maxX - ADJUSTED_INSETS
+                    talentBoundsProp.value.maxX - OVERLAP
                 }
             }
         })

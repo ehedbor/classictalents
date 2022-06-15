@@ -7,6 +7,8 @@ import javafx.scene.layout.HBox
 import org.hedbor.evan.classictalents.ASSETS_ROOT
 import org.hedbor.evan.classictalents.model.MainModel
 import org.hedbor.evan.classictalents.util.booleanBinding
+import org.hedbor.evan.classictalents.util.stringBinding
+import kotlin.math.round
 
 class MainViewController {
     // TODO: do dependency injection
@@ -19,6 +21,14 @@ class MainViewController {
     private fun initialize() {
         for (wowClass in model.classes) {
             val button = ClassButton()
+            button.tooltip.textProperty().bind(wowClass.nameProperty())
+            button.tooltip.styleProperty().bind(
+                wowClass.colorProperty().stringBinding {
+                    val r = round(255 * it.red).toInt()
+                    val g = round(255 * it.green).toInt()
+                    val b = round(255 * it.blue).toInt()
+                    "-fx-text-fill: rgb($r, $g, $b);"
+                })
             button.iconProperty().bind(wowClass.iconProperty())
             button.selectedProperty().bind(
                 model.selectedClassProperty().booleanBinding { selectedClass ->
