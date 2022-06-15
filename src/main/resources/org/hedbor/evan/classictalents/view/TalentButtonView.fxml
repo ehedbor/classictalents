@@ -7,10 +7,8 @@
 
 <fx:root xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
-         type="javafx.scene.layout.StackPane">
-  <padding>
-    <Insets topRightBottomLeft="16"/>
-  </padding>
+         type="javafx.scene.layout.StackPane"
+         styleClass="talent-container">
   <Button fx:id="button" styleClass="talent-button"
           StackPane.alignment="CENTER"
           prefWidth="34" prefHeight="34"
@@ -21,14 +19,54 @@
       <!-- showDuration="INDEFINITE" doesn't seem to work,
            but setting the duration to a ridiculously high number does.
            That number is equal to  3x10^29 centuries. -->
-      <Tooltip fx:id="buttonTooltip"
-               styleClass="tooltip-description"
-               showDelay="0s"
-               hideDelay="0s"
-               showDuration="999999999999999999999999999999999999999s">
-        <text>
-          Spell description here.
-        </text>
+      <Tooltip fx:id="buttonTooltip" styleClass="tooltip-description"
+               showDelay="0s" hideDelay="0s"
+               showDuration="999999999999999999999999999999999999999s"
+               wrapText="true"
+               prefWidth="400"
+               maxHeight="600">
+        <graphic>
+          <VBox prefWidth="400" minHeight="-Infinity" maxHeight="600">
+            <!-- header -->
+            <Label fx:id="tooltipNameLabel" styleClass="tooltip-title"/>
+            <Label fx:id="tooltipRankLabel" styleClass="tooltip-subtitle"/>
+
+            <!-- spell -->
+            <VBox fx:id="tooltipSpellPane">
+              <HBox>
+                <Label fx:id="tooltipCostLabel" styleClass="tooltip-subtitle"
+                       prefWidth="200"/>
+                <Label fx:id="tooltipRangeLabel" styleClass="tooltip-subtitle"
+                       prefWidth="200" alignment="CENTER_RIGHT"/>
+              </HBox>
+              <HBox>
+                <Label fx:id="tooltipCastTimeLabel" styleClass="tooltip-subtitle"
+                       prefWidth="200"/>
+                <Label fx:id="tooltipCooldownLabel" styleClass="tooltip-subtitle"
+                       prefWidth="200" alignment="CENTER_RIGHT"/>
+              </HBox>
+            </VBox>
+
+            <!-- Description -->
+            <Label fx:id="tooltipDescLabel" styleClass="tooltip-description"
+                   wrapText="true" prefWidth="400"/>
+            <VBox fx:id="tooltipNextRankPane">
+              <Label/> <!-- spacer -->
+              <Label styleClass="tooltip-subtitle" text="Next Rank:"/>
+              <Label fx:id="tooltipNextRankDescLabel" styleClass="tooltip-description"
+                     wrapText="true" prefWidth="400"/>
+            </VBox>
+
+            <!-- Footer -->
+            <Label/> <!-- spacer -->
+            <Label fx:id="tooltipSpecRequiredLabel" styleClass="tooltip-error"/>
+            <Label fx:id="tooltipPrereqRequiredLabel" styleClass="tooltip-error"/>
+            <Label fx:id="tooltipClickToLearnLabel" styleClass="tooltip-confirmation"
+                   text="Click to learn"/>
+            <Label fx:id="tooltipClickToUnlearnLabel" styleClass="tooltip-error"
+                   text="Right-Click to unlearn"/>
+          </VBox>
+        </graphic>
       </Tooltip>
     </tooltip>
     <graphic>
@@ -44,8 +82,7 @@
       </StackPane>
     </graphic>
   </Button>
-  <Label fx:id="rankCounterLabel"
-         styleClass="rank-counter"
+  <Label fx:id="rankCounterLabel" styleClass="rank-counter"
          mouseTransparent="true"
          StackPane.alignment="BOTTOM_RIGHT">
     <StackPane.margin>

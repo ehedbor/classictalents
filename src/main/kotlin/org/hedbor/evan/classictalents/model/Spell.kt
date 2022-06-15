@@ -3,30 +3,30 @@ package org.hedbor.evan.classictalents.model
 import org.hedbor.evan.classictalents.util.*
 
 
-@Suppress("MemberVisibilityCanBePrivate")
+@Suppress("MemberVisibilityCanBePrivate", "unused")
 class Spell {
-    var cost by property<Int>()
+    var cost by property<Int?>()
     fun costProperty() = getProperty(Spell::cost)
 
-    var resource by property<ResourceType>()
+    var resource by property<ResourceType?>()
     fun resourceProperty() = getProperty(Spell::resource)
 
-    var range by property<Double>()
+    var range by property<Double?>()
     fun rangeProperty() = getProperty(Spell::range)
 
-    var minRange by property<Double>()
+    var minRange by property<Double?>()
     fun minRangeProperty() = getProperty(Spell::minRange)
 
     var castTime by property<Double>()
     fun castTimeProperty() = getProperty(Spell::castTime)
 
-    var isChanneled by property<Boolean>()
+    var isChanneled by property<Boolean>(false)
     fun channeledProperty() = getProperty(Spell::isChanneled)
 
-    var cooldown by property<Double>()
+    var cooldown by property<Double?>()
     fun cooldownProperty() = getProperty(Spell::cooldown)
 
-    var cooldownUnit by property<CooldownUnit>()
+    var cooldownUnit by property<CooldownUnit?>()
     fun cooldownUnitProperty() = getProperty(Spell::cooldownUnit)
 
     var reagents by property(observableListOf<String>())

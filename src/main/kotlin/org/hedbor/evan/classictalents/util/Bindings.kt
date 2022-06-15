@@ -97,14 +97,14 @@ fun <R, V> R.longBinding(vararg dependencies: Observable, computeValue: (V) -> L
     }
 }
 
-fun stringBinding(vararg dependencies: Observable, computeValue: () -> String): StringBinding {
+fun stringBinding(vararg dependencies: Observable, computeValue: () -> String?): StringBinding {
     return object : StringBinding() {
         init { bind(*dependencies) }
         override fun computeValue() = computeValue()
     }
 }
 
-fun <R, V> R.stringBinding(vararg dependencies: Observable, computeValue: (V) -> String): StringBinding
+fun <R, V> R.stringBinding(vararg dependencies: Observable, computeValue: (V) -> String?): StringBinding
     where R : ObservableValue<V> {
     return object : StringBinding() {
         init { bind(this@stringBinding, *dependencies) }
@@ -112,14 +112,14 @@ fun <R, V> R.stringBinding(vararg dependencies: Observable, computeValue: (V) ->
     }
 }
 
-fun <E> listBinding(vararg dependencies: Observable, computeValue: () -> ObservableList<E>): ListBinding<E> {
+fun <E> listBinding(vararg dependencies: Observable, computeValue: () -> ObservableList<E>?): ListBinding<E> {
     return object : ListBinding<E>() {
         init { bind(*dependencies) }
         override fun computeValue() = computeValue()
     }
 }
 
-fun <R, V, E> R.listBinding(vararg dependencies: Observable, computeValue: (V) -> ObservableList<E>): ListBinding<E>
+fun <R, V, E> R.listBinding(vararg dependencies: Observable, computeValue: (V) -> ObservableList<E>?): ListBinding<E>
     where R : ObservableValue<V> {
     return object : ListBinding<E>() {
         init { bind(this@listBinding, *dependencies) }
@@ -127,14 +127,14 @@ fun <R, V, E> R.listBinding(vararg dependencies: Observable, computeValue: (V) -
     }
 }
 
-fun <K, V> mapBinding(vararg dependencies: Observable, computeValue: () -> ObservableMap<K, V>): MapBinding<K, V> {
+fun <K, V> mapBinding(vararg dependencies: Observable, computeValue: () -> ObservableMap<K, V>?): MapBinding<K, V> {
     return object : MapBinding<K, V>() {
         init { bind(*dependencies) }
         override fun computeValue() = computeValue()
     }
 }
 
-fun <R, RV, K, V> R.mapBinding(vararg dependencies: Observable, computeValue: (RV) -> ObservableMap<K, V>): MapBinding<K, V>
+fun <R, RV, K, V> R.mapBinding(vararg dependencies: Observable, computeValue: (RV) -> ObservableMap<K, V>?): MapBinding<K, V>
     where R : ObservableValue<RV> {
     return object : MapBinding<K, V>() {
         init { bind(this@mapBinding, *dependencies) }
@@ -142,14 +142,14 @@ fun <R, RV, K, V> R.mapBinding(vararg dependencies: Observable, computeValue: (R
     }
 }
 
-fun <E> setBinding(vararg dependencies: Observable, computeValue: () -> ObservableSet<E>): SetBinding<E> {
+fun <E> setBinding(vararg dependencies: Observable, computeValue: () -> ObservableSet<E>?): SetBinding<E> {
     return object : SetBinding<E>() {
         init { bind(*dependencies) }
         override fun computeValue() = computeValue()
     }
 }
 
-fun <R, V, E> R.setBinding(vararg dependencies: Observable, computeValue: (V) -> ObservableSet<E>): SetBinding<E>
+fun <R, V, E> R.setBinding(vararg dependencies: Observable, computeValue: (V) -> ObservableSet<E>?): SetBinding<E>
     where R : ObservableValue<V> {
     return object : SetBinding<E>() {
         init { bind(this@setBinding, *dependencies) }

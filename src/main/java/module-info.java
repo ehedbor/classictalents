@@ -9,6 +9,7 @@ module org.hedbor.evan.classictalents {
     requires com.fasterxml.jackson.kotlin;
 
     opens org.hedbor.evan.classictalents.control to javafx.fxml;
+    opens org.hedbor.evan.classictalents.model to javafx.base;
     opens org.hedbor.evan.classictalents.dto to com.fasterxml.jackson.databind;
 
     exports org.hedbor.evan.classictalents;

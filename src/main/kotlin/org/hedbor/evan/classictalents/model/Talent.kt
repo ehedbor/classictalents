@@ -1,5 +1,6 @@
 package org.hedbor.evan.classictalents.model
 
+import javafx.beans.property.ObjectProperty
 import javafx.scene.image.Image
 import org.hedbor.evan.classictalents.util.getProperty
 import org.hedbor.evan.classictalents.util.property
@@ -32,5 +33,5 @@ class Talent {
     fun descriptionProperty() = getProperty(Talent::description)
 
     var spell by property<Spell?>()
-    fun spellProperty() = getProperty(Talent::spell)
+    fun spellProperty() = getProperty(Talent::spell) as ObjectProperty<Spell?>
 }

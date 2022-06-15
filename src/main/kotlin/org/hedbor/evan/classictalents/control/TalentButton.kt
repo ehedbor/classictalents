@@ -1,33 +1,55 @@
 package org.hedbor.evan.classictalents.control
 
-import javafx.application.Platform
+import javafx.beans.binding.Bindings
+import javafx.beans.binding.ObjectBinding
 import javafx.beans.value.ChangeListener
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
-import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.control.Button
 import javafx.scene.control.Label
-import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.Region
 import javafx.scene.layout.StackPane
+import javafx.scene.layout.VBox
 import org.hedbor.evan.classictalents.ASSETS_ROOT
+import org.hedbor.evan.classictalents.model.CooldownUnit
+import org.hedbor.evan.classictalents.model.ResourceType
 import org.hedbor.evan.classictalents.model.Talent
-import org.hedbor.evan.classictalents.util.getProperty
+import org.hedbor.evan.classictalents.util.booleanBinding
 import org.hedbor.evan.classictalents.util.objectBinding
-import org.hedbor.evan.classictalents.util.property
 import org.hedbor.evan.classictalents.util.stringBinding
+import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.*
 
 class TalentButton(private val model: Talent) : StackPane() {
     @FXML private lateinit var button: Button
-    // TODO: tooltip
+
     @FXML private lateinit var iconView: ImageView
     @FXML private lateinit var highlightView: ImageView
     @FXML private lateinit var activeBorderRegion: Region
     @FXML private lateinit var rankCounterLabel: Label
+
+    @FXML private lateinit var tooltipNameLabel: Label
+    @FXML private lateinit var tooltipRankLabel: Label
+
+    @FXML private lateinit var tooltipSpellPane: VBox
+    @FXML private lateinit var tooltipCostLabel: Label
+    @FXML private lateinit var tooltipRangeLabel: Label
+    @FXML private lateinit var tooltipCastTimeLabel: Label
+    @FXML private lateinit var tooltipCooldownLabel: Label
+
+    @FXML private lateinit var tooltipDescLabel: Label
+    @FXML private lateinit var tooltipNextRankPane: VBox
+    @FXML private lateinit var tooltipNextRankDescLabel: Label
+
+    @FXML private lateinit var tooltipSpecRequiredLabel: Label
+    @FXML private lateinit var tooltipPrereqRequiredLabel: Label
+    @FXML private lateinit var tooltipClickToLearnLabel: Label
+    @FXML private lateinit var tooltipClickToUnlearnLabel: Label
 
     private val rankListener = ChangeListener<Number?> { _, _, _ -> updateActiveBorder() }
 
@@ -51,6 +73,146 @@ class TalentButton(private val model: Talent) : StackPane() {
 
         model.rankProperty().addListener(rankListener)
         model.maxRankProperty().addListener(rankListener)
+
+        initTooltip()
+    }
+
+    private fun initTooltip() {
+        initHeader()
+        initSpell()
+        initDesc()
+        initFooter()
+    }
+
+    private fun initHeader() {
+        tooltipNameLabel.textProperty().bind(model.nameProperty())
+        tooltipRankLabel.textProperty().bind(
+            model.rankProperty().stringBinding(model.maxRankProperty()) { rank ->
+                "Rank $rank/${model.maxRank}"
+            })
+    }
+
+    private fun initSpell() {
+        tooltipSpellPane.visibleProperty().bind(model.spellProperty().isNotNull)
+        tooltipSpellPane.managedProperty().bind(model.spellProperty().isNotNull)
+
+        val resourceCost = Bindings.select<Int?>(model.spellProperty(), "cost")
+        val resource = Bindings.select<ResourceType?>(model.spellProperty(), "resource")
+        val costText = stringBinding(resourceCost, resource) {
+            if (resourceCost.value == null || resource.value == null) {
+                null
+            } else {
+                "" + resourceCost.value + when (resource.value!!) {
+                    ResourceType.MANA -> " Mana"
+                    ResourceType.PERCENT_OF_BASE_MANA -> "% of Base Mana"
+                    ResourceType.RAGE -> " Rage"
+                    ResourceType.ENERGY -> " Energy"
+                }
+            }
+        }
+        tooltipCostLabel.visibleProperty().bind(costText.isNotNull)
+        tooltipCostLabel.managedProperty().bind(costText.isNotNull)
+        tooltipCostLabel.textProperty().bind(costText)
+
+        val range = Bindings.select<Double?>(model.spellProperty(), "range")
+        val rangeText = range.stringBinding {
+            when {
+                it == null -> null
+                it <= 0.0 -> ""
+                it <= 5.0 -> "Melee Range"
+                else -> "$it yd"
+            }
+        }
+        tooltipRangeLabel.visibleProperty().bind(rangeText.isNotNull)
+        tooltipRangeLabel.managedProperty().bind(rangeText.isNotNull)
+        tooltipRangeLabel.textProperty().bind(rangeText)
+        tooltipRangeLabel.alignmentProperty().bind(
+            costText.isNotNull.objectBinding { hasCost ->
+                if (hasCost) Pos.CENTER_RIGHT else Pos.CENTER_LEFT
+            }
+        )
+
+        val castTime = Bindings.select<Double?>(model.spellProperty(), "castTime")
+        val castTimeText = castTime.stringBinding {
+            when (it) {
+                null -> null
+                0.0 -> "Instant"
+                else -> {
+                    DecimalFormat("##.###").format(it) + " sec cast"
+                }
+            }
+        }
+        tooltipCastTimeLabel.visibleProperty().bind(castTimeText.isNotNull)
+        tooltipCastTimeLabel.managedProperty().bind(castTimeText.isNotNull)
+        tooltipCastTimeLabel.textProperty().bind(castTimeText)
+
+        val cooldown = Bindings.select<Double?>(model.spellProperty(), "cooldown")
+        val cooldownUnit = Bindings.select<CooldownUnit?>(model.spellProperty(), "cooldownUnit")
+        val cooldownText = stringBinding(cooldown, cooldownUnit) {
+            if (cooldown.value == null || cooldownUnit.value == null) {
+                null
+            } else {
+                val cd = DecimalFormat("##.###").format(cooldown.value)
+                val unit = when (cooldownUnit.value!!) {
+                    CooldownUnit.HOURS -> "hr"
+                    CooldownUnit.MINUTES -> "min"
+                    CooldownUnit.SECONDS -> "sec"
+                }
+                "$cd $unit cooldown"
+            }
+        }
+        tooltipCooldownLabel.visibleProperty().bind(cooldownText.isNotNull)
+        tooltipCooldownLabel.managedProperty().bind(cooldownText.isNotNull)
+        tooltipCooldownLabel.textProperty().bind(cooldownText)
+    }
+
+    private fun initDesc() {
+        // TODO: format description based on current rank
+        tooltipDescLabel.textProperty().bind(model.descriptionProperty())
+
+        val showNextRank = model.rankProperty().booleanBinding(model.maxRankProperty()) { rank ->
+            rank > 0 && rank != model.maxRank
+        }
+        tooltipNextRankPane.visibleProperty().bind(showNextRank)
+        tooltipNextRankPane.managedProperty().bind(showNextRank)
+
+        // TODO: format description based on next rank
+        tooltipNextRankDescLabel.textProperty().bind(model.descriptionProperty())
+    }
+
+    private fun initFooter() {
+        // TODO: get spec name, # points
+        tooltipSpecRequiredLabel.isVisible = true
+        tooltipSpecRequiredLabel.isManaged = true
+        tooltipSpecRequiredLabel.text = "Requires ## Points in Spec Talents"
+
+        val prereqName: ObjectBinding<String?> = Bindings.select(model.prerequisiteProperty(), "name")
+        val prereqRank = Bindings.select<Int?>(model.prerequisiteProperty(), "rank")
+        val prereqMaxRank = Bindings.select<Int?>(model.prerequisiteProperty(), "maxRank")
+        val prereqText = prereqName.stringBinding(prereqRank, prereqMaxRank) { name ->
+            if (name == null || prereqRank == null || prereqMaxRank == null) {
+                null
+            } else if (prereqRank.value == prereqMaxRank.value) {
+                null
+            } else {
+                val remaining = prereqMaxRank.value - prereqRank.value
+                "Requires $remaining Points in $name"
+            }
+        }
+        tooltipPrereqRequiredLabel.visibleProperty().bind(prereqText.isNotNull)
+        tooltipPrereqRequiredLabel.managedProperty().bind(prereqText.isNotNull)
+        tooltipPrereqRequiredLabel.textProperty().bind(prereqText)
+
+        // TODO: use common property for this
+        val canAlloc = model.rankProperty().booleanBinding(model.maxRankProperty()) { rank ->
+            rank < model.maxRank
+        }
+        tooltipClickToLearnLabel.visibleProperty().bind(canAlloc)
+        tooltipClickToLearnLabel.managedProperty().bind(canAlloc)
+
+        val canDealloc = model.rankProperty().booleanBinding { rank -> rank > 0 }
+        tooltipClickToUnlearnLabel.visibleProperty().bind(canDealloc)
+        tooltipClickToUnlearnLabel.managedProperty().bind(canDealloc)
     }
 
     private fun updateActiveBorder() {
