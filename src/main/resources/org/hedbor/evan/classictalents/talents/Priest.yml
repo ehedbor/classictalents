@@ -1,7 +1,6 @@
 Priest:
   Icon: "images/priest/ClassIcon.jpg"
   Color: "#FFFFFF"
-  classic:
   Classic:
     Specializations:
       Discipline:

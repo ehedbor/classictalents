@@ -4,9 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root xmlns="http://javafx.com/javafx"
-         xmlns:fx="http://javafx.com/fxml"
-         type="javafx.scene.layout.VBox">
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml">
   <HBox fx:id="specsPane" spacing="10" alignment="CENTER">
     <padding>
       <Insets topRightBottomLeft="20"/>
@@ -26,4 +25,4 @@
       <Label fx:id="remainingPointsLabel" styleClass="class-description-text" VBox.vgrow="NEVER"/>
     </VBox>
   </HBox>
-</fx:root>
+</VBox>

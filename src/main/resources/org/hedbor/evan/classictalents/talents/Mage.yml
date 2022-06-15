@@ -1,5 +1,5 @@
 Mage:
-  Icon: "images/mage/ClassIcon.png"
+  Icon: "images/mage/ClassIcon.jpg"
   Color: "#3FC7EB"
   Classic:
     Specializations:
@@ -182,7 +182,7 @@ Mage:
           Improved Scorch:
             Location: [3, 0]
             Max Rank: 3
-            Icon: "images/mage/scorch.png"
+            Icon: "images/mage/Scorch.png"
             Description: >-
               Your Scorch spells have a {:|33,66,100}% chance to cause your target to be vulnerable 
               to Fire damage. This vulnerability increases the Fire damage dealt to your target by 
@@ -206,7 +206,7 @@ Mage:
             Description: Increases the critical strike chance of your Fire spells by {:|2,4,6}%.
           Blast Wave:
             Location: [4, 2]
-            Requires: Pos 2, 2
+            Requires: Pyroblast
             Max Rank: 1
             Icon: "images/paladin/Exorcism.png"
             Description: >-
@@ -223,8 +223,8 @@ Mage:
             Description: Increases the damage done by your Fire spells by {:|2,4,6,8,10}%.
           Combustion:
             Location: [6, 1]
-            Requires: Pos 4, 1
-            Max Rank: 5
+            Requires: Critical Mass
+            Max Rank: 1
             Icon: "images/shaman/FireNovaTotem.png"
             Description: >-
               When activated, this spell causes each of your Fire damage spell hits to increase your 
@@ -320,7 +320,7 @@ Mage:
               caused by your Frost spells by {:|10,20,30}%.
           Shatter:
             Location: [3, 2]
-            Requires: Pos 1, 2
+            Requires: Improved Frost Nova
             Max Rank: 5
             Icon: "images/shaman/FrostShock.png"
             Description: >-

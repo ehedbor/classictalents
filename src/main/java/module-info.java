@@ -1,5 +1,5 @@
 module org.hedbor.evan.classictalents {
-    requires transitive kotlin.stdlib;
+    requires transitive kotlin.stdlib.jdk8;
     requires javafx.controls;
     requires javafx.fxml;
     requires com.fasterxml.jackson.annotation;

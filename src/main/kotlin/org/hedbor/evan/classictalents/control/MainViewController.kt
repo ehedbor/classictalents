@@ -8,7 +8,10 @@ import org.hedbor.evan.classictalents.ASSETS_ROOT
 import org.hedbor.evan.classictalents.model.MainModel
 import org.hedbor.evan.classictalents.util.booleanBinding
 
-class MainViewController(private val model: MainModel) {
+class MainViewController {
+    // TODO: do dependency injection
+    private val model = MainModel().also { it.loadClasses() }
+
     @FXML private lateinit var classButtonsPane: HBox
     @FXML private lateinit var classViewPane: HBox
 
@@ -29,7 +32,9 @@ class MainViewController(private val model: MainModel) {
         }
 
         val loader = FXMLLoader(javaClass.getResource("$ASSETS_ROOT/view/WowClassView.fxml"))
-        loader.setController(WowClassViewController(model))
+        val controller = WowClassView(model)
+        loader.setController(controller)
+        //loader.setRoot(controller)
         classViewPane.children += loader.load<Node>()
     }
 }

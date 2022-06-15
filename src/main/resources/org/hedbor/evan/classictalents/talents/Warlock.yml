@@ -351,7 +351,7 @@ Warlock:
           Improved Searing Pain:
             Location: [3, 3]
             Max Rank: 5
-            Icon: "images/mage/scorch.png"
+            Icon: "images/mage/Scorch.png"
             Description: >-
               Increases the critical strike chance of your Searing Pain spell by {:|2,4,6,8,10}%.
           Pyroclasm:

@@ -3,19 +3,16 @@ package org.hedbor.evan.classictalents
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
+import javafx.scene.layout.VBox
 import javafx.stage.Stage
-import org.hedbor.evan.classictalents.control.MainViewController
-import org.hedbor.evan.classictalents.model.MainModel
 
 
 internal const val ASSETS_ROOT = "/org/hedbor/evan/classictalents"
 
 class ClassicTalentsApp : Application() {
     override fun start(primaryStage: Stage) {
-        val loader = FXMLLoader(javaClass.getResource("$ASSETS_ROOT/view/MainView.fxml"))
-        val model = MainModel().also { it.loadClasses() }
-        loader.setController(MainViewController(model))
-        val scene = Scene(loader.load())
+        val view = FXMLLoader.load<VBox>(javaClass.getResource("$ASSETS_ROOT/view/MainView.fxml"))
+        val scene = Scene(view)
 
         val stylesheets = arrayOf(
             "$ASSETS_ROOT/styles/ClassStyles.css",

@@ -137,7 +137,7 @@ Paladin:
           Guardian's Favor:
             Location: [1, 1]
             Max Rank: 2
-            Icon: "images/paladin/BlessinOfProtection.png"
+            Icon: "images/paladin/BlessingOfProtection.png"
             Description: >-
               Reduces the cooldown of your Blessing of Protection by {:|60,120} sec and increases 
               the duration of your Blessing of Freedom by {:|3,6} sec.
@@ -291,7 +291,7 @@ Paladin:
           Pursuit of Justice:
             Location: [2, 3]
             Max Rank: 2
-            Icon: "iimages/paladin/PursuitOfJustice.jpg"
+            Icon: "images/paladin/PursuitOfJustice.jpg"
             Description: >-
               Increases movement and mounted movement speed by {:|4,8}%. This does not stack with 
               other movement speed increasing effects.
@@ -333,7 +333,7 @@ Paladin:
               dealing a critical strike from a weapon swing, spell, or ability.
           Repentance:
             Location: [6, 1]
-            Max Rank: 5
+            Max Rank: 1
             Icon: "images/paladin/Repentance.png"
             Description: >-
               Puts the enemy target in a state of meditation, incapacitating them for up to 6 sec. 

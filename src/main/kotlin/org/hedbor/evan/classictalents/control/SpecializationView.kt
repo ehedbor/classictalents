@@ -43,9 +43,10 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
 
     @FXML
     private fun initialize() {
-        iconView.image = Image("$ASSETS_ROOT/images/test/classic_temp.jpg")
-        specLabel.text = "Affliction"
-        pointCounterLabel.text = "31 points"
+        iconView.imageProperty().bind(model.iconProperty())
+        specLabel.textProperty().bind(model.nameProperty())
+        pointCounterLabel.textProperty().bind(
+            model.allocatedPointsProperty().stringBinding { "$it points" })
 
         talentGrid.backgroundProperty().bind(model.backgroundProperty().objectBinding { img ->
             Background(
@@ -290,11 +291,12 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
 
     private fun getVerticalArrowImageProperty(prereq: Talent): ObservableValue<Image> {
         return objectBinding(prereq.rankProperty(), prereq.maxRankProperty()) {
-            if (prereq.rank < prereq.maxRank) {
-                Image("$ASSETS_ROOT/images/arrows/down.png")
+            val url = if (prereq.rank < prereq.maxRank) {
+                "$ASSETS_ROOT/images/arrows/down.png"
             } else {
-                Image("$ASSETS_ROOT/images/arrows/down2.png")
+                "$ASSETS_ROOT/images/arrows/down2.png"
             }
+            Image(javaClass.getResourceAsStream(url))
         }
     }
 
@@ -307,7 +309,7 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
             val rankComponent = if (prereq.rank < prereq.maxRank) "" else "2"
 
             val imageName = "$horizComponent$vertComponent$rankComponent.png"
-            Image("$ASSETS_ROOT/images/arrows/$imageName")
+            Image(javaClass.getResourceAsStream("$ASSETS_ROOT/images/arrows/$imageName"))
         }
     }
 }
