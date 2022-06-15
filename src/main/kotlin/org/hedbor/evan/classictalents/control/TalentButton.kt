@@ -1,9 +1,11 @@
 package org.hedbor.evan.classictalents.control
 
+import javafx.application.Platform
 import javafx.beans.value.ChangeListener
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.geometry.Insets
+import javafx.geometry.Pos
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.image.Image
@@ -41,6 +43,7 @@ class TalentButton(private val model: Talent) : StackPane() {
     private fun initialize() {
         highlightView.visibleProperty().bind(button.hoverProperty())
         iconView.imageProperty().bind(model.iconProperty())
+
         rankCounterLabel.textProperty().bind(
             model.rankProperty().stringBinding {
                 it!!.toString()
@@ -48,7 +51,6 @@ class TalentButton(private val model: Talent) : StackPane() {
 
         model.rankProperty().addListener(rankListener)
         model.maxRankProperty().addListener(rankListener)
-
     }
 
     private fun updateActiveBorder() {

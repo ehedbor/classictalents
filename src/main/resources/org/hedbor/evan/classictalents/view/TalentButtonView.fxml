@@ -7,9 +7,12 @@
 
 <fx:root xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
-         type="javafx.scene.layout.StackPane"
-         styleClass="talent-container">
+         type="javafx.scene.layout.StackPane">
+  <padding>
+    <Insets topRightBottomLeft="16"/>
+  </padding>
   <Button fx:id="button" styleClass="talent-button"
+          StackPane.alignment="CENTER"
           prefWidth="34" prefHeight="34"
           minWidth="34" maxWidth="34"
           minHeight="34" maxHeight="34"
@@ -18,8 +21,10 @@
       <!-- showDuration="INDEFINITE" doesn't seem to work,
            but setting the duration to a ridiculously high number does.
            That number is equal to  3x10^29 centuries. -->
-      <Tooltip fx:id="buttonTooltip" styleClass="tooltip-description"
-               showDelay="0s" hideDelay="0s"
+      <Tooltip fx:id="buttonTooltip"
+               styleClass="tooltip-description"
+               showDelay="0s"
+               hideDelay="0s"
                showDuration="999999999999999999999999999999999999999s">
         <text>
           Spell description here.
@@ -39,7 +44,14 @@
       </StackPane>
     </graphic>
   </Button>
-  <alignment>BOTTOM_RIGHT</alignment>
-  <Label fx:id="rankCounterLabel" styleClass="rank-counter"
-         alignment="BOTTOM_RIGHT" mouseTransparent="true"/>
+  <Label fx:id="rankCounterLabel"
+         styleClass="rank-counter"
+         mouseTransparent="true"
+         StackPane.alignment="BOTTOM_RIGHT">
+    <StackPane.margin>
+      <!-- WTF?? Why doesn't the control get laid out correctly
+           unless I use a negative margin? -->
+      <Insets topRightBottomLeft="-18"/>
+    </StackPane.margin>
+  </Label>
 </fx:root>

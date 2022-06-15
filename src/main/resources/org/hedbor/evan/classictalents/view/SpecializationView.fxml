@@ -29,7 +29,7 @@
         <HBox alignment="CENTER">
           <Button styleClass="spec-reset-button" onMouseClicked="#onResetButtonClicked">
               <tooltip>
-                <Tooltip text="Reset Spec"/>
+                <Tooltip styleClass="tooltip-error" text="Reset Spec"/>
               </tooltip>
           </Button>
         </HBox>

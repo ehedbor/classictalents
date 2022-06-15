@@ -29,10 +29,8 @@
     -fx-border-style: solid;
     -fx-border-radius: 7px;
     -fx-border-color: $border-color;
-    /*
-   * wowhead border size: 36px square
-   * wowhead icon size: 44px square
-   */
+    // wowhead border size: 36px square
+    // wowhead icon size: 44px square
 }
 
 .active-border {
@@ -58,7 +56,7 @@
 
     &:disabled {
         -fx-text-fill: gray;
-        -fx-padding:  0px 3px;
+        -fx-padding:  0px 3px 0px 3px;
         -fx-border-width: 1px;
         -fx-border-color: gray;
         -fx-border-radius: 5px;

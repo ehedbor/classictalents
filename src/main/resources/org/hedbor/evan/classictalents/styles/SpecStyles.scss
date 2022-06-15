@@ -31,11 +31,9 @@
 }
 
 .spec-reset-button {
-    @include spec-reset-button(
-        url("/org/hedbor/evan/classictalents/images/button/cancel_x.png"));
+    @include spec-reset-button(url("../images/button/cancel_x.png"));
 
     &:hover {
-        @include spec-reset-button(
-            url("/org/hedbor/evan/classictalents/images/button/cancel_x_hover.png"));
+        @include spec-reset-button(url("../images/button/cancel_x_hover.png"));
     }
 }
