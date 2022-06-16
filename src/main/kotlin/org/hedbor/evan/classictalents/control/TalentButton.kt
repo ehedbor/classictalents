@@ -18,9 +18,7 @@ import org.hedbor.evan.classictalents.ASSETS_ROOT
 import org.hedbor.evan.classictalents.model.CooldownUnit
 import org.hedbor.evan.classictalents.model.ResourceType
 import org.hedbor.evan.classictalents.model.Talent
-import org.hedbor.evan.classictalents.util.booleanBinding
-import org.hedbor.evan.classictalents.util.objectBinding
-import org.hedbor.evan.classictalents.util.stringBinding
+import org.hedbor.evan.classictalents.util.*
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
@@ -66,10 +64,7 @@ class TalentButton(private val model: Talent) : StackPane() {
         highlightView.visibleProperty().bind(button.hoverProperty())
         iconView.imageProperty().bind(model.iconProperty())
 
-        rankCounterLabel.textProperty().bind(
-            model.rankProperty().stringBinding {
-                it!!.toString()
-            })
+        rankCounterLabel.textProperty().bind(model.rankProperty().asString())
 
         model.rankProperty().addListener(rankListener)
         model.maxRankProperty().addListener(rankListener)
@@ -127,10 +122,9 @@ class TalentButton(private val model: Talent) : StackPane() {
         tooltipRangeLabel.managedProperty().bind(rangeText.isNotNull)
         tooltipRangeLabel.textProperty().bind(rangeText)
         tooltipRangeLabel.alignmentProperty().bind(
-            costText.isNotNull.objectBinding { hasCost ->
-                if (hasCost) Pos.CENTER_RIGHT else Pos.CENTER_LEFT
-            }
-        )
+            Bindings.`when`(costText.isNotNull)
+                .then(Pos.CENTER_RIGHT)
+                .otherwise(Pos.CENTER_LEFT))
 
         val castTime = Bindings.select<Double?>(model.spellProperty(), "castTime")
         val castTimeText = castTime.stringBinding {
@@ -170,9 +164,8 @@ class TalentButton(private val model: Talent) : StackPane() {
         // TODO: format description based on current rank
         tooltipDescLabel.textProperty().bind(model.descriptionProperty())
 
-        val showNextRank = model.rankProperty().booleanBinding(model.maxRankProperty()) { rank ->
-            rank > 0 && rank != model.maxRank
-        }
+        val showNextRank = model.rankProperty().greaterThan(0).and(
+            model.rankProperty().lessThan(model.maxRankProperty()))
         tooltipNextRankPane.visibleProperty().bind(showNextRank)
         tooltipNextRankPane.managedProperty().bind(showNextRank)
 
@@ -204,13 +197,11 @@ class TalentButton(private val model: Talent) : StackPane() {
         tooltipPrereqRequiredLabel.textProperty().bind(prereqText)
 
         // TODO: use common property for this
-        val canAlloc = model.rankProperty().booleanBinding(model.maxRankProperty()) { rank ->
-            rank < model.maxRank
-        }
+        val canAlloc = model.rankProperty().lessThan(model.maxRankProperty())
         tooltipClickToLearnLabel.visibleProperty().bind(canAlloc)
         tooltipClickToLearnLabel.managedProperty().bind(canAlloc)
 
-        val canDealloc = model.rankProperty().booleanBinding { rank -> rank > 0 }
+        val canDealloc = model.rankProperty().greaterThan(0)
         tooltipClickToUnlearnLabel.visibleProperty().bind(canDealloc)
         tooltipClickToUnlearnLabel.managedProperty().bind(canDealloc)
     }

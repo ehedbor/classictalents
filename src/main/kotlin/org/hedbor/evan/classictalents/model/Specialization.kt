@@ -1,33 +1,39 @@
 package org.hedbor.evan.classictalents.model
 
-import javafx.beans.property.SimpleIntegerProperty
+import javafx.beans.Observable
+import javafx.beans.property.*
+import javafx.collections.FXCollections
+import javafx.collections.ObservableList
 import javafx.scene.image.Image
-import javafx.scene.layout.Background
-import org.hedbor.evan.classictalents.util.getProperty
+import org.hedbor.evan.classictalents.util.delegate
 import org.hedbor.evan.classictalents.util.intBinding
-import org.hedbor.evan.classictalents.util.observableListOf
-import org.hedbor.evan.classictalents.util.property
 
 
-@Suppress("MemberVisibilityCanBePrivate")
+@Suppress("MemberVisibilityCanBePrivate", "unused")
 class Specialization {
-    var name by property<String>()
-    fun nameProperty() = getProperty(Specialization::name)
+    private val _name = SimpleStringProperty("")
+    var name: String by _name.delegate()
+    fun nameProperty() = _name
 
-    var icon by property<Image>()
-    fun iconProperty() = getProperty(Specialization::icon)
+    // TODO: default images
+    private val _icon = SimpleObjectProperty<Image>()
+    var icon: Image by _icon.delegate()
+    fun iconProperty() = _icon
 
-    var background by property<Image>()
-    fun backgroundProperty() = getProperty(Specialization::background)
+    private val _background = SimpleObjectProperty<Image>()
+    var background: Image by _background.delegate()
+    fun backgroundProperty() = _background
 
-    var talents by property(observableListOf<Talent>())
-    fun talentsProperty() = getProperty(Specialization::talents)
+    private val _talents = SimpleListProperty<Talent>(
+        FXCollections.observableArrayList { arrayOf(it.rankProperty()) })
+    var talents: ObservableList<Talent> by _talents.delegate()
+    fun talentsProperty() = _talents
 
-    private val _allocatedPointsProperty = SimpleIntegerProperty().apply {
-        this.bind(talentsProperty().intBinding { talents ->
+    private val _allocatedPoints = SimpleIntegerProperty().apply {
+        bind(talentsProperty().intBinding { talents ->
             talents.sumOf { it.rank }
         })
     }
-    val allocatedPoints get() = _allocatedPointsProperty.get()
-    fun allocatedPointsProperty() = _allocatedPointsProperty
+    val allocatedPoints by _allocatedPoints.delegate()
+    fun allocatedPointsProperty(): ReadOnlyIntegerProperty = _allocatedPoints
 }

@@ -1,82 +1,78 @@
+@file:Suppress("unused")
+
 package org.hedbor.evan.classictalents.util
 
 import javafx.beans.property.*
-import javafx.collections.ObservableList
-import javafx.collections.ObservableMap
-import javafx.collections.ObservableSet
-import org.hedbor.evan.classictalents.model.Spell
 import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KMutableProperty1
 import kotlin.reflect.KProperty
-import kotlin.reflect.KProperty1
-import kotlin.reflect.full.memberProperties
 
-// See tornadofx for original implementation:
-// https://github.com/edvin/tornadofx/blob/master/src/main/java/tornadofx/Properties.kt
 
-inline fun <reified T> property(value: T? = null): PropertyDelegate<T> {
-    val prop: Property<*> = when (T::class) {
-        Boolean::class -> SimpleBooleanProperty((value ?: false) as Boolean)
-        Double::class -> SimpleDoubleProperty((value ?: 0.0) as Double)
-        Float::class -> SimpleFloatProperty((value ?: 0.0f) as Float)
-        Int::class -> SimpleIntegerProperty((value ?: 0) as Int)
-        Long::class -> SimpleLongProperty((value ?: 0L) as Long)
-        String::class -> SimpleStringProperty(value as String?)
-        ObservableList::class -> SimpleListProperty(value as ObservableList<*>?)
-        ObservableMap::class -> SimpleMapProperty(value as ObservableMap<*, *>?)
-        ObservableSet::class -> SimpleSetProperty(value as ObservableSet<*>?)
-        else -> SimpleObjectProperty(value)
-    }
-    @Suppress("UNCHECKED_CAST")
-    return PropertyDelegate(prop as Property<T>)
-}
+fun <C, T> Property<T>.delegate() = PropDelegate<C, T>(this)
 
-fun <T> property(block: () -> Property<T>) = PropertyDelegate(block())
+// special cases for non-nullable properties
+fun <C> BooleanProperty.delegate() = BoolPropDelegate<C>(this)
+fun <C> IntegerProperty.delegate() = IntPropDelegate<C>(this)
+fun <C> LongProperty.delegate() = LongPropDelegate<C>(this)
+fun <C> FloatProperty.delegate() = FloatPropDelegate<C>(this)
+fun <C> DoubleProperty.delegate() = DoublePropDelegate<C>(this)
 
-class PropertyDelegate<T>(internal val javafxProperty : Property<T>) : ReadWriteProperty<Any?, T> {
-    override fun getValue(thisRef: Any?, property: KProperty<*>): T {
-        return javafxProperty.value
+
+class PropDelegate<in C, T>(private val fxProp: Property<T>): ReadWriteProperty<C, T> {
+    override operator fun getValue(thisRef: C, property: KProperty<*>): T {
+        return fxProp.value
     }
 
-    override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
-        javafxProperty.value = value
+    override operator fun setValue(thisRef: C, property: KProperty<*>, value: T) {
+        fxProp.value = value
     }
 }
 
-private fun <T> Any.getDelegate(prop: KMutableProperty1<*, T>): PropertyDelegate<T> {
-    val field = javaClass.getDeclaredField("${prop.name}\$delegate")
-    field.isAccessible = true
-    @Suppress("UNCHECKED_CAST")
-    return field.get(this) as PropertyDelegate<T>
+class BoolPropDelegate<in C>(private val fxProp: BooleanProperty): ReadWriteProperty<C, Boolean> {
+    override operator fun getValue(thisRef: C, property: KProperty<*>): Boolean {
+        return fxProp.value
+    }
+
+    override operator fun setValue(thisRef: C, property: KProperty<*>, value: Boolean) {
+        fxProp.value = value
+    }
 }
 
-@Suppress("UNCHECKED_CAST")
-fun <T> Any.getProperty(prop: KMutableProperty1<*, T>) = getDelegate(prop).javafxProperty
+class IntPropDelegate<in C>(private val fxProp: IntegerProperty): ReadWriteProperty<C, Int> {
+    override operator fun getValue(thisRef: C, property: KProperty<*>): Int {
+        return fxProp.value
+    }
 
-//fun Any.getProperty(prop: KMutableProperty1<*, Boolean>) = getDelegate(prop).javafxProperty as BooleanProperty
-//fun Any.getProperty(prop: KMutableProperty1<*, Double>) = getDelegate(prop).javafxProperty as DoubleProperty
-//fun Any.getProperty(prop: KMutableProperty1<*, Float>) = getDelegate(prop).javafxProperty as FloatProperty
-//fun Any.getProperty(prop: KMutableProperty1<*, Int>) = getDelegate(prop).javafxProperty as IntegerProperty
-//fun Any.getProperty(prop: KMutableProperty1<*, String>) = getDelegate(prop).javafxProperty as StringProperty
-//
-//@Suppress("UNCHECKED_CAST")
-//fun <E> Any.getProperty(prop: KMutableProperty1<Spell, ObservableList<E>>) = getDelegate(prop).javafxProperty as ListProperty<E>
-//@Suppress("UNCHECKED_CAST")
-//fun <K, V> Any.getProperty(prop: KMutableProperty1<*, Map<K, V>>) = getDelegate(prop).javafxProperty as MapProperty<K, V>
-//@Suppress("UNCHECKED_CAST")
-//fun <E> Any.getProperty(prop: KMutableProperty1<*, Set<E>>) = getDelegate(prop).javafxProperty as SetProperty<E>
+    override operator fun setValue(thisRef: C, property: KProperty<*>, value: Int) {
+        fxProp.value = value
+    }
+}
 
-//fun <T> Any.getProperty(prop: KProperty1<*, T>) = getDelegate(prop).javafxProperty as ObjectProperty<T>
-//
-//fun Any.getProperty(prop: KProperty1<*, Boolean>) = getDelegate(prop).javafxProperty as BooleanProperty
-//fun Any.getProperty(prop: KProperty1<*, Double>) = getDelegate(prop).javafxProperty as DoubleProperty
-//fun Any.getProperty(prop: KProperty1<*, Float>) = getDelegate(prop).javafxProperty as FloatProperty
-//fun Any.getProperty(prop: KProperty1<*, Int>) = getDelegate(prop).javafxProperty as IntegerProperty
-//fun Any.getProperty(prop: KProperty1<*, String>) = getDelegate(prop).javafxProperty as StringProperty
-//
-//@Suppress("UNCHECKED_CAST")
-//fun <E> Any.getProperty(prop: KProperty1<Spell, ObservableList<String>>) = getDelegate(prop).javafxProperty as ListProperty<E>
-//@Suppress("UNCHECKED_CAST")
-//fun <K, V> Any.getProperty(prop: KProperty1<*, Map<K, V>>) = getDelegate(prop).javafxProperty as MapProperty<K, V>
-//@Suppress("UNCHECKED_CAST")
-//fun <E> Any.getProperty(prop: KProperty1<*, Set<E>>) = getDelegate(prop).javafxProperty as SetProperty<E>
+class LongPropDelegate<in C>(private val fxProp: LongProperty): ReadWriteProperty<C, Long> {
+    override operator fun getValue(thisRef: C, property: KProperty<*>): Long {
+        return fxProp.value
+    }
+
+    override operator fun setValue(thisRef: C, property: KProperty<*>, value: Long) {
+        fxProp.value = value
+    }
+}
+
+class FloatPropDelegate<in C>(private val fxProp: FloatProperty): ReadWriteProperty<C, Float> {
+    override operator fun getValue(thisRef: C, property: KProperty<*>): Float {
+        return fxProp.value
+    }
+
+    override operator fun setValue(thisRef: C, property: KProperty<*>, value: Float) {
+        fxProp.value = value
+    }
+}
+
+class DoublePropDelegate<in C>(private val fxProp: DoubleProperty): ReadWriteProperty<C, Double> {
+    override operator fun getValue(thisRef: C, property: KProperty<*>): Double {
+        return fxProp.value
+    }
+
+    override operator fun setValue(thisRef: C, property: KProperty<*>, value: Double) {
+        fxProp.value = value
+    }
+}

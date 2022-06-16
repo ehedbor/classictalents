@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package org.hedbor.evan.classictalents.util
 
 import javafx.beans.Observable

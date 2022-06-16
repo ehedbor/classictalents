@@ -1,37 +1,48 @@
 package org.hedbor.evan.classictalents.model
 
-import javafx.beans.property.ObjectProperty
+import javafx.beans.property.SimpleIntegerProperty
+import javafx.beans.property.SimpleObjectProperty
+import javafx.beans.property.SimpleStringProperty
 import javafx.scene.image.Image
-import org.hedbor.evan.classictalents.util.getProperty
-import org.hedbor.evan.classictalents.util.property
+import org.hedbor.evan.classictalents.util.delegate
 
 
-@Suppress("MemberVisibilityCanBePrivate")
+@Suppress("MemberVisibilityCanBePrivate", "unused")
 class Talent {
-    var name by property<String>()
-    fun nameProperty() = getProperty(Talent::name)
+    private val _name = SimpleStringProperty("")
+    var name: String by _name.delegate()
+    fun nameProperty() = _name
 
-    var row by property<Int>()
-    fun rowProperty() = getProperty(Talent::row)
+    private val _row = SimpleIntegerProperty()
+    var row by _row.delegate()
+    fun rowProperty() = _row
 
-    var column by property<Int>()
-    fun columnProperty() = getProperty(Talent::column)
+    private val _column = SimpleIntegerProperty()
+    var column by _column.delegate()
+    fun columnProperty() = _column
 
-    var prerequisite by property<Talent?>()
-    fun prerequisiteProperty() = getProperty(Talent::prerequisite)
+    private val _prerequisite = SimpleObjectProperty<Talent?>()
+    var prerequisite by _prerequisite.delegate()
+    fun prerequisiteProperty() = _prerequisite
 
-    var maxRank by property<Int>()
-    fun maxRankProperty() = getProperty(Talent::maxRank)
+    private val _maxRank = SimpleIntegerProperty()
+    var maxRank by _maxRank.delegate()
+    fun maxRankProperty() = _maxRank
 
-    var rank by property<Int>()
-    fun rankProperty() = getProperty(Talent::rank)
+    private val _rank = SimpleIntegerProperty()
+    var rank by _rank.delegate()
+    fun rankProperty() = _rank
 
-    var icon by property<Image>()
-    fun iconProperty() = getProperty(Talent::icon)
+    // TODO: default image
+    private val _icon = SimpleObjectProperty<Image>()
+    var icon: Image by _icon.delegate()
+    fun iconProperty() = _icon
 
-    var description by property<String>()
-    fun descriptionProperty() = getProperty(Talent::description)
+    private val _description = SimpleStringProperty("")
+    var description: String by _description.delegate()
+    fun descriptionProperty() = _description
 
-    var spell by property<Spell?>()
-    fun spellProperty() = getProperty(Talent::spell) as ObjectProperty<Spell?>
+    private val _spell = SimpleObjectProperty<Spell?>()
+    var spell by _spell.delegate()
+    fun spellProperty() = _spell
 }

@@ -1,39 +1,52 @@
 package org.hedbor.evan.classictalents.model
 
-import org.hedbor.evan.classictalents.util.*
+import javafx.beans.property.*
+import javafx.collections.ObservableList
+import org.hedbor.evan.classictalents.util.delegate
+import org.hedbor.evan.classictalents.util.observableListOf
 
 
 @Suppress("MemberVisibilityCanBePrivate", "unused")
 class Spell {
-    var cost by property<Int?>()
-    fun costProperty() = getProperty(Spell::cost)
+    private val _cost = SimpleIntegerProperty()
+    var cost by _cost.delegate()
+    fun costProperty() = _cost
 
-    var resource by property<ResourceType?>()
-    fun resourceProperty() = getProperty(Spell::resource)
+    private val _resource = SimpleObjectProperty<ResourceType?>()
+    var resource by _resource.delegate()
+    fun resourceProperty() = _resource
 
-    var range by property<Double?>()
-    fun rangeProperty() = getProperty(Spell::range)
+    private val _range = SimpleObjectProperty<Double?>()
+    var range by _range.delegate()
+    fun rangeProperty() = _range
 
-    var minRange by property<Double?>()
-    fun minRangeProperty() = getProperty(Spell::minRange)
+    private val _minRange = SimpleObjectProperty<Double?>()
+    var minRange by _minRange.delegate()
+    fun minRangeProperty() = _minRange
 
-    var castTime by property<Double>()
-    fun castTimeProperty() = getProperty(Spell::castTime)
+    private val _castTime = SimpleDoubleProperty()
+    var castTime by _castTime.delegate()
+    fun castTimeProperty() = _castTime
 
-    var isChanneled by property<Boolean>(false)
-    fun channeledProperty() = getProperty(Spell::isChanneled)
+    private val _isChanneled = SimpleBooleanProperty()
+    var isChanneled by _isChanneled.delegate()
+    fun channeledProperty() = _isChanneled
 
-    var cooldown by property<Double?>()
-    fun cooldownProperty() = getProperty(Spell::cooldown)
+    private val _cooldown = SimpleObjectProperty<Double?>()
+    var cooldown by _cooldown.delegate()
+    fun cooldownProperty() = _cooldown
 
-    var cooldownUnit by property<CooldownUnit?>()
-    fun cooldownUnitProperty() = getProperty(Spell::cooldownUnit)
+    private val _cooldownUnit = SimpleObjectProperty<CooldownUnit?>()
+    var cooldownUnit by _cooldownUnit.delegate()
+    fun cooldownUnitProperty() = _cooldownUnit
 
-    var reagents by property(observableListOf<String>())
-    fun reagentsProperty() = getProperty(Spell::reagents)
+    private val _reagents = SimpleListProperty<String>(observableListOf())
+    var reagents: ObservableList<String> by _reagents.delegate()
+    fun reagentsProperty() = _reagents
 
-    var tools by property(observableListOf<String>())
-    fun toolsProperty() = getProperty(Spell::tools)
+    private val _tools = SimpleListProperty<String>(observableListOf())
+    var tools: ObservableList<String> by _tools.delegate()
+    fun toolsProperty() = _tools
 }
 
 enum class ResourceType {

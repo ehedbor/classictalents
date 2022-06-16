@@ -1,17 +1,22 @@
 package org.hedbor.evan.classictalents.model
 
+import javafx.beans.property.SimpleListProperty
+import javafx.beans.property.SimpleObjectProperty
+import javafx.collections.ObservableList
 import org.hedbor.evan.classictalents.ASSETS_ROOT
 import org.hedbor.evan.classictalents.dto.TalentConfigReader
-import org.hedbor.evan.classictalents.util.getProperty
+import org.hedbor.evan.classictalents.util.delegate
 import org.hedbor.evan.classictalents.util.observableListOf
-import org.hedbor.evan.classictalents.util.property
 
+@Suppress("unused")
 class MainModel {
-    var classes by property(observableListOf<WowClass>())
-    fun classesProperty() = getProperty(MainModel::classes)
+    private val _classes = SimpleListProperty<WowClass>(observableListOf())
+    var classes: ObservableList<WowClass> by _classes.delegate()
+    fun classesProperty() = _classes
 
-    var selectedClass by property<WowClass?>()
-    fun selectedClassProperty() = getProperty(MainModel::selectedClass)
+    private val _selectedClass = SimpleObjectProperty<WowClass?>()
+    var selectedClass by _selectedClass.delegate()
+    fun selectedClassProperty() = _selectedClass
 
     fun loadClasses() {
         check(classes.isEmpty()) { "Cannot load classes more than once" }
