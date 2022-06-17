@@ -38,8 +38,10 @@ class WowClassView(private val model: MainModel) {
 
         requiredLevelLabel.textProperty().bind(
             wowClass.allocatedPointsProperty().stringBinding { allocated ->
-                val level = 10 + (allocated as Int)
-                "Required Level: $level"
+                if (allocated as Int > 0)
+                    "Required Level: ${allocated + 9}"
+                else
+                    "Required Level: \u2013" // en dash
             })
 
         remainingPointsLabel.textProperty().bind(

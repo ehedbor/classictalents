@@ -126,8 +126,17 @@ class TalentConfigReader {
 
         talent.icon = getImage(errorPath, talentDto.icon)
 
-        // TODO: validate choice format
+        // YAML replaces newlines with spaces, which makes for some ugly double-wide spaces in the
+        // displayed text. Easy fix is to just replace every sequence of 2+ spaces with a single space.
+        // Also, replace one newline with 2 to make it more obvious that there is a paragraph break.
+        // There might be a way to just increases the space after paragraphs in JavaFX,
+        // but if there is, I don't know about it.
+
+        // technically i should do this to every field but realistically
+        // the description is the only field that will have newlines
         talent.description = talentDto.description
+            .replace("\n", "\n\n")
+            .replace(" {2,}".toRegex(), " ")
 
         if (talentDto.spell != null) {
             talent.spell = readSpell(errorPath, talentDto.spell)

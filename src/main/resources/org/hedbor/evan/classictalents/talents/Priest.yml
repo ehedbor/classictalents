@@ -42,10 +42,10 @@ Priest:
             Max Rank: 2
             Icon: "images/druid/Tranquility.png"
             Description: >-
-              Gives you a {:|50,100}% chance to gain the Focused Casting effect that lasts for 6 sec 
+              Gives you a {0:|50,100}% chance to gain the Focused Casting effect that lasts for 6 sec 
               after being the victim of a melee or ranged critical strike. The Focused Casting 
               effect prevents you from losing casting time when taking damage and increases 
-              resistance to interrupt effects by {:|10,20}%.
+              resistance to interrupt effects by {0:|10,20}%.
           Inner Focus:
             Location: [2, 1]
             Max Rank: 1
@@ -96,8 +96,8 @@ Priest:
             Max Rank: 5
             Icon: "images/shaman/WrathOfAirTotem.png"
             Description: >-
-              Increases your spell damage by {:|1,2,3,4,5}% and the critical strike chance of your
-              offensive spells by {:|1,2,3,4,5}%.
+              Increases your spell damage by {0:|1,2,3,4,5}% and the critical strike chance of your
+              offensive spells by {0:|1,2,3,4,5}%.
           Power Infusion:
             Location: [6, 1]
             Requires: Mental Strength

@@ -148,8 +148,8 @@ Warlock:
             Max Rank: 5
             Icon: "images/warlock/DemonicEmbrace.png"
             Description: >-
-              Increases your total Stamina by {:|3,6,9,12,15}%, but reduces your total Spirit by 
-              {:|1,2,3,4,5}%.
+              Increases your total Stamina by {0:|3,6,9,12,15}%, but reduces your total Spirit by 
+              {0:|1,2,3,4,5}%.
           Improved Health Funnel:
             Location: [1, 0]
             Max Rank: 2
@@ -176,8 +176,8 @@ Warlock:
             Icon: "images/warlock/SummonSuccubus.png"
             Description: >-
               Increases the effect of your Succubus' Lash of Pain and Soothing Kiss spells by 
-              {:|10,20,30}%, and increases the duration of your Succubus' Seduction and Lesser 
-              Invisibility spells by {:|10,20,30}%.
+              {0:|10,20,30}%, and increases the duration of your Succubus' Seduction and Lesser 
+              Invisibility spells by {0:|10,20,30}%.
           Fel Domination:
             Location: [2, 1]
             Max Rank: 1
@@ -202,7 +202,7 @@ Warlock:
             Icon: "images/warlock/ImpPhaseShift.png"
             Description: >-
               Reduces the casting time of your Imp, Voidwalker, Succubus and Felhunter Summoning 
-              spells by {:|2,4} sec and the Mana cost by {:|20,40}%.
+              spells by {0:|2,4} sec and the Mana cost by {0:|20,40}%.
           Unholy Power:
             Location: [3, 2]
             Max Rank: 5
@@ -216,7 +216,7 @@ Warlock:
             Icon: "images/warlock/EnslaveDemon.png"
             Description: >-
               Reduces the Attack Speed and Casting Speed penalty of your Enslave Demon spell by 
-              {:|2,4,6,8,10}% and reduces the resist chance by {:|2,4,6,8,10}%.
+              {0:|2,4,6,8,10}% and reduces the resist chance by {0:|2,4,6,8,10}%.
           Demonic Sacrifice:
             Location: [4, 1]
             Max Rank: 1
@@ -251,13 +251,13 @@ Warlock:
               Grants both the Warlock and the summoned demon an effect as long as that demon is 
               active.
               
-              Imp - Reduces threat caused by {:|4,8,12,16,20}%.
+              Imp - Reduces threat caused by {0:|4,8,12,16,20}%.
               
-              Voidwalker - Reduces physical damage taken by {:|2,4,6,8,10}%.
+              Voidwalker - Reduces physical damage taken by {0:|2,4,6,8,10}%.
               
-              Succubus - Increases all damage caused by {:|2,4,6,8,10}%.
+              Succubus - Increases all damage caused by {0:|2,4,6,8,10}%.
               
-              Felhunter - Increases all resistances by {:|.2,.4,.6,.8,1} per level.
+              Felhunter - Increases all resistances by {0:|.2,.4,.6,.8,1} per level.
           Soul Link:
             Location: [6, 1]
             Requires: Demonic Sacrifice
@@ -299,7 +299,7 @@ Warlock:
             Icon: "images/warlock/Bane.png"
             Description: >-
               Reduces the casting time of your Shadow Bolt and Immolate spells by 
-              {:|0.1,0.2,0.3,0.4,0.5} sec and your Soul Fire spell by {:|0.4,0.8,1.2,1.6,2} sec.
+              {0:|0.1,0.2,0.3,0.4,0.5} sec and your Soul Fire spell by {0:|0.4,0.8,1.2,1.6,2} sec.
           Aftermath:
             Location: [1, 2]
             Max Rank: 5

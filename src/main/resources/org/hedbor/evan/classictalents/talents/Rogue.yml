@@ -67,8 +67,8 @@ Rogue:
             Max Rank: 5
             Icon: "images/hunter/FeignDeath.png"
             Description: >-
-              Increases the damage dealt by your poisons by {:|4,8,12,16,20}% and gives your poisons 
-              an additional {:|8,16,24,32,40}% chance to resist dispel effects.
+              Increases the damage dealt by your poisons by {0:|4,8,12,16,20}% and gives your poisons 
+              an additional {0:|8,16,24,32,40}% chance to resist dispel effects.
           Improved Poisons:
             Location: [3, 2]
             Max Rank: 5
@@ -187,7 +187,7 @@ Rogue:
             Max Rank: 5
             Icon: "images/skills/MaceSpecialization.png"
             Description: >-
-              Increases your skill with Maces by {:|1,2,3,4,5}, and gives you a {:|1,2,3,4,5}% 
+              Increases your skill with Maces by {0:|1,2,3,4,5}, and gives you a {0:|1,2,3,4,5}% 
               chance to stun your target for 3 sec with a mace.
           Blade Flurry:
             Location: [4, 1]
@@ -243,7 +243,7 @@ Rogue:
             Icon: "images/warlock/Fear.png"
             Description: >-
               Reduces the chance enemies have to detect you while in Stealth mode.
-              {0:?1:,>1:More effective than Master of Deception (Rank '{0:|1,2,3,4}').}
+              {0:?>1:More effective than Master of Deception (Rank {0:|1,2,3,4}).}
           Opportunity:
             Location: [0, 2]
             Max Rank: 5
@@ -256,8 +256,8 @@ Rogue:
             Max Rank: 2
             Icon: "images/rogue/Feint.png"
             Description: >-
-              Reduces the chance you are critically hit by melee and ranged attacks by {:|1,2}% and 
-              increases the threat reduction of your Feint ability by {:|10,20}%.
+              Reduces the chance you are critically hit by melee and ranged attacks by {0:|1,2}% and 
+              increases the threat reduction of your Feint ability by {0:|10,20}%.
           Elusiveness:
             Location: [1, 1]
             Max Rank: 2
@@ -269,8 +269,8 @@ Rogue:
             Max Rank: 5
             Icon: "images/rogue/Stealth.png"
             Description: >-
-              Increases your speed while stealthed by {:|3,6,9,12,15}% and reduces the cooldown of 
-              your Stealth ability by {:|1,2,3,4,5} sec.
+              Increases your speed while stealthed by {0:|3,6,9,12,15}% and reduces the cooldown of 
+              your Stealth ability by {0:|1,2,3,4,5} sec.
           Initiative:
             Location: [2, 0]
             Max Rank: 3
@@ -324,7 +324,7 @@ Rogue:
             Icon: "images/druid/Prowl.png"
             Description: >-
               Increases your Stealth detection and reduces the chance you are hit by spells and 
-              ranged attacks by {0:|1,2}%. {0:?=2:More effective than Heightened Senses (Rank 1).}
+              ranged attacks by {0:|1,2}%. {0:?>1:More effective than Heightened Senses (Rank 1).}
           Preparation:
             Location: [4, 1]
             Max Rank: 1

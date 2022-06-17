@@ -12,8 +12,8 @@ Mage:
             Max Rank: 2
             Icon: "images/priest/DispelMagic.png"
             Description: >-
-              Reduces your target's resistance to all your spells by {:|5,10} and reduces the threat 
-              caused by your Arcane spells by {:|20,40}%.
+              Reduces your target's resistance to all your spells by {0:|5,10} and reduces the threat 
+              caused by your Arcane spells by {0:|20,40}%.
           Arcane Focus:
             Location: [0, 1]
             Max Rank: 5
@@ -37,8 +37,8 @@ Mage:
             Max Rank: 5
             Icon: "images/mage/MagicAbsorption.png"
             Description: >-
-              Increase all resistances by {:|2,4,6,8,10} and causes all spells you fully resist to 
-              restore {:|1,2,3,4,5}% of your mana. 1 sec. cooldown.
+              Increase all resistances by {0:|2,4,6,8,10} and causes all spells you fully resist to 
+              restore {0:|1,2,3,4,5}% of your mana. 1 sec. cooldown.
           Arcane Concentration:
             Location: [1, 2]
             Max Rank: 5
@@ -177,8 +177,8 @@ Mage:
             Max Rank: 2
             Icon: "images/warlock/Aftermath.png"
             Description: >-
-              Gives your Fire spells a {:|35,70}% chance to not lose casting time when you take 
-              damage and reduces the threat caused by your Fire spells by {:|15,30}%.
+              Gives your Fire spells a {0:|35,70}% chance to not lose casting time when you take 
+              damage and reduces the threat caused by your Fire spells by {0:|15,30}%.
           Improved Scorch:
             Location: [3, 0]
             Max Rank: 3
@@ -243,7 +243,7 @@ Mage:
             Icon: "images/mage/FrostWard.png"
             Description: >-
               Increases the armor and resistances given by your Frost Armor and Ice Armor spells by 
-              {:|15,30}%. In addition, gives your Frost Ward a {:|10,20}% chance to reflect Frost 
+              {0:|15,30}%. In addition, gives your Frost Ward a {0:|10,20}% chance to reflect Frost 
               spells and effects while active.
           Improved Frostbolt:
             Location: [0, 1]
@@ -281,8 +281,8 @@ Mage:
             Max Rank: 3
             Icon: "images/mage/Permafrost.png"
             Description: >-
-              Increases the duration of your Chill effects by {:|1,2,3} sec and reduces the target's 
-              speed by an additional {:|3,7,10}%.
+              Increases the duration of your Chill effects by {0:|1,2,3} sec and reduces the target's 
+              speed by an additional {0:|3,7,10}%.
           Piercing Ice:
             Location: [2, 0]
             Max Rank: 3
@@ -316,8 +316,8 @@ Mage:
             Max Rank: 3
             Icon: "images/skills/Dazed.png"
             Description: >-
-              Reduces the mana cost of your Frost spells by {:|5,10,15}% and reduces the threat 
-              caused by your Frost spells by {:|10,20,30}%.
+              Reduces the mana cost of your Frost spells by {0:|5,10,15}% and reduces the threat 
+              caused by your Frost spells by {0:|10,20,30}%.
           Shatter:
             Location: [3, 2]
             Requires: Improved Frost Nova

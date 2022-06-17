@@ -54,9 +54,9 @@ Paladin:
             Max Rank: 2
             Icon: "images/paladin/LayOnHands.png"
             Description: >-
-              Gives the target of your Lay on Hands spell a {:|15,30}% bonus to their armor value 
+              Gives the target of your Lay on Hands spell a {0:|15,30}% bonus to their armor value 
               from items for 2 min. In addition, the cooldown for your Lay on Hands spell is reduced 
-              by {:|10,20} min.
+              by {0:|10,20} min.
           Unyielding Faith:
             Location: [2, 3]
             Max Rank: 2
@@ -139,8 +139,8 @@ Paladin:
             Max Rank: 2
             Icon: "images/paladin/BlessingOfProtection.png"
             Description: >-
-              Reduces the cooldown of your Blessing of Protection by {:|60,120} sec and increases 
-              the duration of your Blessing of Freedom by {:|3,6} sec.
+              Reduces the cooldown of your Blessing of Protection by {0:|60,120} sec and increases 
+              the duration of your Blessing of Freedom by {0:|3,6} sec.
           Toughness:
             Location: [1, 3]
             Max Rank: 5
@@ -186,8 +186,8 @@ Paladin:
             Max Rank: 3
             Icon: "images/paladin/ConcentrationAura.png"
             Description: >-
-              Increases the effect of your Concentration Aura by an additional {:|5,10,15}% and 
-              gives all group members affected by the aura an additional {:|5,10,15}% chance to 
+              Increases the effect of your Concentration Aura by an additional {0:|5,10,15}% and 
+              gives all group members affected by the aura an additional {0:|5,10,15}% chance to 
               resist Silence and Interrupt effects.
           Blessing of Sanctuary:
             Location: [4, 1]

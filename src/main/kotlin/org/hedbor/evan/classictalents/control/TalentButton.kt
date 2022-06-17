@@ -15,13 +15,12 @@ import javafx.scene.layout.Region
 import javafx.scene.layout.StackPane
 import javafx.scene.layout.VBox
 import org.hedbor.evan.classictalents.ASSETS_ROOT
+import org.hedbor.evan.classictalents.format.TalentFormatter
 import org.hedbor.evan.classictalents.model.CooldownUnit
 import org.hedbor.evan.classictalents.model.ResourceType
 import org.hedbor.evan.classictalents.model.Talent
 import org.hedbor.evan.classictalents.util.*
 import java.text.DecimalFormat
-import java.text.NumberFormat
-import java.util.*
 
 class TalentButton(private val model: Talent) : StackPane() {
     @FXML private lateinit var button: Button
@@ -115,7 +114,10 @@ class TalentButton(private val model: Talent) : StackPane() {
                 it == null -> null
                 it <= 0.0 -> ""
                 it <= 5.0 -> "Melee Range"
-                else -> "$it yd"
+                else -> {
+                    val distance = DecimalFormat("##.###").format(it)
+                    "$distance yd range"
+                }
             }
         }
         tooltipRangeLabel.visibleProperty().bind(rangeText.isNotNull)
@@ -161,16 +163,24 @@ class TalentButton(private val model: Talent) : StackPane() {
     }
 
     private fun initDesc() {
-        // TODO: format description based on current rank
-        tooltipDescLabel.textProperty().bind(model.descriptionProperty())
+        tooltipDescLabel.textProperty().bind(
+            model.descriptionProperty().stringBinding(model.rankProperty()) { desc ->
+                val index = if (model.rank == 0) 1 else model.rank
+                TalentFormatter(desc).format(index)
+            })
 
         val showNextRank = model.rankProperty().greaterThan(0).and(
             model.rankProperty().lessThan(model.maxRankProperty()))
         tooltipNextRankPane.visibleProperty().bind(showNextRank)
         tooltipNextRankPane.managedProperty().bind(showNextRank)
 
-        // TODO: format description based on next rank
-        tooltipNextRankDescLabel.textProperty().bind(model.descriptionProperty())
+        tooltipNextRankDescLabel.textProperty().bind(
+            model.descriptionProperty().stringBinding(model.rankProperty()) { desc ->
+                if (model.rank > 0 && model.rank < model.maxRank) {
+                    val index = model.rank + 1
+                    TalentFormatter(desc).format(index)
+                } else null
+            })
     }
 
     private fun initFooter() {

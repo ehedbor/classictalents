@@ -39,8 +39,8 @@ Hunter:
             Max Rank: 2
             Icon: "images/hunter/RevivePet.png"
             Description: >-
-              Revive Pet's casting time is reduced by {:|3,6} sec, mana cost is reduced by 
-              {:|20,40}%, and increases the health your pet returns with by an additional {:|15,30}%.
+              Revive Pet's casting time is reduced by {0:|3,6} sec, mana cost is reduced by 
+              {0:|20,40}%, and increases the health your pet returns with by an additional {0:|15,30}%.
           Pathfinding:
             Location: [2, 0]
             Max Rank: 2
@@ -75,7 +75,7 @@ Hunter:
             Max Rank: 2
             Icon: "images/druid/DemoralizingRoar.png"
             Description: >-
-              While your pet is active, you and your pet will regenerate {0,choice,1#1|2|2}% of your 
+              While your pet is active, you and your pet will regenerate {0:|1,2,3}% of your 
               total health every 10 sec.
           Intimidation:
             Location: [4, 1]
@@ -221,16 +221,16 @@ Hunter:
             Max Rank: 3
             Icon: "images/hunter/MonsterSlaying.jpg"
             Description: >-
-              Increases all damage caused against Beasts, Giants and Dragonkin targets by {:|1,2,3}% 
+              Increases all damage caused against Beasts, Giants and Dragonkin targets by {0:|1,2,3}% 
               and increases critical damage caused against Beasts, Giants and Dragonkin targets by 
-              an additional {:|1,2,3}%.
+              an additional {0:|1,2,3}%.
           Humanoid Slaying:
             Location: [0, 1]
             Max Rank: 3
             Icon: "images/paladin/Repentance.png"
             Description: >-
-              Increases all damage caused against Humanoid targets by {:|1,2,3}% and increases 
-              critical damage caused against Humanoid targets by an additional {:|1,2,3}%.
+              Increases all damage caused against Humanoid targets by {0:|1,2,3}% and increases 
+              critical damage caused against Humanoid targets by an additional {0:|1,2,3}%.
           Deflection:
             Location: [0, 2]
             Max Rank: 5
@@ -261,8 +261,8 @@ Hunter:
             Max Rank: 2
             Icon: "images/paladin/DivineIntervention.png"
             Description: >-
-              Increases the duration of Freezing and Frost trap effects by {:|15,30}% and the damage 
-              of Immolation and Explosive trap effects by {:|15,30}%.
+              Increases the duration of Freezing and Frost trap effects by {0:|15,30}% and the damage 
+              of Immolation and Explosive trap effects by {0:|15,30}%.
           Survivalist:
             Location: [2, 1]
             Max Rank: 5
@@ -283,8 +283,8 @@ Hunter:
             Max Rank: 3
             Icon: "images/rogue/Kick.png"
             Description: >-
-              Increases hit chance by {:|1,2,3}% and increases the chance movement impairing effects
-              will be resisted by an additional {:|5,10}%.
+              Increases hit chance by {0:|1,2,3}% and increases the chance movement impairing effects
+              will be resisted by an additional {0:|5,10}%.
           Improved Feign Death:
             Location: [3, 3]
             Max Rank: 2

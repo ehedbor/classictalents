@@ -89,7 +89,9 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
     @FXML
     private fun onResetButtonClicked(event: MouseEvent) {
         if (event.button == MouseButton.PRIMARY) {
-            TODO("unallocate all points")
+            for (talent in model.talents) {
+                talent.rank = 0
+            }
         }
     }
 

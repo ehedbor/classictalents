@@ -93,7 +93,7 @@ Druid:
             Max Rank: 5
             Icon: "images/druid/Starfire.png"
             Description: >-
-              Reduces the cast time of Starfire by 0.{:|1,2,3,4,5} sec and has a {:|3,6,9,12,15}% 
+              Reduces the cast time of Starfire by 0.{0:|1,2,3,4,5} sec and has a {0:|3,6,9,12,15}% 
               chance to stun the target for 3 sec.
           Nature's Grace:
             Location: [4, 1]
@@ -146,8 +146,8 @@ Druid:
             Max Rank: 5
             Icon: "images/druid/DemoralizingRoar.png"
             Description: >-
-              Increases the Attack Power reduction of your Demoralizing Roar by {:|8,16,24,32,40}% 
-              and the damage caused by your Ferocious Bite by {:|3,6,9,12,15}%.
+              Increases the Attack Power reduction of your Demoralizing Roar by {0:|8,16,24,32,40}% 
+              and the damage caused by your Ferocious Bite by {0:|3,6,9,12,15}%.
           Feral Instinct:
             Location: [1, 0]
             Max Rank: 5
@@ -243,9 +243,9 @@ Druid:
             Max Rank: 5
             Icon: "images/druid/HeartOfTheWild.png"
             Description: >-
-              Increases your Intellect by {:|4,8,12,16,20}%. In addition, while in Bear or Dire Bear 
-              Form your Stamina is increased by {:|4,8,12,16,20}% and while in Cat Form your 
-              Strength is increased by {:|4,8,12,16,20}%.
+              Increases your Intellect by {0:|4,8,12,16,20}%. In addition, while in Bear or Dire Bear 
+              Form your Stamina is increased by {0:|4,8,12,16,20}% and while in Cat Form your 
+              Strength is increased by {0:|4,8,12,16,20}%.
           Leader Of the Pack:
             Location: [6, 1]
             Max Rank: 1
