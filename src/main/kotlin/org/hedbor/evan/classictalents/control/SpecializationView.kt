@@ -172,7 +172,7 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
         val talentBoundsProp = talentButton.boundsInParentProperty()
         val prereqBoundsProp = prereqButton.boundsInParentProperty()
         val horizImageProp = getHorizontalArrowImageProperty(talent, prereq)
-        val vertImageProp = getVerticalArrowImageProperty(prereq)
+        val vertImageProp = getVerticalArrowImageProperty(talent, prereq)
 
         val arrow = ImageView()
 
@@ -234,7 +234,7 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
         val talentBoundsProp = talentButton.boundsInParentProperty()
         val prereqBoundsProp = prereqButton.boundsInParentProperty()
         val horizImageProp = getHorizontalArrowImageProperty(talent, prereq)
-        val vertImageProp = getVerticalArrowImageProperty(prereq)
+        val vertImageProp = getVerticalArrowImageProperty(talent, prereq)
 
         val arrow = ImageView()
 
@@ -295,9 +295,9 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
         return arrow
     }
 
-    private fun getVerticalArrowImageProperty(prereq: Talent): ObservableValue<Image> {
-        return objectBinding(prereq.rankProperty(), prereq.maxRankProperty()) {
-            val url = if (prereq.rank < prereq.maxRank) {
+    private fun getVerticalArrowImageProperty(talent: Talent, prereq: Talent): ObservableValue<Image> {
+        return objectBinding(talent.rankProperty(), talent.maxRankProperty()) {
+            val url = if (talent.rank < talent.maxRank) {
                 "$ASSETS_ROOT/images/arrows/down.png"
             } else {
                 "$ASSETS_ROOT/images/arrows/down2.png"
@@ -309,10 +309,10 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
     private fun getHorizontalArrowImageProperty(
         talent: Talent, prereq: Talent
     ): ObservableValue<Image> {
-        return objectBinding(prereq.rankProperty(), prereq.maxRankProperty()) {
+        return objectBinding(talent.rankProperty(), talent.maxRankProperty()) {
             val horizComponent = if (talent.column > prereq.column) "right" else "left"
             val vertComponent = if (talent.row > prereq.row) "down" else ""
-            val rankComponent = if (prereq.rank < prereq.maxRank) "" else "2"
+            val rankComponent = if (talent.rank < talent.maxRank) "" else "2"
 
             val imageName = "$horizComponent$vertComponent$rankComponent.png"
             Image(javaClass.getResourceAsStream("$ASSETS_ROOT/images/arrows/$imageName"))

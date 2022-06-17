@@ -11,6 +11,10 @@ import org.hedbor.evan.classictalents.util.intBinding
 
 @Suppress("MemberVisibilityCanBePrivate", "unused")
 class Specialization {
+    private val _wowClass = SimpleObjectProperty<WowClass>()
+    var wowClass: WowClass by _wowClass.delegate()
+    fun wowClassProperty() = _wowClass
+
     private val _name = SimpleStringProperty("")
     var name: String by _name.delegate()
     fun nameProperty() = _name

@@ -55,11 +55,13 @@ class TalentConfigReader {
         }
 
         for ((specName, specDto) in classDto.classic.specs) {
-            wowClass.specializations += readSpec(
+            val spec = readSpec(
                 "$errorPath, spec '$specName'",
                 specName,
                 specDto
             )
+            spec.wowClass = wowClass
+            wowClass.specializations += spec
         }
 
         return wowClass
@@ -76,7 +78,10 @@ class TalentConfigReader {
                 "Found multiple talents with the same location (${talentDto.location})\n\t$errorPath"
             }
             val talentErrorPath = "$errorPath, talent '$talentName'"
-            spec.talents += readTalent(talentErrorPath, talentName, talentDto)
+
+            val talent = readTalent(talentErrorPath, talentName, talentDto)
+            talent.specialization = spec
+            spec.talents += talent
         }
 
         // now that all talents have been loaded, resolve prerequisites

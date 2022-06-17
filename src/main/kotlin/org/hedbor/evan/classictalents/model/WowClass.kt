@@ -1,10 +1,7 @@
 package org.hedbor.evan.classictalents.model
 
-import javafx.beans.property.ReadOnlyIntegerProperty
-import javafx.beans.property.SimpleIntegerProperty
-import javafx.beans.property.SimpleListProperty
-import javafx.beans.property.SimpleObjectProperty
-import javafx.beans.property.SimpleStringProperty
+import javafx.beans.binding.Bindings
+import javafx.beans.property.*
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
 import javafx.scene.image.Image
@@ -26,6 +23,10 @@ class WowClass {
     var color: Color by _color.delegate()
     fun colorProperty() = _color
 
+    /*
+     * Calculated properties
+     */
+
     private val _specializations = SimpleListProperty<Specialization>(
         FXCollections.observableArrayList { arrayOf(it.allocatedPointsProperty()) })
     var specializations: ObservableList<Specialization> by _specializations.delegate()
@@ -38,4 +39,15 @@ class WowClass {
     }
     val allocatedPoints by _allocatedPoints.delegate()
     fun allocatedPointsProperty() = _allocatedPoints as ReadOnlyIntegerProperty
+
+    // TODO: max points depends on expansion
+    private val _maxPoints = SimpleIntegerProperty(51)
+    val maxPoints by _maxPoints.delegate()
+    fun maxPointsProperty() = _maxPoints as ReadOnlyIntegerProperty
+
+    private val _hasUnassignedPoints = SimpleBooleanProperty().apply {
+        bind(allocatedPointsProperty().lessThan(maxPointsProperty()))
+    }
+    val hasUnassignedPoints by _hasUnassignedPoints.delegate()
+    fun hasUnassignedPointsProperty() = _hasUnassignedPoints as ReadOnlyBooleanProperty
 }

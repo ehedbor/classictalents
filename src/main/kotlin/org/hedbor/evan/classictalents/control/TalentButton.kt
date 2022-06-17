@@ -1,7 +1,6 @@
 package org.hedbor.evan.classictalents.control
 
 import javafx.beans.binding.Bindings
-import javafx.beans.binding.ObjectBinding
 import javafx.beans.value.ChangeListener
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
@@ -60,9 +59,19 @@ class TalentButton(private val model: Talent) : StackPane() {
     @Suppress("unused")
     @FXML
     private fun initialize() {
-        highlightView.visibleProperty().bind(button.hoverProperty())
-        iconView.imageProperty().bind(model.iconProperty())
+        //disableProperty().bind(model.canAllocateProperty().not())
 
+        highlightView.visibleProperty().bind(button.hoverProperty())
+
+        val shouldBeColored = booleanBinding(model.canAcceptPointsProperty(), model.rankProperty()) {
+            model.canAcceptPoints || model.rank > 0
+        }
+        iconView.imageProperty().bind(
+            model.iconProperty().objectBinding(shouldBeColored) {
+                if (shouldBeColored.value) it else it.grayscale()
+            })
+
+        rankCounterLabel.disableProperty().bind(shouldBeColored.not())
         rankCounterLabel.textProperty().bind(model.rankProperty().asString())
 
         model.rankProperty().addListener(rankListener)
@@ -170,50 +179,59 @@ class TalentButton(private val model: Talent) : StackPane() {
             })
 
         val showNextRank = model.rankProperty().greaterThan(0).and(
-            model.rankProperty().lessThan(model.maxRankProperty()))
+            model.maxedOutProperty().not())
         tooltipNextRankPane.visibleProperty().bind(showNextRank)
         tooltipNextRankPane.managedProperty().bind(showNextRank)
 
         tooltipNextRankDescLabel.textProperty().bind(
-            model.descriptionProperty().stringBinding(model.rankProperty()) { desc ->
-                if (model.rank > 0 && model.rank < model.maxRank) {
-                    val index = model.rank + 1
-                    TalentFormatter(desc).format(index)
+            model.descriptionProperty().stringBinding(model.rankProperty(), model.maxedOutProperty()) { desc ->
+                if (model.rank > 0 && !model.isMaxedOut) {
+                    TalentFormatter(desc).format(model.rank)
                 } else null
             })
     }
 
     private fun initFooter() {
-        // TODO: get spec name, # points
-        tooltipSpecRequiredLabel.isVisible = true
-        tooltipSpecRequiredLabel.isManaged = true
-        tooltipSpecRequiredLabel.text = "Requires ## Points in Spec Talents"
+        val allocatedPoints = Bindings.select<Int>(model.specializationProperty(), "allocatedPoints")
+        val specName = Bindings.select<String>(model.specializationProperty(), "name")
+        val specRequiredLabel = model.requiredPointsProperty().stringBinding(allocatedPoints, specName) { required ->
+            if (allocatedPoints.value == null || specName.value == null)
+                return@stringBinding null
 
-        val prereqName: ObjectBinding<String?> = Bindings.select(model.prerequisiteProperty(), "name")
-        val prereqRank = Bindings.select<Int?>(model.prerequisiteProperty(), "rank")
-        val prereqMaxRank = Bindings.select<Int?>(model.prerequisiteProperty(), "maxRank")
+            if (allocatedPoints.value >= required as Int) {
+                null
+            } else {
+                "Requires $required Points in ${specName.value} Talents"
+            }
+        }
+
+        tooltipSpecRequiredLabel.visibleProperty().bind(specRequiredLabel.isNotNull)
+        tooltipSpecRequiredLabel.managedProperty().bind(specRequiredLabel.isNotNull)
+        tooltipSpecRequiredLabel.textProperty().bind(specRequiredLabel)
+
+        val prereqName = Bindings.selectString(model.prerequisiteProperty(), "name")
+        val prereqRank = Bindings.selectInteger(model.prerequisiteProperty(), "rank")
+        val prereqMaxRank = Bindings.selectInteger(model.prerequisiteProperty(), "maxRank")
         val prereqText = prereqName.stringBinding(prereqRank, prereqMaxRank) { name ->
-            if (name == null || prereqRank == null || prereqMaxRank == null) {
+            if (name.isNullOrEmpty()) {
                 null
             } else if (prereqRank.value == prereqMaxRank.value) {
                 null
             } else {
                 val remaining = prereqMaxRank.value - prereqRank.value
-                "Requires $remaining Points in $name"
+                "Requires $remaining ${if (remaining == 1) "Point" else "Points"} in $name"
             }
         }
         tooltipPrereqRequiredLabel.visibleProperty().bind(prereqText.isNotNull)
         tooltipPrereqRequiredLabel.managedProperty().bind(prereqText.isNotNull)
         tooltipPrereqRequiredLabel.textProperty().bind(prereqText)
 
-        // TODO: use common property for this
-        val canAlloc = model.rankProperty().lessThan(model.maxRankProperty())
-        tooltipClickToLearnLabel.visibleProperty().bind(canAlloc)
-        tooltipClickToLearnLabel.managedProperty().bind(canAlloc)
+        tooltipClickToLearnLabel.visibleProperty().bind(model.canAcceptPointsProperty())
+        tooltipClickToLearnLabel.managedProperty().bind(model.canAcceptPointsProperty())
 
-        val canDealloc = model.rankProperty().greaterThan(0)
-        tooltipClickToUnlearnLabel.visibleProperty().bind(canDealloc)
-        tooltipClickToUnlearnLabel.managedProperty().bind(canDealloc)
+        val canRemovePts = model.canDeallocateProperty().and(model.rankProperty().greaterThan(0))
+        tooltipClickToUnlearnLabel.visibleProperty().bind(canRemovePts)
+        tooltipClickToUnlearnLabel.managedProperty().bind(canRemovePts)
     }
 
     private fun updateActiveBorder() {
@@ -231,11 +249,11 @@ class TalentButton(private val model: Talent) : StackPane() {
     @FXML
     private fun onMouseClicked(event: MouseEvent) {
         if (event.button == MouseButton.PRIMARY) {
-            if (model.rank < model.maxRank) {
+            if (model.canAcceptPoints && model.rank < model.maxRank) {
                 model.rank++
             }
         } else if (event.button == MouseButton.SECONDARY) {
-            if (model.rank > 0) {
+            if (model.canDeallocate && model.rank > 0) {
                 model.rank--
             }
         }
