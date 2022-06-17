@@ -9,7 +9,7 @@ import org.hedbor.evan.classictalents.model.WowClass
 import org.hedbor.evan.classictalents.util.booleanBinding
 import org.hedbor.evan.classictalents.util.stringBinding
 
-class WowClassView(private val model: MainModel) {
+class WowClassView(private val model: WowClass /*MainModel*/) {
     @FXML private lateinit var specsPane: HBox
     @FXML private lateinit var footer: VBox
     @FXML private lateinit var requiredLevelLabel: Label
@@ -17,18 +17,22 @@ class WowClassView(private val model: MainModel) {
 
     @FXML
     private fun initialize() {
-        footer.visibleProperty().bind(model.selectedClassProperty().booleanBinding { it != null })
+        // TODO: reuse view for different models. see MainViewController for reasoning
+        setClass(model)
 
-        if (model.selectedClass != null) {
-            setClass(model.selectedClass!!)
-        }
-        model.selectedClassProperty().addListener { _, _, cls ->
-            specsPane.children.clear()
-            requiredLevelLabel.textProperty().unbind()
-            remainingPointsLabel.textProperty().unbind()
-
-            if (cls != null) setClass(cls)
-        }
+//        footer.visibleProperty().bind(model.selectedClassProperty().booleanBinding { it != null })
+//
+//        if (model.selectedClass != null) {
+//            setClass(model.selectedClass!!)
+//        }
+//
+//        model.selectedClassProperty().addListener { _, _, cls ->
+//            specsPane.children.clear()
+//            requiredLevelLabel.textProperty().unbind()
+//            remainingPointsLabel.textProperty().unbind()
+//
+//            if (cls != null) setClass(cls)
+//        }
     }
 
     private fun setClass(wowClass: WowClass) {

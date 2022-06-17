@@ -306,6 +306,9 @@ Shaman:
             Description: >-
               When activated, your next Nature spell with a casting time less than 10 sec becomes an 
               instant cast spell.
+            Spell:
+              Cast Time: Instant
+              Cooldown: 3 min
           Purification:
             Location: [5, 2]
             Max Rank: 5

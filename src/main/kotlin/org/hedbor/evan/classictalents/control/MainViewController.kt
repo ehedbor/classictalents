@@ -39,12 +39,23 @@ class MainViewController {
             }
 
             classButtonsPane.children += button
+
+            val loader = FXMLLoader(javaClass.getResource("$ASSETS_ROOT/view/WowClassView.fxml"))
+            val controller = WowClassView(wowClass)
+            loader.setController(controller)
+
+            // TODO: Recreating the specialization views is extremely slow. It would be best to reuse
+            //     the same spec/talent buttons but that is also pretty difficult. To save time, keep a
+            //     WowClassView in memory for each class and just turn them on and off.
+            val view = loader.load<Node>()
+            view.visibleProperty().bind(model.selectedClassProperty().isEqualTo(wowClass))
+            view.managedProperty().bind(model.selectedClassProperty().isEqualTo(wowClass))
+            classViewPane.children += view
         }
 
-        val loader = FXMLLoader(javaClass.getResource("$ASSETS_ROOT/view/WowClassView.fxml"))
-        val controller = WowClassView(model)
-        loader.setController(controller)
-        //loader.setRoot(controller)
-        classViewPane.children += loader.load<Node>()
+//        val loader = FXMLLoader(javaClass.getResource("$ASSETS_ROOT/view/WowClassView.fxml"))
+//        val controller = WowClassView(model)
+//        loader.setController(controller)
+//        classViewPane.children += loader.load<Node>()
     }
 }

@@ -13,7 +13,7 @@ Hunter:
             Icon: "images/hunter/AspectOfTheHawk.png"
             Description: >-
               While Aspect of the Hawk is active, all normal ranged attacks have a {:|1,2,3,4,5}% 
-              chance of increasing ranged attack speed by 3% for 12 sec.
+              chance of increasing ranged attack speed by 30% for 12 sec.
           Endurance Training:
             Location: [0, 2]
             Max Rank: 5
@@ -284,7 +284,7 @@ Hunter:
             Icon: "images/rogue/Kick.png"
             Description: >-
               Increases hit chance by {0:|1,2,3}% and increases the chance movement impairing effects
-              will be resisted by an additional {0:|5,10}%.
+              will be resisted by an additional {0:|5,10,15}%.
           Improved Feign Death:
             Location: [3, 3]
             Max Rank: 2
