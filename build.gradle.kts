@@ -1,11 +1,9 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     kotlin("jvm") version "1.6.21"
     application
     id("io.freefair.sass-java") version "6.4.3"
     id("org.openjfx.javafxplugin") version "0.0.13"
-    id("org.beryx.jlink") version "2.24.4"
+    id("org.beryx.jlink") version "2.25.0"
 }
 
 group = "org.hedbor.evan"
@@ -16,6 +14,7 @@ repositories {
 }
 
 dependencies {
+    implementation(kotlin("stdlib-jdk8"))
     implementation("com.fasterxml.jackson.core:jackson-databind:2.13.3")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.3")
@@ -33,8 +32,84 @@ javafx {
 
 jlink {
     launcher {
-        name = "org.hedbor.evan.classictalents"
+        name = "ClassicTalents"
     }
+    jpackage {
+        vendor = "Evan Hedbor"
+        imageName = "ClassicTalents"
+        installerName = "ClassicTalents"
+
+        installerType = if (project.hasProperty("installerType")) {
+            project.properties["installerType"] as String
+        } else {
+            val currentOs = org.gradle.internal.os.OperatingSystem.current()
+            when {
+                currentOs.isWindows -> "msi"
+                currentOs.isLinux -> "deb"
+                currentOs.isMacOsX -> "dmg"
+                else -> error("Unknown OS '${currentOs.name}'")
+            }
+        }
+
+        installerOptions = mutableListOf(
+            "--description", "A simple talent calculator for World of Warcraft: Classic.",
+            "--copyright", "Copyright (C) Evan Hedbor 2020-2022 (MIT License)",
+        )
+
+        when (installerType) {
+            "msi" -> {
+                installerOptions.addAll(listOf(
+                    "--icon", "src/main/resources/org/hedbor/evan/classictalents/icons/classictalents.ico",
+                    "--win-per-user-install",
+                    "--win-dir-chooser",
+                    "--win-shortcut",
+                    "--win-menu",
+                ))
+            }
+            in arrayOf("deb", "rpm") -> {
+                installerOptions.addAll(listOf(
+                    "--icon", "src/main/resources/org/hedbor/evan/classictalents/icons/classictalents.png",
+                    "--linux-shortcut",
+                    "--linux-menu-group", "Game;Java;",
+                ))
+
+                if (installerType == "deb") {
+                    installerOptions.addAll(listOf(
+                        "--linux-app-category", "games",
+                        "--linux-deb-maintainer", "evan@hedbor.org",
+                    ))
+                } else {
+                    installerOptions.addAll(listOf(
+                        "--linux-rpm-license-type", "MIT",
+                    ))
+                }
+            }
+            in arrayOf("pkg", "dmg") -> {
+                installerOptions.addAll(listOf(
+                    "--icon", "src/main/resources/org/hedbor/evan/classictalents/icons/classictalents.icns",
+                ))
+            }
+            else -> {}
+        }
+    }
+    imageZip.set(project.file("${project.buildDir}/image-zip/${project.name}-${project.version}.zip"))
+}
+
+// The jlink compile isn't executable since the kotlin packages are declared twice. AFAIK, the
+// reason that happens is because a bunch of .kotlin_metadata files are generated--which don't seem
+// to be needed to run the program--and put in the mergedJarsDir.  This task fixes that issue by
+// just deleting the whole kotlin directory.
+val excludeKotlinMetadata = tasks.register("excludeKotlinMetadata") {
+    dependsOn(tasks.prepareMergedJarsDir)
+    doLast {
+        val mergedJarsDir = tasks.prepareMergedJarsDir.get().mergedJarsDir
+        val kotlinDir = mergedJarsDir.dir("kotlin")
+        delete(kotlinDir)
+    }
+}
+
+tasks.createMergedModule.configure {
+    dependsOn(excludeKotlinMetadata)
 }
 
 tasks.jar {
@@ -54,9 +129,12 @@ tasks.jar.configure {
     exclude("**/*.sass")
     exclude("**/*.scss")
     exclude("**/*.css.map")
+    // this doesnt seem to have an effect, is it needed?
+    exclude("**/*.kotlin_metadata")
+    exclude("**/*.kotlin_module")
+    exclude("**/*.kotlin_builtins")
 }
 
 tasks.compileKotlin {
     kotlinOptions.jvmTarget = "17"
-    kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
 }
