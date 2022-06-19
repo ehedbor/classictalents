@@ -27,27 +27,23 @@ class WowClass {
      * Calculated properties
      */
 
-    private val _specializations = SimpleListProperty<Specialization>(
+    private val _specializations = ReadOnlyListWrapper<Specialization>(
         FXCollections.observableArrayList { arrayOf(it.allocatedPointsProperty()) })
     var specializations: ObservableList<Specialization> by _specializations.delegate()
-    fun specializationsProperty() = _specializations
+    fun specializationsProperty() = _specializations.readOnlyProperty!!
 
-    private val _allocatedPoints = SimpleIntegerProperty().apply {
-        bind(specializationsProperty().intBinding { specs ->
-            specs.sumOf { it.allocatedPoints }
-        })
-    }
+    private val _allocatedPointsBinding = Bindings.createIntegerBinding({ specializations.sumOf { it.allocatedPoints } }, specializationsProperty())
+    private val _allocatedPoints = ReadOnlyIntegerWrapper().also { it.bind(_allocatedPointsBinding) }
     val allocatedPoints by _allocatedPoints.delegate()
-    fun allocatedPointsProperty() = _allocatedPoints as ReadOnlyIntegerProperty
+    fun allocatedPointsProperty() = _allocatedPoints.readOnlyProperty!!
 
     // TODO: max points depends on expansion
-    private val _maxPoints = SimpleIntegerProperty(51)
+    private val _maxPoints = ReadOnlyIntegerWrapper(51)
     val maxPoints by _maxPoints.delegate()
-    fun maxPointsProperty() = _maxPoints as ReadOnlyIntegerProperty
+    fun maxPointsProperty() = _maxPoints.readOnlyProperty!!
 
-    private val _hasUnassignedPoints = SimpleBooleanProperty().apply {
-        bind(allocatedPointsProperty().lessThan(maxPointsProperty()))
-    }
+    private val _hasUnassignedPointsBinding = allocatedPointsProperty().lessThan(maxPointsProperty())
+    private val _hasUnassignedPoints = ReadOnlyBooleanWrapper().also { it.bind(_hasUnassignedPointsBinding) }
     val hasUnassignedPoints by _hasUnassignedPoints.delegate()
-    fun hasUnassignedPointsProperty() = _hasUnassignedPoints as ReadOnlyBooleanProperty
+    fun hasUnassignedPointsProperty() = _hasUnassignedPoints.readOnlyProperty!!
 }

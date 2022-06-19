@@ -186,7 +186,7 @@ class TalentButton(private val model: Talent) : StackPane() {
         tooltipNextRankDescLabel.textProperty().bind(
             model.descriptionProperty().stringBinding(model.rankProperty(), model.maxedOutProperty()) { desc ->
                 if (model.rank > 0 && !model.isMaxedOut) {
-                    TalentFormatter(desc).format(model.rank)
+                    TalentFormatter(desc).format(model.rank + 1)
                 } else null
             })
     }

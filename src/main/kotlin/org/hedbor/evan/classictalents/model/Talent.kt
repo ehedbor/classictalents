@@ -3,15 +3,16 @@ package org.hedbor.evan.classictalents.model
 import javafx.beans.binding.Bindings
 import javafx.beans.binding.BooleanBinding
 import javafx.beans.property.ReadOnlyBooleanProperty
+import javafx.beans.property.ReadOnlyBooleanWrapper
 import javafx.beans.property.ReadOnlyIntegerProperty
+import javafx.beans.property.ReadOnlyIntegerWrapper
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.ObservableList
 import javafx.scene.image.Image
-import org.hedbor.evan.classictalents.util.booleanBinding
-import org.hedbor.evan.classictalents.util.delegate
+import org.hedbor.evan.classictalents.util.*
 
 
 @Suppress("MemberVisibilityCanBePrivate", "unused")
@@ -36,11 +37,11 @@ class Talent {
     var prerequisite by _prerequisite.delegate()
     fun prerequisiteProperty() = _prerequisite
 
-    private val _maxRank = SimpleIntegerProperty()
+    private val _maxRank = SimpleIntegerProperty(5)
     var maxRank by _maxRank.delegate()
     fun maxRankProperty() = _maxRank
 
-    private val _rank = SimpleIntegerProperty()
+    private val _rank = SimpleIntegerProperty(0)
     var rank by _rank.delegate()
     fun rankProperty() = _rank
 
@@ -61,73 +62,40 @@ class Talent {
      * Computed properties:
      */
 
-    private val _requiredPoints = SimpleIntegerProperty().apply {
-        bind(rowProperty().multiply(5))
-    }
+    private val _requiredPointsBinding = rowProperty().multiply(5)
+    private val _requiredPoints = ReadOnlyIntegerWrapper().also { it.bind(_requiredPointsBinding) }
     val requiredPoints by _requiredPoints.delegate()
-    fun requiredPointsProperty() = _requiredPoints as ReadOnlyIntegerProperty
+    fun requiredPointsProperty() = _requiredPoints.readOnlyProperty!!
 
-    private val _isMaxedOut = SimpleBooleanProperty().also { prop ->
-        prop.bind(rankProperty().isEqualTo(maxRankProperty()))
-    }
+    private val _maxedOutBinding = rankProperty().isEqualTo(maxRankProperty())
+    private val _isMaxedOut = ReadOnlyBooleanWrapper().also { it.bind(_maxedOutBinding) }
     val isMaxedOut by _isMaxedOut.delegate()
-    fun maxedOutProperty() = _isRowUnlocked as ReadOnlyBooleanProperty
+    fun maxedOutProperty() = _isMaxedOut.readOnlyProperty!!
 
-    private val _isRowUnlocked = SimpleBooleanProperty().also { prop ->
-        specializationProperty().addListener { _, oldSpec, newSpec ->
-            if (oldSpec != null) prop.unbind()
-            if (newSpec != null) {
-                prop.bind(booleanBinding(requiredPointsProperty(), newSpec.allocatedPointsProperty()) {
-                    newSpec.allocatedPoints >= requiredPoints
-                })
-            } else {
-                prop.value = false
-            }
-        }
-    }
+    private val _isRowUnlockedBinding =
+        Bindings.`when`(specializationProperty().isNull).then(false)
+            .otherwise(Bindings.selectInteger(specializationProperty(), "allocatedPoints")
+                .greaterThanOrEqualTo(requiredPointsProperty()))
+    private val _isRowUnlocked = ReadOnlyBooleanWrapper().also { it.bind(_isRowUnlockedBinding) }
     val isRowUnlocked by _isRowUnlocked.delegate()
-    fun rowUnlockedProperty() = _isRowUnlocked as ReadOnlyBooleanProperty
+    fun rowUnlockedProperty() = _isRowUnlocked.readOnlyProperty!!
 
-    private val _canAllocate = SimpleBooleanProperty().also { canAllocProp ->
-        // TODO: make an improved .select{} method, this is ridiculous
-        val prereqMaxedOut = SimpleBooleanProperty(true).also { prop ->
-            prerequisiteProperty().addListener { _, old, new ->
-                if (old != null) { prop.unbind() }
-                if (new != null) {
-                    // WTF: booleanBinding() doesn't work but BooleanBinding does
-                    // WHY????
-                    prop.bind(object : BooleanBinding() {
-                        init { bind(new.maxedOutProperty()) }
+    private val _canAllocBinding = run {
+        val prereqMaxed =
+            Bindings.`when`(prerequisiteProperty().isNull)
+                .then(true)
+                .otherwise(Bindings.selectBoolean(prerequisiteProperty(), "maxedOut"))
 
-                        override fun computeValue() = new.isMaxedOut
-                    })
-                } else {
-                    prop.value = true
-                }
-            }
-        }
-        val hasUnassignedPoints = SimpleBooleanProperty(true).also { prop ->
-            specializationProperty().addListener { _, oldSpec, newSpec ->
-                if (oldSpec != null) prop.unbind()
-                if (newSpec != null) {
-                    prop.bind(SimpleBooleanProperty().also { innerProp ->
-                        newSpec.wowClassProperty().addListener { _, oldClass, newClass ->
-                            if (oldClass != null) innerProp.unbind()
-                            if (newClass != null) {
-                                innerProp.bind(newClass.hasUnassignedPointsProperty())
-                            } else {
-                                innerProp.value = true
-                            }
-                        }
-                    })
-                } else {
-                    prop.value = true
-                }
-            }
-        }
+        val hasUnassignedPoints = Bindings.`when`(specializationProperty().isNull)
+            .then(true)
+            .otherwise(
+                Bindings.`when`(Bindings.select<WowClass>(specializationProperty(), "wowClass").isNull)
+                    .then(true)
+                    .otherwise(Bindings.selectBoolean(specializationProperty(), "wowClass", "hasUnassignedPoints")))
 
-        canAllocProp.bind(prereqMaxedOut.and(rowUnlockedProperty()).and(hasUnassignedPoints))
+        prereqMaxed.and(rowUnlockedProperty()).and(hasUnassignedPoints)
     }
+    private val _canAllocate = SimpleBooleanProperty().also { it.bind(_canAllocBinding) }
 
     /** @see canAllocateProperty */
     val canAllocate by _canAllocate.delegate()
@@ -143,12 +111,13 @@ class Talent {
      */
     fun canAllocateProperty() = _canAllocate as ReadOnlyBooleanProperty
 
-    private val _canDeallocate = SimpleBooleanProperty().apply {
+    private val _canDeallocateBinding = Bindings.`when`(specializationProperty().isNull)
+    private val _canDeallocate = ReadOnlyBooleanWrapper().also { prop ->
         // TODO: is this all we need to bind?
         specializationProperty().addListener { _, old, new ->
-            if (old != null) unbind()
+            if (old != null) prop.unbind()
             if (new != null) {
-                bind(new.talentsProperty().booleanBinding { talents ->
+                prop.bind(new.talentsProperty().booleanBinding { talents ->
                     // you cannot remove points if doing so would cause a later talent to not be allocatable
                     // first, check this talent's dependency, if any
                     val dependency = talents.firstOrNull { this@Talent === it.prerequisite }
@@ -182,13 +151,10 @@ class Talent {
      * This is true if removing a point from this talent will not make any later talents to become
      * non-allocatable.
      */
-    fun canDeallocateProperty() = _canDeallocate as ReadOnlyBooleanProperty
+    fun canDeallocateProperty() = _canDeallocate.readOnlyProperty!!
 
-    private val _canAcceptPoints = SimpleBooleanProperty().also {
-        it.bind(booleanBinding(canAllocateProperty(), maxedOutProperty(), rankProperty()) {
-            !isMaxedOut && (canAllocate /*|| rank >= 1*/)
-        })
-    }
+    private val _canAcceptPointsBinding = maxedOutProperty().not().and(canAllocateProperty())
+    private val _canAcceptPoints = ReadOnlyBooleanWrapper().also { it.bind(_canAcceptPointsBinding) }
 
     /** @see canAcceptPointsProperty */
     val canAcceptPoints by _canAcceptPoints.delegate()
@@ -196,5 +162,5 @@ class Talent {
     /**
      * Whether the user can actually add more points to this talent.
      */
-    fun canAcceptPointsProperty() = _canAcceptPoints as ReadOnlyBooleanProperty
+    fun canAcceptPointsProperty() = _canAcceptPoints.readOnlyProperty!!
 }

@@ -33,11 +33,14 @@ class Specialization {
     var talents: ObservableList<Talent> by _talents.delegate()
     fun talentsProperty() = _talents
 
-    private val _allocatedPoints = SimpleIntegerProperty().apply {
-        bind(talentsProperty().intBinding { talents ->
-            talents.sumOf { it.rank }
-        })
+    /*
+     * Computed properties:
+     */
+
+    private val _allocatedPointsBinding = talentsProperty().intBinding { talents ->
+        talents.sumOf { it.rank }
     }
+    private val _allocatedPoints = ReadOnlyIntegerWrapper().also { it.bind(_allocatedPointsBinding) }
     val allocatedPoints by _allocatedPoints.delegate()
-    fun allocatedPointsProperty(): ReadOnlyIntegerProperty = _allocatedPoints
+    fun allocatedPointsProperty() = _allocatedPoints.readOnlyProperty!!
 }
