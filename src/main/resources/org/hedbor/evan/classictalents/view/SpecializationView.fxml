@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Rectangle?>
+<fx:root xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         type="javafx.scene.layout.BorderPane"
+         styleClass="spec-border">
+  <top> <!-- header -->
+    <BorderPane styleClass="spec-header">
+      <center>
+        <HBox alignment="CENTER" spacing="5">
+          <StackPane>
+            <ImageView fx:id="iconView" styleClass="talent-icon"
+                       fitWidth="27" fitHeight="27"/>
+            <ImageView styleClass="talent-icon"
+                       fitWidth="30" fitHeight="30">
+              <Image url="@../images/button/border.png"/>
+            </ImageView>
+          </StackPane>
+          <Label fx:id="specLabel" styleClass="spec-title"/>
+          <Label fx:id="pointCounterLabel" styleClass="spec-title"/>
+        </HBox>
+      </center>
+      <right>
+        <HBox alignment="CENTER">
+          <Button styleClass="spec-reset-button" onMouseClicked="#onResetButtonClicked">
+              <tooltip>
+                <Tooltip styleClass="tooltip-error" text="Reset Spec"/>
+              </tooltip>
+          </Button>
+        </HBox>
+      </right>
+    </BorderPane>
+  </top>
+  <center> <!-- talent grid -->
+    <StackPane styleClass="spec-background">
+      <GridPane fx:id="talentGrid" styleClass="spec-background">
+        <padding>
+          <Insets topRightBottomLeft="15"/>
+        </padding>
+        <shape>
+          <Rectangle fx:id="talentGridShape" styleClass="spec-background"
+                     arcWidth="20" arcHeight="20"/>
+        </shape>
+      </GridPane>
+      <Pane fx:id="arrowOverlay" mouseTransparent="true"/>
+    </StackPane>
+  </center>
+</fx:root>

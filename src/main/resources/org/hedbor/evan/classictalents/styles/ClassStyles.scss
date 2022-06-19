@@ -1,0 +1,20 @@
+@use 'Constants';
+
+.class-background {
+    -fx-background-color: Constants.$dark-background-color;
+}
+
+.class-footer {
+    -fx-background-color: Constants.$light-background-color;
+    -fx-border-color: Constants.$light-background-color;
+    -fx-border-width: 5px;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-style: solid;
+}
+
+.class-description-text {
+    -fx-text-fill: Constants.$normal-text-color;
+    -fx-font-family: Constants.$ui-font;
+    -fx-font-size: Constants.$large-label-font-size;
+}

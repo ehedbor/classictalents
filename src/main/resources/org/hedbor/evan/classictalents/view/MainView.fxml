@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.hedbor.evan.classictalents.control.MainViewController"
+      styleClass="class-background">
+  <!-- The nested hbox here prevents the inner hbox from expanding to fill all horizontal space -->
+  <HBox alignment="CENTER">
+    <padding>
+      <Insets top="20" bottom="20"/>
+    </padding>
+    <HBox fx:id="classButtonsPane" styleClass="class-footer"
+          spacing="60" alignment="CENTER" HBox.hgrow="NEVER">
+      <padding>
+        <Insets top="20" right="30" bottom="20" left="30"/>
+      </padding>
+      <!-- include class selection buttons here -->
+    </HBox>
+  </HBox>
+  <HBox fx:id="classViewPane" alignment="CENTER">
+    <!-- include current class view here -->
+  </HBox>
+</VBox>

@@ -1,0 +1,31 @@
+@use "Constants";
+
+.tooltip-title {
+    -fx-text-fill: Constants.$normal-text-color;
+    -fx-font-family: Constants.$ui-font;
+    -fx-font-size: Constants.$large-label-font-size;
+}
+
+.tooltip-subtitle {
+    -fx-text-fill: Constants.$normal-text-color;
+    -fx-font-family: Constants.$ui-font;
+    -fx-font-size: Constants.$small-label-font-size;
+}
+
+.tooltip-description {
+    -fx-text-fill: Constants.$description-text-color;
+    -fx-font-family: Constants.$ui-font;
+    -fx-font-size: Constants.$small-label-font-size;
+}
+
+.tooltip-error {
+    -fx-text-fill: Constants.$error-text-color;
+    -fx-font-family: Constants.$ui-font;
+    -fx-font-size: Constants.$small-label-font-size;
+}
+
+.tooltip-confirmation {
+    -fx-text-fill: Constants.$confirmation-text-color;
+    -fx-font-family: Constants.$ui-font;
+    -fx-font-size: Constants.$small-label-font-size;
+}

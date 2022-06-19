@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         type="javafx.scene.layout.StackPane"
+         styleClass="talent-container">
+  <Button fx:id="button" styleClass="talent-button"
+          StackPane.alignment="CENTER"
+          prefWidth="34" prefHeight="34"
+          minWidth="34" maxWidth="34"
+          minHeight="34" maxHeight="34"
+          onMouseClicked="#onMouseClicked">
+    <tooltip>
+      <!-- showDuration="INDEFINITE" doesn't seem to work,
+           but setting the duration to a ridiculously high number does.
+           That number is equal to  3x10^29 centuries. -->
+      <Tooltip fx:id="buttonTooltip" styleClass="tooltip-description"
+               showDelay="0s" hideDelay="0s"
+               showDuration="999999999999999999999999999999999999999s"
+               wrapText="true"
+               prefWidth="400"
+               maxHeight="600">
+        <graphic>
+          <VBox prefWidth="400" minHeight="-Infinity" maxHeight="600">
+            <!-- header -->
+            <Label fx:id="tooltipNameLabel" styleClass="tooltip-title"/>
+            <Label fx:id="tooltipRankLabel" styleClass="tooltip-subtitle"/>
+
+            <!-- spell -->
+            <VBox fx:id="tooltipSpellPane">
+              <HBox>
+                <Label fx:id="tooltipCostLabel" styleClass="tooltip-subtitle"
+                       prefWidth="200"/>
+                <Label fx:id="tooltipRangeLabel" styleClass="tooltip-subtitle"
+                       prefWidth="200" alignment="CENTER_RIGHT"/>
+              </HBox>
+              <HBox>
+                <Label fx:id="tooltipCastTimeLabel" styleClass="tooltip-subtitle"
+                       prefWidth="200"/>
+                <Label fx:id="tooltipCooldownLabel" styleClass="tooltip-subtitle"
+                       prefWidth="200" alignment="CENTER_RIGHT"/>
+              </HBox>
+            </VBox>
+
+            <!-- Description -->
+            <Label fx:id="tooltipDescLabel" styleClass="tooltip-description"
+                   wrapText="true" prefWidth="400"/>
+            <VBox fx:id="tooltipNextRankPane">
+              <Label/> <!-- spacer -->
+              <Label styleClass="tooltip-subtitle" text="Next Rank:"/>
+              <Label fx:id="tooltipNextRankDescLabel" styleClass="tooltip-description"
+                     wrapText="true" prefWidth="400"/>
+            </VBox>
+
+            <!-- Footer -->
+            <Label/> <!-- spacer -->
+            <Label fx:id="tooltipSpecRequiredLabel" styleClass="tooltip-error"/>
+            <Label fx:id="tooltipPrereqRequiredLabel" styleClass="tooltip-error"/>
+            <Label fx:id="tooltipClickToLearnLabel" styleClass="tooltip-confirmation"
+                   text="Click to learn"/>
+            <Label fx:id="tooltipClickToUnlearnLabel" styleClass="tooltip-error"
+                   text="Right-Click to unlearn"/>
+          </VBox>
+        </graphic>
+      </Tooltip>
+    </tooltip>
+    <graphic>
+      <StackPane>
+        <ImageView fx:id="iconView" styleClass="talent-icon"/>
+        <ImageView styleClass="talent-icon">
+          <Image url="@../images/button/border.png"/>
+        </ImageView>
+        <ImageView fx:id="highlightView" styleClass="talent-icon">
+          <Image url="@../images/button/highlight_hover.png"/>
+        </ImageView>
+        <Region fx:id="activeBorderRegion"/>
+      </StackPane>
+    </graphic>
+  </Button>
+  <Label fx:id="rankCounterLabel" styleClass="rank-counter"
+         mouseTransparent="true"
+         StackPane.alignment="BOTTOM_RIGHT">
+    <StackPane.margin>
+      <!-- WTF?? Why doesn't the control get laid out correctly
+           unless I use a negative margin? -->
+      <Insets topRightBottomLeft="-22.5"/>
+    </StackPane.margin>
+  </Label>
+</fx:root>

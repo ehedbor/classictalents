@@ -1,0 +1,345 @@
+Paladin:
+  Icon: "images/paladin/ClassIcon.jpg"
+  Color: "#F48CBA"
+  Classic:
+    Specializations:
+      Holy:
+        Icon: "images/paladin/HolyLight.png"
+        Background: "images/backgrounds/paladin_holy.jpg"
+        Talents:
+          Divine Strength:
+            Location: [0, 1]
+            Max Rank: 5
+            Icon: "images/warrior/IntimidatingShout.png"
+            Description: Increases your Strength by {:|2,4,6,8,10}%.
+          Divine Intellect:
+            Location: [0, 2]
+            Max Rank: 5
+            Icon: "images/druid/Hibernate.png"
+            Description: Increases your total Intellect by {:|2,4,6,8,10}%.
+          Spiritual Focus:
+            Location: [1, 1]
+            Max Rank: 5
+            Icon: "images/mage/Blink.png"
+            Description: >-
+              Gives your Flash of Light and Holy Light spells a {:|14,28,42,56,70}% to not lose 
+              casting time when you take damage.
+          Improved Seal of Righteousness:
+            Location: [1, 2]
+            Max Rank: 5
+            Icon: "images/paladin/SealOfRighteousness.png"
+            Description: >-
+              Increases the damage done by your Seal of Righteousness and Judgement of Righteousness 
+              by {:|3,6,9,12,15}%.
+          Healing Light:
+            Location: [2, 0]
+            Max Rank: 3
+            Icon: "images/paladin/HolyLight.png"
+            Description: >-
+              Increases the amount healed by your Holy Light and Flash of Light spells by 
+              {:|4,8,12}%.
+          Consecration:
+            Location: [2, 1]
+            Max Rank: 1
+            Icon: "images/paladin/Consecration.png"
+            Description: >-
+              Consecrates the land beneath the Paladin, doing 64 Holy damage over 8 sec to enemies 
+              who enter the area.
+            Spell:
+              Cost: 135 Mana
+              Cast Time: Instant
+              Cooldown: 8 sec
+          Improved Lay on Hands:
+            Location: [2, 2]
+            Max Rank: 2
+            Icon: "images/paladin/LayOnHands.png"
+            Description: >-
+              Gives the target of your Lay on Hands spell a {0:|15,30}% bonus to their armor value 
+              from items for 2 min. In addition, the cooldown for your Lay on Hands spell is reduced 
+              by {0:|10,20} min.
+          Unyielding Faith:
+            Location: [2, 3]
+            Max Rank: 2
+            Icon: "images/paladin/UnyieldingFaith.jpg"
+            Description: >-
+              Increases your chance to resist Fear and Disorient effects by an additional {:|5,10}%.
+          Illumination:
+            Location: [3, 1]
+            Max Rank: 5
+            Icon: "images/priest/GreaterHeal.png"
+            Description: >-
+              After getting a critical effect from your Flash of Light, Holy Light, or Holy Shock 
+              heal spell, gives you a {:|20,40,60,80,100}% chance to gain Mana equal to the base 
+              cost of the spell.
+          Improved Blessing of Wisdom:
+            Location: [3, 2]
+            Max Rank: 2
+            Icon: "images/paladin/BlessingOfWisdom.png"
+            Description: Increases the effect of your Blessing of Wisdom spell by {:|10,20}%.
+          Divine Favor:
+            Location: [4, 1]
+            Requires: Illumination
+            Max Rank: 1
+            Icon: "images/paladin/FlashOfLight.png"
+            Description: >-
+              When activated, gives your next Flash of Light, Holy Light, or Holy Shock spell a 100% 
+              critical effect chance.
+            Spell:
+              Cost: 4% of Base Mana
+              Cast Time: Instant
+              Cooldown: 2 min
+          Lasting Judgement:
+            Location: [4, 2]
+            Max Rank: 3
+            Icon: "images/paladin/BlessingOfLight.png"
+            Description: >-
+              Increases the duration of your Judgement of Light and Judgement of Wisdom by 
+              {:|10,20,30} sec.
+          Holy Power:
+            Location: [5, 2]
+            Max Rank: 5
+            Icon: "images/paladin/HolyPower.jpg"
+            Description: Increases the critical effect chance of your Holy spells by {:|1,2,3,4,5}%.
+          Holy Shock:
+            Location: [6, 1]
+            Requires: Divine Favor
+            Max Rank: 1
+            Icon: "images/paladin/HolyShock.png"
+            Description: >-
+              Blasts the target with Holy energy, causing 204 to 220 Holy damage to an enemy, or 204 
+              to 220 healing to an ally.
+            Spell:
+              Cost: 225 Mana
+              Range: 20 yd
+              Cast Time: Instant
+              Cooldown: 30 sec
+      Protection:
+        Icon: "images/paladin/DevotionAura.png"
+        Background: "images/backgrounds/paladin_protection.jpg"
+        Talents:
+          Improved Devotion Aura:
+            Location: [0, 1]
+            Max Rank: 5
+            Icon: "images/paladin/DevotionAura.png"
+            Description: Increases the armor bonus of your Devotion Aura by {:|5,10,15,20,25}%.
+          Redoubt:
+            Location: [0, 2]
+            Max Rank: 5
+            Icon: "images/warrior/ShieldBlock.png"
+            Description: >-
+              Increases your chance to block attacks with your shield by {:|6,12,18,24,30}% after
+              being the victim of a critical strike. Lasts 10 sec or 5 blocks.
+          Precision:
+            Location: [1, 0]
+            Max Rank: 3
+            Icon: "images/rogue/Ambush.png"
+            Description: Increases your chance to hit with melee weapons by {:|1,2,3}%.
+          Guardian's Favor:
+            Location: [1, 1]
+            Max Rank: 2
+            Icon: "images/paladin/BlessingOfProtection.png"
+            Description: >-
+              Reduces the cooldown of your Blessing of Protection by {0:|60,120} sec and increases 
+              the duration of your Blessing of Freedom by {0:|3,6} sec.
+          Toughness:
+            Location: [1, 3]
+            Max Rank: 5
+            Icon: "images/paladin/Toughness.png"
+            Description: Increases your armor value from items by {:|2,4,6,8,10}%.
+          Blessing of Kings:
+            Location: [2, 0]
+            Max Rank: 1
+            Icon: "images/paladin/BlessingOfKings.png"
+            Description: >-
+              Places a Blessing on the friendly target, increasing total stats by 10% for 5 min. 
+              Players may only have one Blessing on them per Paladin at any one time.
+            Spell:
+              Cost: 8% of Base Mana
+              Range: 30 yd
+              Cast Time: Instant
+          Improved Righteous Fury:
+            Location: [2, 1]
+            Max Rank: 3
+            Icon: "images/paladin/RighteousFury.png"
+            Description: >-
+              Increases the amount of threat generated by your Righteous Fury spell by 
+              {:|16,33,50}%.
+          Shield Specialization:
+            Location: [2, 2]
+            Requires: Redoubt
+            Max Rank: 3
+            Icon: "images/skills/ShieldSpecialization.png"
+            Description: Increases the amount of damage absorbed by your shield by {:|10,20,30}%.
+          Anticipation:
+            Location: [2, 3]
+            Max Rank: 5
+            Icon: "images/priest/Fade.png"
+            Description: >-
+              Increases your Defense skill by {:|2,4,6,8,10}.
+          Improved Hammer of Justice:
+            Location: [3, 1]
+            Max Rank: 3
+            Icon: "images/paladin/HammerOfJustice.png"
+            Description: Decreases the cooldown of your Hammer of Justice spell by {:|5,10,15} sec.
+          Improved Concentration Aura:
+            Location: [3, 2]
+            Max Rank: 3
+            Icon: "images/paladin/ConcentrationAura.png"
+            Description: >-
+              Increases the effect of your Concentration Aura by an additional {0:|5,10,15}% and 
+              gives all group members affected by the aura an additional {0:|5,10,15}% chance to 
+              resist Silence and Interrupt effects.
+          Blessing of Sanctuary:
+            Location: [4, 1]
+            Max Rank: 1
+            Icon: "images/shaman/LightningShield.png"
+            Description: >-
+              Places a Blessing on the friendly target, reducing damage dealt from all sources by up 
+              to 10 for 5 min. In addition, when the target blocks a melee attack the attacker will 
+              take 14 Holy damage. Players may only have one Blessing on them per Paladin at any one 
+              time.
+            Spell:
+              Cost: 60 Mana
+              Range: 30 yd
+              Cast Time: Instant
+          Reckoning:
+            Location: [4, 2]
+            Max Rank: 5
+            Icon: "images/paladin/Reckoning.png"
+            Description: >-
+              Gives you a {:|20,40,60,80,100}% chance to gain an extra attack after being the victim 
+              of a critical strike.
+          One-Handed Weapon Specialization:
+            Location: [5, 2]
+            Max Rank: 5
+            Icon: "images/skills/OneHandedWeaponSpecialization.png"
+            Description: >-
+              Increases the damage you deal with one-handed melee weapons by {:|2,4,6,8,10}%.
+          Holy Shield:
+            Location: [6, 1]
+            Requires: Blessing of Sanctuary
+            Max Rank: 1
+            Icon: "images/paladin/HolyShield.png"
+            Description: >-
+              Increases chance to block by 30% for 10 sec, and deals 65 Holy damage for each attack 
+              blocked while active. Damage caused by Holy Shield causes 20% additional threat. Each 
+              block expends a charge. 4 charges.
+            Spell:
+              Cost: 150 Mana
+              Cast Time: Instant
+              Cooldown: 10 sec
+      Retribution:
+        Icon: "images/paladin/RetributionAura.png"
+        Background: "images/backgrounds/paladin_retribution.jpg"
+        Talents:
+          Improved Blessing of Might:
+            Location: [0, 1]
+            Max Rank: 5
+            Icon: "images/paladin/BlessingOfMight.png"
+            Description: >-
+              Increases the melee attack power bonus of your Blessing of Might by {:|4,8,12,16,20}%.
+          Benediction:
+            Location: [0, 2]
+            Max Rank: 5
+            Icon: "images/shaman/WaterWalking.png"
+            Description: >-
+              Reduces the Mana cost of your Judgement and Seal spells by {:|3,6,9,12,15}%.
+          Improved Judgement:
+            Location: [1, 0]
+            Max Rank: 2
+            Icon: "images/paladin/Judgement.png"
+            Description: Decreases the cooldown of your Judgement spell by {:|1,2} sec.
+          Improved Seal of the Crusader:
+            Location: [1, 1]
+            Max Rank: 3
+            Icon: "images/priest/Smite.png"
+            Description: >-
+              Increases the melee attack power bonus of your Seal of the Crusader and the Holy 
+              damage increase of your Judgement of the Crusader by {:|5,10,15}%.
+          Deflection:
+            Location: [1, 2]
+            Max Rank: 5
+            Icon: "images/skills/Parry.png"
+            Description: Increases your Parry chance by {:|1,2,3,4,5}%.
+          Vindication:
+            Location: [2, 0]
+            Max Rank: 3
+            Icon: "images/paladin/Vindication.jpg"
+            Description: >-
+              Gives the Paladin's damaging melee attacks a chance to reduce the target's Strength 
+              and Agility by {:|5,10,15}% for 10 sec.
+          Conviction:
+            Location: [2, 1]
+            Max Rank: 5
+            Icon: "images/paladin/Conviction.png"
+            Description: >-
+              Increases your chance to get a critical strike with melee weapons by {:|1,2,3,4,5}%.
+          Seal of Command:
+            Location: [2, 2]
+            Max Rank: 1
+            Icon: "images/paladin/SealOfCommand.png"
+            Description: >-
+              Gives the Paladin a chance to deal additional Holy damage equal to 70% of normal 
+              weapon damage. Only one Seal can be active on the Paladin at any one time. Lasts 30 
+              sec.
+              
+              Unleashing this Seal's energy will judge an enemy, instantly causing 68 to 73 Holy 
+              damage, 137 to 146 if the target is stunned or incapacitated.
+            Spell:
+              Cost: 65 Mana
+              Cast Time: Instant
+          Pursuit of Justice:
+            Location: [2, 3]
+            Max Rank: 2
+            Icon: "images/paladin/PursuitOfJustice.jpg"
+            Description: >-
+              Increases movement and mounted movement speed by {:|4,8}%. This does not stack with 
+              other movement speed increasing effects.
+          Eye for an Eye:
+            Location: [3, 0]
+            Max Rank: 2
+            Icon: "images/paladin/EyeForAnEye.jpg"
+            Description: >-
+              All spell criticals against you cause {:|15,30}% of the damage taken to the caster as 
+              well. The damage caused by Eye for an Eye will not exceed 50% of the Paladin's total 
+              health.
+          Improved Retribution Aura:
+            Location: [3, 2]
+            Max Rank: 2
+            Icon: "images/paladin/RetributionAura.png"
+            Description: Increases the damage done by your Retribution Aura by {:|25,30}%.
+          Two-Handed Weapon Specialization:
+            Location: [4, 0]
+            Max Rank: 3
+            Icon: "images/skills/TwoHandedWeaponSpecialization02.png"
+            Description: >-
+              Increases the damage you deal with two-handed melee weapons by {:|2,4,6,8,10}%.
+          Sanctity Aura:
+            Location: [4, 2]
+            Max Rank: 1
+            Icon: "images/paladin/SanctityAura.png"
+            Description: >-
+              Increases Holy damage done by party members within 30 yards by 10%. Players may only 
+              have one Aura on them per Paladin at any one time.
+            Spell:
+              Cast Time: Instant
+          Vengeance:
+            Location: [5, 1]
+            Requires: Conviction
+            Max Rank: 5
+            Icon: "images/rogue/Aggression.png"
+            Description: >-
+              Give you a {:|3,6,9,12,15}% bonus to Physical and Holy damage you deal for 8 sec after
+              dealing a critical strike from a weapon swing, spell, or ability.
+          Repentance:
+            Location: [6, 1]
+            Max Rank: 1
+            Icon: "images/paladin/Repentance.png"
+            Description: >-
+              Puts the enemy target in a state of meditation, incapacitating them for up to 6 sec. 
+              Any damage caused will awaken the target. Only works against Humanoids.
+            Spell:
+              Cost: 60 Mana
+              Range: 20 yd
+              Cast Time: Instant
+              Cooldown: 1 min
