@@ -88,7 +88,7 @@
     <StackPane.margin>
       <!-- WTF?? Why doesn't the control get laid out correctly
            unless I use a negative margin? -->
-      <Insets topRightBottomLeft="-18"/>
+      <Insets topRightBottomLeft="-22.5"/>
     </StackPane.margin>
   </Label>
 </fx:root>

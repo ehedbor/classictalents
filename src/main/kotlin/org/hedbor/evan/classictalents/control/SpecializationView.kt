@@ -20,15 +20,17 @@ import org.hedbor.evan.classictalents.model.Specialization
 import org.hedbor.evan.classictalents.model.Talent
 import org.hedbor.evan.classictalents.util.*
 
+
 class SpecializationView(private val model: Specialization) : BorderPane() {
     companion object {
-        private const val OVERLAP: Double = 2.0
+        private val OVERLAP = Insets(3.0, 7.0, 7.0, 3.0)
     }
 
     @FXML private lateinit var iconView: ImageView
     @FXML private lateinit var specLabel: Label
     @FXML private lateinit var pointCounterLabel: Label
     @FXML private lateinit var talentGrid: GridPane
+    @FXML private lateinit var talentGridShape: Rectangle
     @FXML private lateinit var arrowOverlay: Pane
 
     private val arrows = mutableMapOf<Talent, Node>()
@@ -60,12 +62,9 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
                         true, true,
                         true, true)))
             })
-        talentGrid.shape = Rectangle().apply {
-            arcWidth = 20.0
-            arcHeight = 20.0
-            widthProperty().bind(talentGrid.widthProperty())
-            heightProperty().bind(talentGrid.heightProperty())
-        }
+        // add rounded corners
+        talentGridShape.widthProperty().bind(talentGrid.widthProperty())
+        talentGridShape.heightProperty().bind(talentGrid.heightProperty())
 
         model.talents.forEach { addTalent(it) }
         model.talents.addListener(ListChangeListener { c ->
@@ -186,9 +185,9 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
 
             val deltaY = talentBoundsProp.value.minY - prereqBoundsProp.value.maxY
             val height = deltaY + if (talent.column != prereq.column) { // horizontal
-                (talentBoundsProp.value.height - horizImageProp.value.height) / 2.0 + OVERLAP
+                (talentBoundsProp.value.height - horizImageProp.value.height) / 2.0 + OVERLAP.top
             } else {
-                OVERLAP * 2.0
+                OVERLAP.top + OVERLAP.bottom
             }
 
             // Calculate minimum x/y
@@ -220,7 +219,7 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
             if (talent.column != prereq.column) { // horizontal
                 prereqBoundsProp.value.maxY - (prereqBoundsProp.value.height - image.width) / 2.0
             } else {
-                prereqBoundsProp.value.maxY - OVERLAP
+                prereqBoundsProp.value.maxY - OVERLAP.bottom
             }
         })
 
@@ -253,9 +252,9 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
             }
 
             val width = deltaX + if (talent.row != prereq.row) { // vertical
-                (talentBoundsProp.value.width + vertImageProp.value.width) / 2.0 + OVERLAP
+                (talentBoundsProp.value.width + vertImageProp.value.width) / 2.0 + OVERLAP.right
             } else {
-                OVERLAP * 2.0
+                OVERLAP.left + OVERLAP.right
             }
 
             // determine min x/y
@@ -274,15 +273,15 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
             vertImageProp, talentBoundsProp, prereqBoundsProp) {
             if (talent.row != prereq.row) { // vertical
                 if (talent.column > prereq.column) { // left to right
-                    prereqBoundsProp.value.maxX - OVERLAP
+                    prereqBoundsProp.value.maxX - OVERLAP.right
                 } else {
                     talentBoundsProp.value.maxX - (prereqBoundsProp.value.width + vertImageProp.value.width) / 2.0
                 }
             } else {
                 if (talent.column > prereq.column) { // left to right
-                    prereqBoundsProp.value.maxX - OVERLAP
+                    prereqBoundsProp.value.maxX - OVERLAP.right
                 } else {
-                    talentBoundsProp.value.maxX - OVERLAP
+                    talentBoundsProp.value.maxX - OVERLAP.left
                 }
             }
         })
@@ -296,11 +295,11 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
     }
 
     private fun getVerticalArrowImageProperty(talent: Talent, prereq: Talent): ObservableValue<Image> {
-        return objectBinding(talent.rankProperty(), talent.maxRankProperty()) {
-            val url = if (talent.rank < talent.maxRank) {
-                "$ASSETS_ROOT/images/arrows/down.png"
-            } else {
+        return objectBinding(talent.canAllocateProperty(), talent.rankProperty()) {
+            val url = if (talent.rank > 0 || talent.canAllocate) {
                 "$ASSETS_ROOT/images/arrows/down2.png"
+            } else {
+                "$ASSETS_ROOT/images/arrows/down.png"
             }
             Image(javaClass.getResourceAsStream(url))
         }
@@ -309,10 +308,10 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
     private fun getHorizontalArrowImageProperty(
         talent: Talent, prereq: Talent
     ): ObservableValue<Image> {
-        return objectBinding(talent.rankProperty(), talent.maxRankProperty()) {
+        return objectBinding(talent.canAllocateProperty(), talent.rankProperty(), talent.maxRankProperty()) {
             val horizComponent = if (talent.column > prereq.column) "right" else "left"
             val vertComponent = if (talent.row > prereq.row) "down" else ""
-            val rankComponent = if (talent.rank < talent.maxRank) "" else "2"
+            val rankComponent = if (talent.rank > 0 || talent.canAllocate) "2" else ""
 
             val imageName = "$horizComponent$vertComponent$rankComponent.png"
             Image(javaClass.getResourceAsStream("$ASSETS_ROOT/images/arrows/$imageName"))

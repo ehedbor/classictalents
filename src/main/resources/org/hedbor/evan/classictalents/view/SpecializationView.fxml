@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Rectangle?>
 <fx:root xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
          type="javafx.scene.layout.BorderPane"
@@ -37,11 +38,15 @@
     </BorderPane>
   </top>
   <center> <!-- talent grid -->
-    <StackPane>
+    <StackPane styleClass="spec-background">
       <GridPane fx:id="talentGrid" styleClass="spec-background">
         <padding>
           <Insets topRightBottomLeft="15"/>
         </padding>
+        <shape>
+          <Rectangle fx:id="talentGridShape" styleClass="spec-background"
+                     arcWidth="20" arcHeight="20"/>
+        </shape>
       </GridPane>
       <Pane fx:id="arrowOverlay" mouseTransparent="true"/>
     </StackPane>
