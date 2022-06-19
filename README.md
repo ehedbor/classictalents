@@ -1,20 +1,16 @@
 # WoW Classic Talent Calculator
 A small hobby project built with Kotlin and TornadoFX to practice application development in a practical context.
 This program is a talent calculator for the original version of World of Warcraft that was re-released with WoW: Classic.
-Currently, only a few of the classes are supported. In the future, I plan to support all classes across three expansions
-(Vanilla, TBC, WotLK).
+All vanilla classes are supported. In the future, I plan to add support for TBC and WotLK too.
                      
 ## Installation
-First, make sure to install Java 1.8.
-Next, download the latest classictalents.jar from the releases tab. 
-The program can be run with `java -jar classictalents-X.Y.Z.jar` (where `X.Y.Z` is the project version).
-
+Go to the releases tab and download the appropriate installer for your system 
+(.msi for Windows, .deb for Ubuntu, etc.). Then, launch the installer and follow the instructions.
 
 ## Building from source
-1. Install Java 1.8.
+1. Install Java 17.
 2. Clone the project with `git clone`.
-3. In the project directory, build the project with `./gradlew :app:shadowJar`.
-4. The compiled jar file will be in the subdirectory "app/build/libs"
+3. Run the project with `./gradlew run` or create an installer with `./gradlew jpackage -PinstallerType=<msi|exe|pkg|dmg|deb|rpm>`.
                                                        
 ## Acknowledgements
 - Wowhead, for inspiring the GUI design with [their talent calculator](https://classic.wowhead.com/talent-calc/warlock).
@@ -24,4 +20,4 @@ The program can be run with `java -jar classictalents-X.Y.Z.jar` (where `X.Y.Z` 
 - Blizzard, for making a fun game
 
 ## License
-This program is distributed under the GNU GPLv3. See LICENSE.txt for details.
+This program is distributed under the MIT license. See LICENSE.txt for details.
