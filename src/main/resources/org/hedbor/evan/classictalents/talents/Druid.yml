@@ -111,6 +111,7 @@ Druid:
               Rejuvenation spells by {:|3,6,9}%.
           Moonfury:
             Location: [5, 1]
+            Requires: Nature's Grace
             Max Rank: 5
             Icon: "images/druid/MoonkinAura.png"
             Description: >-
