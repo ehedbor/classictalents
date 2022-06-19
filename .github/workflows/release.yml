@@ -1,4 +1,4 @@
-name: U
+name: Build and Release
 
 on:
   push:
