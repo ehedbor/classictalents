@@ -50,11 +50,7 @@ jobs:
         java-version: '17.0.1'
     - name: Verify Gradle Wrapper
       uses: gradle/wrapper-validation-action@v1   
-    - name: Build
-      run: ./gradlew --info --stacktrace build
-    - name: Run jlink
-      run: ./gradlew --info --stacktrace jlink
-    - name: Run jpackage
+    - name: Build with jpackage
       run: ./gradlew --info --stacktrace -PlauncherType=${{ matrix.launcher-type }} jpackage
     - name: Upload 
       uses: actions/upload-release-asset@v1
@@ -63,6 +59,6 @@ jobs:
       with:
         upload_url: ${{ needs.create_release.outputs.upload_url }}
         # TODO: figure out how to do the version thing
-        asset_path: ./build/jpackage/ClassicTalents*-${{ version??? }}${{ matrix.arch }}.${{ matrix.launcher_type }}
-        asset_name: ClassicTalents-${{ version??? }}${{ matrix.arch }}.${{ matrix.launcher_type }}
+        asset_path: ./build/jpackage/ClassicTalents*${{ matrix.arch }}.${{ matrix.launcher_type }}
+        asset_name: ClassicTalents-${{ steps.get_project_version.outputs. }}${{ matrix.arch }}.${{ matrix.launcher_type }}
         asset_content_type: application/octet-stream
