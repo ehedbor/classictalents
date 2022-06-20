@@ -9,17 +9,15 @@ jobs:
   create_release:
     name: Create Release
     runs-on: ubuntu-latest
-    outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_uri }}
     steps:
-    - name: Create release
+    - name: Create Release
       id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        name: ${{ github.ref_name }}
+        draft: false
+        prerelease: false
+        generate_release_notes: false
   build_release:
     name: Build Release
     needs: create_release
@@ -30,36 +28,31 @@ jobs:
         include:
         - os: ubuntu-latest
           launcher-type: deb
-          arch: _amd64
         - os: ubuntu-latest
           launcher-type: rpm
-          arch: _x86_64
         - os: macos-latest
           launcher-type: pkg
-          arch: ""
         - os: windows-latest
           launcher-type: msi
-          arch: ""
       fail-fast: false
     steps:
     - name: Git checkout
       uses: actions/checkout@v3
+
     - name: Set up JDK 
       uses: actions/setup-java@v3
       with:
         java-version: '17.0.1'
         distribution: temurin
+
     - name: Verify Gradle Wrapper
       uses: gradle/wrapper-validation-action@v1   
+
     - name: Build with jpackage
       run: ./gradlew --info --stacktrace -PlauncherType=${{ matrix.launcher-type }} jpackage
-    - name: Upload 
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
       with:
-        upload_url: ${{ needs.create_release.outputs.upload_url }}
-        # TODO: figure out how to do the version thing
-        asset_path: ./build/jpackage/ClassicTalents*${{ matrix.arch }}.${{ matrix.launcher_type }}
-        asset_name: ClassicTalents${{ matrix.arch }}.${{ matrix.launcher_type }}
-        asset_content_type: application/octet-stream
+        tag_name: ${{ needs.create_release.outputs.tag-name }}
+        files: build/jpackage/ClassicTalents*.*

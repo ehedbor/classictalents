@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "org.hedbor.evan"
-version = "2.0.3"
+version = "2.0.4"
 
 repositories {
     mavenCentral()
