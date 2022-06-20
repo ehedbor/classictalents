@@ -30,18 +30,16 @@ jobs:
         include:
         - os: ubuntu-latest
           launcher-type: deb
-          arch: amd64
+          arch: _amd64
         - os: ubuntu-latest
           launcher-type: rpm
-          arch: x86_64
+          arch: _x86_64
         - os: macos-latest
           launcher-type: pkg
-        - os: macos-latest
-          launcher-type: dmg
-        - os: windows-latest
-          launcher-type: exe
+          arch: ""
         - os: windows-latest
           launcher-type: msi
+          arch: ""
       fail-fast: false
     steps:
     - name: Git checkout
@@ -57,14 +55,14 @@ jobs:
     - name: Run jlink
       run: ./gradlew --info --stacktrace jlink
     - name: Run jpackage
-      run: ./gradlew --info --stacktrace -PlauncherType=${{ matrix.launcher-type }} jpackage 
-      
+      run: ./gradlew --info --stacktrace -PlauncherType=${{ matrix.launcher-type }} jpackage
     - name: Upload 
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ needs.create_release.outputs.upload_url }}
-        asset_path: ./build/jpackage/classictalents_${{ TODO version? }}-1_${{ TODO arch }}.${{ matrix.launcher_type }}
-        asset_name: classictalents_${{ TODO version? }}-1_${{ TODO arch }}.${{ matrix.launcher_type }}
+        # TODO: figure out how to do the version thing
+        asset_path: ./build/jpackage/ClassicTalents*-${{ version??? }}${{ matrix.arch }}.${{ matrix.launcher_type }}
+        asset_name: ClassicTalents-${{ version??? }}${{ matrix.arch }}.${{ matrix.launcher_type }}
         asset_content_type: application/octet-stream

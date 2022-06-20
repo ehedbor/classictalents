@@ -46,7 +46,7 @@ jlink {
             when {
                 currentOs.isWindows -> "msi"
                 currentOs.isLinux -> "deb"
-                currentOs.isMacOsX -> "dmg"
+                currentOs.isMacOsX -> "pkg"
                 else -> error("Unknown OS '${currentOs.name}'")
             }
         }
@@ -57,18 +57,23 @@ jlink {
         )
 
         when (installerType) {
-            "msi" -> {
-                installerOptions.addAll(listOf(
-                    "--icon", "src/main/resources/org/hedbor/evan/classictalents/icons/classictalents.ico",
-                    "--win-per-user-install",
-                    "--win-dir-chooser",
-                    "--win-shortcut",
-                    "--win-menu",
+           "msi", "exe" -> {
+               imageOptions.addAll(listOf(
+                   "--resource-dir", "jpackage\\windows"
+               ))
+               installerOptions.addAll(listOf(
+                   "--win-per-user-install",
+                   "--win-dir-chooser",
+                   "--win-shortcut",
+                   "--win-shortcut-prompt",
+                   "--win-menu",
+               ))
+           }
+            "deb", "rpm" -> {
+                imageOptions.addAll(listOf(
+                    "--resource-dir", "jpackage/linux"
                 ))
-            }
-            in arrayOf("deb", "rpm") -> {
                 installerOptions.addAll(listOf(
-                    "--icon", "src/main/resources/org/hedbor/evan/classictalents/icons/classictalents.png",
                     "--linux-shortcut",
                     "--linux-menu-group", "Game;Java;",
                 ))
@@ -84,12 +89,11 @@ jlink {
                     ))
                 }
             }
-            in arrayOf("pkg", "dmg") -> {
-                installerOptions.addAll(listOf(
-                    "--icon", "src/main/resources/org/hedbor/evan/classictalents/icons/classictalents.icns",
+            "pkg", "dmg" -> {
+                imageOptions.addAll(listOf(
+                    "--resource-dir", "jpackage/macos"
                 ))
             }
-            else -> {}
         }
     }
     imageZip.set(project.file("${project.buildDir}/image-zip/${project.name}-${project.version}.zip"))
