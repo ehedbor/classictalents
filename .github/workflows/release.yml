@@ -36,6 +36,8 @@ jobs:
           launcher-type: msi
       fail-fast: false
     steps:
+    - name: Echo ${{ matrix }}
+      run: echo ${{ matrix }}
     - name: Git checkout
       uses: actions/checkout@v3
 
@@ -55,4 +57,4 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ needs.create_release.outputs.tag-name }}
-        files: build/jpackage/ClassicTalents*.*
+        files: build/jpackage/*.*
