@@ -36,8 +36,8 @@ jobs:
           launcher-type: msi
       fail-fast: false
     steps:
-    - name: Echo ${{ matrix }}
-      run: echo ${{ matrix }}
+    - name: Echo ${{ matrix.os }} ${{ matrix.launcher-type }}
+      run: echo ${{ matrix.os }} ${{ matrix.launcher-type }}
     - name: Git checkout
       uses: actions/checkout@v3
 
