@@ -26,17 +26,15 @@ jobs:
       matrix:
         include:
         - os: ubuntu-latest
-          launcher-type: deb
+          installer-type: deb
         - os: ubuntu-latest
-          launcher-type: rpm
+          installer-type: rpm
         - os: macos-latest
-          launcher-type: pkg
+          installer-type: pkg
         - os: windows-latest
-          launcher-type: msi
+          installer-type: msi
       fail-fast: false
     steps:
-    - name: Echo ${{ matrix.os }} ${{ matrix.launcher-type }}
-      run: echo ${{ matrix.os }} ${{ matrix.launcher-type }}
     - name: Git checkout
       uses: actions/checkout@v3
 
@@ -50,7 +48,7 @@ jobs:
       uses: gradle/wrapper-validation-action@v1   
 
     - name: Build with jpackage
-      run: ./gradlew --info --stacktrace -PlauncherType=${{ matrix.launcher-type }} jpackage
+      run: ./gradlew --info --stacktrace -PinstallerType=${{ matrix.installer-type }} jpackage
 
     - name: Release
       uses: softprops/action-gh-release@v1
