@@ -29,42 +29,72 @@ class TalentConfigReader {
      * @throws IllegalStateException if an unexpected error is found while parsing
      * @throws IllegalArgumentException if the yml file is malformed
      */
-    fun readClass(filePath: String): WowClass {
+    fun readClass(filePath: String): List<WowClass> {
         val config = try {
             mapper.readValue(javaClass.getResourceAsStream(filePath), rootType)
         } catch (e: Exception) {
             throw IllegalStateException("Failed to parse talent file at '$filePath'", e)
         }
 
-        // construct a wow class from the config file
-        val wowClass = WowClass()
-
         require(config.size == 1) {
             "Expected 1 class per file, found ${config.size}\n\tin file '$filePath'"
         }
         val (className, classDto) = config.entries.first()
-
         val errorPath = "in file '$filePath', class '$className'"
 
-        wowClass.name = className
-        wowClass.icon = getImage(errorPath, classDto.icon)
-        wowClass.color = try {
+        // common attributes
+        val icon = getImage(errorPath, classDto.icon)
+        val color = try {
             Color.web(classDto.color)
         } catch (e: IllegalArgumentException) {
             throw IllegalArgumentException("Could not parse color '${classDto.color}'\n\t$errorPath", e)
         }
 
-        for ((specName, specDto) in classDto.classic.specs) {
+        fun WowClass.addCommonAttributes() {
+            this.name = className
+            this.icon = icon
+            this.color = color
+        }
+
+        val vanillaClass = classDto.classic?.let {
+            WowClass().apply {
+                expansion = Expansion.CLASSIC
+                addCommonAttributes()
+                addSpecs("$errorPath, expansion 'Classic'", it.specs)
+            }
+        }
+
+        val tbcClass = classDto.tbc?.let {
+            WowClass().apply {
+                expansion = Expansion.TBC
+                addCommonAttributes()
+                addSpecs("$errorPath, expansion 'TBC'", it.specs)
+            }
+        }
+
+        val wrathClass = classDto.wotlk?.let {
+            WowClass().apply {
+                expansion = Expansion.WOTLK
+                addCommonAttributes()
+                val wrathErrPath = "$errorPath, expansion 'WotLK'"
+                addSpecs(wrathErrPath, it.specs)
+                //addGlyphs(wrathErrPath, it.glyphs)
+            }
+        }
+
+        return listOfNotNull(vanillaClass, tbcClass, wrathClass)
+    }
+
+    private fun WowClass.addSpecs(errorPath: String, specs: Map<String, SpecDto>) {
+        for ((specName, specDto) in specs) {
             val spec = readSpec(
                 "$errorPath, spec '$specName'",
                 specName,
                 specDto
             )
-            spec.wowClass = wowClass
-            wowClass.specializations += spec
+            spec.wowClass = this
+            this.specializations += spec
         }
-
-        return wowClass
     }
 
     private fun readSpec(errorPath: String, specName: String, specDto: SpecDto): Specialization {

@@ -14,6 +14,10 @@ class WowClass {
     var name: String by _name.delegate()
     fun nameProperty() = _name
 
+    private val _expansion = SimpleObjectProperty(Expansion.CLASSIC)
+    var expansion: Expansion by _expansion.delegate()
+    fun expansionProperty() = _expansion
+
     // TODO: default icon
     private val _icon = SimpleObjectProperty<Image>()
     var icon: Image by _icon.delegate()
@@ -46,4 +50,10 @@ class WowClass {
     private val _hasUnassignedPoints = ReadOnlyBooleanWrapper().also { it.bind(_hasUnassignedPointsBinding) }
     val hasUnassignedPoints by _hasUnassignedPoints.delegate()
     fun hasUnassignedPointsProperty() = _hasUnassignedPoints.readOnlyProperty!!
+}
+
+enum class Expansion {
+    CLASSIC,
+    TBC,
+    WOTLK
 }

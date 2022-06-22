@@ -8,7 +8,9 @@ typealias TalentConfigDto = Map<String, ClassDto>
 data class ClassDto(
     @JsonProperty("Icon") val icon: String,
     @JsonProperty("Color") val color: String,
-    @JsonProperty("Classic") val classic: ClassicEraDto,
+    @JsonProperty("Classic") val classic: ClassicEraDto?,
+    @JsonProperty("TBC") val tbc: ClassicEraDto?,
+    @JsonProperty("WotLK") val wotlk: ClassicEraDto?, // TODO: add glyphs
 )
 
 data class ClassicEraDto(

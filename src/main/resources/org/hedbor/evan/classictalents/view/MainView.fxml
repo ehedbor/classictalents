@@ -7,10 +7,21 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.hedbor.evan.classictalents.control.MainViewController"
       styleClass="class-background">
+  <HBox alignment="CENTER">
+    <padding>
+      <Insets top="20" bottom="10"/>
+    </padding>
+    <HBox fx:id="expansionButtonsPane" styleClass="class-footer"
+          spacing="60" alignment="CENTER" HBox.hgrow="NEVER">
+      <padding>
+        <Insets top="10" right="15" bottom="10" left="15"/>
+      </padding>
+    </HBox>
+  </HBox>
   <!-- The nested hbox here prevents the inner hbox from expanding to fill all horizontal space -->
   <HBox alignment="CENTER">
     <padding>
-      <Insets top="20" bottom="20"/>
+      <Insets top="10" bottom="10"/>
     </padding>
     <HBox fx:id="classButtonsPane" styleClass="class-footer"
           spacing="60" alignment="CENTER" HBox.hgrow="NEVER">

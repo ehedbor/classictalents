@@ -1,5 +1,34 @@
 @use 'Constants';
 
+.expac-button {
+    -fx-padding: 9px;
+    -fx-border-color: transparent;
+    -fx-border-width: 0px;
+    -fx-background-color: transparent;
+
+    &:hover {
+        -fx-background-color: Constants.$dark-background-color;
+    }
+    &:armed {
+        -fx-padding: 9px 9px 6px 9px;
+        -fx-background-color: Constants.$dark-background-color;
+        -fx-border-color: #0591b4;
+        -fx-border-width: 0px 0px 3px 0px;
+    }
+    &:selected {
+        -fx-padding: 9px 9px 6px 9px;
+        -fx-background-color: Constants.$dark-background-color;
+        -fx-border-color: #0591b4;
+        -fx-border-width: 0px 0px 3px 0px;
+    }
+}
+
+.expac-button-icon {
+    -fx-background-size: 100% 100% contain cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat no-repeat;
+}
+
 .class-background {
     -fx-background-color: Constants.$dark-background-color;
 }
