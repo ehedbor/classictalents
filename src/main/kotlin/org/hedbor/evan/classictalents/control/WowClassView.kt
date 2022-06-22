@@ -4,9 +4,7 @@ import javafx.fxml.FXML
 import javafx.scene.control.Label
 import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
-import org.hedbor.evan.classictalents.model.MainModel
 import org.hedbor.evan.classictalents.model.WowClass
-import org.hedbor.evan.classictalents.util.booleanBinding
 import org.hedbor.evan.classictalents.util.stringBinding
 
 class WowClassView(private val model: WowClass /*MainModel*/) {
@@ -49,10 +47,8 @@ class WowClassView(private val model: WowClass /*MainModel*/) {
             })
 
         remainingPointsLabel.textProperty().bind(
-            wowClass.allocatedPointsProperty().stringBinding { allocated ->
-                // TODO: max points depends on expansion
-                val maxPoints = 51
-                val remaining = maxPoints - (allocated as Int)
+            wowClass.allocatedPointsProperty().stringBinding(wowClass.maxPointsProperty()) { allocated ->
+                val remaining = wowClass.maxPoints - (allocated as Int)
                 "Remaining Points: $remaining"
             }
         )

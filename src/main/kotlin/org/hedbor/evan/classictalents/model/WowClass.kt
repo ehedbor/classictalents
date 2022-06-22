@@ -41,8 +41,15 @@ class WowClass {
     val allocatedPoints by _allocatedPoints.delegate()
     fun allocatedPointsProperty() = _allocatedPoints.readOnlyProperty!!
 
-    // TODO: max points depends on expansion
-    private val _maxPoints = ReadOnlyIntegerWrapper(51)
+    private val _maxPointsBinding = expansionProperty().intBinding {
+        when (it) {
+            Expansion.CLASSIC -> 51
+            Expansion.TBC -> 61
+            Expansion.WOTLK -> 71
+            null -> 0
+        }
+    }
+    private val _maxPoints = ReadOnlyIntegerWrapper().also { it.bind(_maxPointsBinding) }
     val maxPoints by _maxPoints.delegate()
     fun maxPointsProperty() = _maxPoints.readOnlyProperty!!
 
