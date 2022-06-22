@@ -18,7 +18,7 @@ class ClassicTalentsApp : Application() {
         loadIcons(primaryStage)
 
         val view = FXMLLoader.load<VBox>(javaClass.getResource("$ASSETS_ROOT/view/MainView.fxml"))
-        val scene = Scene(view, 1335.0, 1020.0)
+        val scene = Scene(view, 1075.0, 1115.0)
 
         loadFonts()
         loadStylesheets(scene)
