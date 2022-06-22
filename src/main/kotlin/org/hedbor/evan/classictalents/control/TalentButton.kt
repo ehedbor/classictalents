@@ -7,9 +7,11 @@ import javafx.fxml.FXMLLoader
 import javafx.geometry.Pos
 import javafx.scene.control.Button
 import javafx.scene.control.Label
+import javafx.scene.control.Tooltip
 import javafx.scene.image.ImageView
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
+import javafx.scene.layout.Pane
 import javafx.scene.layout.Region
 import javafx.scene.layout.StackPane
 import javafx.scene.layout.VBox
@@ -29,6 +31,10 @@ class TalentButton(private val model: Talent) : StackPane() {
     @FXML private lateinit var activeBorderRegion: Region
     @FXML private lateinit var rankCounterLabel: Label
 
+    @FXML private lateinit var buttonTooltip: Tooltip
+    @FXML private lateinit var tooltipGraphicWrapper: Pane
+    @FXML private lateinit var tooltipGraphic: VBox
+
     @FXML private lateinit var tooltipNameLabel: Label
     @FXML private lateinit var tooltipRankLabel: Label
 
@@ -42,6 +48,7 @@ class TalentButton(private val model: Talent) : StackPane() {
     @FXML private lateinit var tooltipNextRankPane: VBox
     @FXML private lateinit var tooltipNextRankDescLabel: Label
 
+    @FXML private lateinit var tooltipFooterPane: VBox
     @FXML private lateinit var tooltipSpecRequiredLabel: Label
     @FXML private lateinit var tooltipPrereqRequiredLabel: Label
     @FXML private lateinit var tooltipClickToLearnLabel: Label
@@ -59,8 +66,6 @@ class TalentButton(private val model: Talent) : StackPane() {
     @Suppress("unused")
     @FXML
     private fun initialize() {
-        //disableProperty().bind(model.canAllocateProperty().not())
-
         highlightView.visibleProperty().bind(button.hoverProperty())
 
         val shouldBeColored = booleanBinding(model.canAcceptPointsProperty(), model.rankProperty()) {
@@ -81,6 +86,33 @@ class TalentButton(private val model: Talent) : StackPane() {
     }
 
     private fun initTooltip() {
+        button.hoverProperty().addListener { _, _, isHover ->
+            if (isHover) {
+                val bounds = button.localToScreen(button.boundsInLocal)
+                // TODO: For some reason the tooltip flickers for one frame
+                //    the first time it is shown, and after its size changes. Why??
+                buttonTooltip.show(button, bounds.maxX, bounds.minY)
+            } else {
+                buttonTooltip.hide()
+            }
+        }
+        // fix bug where tooltip is a morbillion pixels tall
+        buttonTooltip.apply {
+            minHeightProperty().bind(tooltipGraphicWrapper.minHeightProperty().add(20))
+            prefHeightProperty().bind(tooltipGraphicWrapper.heightProperty().add(20))
+            maxHeightProperty().bind(tooltipGraphicWrapper.maxHeightProperty().add(20))
+        }
+
+        tooltipGraphicWrapper.apply {
+            minWidthProperty().bind(tooltipGraphic.widthProperty())
+            prefWidthProperty().bind(tooltipGraphic.widthProperty())
+            maxWidthProperty().bind(tooltipGraphic.widthProperty())
+
+            minHeightProperty().bind(tooltipGraphic.heightProperty())
+            prefHeightProperty().bind(tooltipGraphic.heightProperty())
+            maxHeightProperty().bind(tooltipGraphic.heightProperty())
+        }
+
         initHeader()
         initSpell()
         initDesc()
@@ -232,20 +264,27 @@ class TalentButton(private val model: Talent) : StackPane() {
         val canRemovePts = model.canDeallocateProperty().and(model.rankProperty().greaterThan(0))
         tooltipClickToUnlearnLabel.visibleProperty().bind(canRemovePts)
         tooltipClickToUnlearnLabel.managedProperty().bind(canRemovePts)
+
+        val footerVisible = tooltipSpecRequiredLabel.visibleProperty()
+            .or(tooltipPrereqRequiredLabel.visibleProperty())
+            .or(tooltipClickToLearnLabel.visibleProperty())
+            .or(tooltipClickToUnlearnLabel.visibleProperty())
+        tooltipFooterPane.visibleProperty().bind(footerVisible)
+        tooltipFooterPane.managedProperty().bind(footerVisible)
     }
 
     private fun updateActiveBorder() {
-        activeBorderRegion.styleClass.clear()
         if (model.rank >= model.maxRank) {
+            activeBorderRegion.styleClass -= "active-border"
             activeBorderRegion.styleClass += "maxed-out-border"
         } else if (model.rank > 0) {
+            activeBorderRegion.styleClass -= "maxed-out-border"
             activeBorderRegion.styleClass += "active-border"
         } else {
             // do nothing, style already cleared
         }
     }
 
-    @Suppress("unused")
     @FXML
     private fun onMouseClicked(event: MouseEvent) {
         if (event.button == MouseButton.PRIMARY) {

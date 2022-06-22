@@ -16,56 +16,65 @@
           minHeight="34" maxHeight="34"
           onMouseClicked="#onMouseClicked">
     <tooltip>
-      <!-- showDuration="INDEFINITE" doesn't seem to work,
-           but setting the duration to a ridiculously high number does.
-           That number is equal to  3x10^29 centuries. -->
+      <!--      style="-fx-border-color: red; -fx-border-width: 3px;"-->
       <Tooltip fx:id="buttonTooltip" styleClass="tooltip-description"
-               showDelay="0s" hideDelay="0s"
-               showDuration="999999999999999999999999999999999999999s"
+               anchorLocation="CONTENT_BOTTOM_LEFT"
+               showDelay="999999s" hideDelay="999999s"
+               showDuration="999999s"
                wrapText="true"
                prefWidth="400"
+               minHeight="-Infinity"
                maxHeight="600">
         <graphic>
-          <VBox prefWidth="400" minHeight="-Infinity" maxHeight="600">
-            <!-- header -->
-            <Label fx:id="tooltipNameLabel" styleClass="tooltip-title"/>
-            <Label fx:id="tooltipRankLabel" styleClass="tooltip-subtitle"/>
+          <!--                style="-fx-border-width: 2px; -fx-border-color: green;"-->
+          <Pane fx:id="tooltipGraphicWrapper">
+            <!--            style="-fx-border-color: blue; -fx-border-width: 1px;"-->
+            <VBox fx:id="tooltipGraphic"
+                  prefWidth="400"
+                  minHeight="-Infinity"
+                  maxHeight="600">
+              <!-- header -->
+              <Label fx:id="tooltipNameLabel" styleClass="tooltip-title"/>
+              <Label fx:id="tooltipRankLabel" styleClass="tooltip-subtitle"/>
 
-            <!-- spell -->
-            <VBox fx:id="tooltipSpellPane">
-              <HBox>
-                <Label fx:id="tooltipCostLabel" styleClass="tooltip-subtitle"
-                       prefWidth="200"/>
-                <Label fx:id="tooltipRangeLabel" styleClass="tooltip-subtitle"
-                       prefWidth="200" alignment="CENTER_RIGHT"/>
-              </HBox>
-              <HBox>
-                <Label fx:id="tooltipCastTimeLabel" styleClass="tooltip-subtitle"
-                       prefWidth="200"/>
-                <Label fx:id="tooltipCooldownLabel" styleClass="tooltip-subtitle"
-                       prefWidth="200" alignment="CENTER_RIGHT"/>
-              </HBox>
-            </VBox>
+              <!-- spell -->
+              <VBox fx:id="tooltipSpellPane">
+                <HBox>
+                  <Label fx:id="tooltipCostLabel" styleClass="tooltip-subtitle"
+                         prefWidth="200"/>
+                  <Label fx:id="tooltipRangeLabel" styleClass="tooltip-subtitle"
+                         prefWidth="200" alignment="CENTER_RIGHT"/>
+                </HBox>
+                <HBox>
+                  <Label fx:id="tooltipCastTimeLabel" styleClass="tooltip-subtitle"
+                         prefWidth="200"/>
+                  <Label fx:id="tooltipCooldownLabel" styleClass="tooltip-subtitle"
+                         prefWidth="200" alignment="CENTER_RIGHT"/>
+                </HBox>
+              </VBox>
 
-            <!-- Description -->
-            <Label fx:id="tooltipDescLabel" styleClass="tooltip-description"
-                   wrapText="true" prefWidth="400"/>
-            <VBox fx:id="tooltipNextRankPane">
-              <Label/> <!-- spacer -->
-              <Label styleClass="tooltip-subtitle" text="Next Rank:"/>
-              <Label fx:id="tooltipNextRankDescLabel" styleClass="tooltip-description"
+              <!-- Description -->
+              <Label fx:id="tooltipDescLabel" styleClass="tooltip-description"
                      wrapText="true" prefWidth="400"/>
-            </VBox>
+              <VBox fx:id="tooltipNextRankPane">
+                <Label/> <!-- spacer -->
+                <Label styleClass="tooltip-subtitle" text="Next Rank:"/>
+                <Label fx:id="tooltipNextRankDescLabel" styleClass="tooltip-description"
+                       wrapText="true" prefWidth="400"/>
+              </VBox>
 
-            <!-- Footer -->
-            <Label/> <!-- spacer -->
-            <Label fx:id="tooltipSpecRequiredLabel" styleClass="tooltip-error"/>
-            <Label fx:id="tooltipPrereqRequiredLabel" styleClass="tooltip-error"/>
-            <Label fx:id="tooltipClickToLearnLabel" styleClass="tooltip-confirmation"
-                   text="Click to learn"/>
-            <Label fx:id="tooltipClickToUnlearnLabel" styleClass="tooltip-error"
-                   text="Right-Click to unlearn"/>
-          </VBox>
+              <!-- Footer -->
+              <VBox fx:id="tooltipFooterPane">
+                <Label/> <!-- spacer -->
+                <Label fx:id="tooltipSpecRequiredLabel" styleClass="tooltip-error"/>
+                <Label fx:id="tooltipPrereqRequiredLabel" styleClass="tooltip-error"/>
+                <Label fx:id="tooltipClickToLearnLabel" styleClass="tooltip-confirmation"
+                       text="Click to learn"/>
+                <Label fx:id="tooltipClickToUnlearnLabel" styleClass="tooltip-error"
+                       text="Right-Click to unlearn"/>
+              </VBox>
+            </VBox>
+          </Pane>
         </graphic>
       </Tooltip>
     </tooltip>

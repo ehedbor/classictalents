@@ -42,6 +42,14 @@ class ClassButton : Button() {
             } else {
                 activeBorderRegion.styleClass.clear()
             }
+        }                             
+        hoverProperty().addListener { _, _, isHover ->
+            if (isHover) {
+                val bounds = localToScreen(boundsInLocal)
+                tooltip.show(this, bounds.maxX, bounds.minY)
+            } else {
+                tooltip.hide()
+            }
         }
     }
 }

@@ -37,6 +37,10 @@ class BoolPropDelegate<in C>(private val fxProp: BooleanProperty): ReadWriteProp
     }
 }
 
+// Yes, these all need separate classes. This is because IntegerProperty et al. does not implement
+// Property<Integer> but rather Property<Number>, so getValue()/setValue() has to work with Numbers
+// to comply with e.g. PropDelegate<C, Int>. 
+
 class IntPropDelegate<in C>(private val fxProp: IntegerProperty): ReadWriteProperty<C, Int> {
     override operator fun getValue(thisRef: C, property: KProperty<*>): Int {
         return fxProp.value
