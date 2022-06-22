@@ -140,13 +140,19 @@ class TalentConfigReader {
         require(talentDto.location.size == 2) {
             "Location must be an array of the form [row, col] (got ${talentDto.location})\n\t$errorPath"
         }
-        // TODO: different number of rows depending on expansion
-        require(talentDto.location[0] in 0 until 7) {
-            "Location row '${talentDto.location[0]}' out of range 0..6\n\t$errorPath"
+
+        val maxRow =
+            if ("Classic" in errorPath) 7
+            else if ("TBC" in errorPath) 9
+            else 11
+        require(talentDto.location[0] in 0 until maxRow) {
+            "Location row '${talentDto.location[0]}' out of range 0..${maxRow - 1}\n\t$errorPath"
         }
+
         require(talentDto.location[1] in 0 until 4) {
             "Location column '${talentDto.location[1]}' out of range 0..3\n\t$errorPath"
         }
+        
         talent.row = talentDto.location[0]
         talent.column = talentDto.location[1]
 

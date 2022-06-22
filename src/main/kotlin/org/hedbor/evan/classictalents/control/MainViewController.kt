@@ -9,6 +9,8 @@ import javafx.scene.control.ToggleGroup
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.layout.HBox
+import javafx.scene.layout.VBox
+import javafx.scene.transform.Transform
 import org.hedbor.evan.classictalents.ASSETS_ROOT
 import org.hedbor.evan.classictalents.model.Expansion
 import org.hedbor.evan.classictalents.model.MainModel
@@ -18,6 +20,10 @@ import org.hedbor.evan.classictalents.util.stringBinding
 import kotlin.math.round
 
 class MainViewController {
+    companion object {
+        private const val SCALE_FACTOR = 0.8
+    }
+
     // TODO: do dependency injection
     private val model = MainModel().also { it.loadClasses() }
 
@@ -27,14 +33,22 @@ class MainViewController {
 
     @FXML
     private fun initialize() {
+        // tbc too big :(
+        // TODO: find way to decrease size that does not make it look wonky.
+        //     resize spec panels maybe?
+        //expansionButtonsPane.transforms += Transform.scale(SCALE_FACTOR, SCALE_FACTOR)
+        //classButtonsPane.transforms += Transform.scale(SCALE_FACTOR, SCALE_FACTOR)
+        classViewPane.transforms += Transform.scale(SCALE_FACTOR, SCALE_FACTOR)
+
         val group = ToggleGroup()
         // prevent de-selecting an expansion
         group.selectedToggleProperty().addListener { _, old, new ->
-            if (new == null)
+            if (new == null) {
                 old.isSelected = true
+            }
         }
 
-        for ((expansion, classes) in model.classes) {
+        for ((expansion, classes) in model.classes.toSortedMap()) {
             expansionButtonsPane.children += makeExpansionButton(expansion, group)
             classes.forEach { addClass(it) }
         }
@@ -73,6 +87,9 @@ class MainViewController {
             image = Image(MainViewController::class.java.getResourceAsStream(imageName))
         }
         setOnAction {
+            if (model.selectedExpansion != expansion) {
+                model.selectedClass = null
+            }
             model.selectedExpansion = expansion
         }
 //        model.selectedExpansionProperty().addListener { _, _, new ->

@@ -31,7 +31,10 @@
       <!-- include class selection buttons here -->
     </HBox>
   </HBox>
-  <HBox fx:id="classViewPane" alignment="CENTER">
-    <!-- include current class view here -->
+  <!-- TODO: maybe not use 3 separate hboxes?? also make it actually center cause this didnt work -->
+  <HBox alignment="CENTER">
+    <HBox fx:id="classViewPane" alignment="CENTER" HBox.hgrow="NEVER">
+      <!-- include current class view here -->
+    </HBox>
   </HBox>
 </VBox>
