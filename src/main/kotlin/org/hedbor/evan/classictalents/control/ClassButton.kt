@@ -35,12 +35,15 @@ class ClassButton : Button() {
     @FXML
     private fun initialize() {
         iconView.imageProperty().bind(iconProperty())
+        iconView.fitWidth = 48.0
+        iconView.fitHeight = 48.0
+
         highlightView.visibleProperty().bind(hoverProperty())
         selectedProperty().addListener { _, _, selected ->
             if (selected) {
-                activeBorderRegion.styleClass.add("active-border")
+                activeBorderRegion.styleClass += "active-border"
             } else {
-                activeBorderRegion.styleClass.clear()
+                activeBorderRegion.styleClass -= "active-border"
             }
         }                             
         hoverProperty().addListener { _, _, isHover ->

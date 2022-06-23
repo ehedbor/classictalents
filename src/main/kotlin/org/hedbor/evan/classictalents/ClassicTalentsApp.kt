@@ -18,7 +18,7 @@ class ClassicTalentsApp : Application() {
         loadIcons(primaryStage)
 
         val view = FXMLLoader.load<VBox>(javaClass.getResource("$ASSETS_ROOT/view/MainView.fxml"))
-        val scene = Scene(view, 1075.0, 1115.0)
+        val scene = Scene(view, 1045.0, 1025.0)
 
         loadFonts()
         loadStylesheets(scene)
@@ -44,7 +44,7 @@ class ClassicTalentsApp : Application() {
 
     private fun loadFonts() {
         val uiFont = javaClass.getResource("$ASSETS_ROOT/fonts/FrizQuadrataTT.ttf")?.toExternalForm()
-        Font.loadFont(uiFont, 12.0)
+        Font.loadFont(uiFont, 368.0)
     }
 
     private fun loadStylesheets(scene: Scene) {

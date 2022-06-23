@@ -3,13 +3,16 @@ package org.hedbor.evan.classictalents.control
 import javafx.fxml.FXML
 import javafx.scene.control.Label
 import javafx.scene.layout.HBox
-import javafx.scene.layout.VBox
 import org.hedbor.evan.classictalents.model.WowClass
 import org.hedbor.evan.classictalents.util.stringBinding
+import kotlin.math.round
 
-class WowClassView(private val model: WowClass /*MainModel*/) {
+class WowClassView(private val model: WowClass) {
     @FXML private lateinit var specsPane: HBox
-    @FXML private lateinit var footer: VBox
+    @FXML private lateinit var classNameLabel: Label
+    @FXML private lateinit var spec1PtsLabel: Label
+    @FXML private lateinit var spec2PtsLabel: Label
+    @FXML private lateinit var spec3PtsLabel: Label
     @FXML private lateinit var requiredLevelLabel: Label
     @FXML private lateinit var remainingPointsLabel: Label
 
@@ -17,20 +20,6 @@ class WowClassView(private val model: WowClass /*MainModel*/) {
     private fun initialize() {
         // TODO: reuse view for different models. see MainViewController for reasoning
         setClass(model)
-
-//        footer.visibleProperty().bind(model.selectedClassProperty().booleanBinding { it != null })
-//
-//        if (model.selectedClass != null) {
-//            setClass(model.selectedClass!!)
-//        }
-//
-//        model.selectedClassProperty().addListener { _, _, cls ->
-//            specsPane.children.clear()
-//            requiredLevelLabel.textProperty().unbind()
-//            remainingPointsLabel.textProperty().unbind()
-//
-//            if (cls != null) setClass(cls)
-//        }
     }
 
     private fun setClass(wowClass: WowClass) {
@@ -38,19 +27,28 @@ class WowClassView(private val model: WowClass /*MainModel*/) {
             .map { SpecializationView(it) }
             .toCollection(specsPane.children)
 
+        classNameLabel.textProperty().bind(
+            wowClass.nameProperty().stringBinding { "$it:" })
+        classNameLabel.styleProperty().bind(wowClass.colorProperty().stringBinding {
+            val r = round(it.red * 255).toInt()
+            val g = round(it.green * 255).toInt()
+            val b = round(it.blue * 255).toInt()
+            "-fx-text-fill: rgb($r, $g, $b);"
+        })
+
+        // TODO rebind if specs change
+        spec1PtsLabel.textProperty().bind(wowClass.specializations[0].allocatedPointsProperty().asString())
+        spec2PtsLabel.textProperty().bind(wowClass.specializations[1].allocatedPointsProperty().asString())
+        spec3PtsLabel.textProperty().bind(wowClass.specializations[2].allocatedPointsProperty().asString())
+
         requiredLevelLabel.textProperty().bind(
             wowClass.allocatedPointsProperty().stringBinding { allocated ->
                 if (allocated as Int > 0)
-                    "Required Level: ${allocated + 9}"
+                    (allocated + 9).toString()
                 else
-                    "Required Level: \u2013" // en dash
+                    "\u2013" // en dash
             })
 
-        remainingPointsLabel.textProperty().bind(
-            wowClass.allocatedPointsProperty().stringBinding(wowClass.maxPointsProperty()) { allocated ->
-                val remaining = wowClass.maxPoints - (allocated as Int)
-                "Remaining Points: $remaining"
-            }
-        )
+        remainingPointsLabel.textProperty().bind(wowClass.allocatedPointsProperty().asString())
     }
 }

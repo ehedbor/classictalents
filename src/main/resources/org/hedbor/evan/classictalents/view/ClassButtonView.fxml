@@ -19,11 +19,14 @@
   </tooltip>
   <graphic>
     <StackPane>
-      <ImageView fx:id="iconView" styleClass="talent-icon"/>
-      <ImageView styleClass="talent-icon">
+      <ImageView fx:id="iconView" styleClass="talent-icon"
+                 fitWidth="48.0" fitHeight="48.0"/>
+      <ImageView styleClass="talent-icon"
+                 fitWidth="54.4" fitHeight="54.4">
         <Image url="@../images/button/border.png"/>
       </ImageView>
-      <ImageView fx:id="highlightView" styleClass="talent-icon">
+      <ImageView fx:id="highlightView" styleClass="talent-icon"
+                 fitWidth="49.6" fitHeight="49.6">
         <Image url="@../images/button/highlight_hover.png"/>
       </ImageView>
       <Region fx:id="activeBorderRegion"/>

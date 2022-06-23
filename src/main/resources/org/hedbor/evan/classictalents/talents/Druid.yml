@@ -671,6 +671,7 @@ Druid:
               melee critical chance of all party members within 45 yards by 5%.
           Improved Leader of the Pack:
             Location: [6, 2]
+            Requires: Leader of the Pack
             Max Rank: 2
             Icon: "images/druid/LeaderOfThePack.png"
             Description: >-
@@ -729,7 +730,7 @@ Druid:
               Gives you a {:|14,28,42,56,70}% chance to avoid interruption caused by damage while 
               casting the Healing Touch, Regrowth and Tranquility spells.
           Natural Shapeshifter:
-            Location: [1, 3]
+            Location: [1, 2]
             Max Rank: 3
             Icon: "images/mage/ArcaneExplosion.png"
             Description: Reduces the mana cost of all shapeshifting by {:|10,20,30}%.
@@ -766,7 +767,7 @@ Druid:
             Description: >-
               Reduces the Mana cost of your Healing Touch and Tranquility spells by {:|2,4,6,8,10}%.
           Improved Rejuvenation:
-            Location: [3, 3]
+            Location: [3, 2]
             Max Rank: 3
             Icon: "images/druid/Rejuvenation.png"
             Description: Increases the effect of your Rejuvenation spell by {:|5,10,15}%.
@@ -798,6 +799,7 @@ Druid:
               effects.
           Improved Regrowth:
             Location: [5, 2]
+            Requires: Improved Rejuvenation
             Max Rank: 5
             Icon: "images/druid/Regrowth.png"
             Description: >-
@@ -837,6 +839,7 @@ Druid:
               {:|4,8,12,16,20}%.
           Tree of Life:
             Location: [8, 1]
+            Requires: Empowered Rejuvenation
             Max Rank: 1
             Icon: "images/druid/TreeOfLife.jpg"
             Description: >-

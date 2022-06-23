@@ -274,11 +274,11 @@ class TalentButton(private val model: Talent) : StackPane() {
     }
 
     private fun updateActiveBorder() {
+        activeBorderRegion.styleClass -= "active-border"
+        activeBorderRegion.styleClass -= "maxed-out-border"
         if (model.rank >= model.maxRank) {
-            activeBorderRegion.styleClass -= "active-border"
             activeBorderRegion.styleClass += "maxed-out-border"
         } else if (model.rank > 0) {
-            activeBorderRegion.styleClass -= "maxed-out-border"
             activeBorderRegion.styleClass += "active-border"
         } else {
             // do nothing, style already cleared

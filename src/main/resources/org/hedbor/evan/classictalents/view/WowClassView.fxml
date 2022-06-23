@@ -2,27 +2,68 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml">
-  <HBox fx:id="specsPane" spacing="10" alignment="CENTER">
-    <padding>
-      <Insets topRightBottomLeft="20"/>
-    </padding>
-    <!-- include specs here -->
-  </HBox>
-  <HBox alignment="CENTER">
-    <padding>
-      <Insets right="10" bottom="20" left="10"/>
-    </padding>
-    <VBox fx:id="footer" styleClass="class-footer" alignment="CENTER">
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml">
+  <padding>
+    <Insets topRightBottomLeft="10"/>
+  </padding>
+  <top>
+    <AnchorPane fx:id="headerWrapper">
       <padding>
-        <Insets right="10" left="10"/>
+        <Insets left="10" right="10"/>
       </padding>
-      <Label text="Talent Info:" styleClass="class-description-text" VBox.vgrow="NEVER"/>
-      <Label fx:id="requiredLevelLabel" styleClass="class-description-text" VBox.vgrow="NEVER"/>
-      <Label fx:id="remainingPointsLabel" styleClass="class-description-text" VBox.vgrow="NEVER"/>
-    </VBox>
-  </HBox>
-</VBox>
+      <BorderPane fx:id="header" styleClass="class-header"
+                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <padding>
+          <Insets right="10" left="10"/>
+        </padding>
+        <left>
+          <HBox spacing="5">
+            <StackPane>
+              <ImageView styleClass="talent-icon"
+                         fitWidth="27" fitHeight="27">
+                <Image url="@../images/druid/ClassIcon.jpg"/>
+              </ImageView>
+              <ImageView styleClass="talent-icon"
+                         fitWidth="30" fitHeight="30">
+                <Image url="@../images/button/border.png"/>
+              </ImageView>
+            </StackPane>
+            <!-- TODO: add style classes for gray text -->
+            <Label fx:id="classNameLabel" styleClass="important-class-description-text"/>
+            <Label fx:id="spec1PtsLabel" styleClass="important-class-description-text"/>
+            <Label text="/" styleClass="important-class-description-text" style="-fx-text-fill: gray;"/>
+            <Label fx:id="spec2PtsLabel" styleClass="important-class-description-text"/>
+            <Label text="/" styleClass="important-class-description-text" style="-fx-text-fill: gray;"/>
+            <Label fx:id="spec3PtsLabel" styleClass="important-class-description-text"/>
+          </HBox>
+        </left>
+        <right>
+          <HBox spacing="20">
+            <HBox spacing="5">
+              <Label text="Required Level:" styleClass="class-description-text" style="-fx-text-fill: gray;"
+                     alignment="CENTER_RIGHT"/>
+              <Label fx:id="requiredLevelLabel" styleClass="class-description-text" alignment="CENTER_RIGHT"/>
+            </HBox>
+            <HBox spacing="5">
+              <Label text="Points Left:" styleClass="class-description-text" style="-fx-text-fill: gray;"
+                     alignment="CENTER_RIGHT"/>
+              <Label fx:id="remainingPointsLabel" styleClass="class-description-text" alignment="CENTER_RIGHT"/>
+            </HBox>
+          </HBox>
+        </right>
+      </BorderPane>
+    </AnchorPane>
+  </top>
+  <center>
+    <HBox fx:id="specsPane" spacing="10" alignment="CENTER">
+      <padding>
+        <Insets topRightBottomLeft="10"/>
+      </padding>
+      <!-- include specs here -->
+    </HBox>
+  </center>
+</BorderPane>

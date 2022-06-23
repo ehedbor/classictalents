@@ -18,9 +18,10 @@ class MainModel {
     var selectedExpansion by _selectedExpansion.delegate()
     fun selectedExpansionProperty() = _selectedExpansion
 
-    private val _selectedClass = SimpleObjectProperty<WowClass?>()
-    var selectedClass by _selectedClass.delegate()
-    fun selectedClassProperty() = _selectedClass
+    private val _selectedClasses = SimpleMapProperty<Expansion, WowClass?>(
+        Expansion.values().associateWith { null }.toObservableMap())
+    var selectedClasses: ObservableMap<Expansion, WowClass?> by _selectedClasses.delegate()
+    fun selectedClassesProperty() = _selectedClasses
 
     fun loadClasses() {
         check(classes.isEmpty()) { "Cannot load classes more than once" }

@@ -7,17 +7,17 @@
     -fx-background-color: transparent;
 
     &:hover {
-        -fx-background-color: Constants.$dark-background-color;
+        -fx-background-color: Constants.$background-color;
     }
     &:armed {
         -fx-padding: 9px 9px 6px 9px;
-        -fx-background-color: Constants.$dark-background-color;
+        -fx-background-color: Constants.$background-color;
         -fx-border-color: #0591b4;
         -fx-border-width: 0px 0px 3px 0px;
     }
     &:selected {
         -fx-padding: 9px 9px 6px 9px;
-        -fx-background-color: Constants.$dark-background-color;
+        -fx-background-color: Constants.$background-color;
         -fx-border-color: #0591b4;
         -fx-border-width: 0px 0px 3px 0px;
     }
@@ -30,15 +30,15 @@
 }
 
 .class-background {
-    -fx-background-color: Constants.$dark-background-color;
+    -fx-background-color: Constants.$background-color;
 }
 
-.class-footer {
-    -fx-background-color: Constants.$light-background-color;
-    -fx-border-color: Constants.$light-background-color;
-    -fx-border-width: 5px;
-    -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
+.class-header {
+    -fx-background-color: #101010;
+    -fx-background-radius: 5px;
+    -fx-border-color: #101010;
+    -fx-border-width: 6px 1px 6px 1px;
+    -fx-border-radius: 5px;
     -fx-border-style: solid;
 }
 
@@ -46,4 +46,11 @@
     -fx-text-fill: Constants.$normal-text-color;
     -fx-font-family: Constants.$ui-font;
     -fx-font-size: Constants.$large-label-font-size;
+}
+
+.important-class-description-text {
+    -fx-text-fill: Constants.$normal-text-color;
+    -fx-font-family: Constants.$ui-font;
+    -fx-font-size: Constants.$title-size;
+    -fx-font-weight: bold;
 }

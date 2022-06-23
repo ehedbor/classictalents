@@ -9,24 +9,24 @@
       styleClass="class-background">
   <HBox alignment="CENTER">
     <padding>
-      <Insets top="20" bottom="10"/>
+      <Insets top="10" bottom="5"/>
     </padding>
-    <HBox fx:id="expansionButtonsPane" styleClass="class-footer"
-          spacing="60" alignment="CENTER" HBox.hgrow="NEVER">
+    <HBox fx:id="expansionButtonsPane" styleClass="class-header"
+          spacing="18" alignment="CENTER" HBox.hgrow="NEVER">
       <padding>
-        <Insets top="10" right="15" bottom="10" left="15"/>
+        <Insets topRightBottomLeft="7"/>
       </padding>
     </HBox>
   </HBox>
   <!-- The nested hbox here prevents the inner hbox from expanding to fill all horizontal space -->
   <HBox alignment="CENTER">
     <padding>
-      <Insets top="10" bottom="10"/>
+      <Insets top="5" bottom="15"/>
     </padding>
-    <HBox fx:id="classButtonsPane" styleClass="class-footer"
-          spacing="60" alignment="CENTER" HBox.hgrow="NEVER">
+    <HBox fx:id="classButtonsPane" styleClass="class-header"
+          spacing="40" alignment="CENTER" HBox.hgrow="NEVER">
       <padding>
-        <Insets top="20" right="30" bottom="20" left="30"/>
+        <Insets top="14" right="18" bottom="14" left="18"/>
       </padding>
       <!-- include class selection buttons here -->
     </HBox>

@@ -14,23 +14,23 @@ import javafx.scene.image.ImageView
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.*
-import javafx.scene.shape.Rectangle
 import org.hedbor.evan.classictalents.ASSETS_ROOT
 import org.hedbor.evan.classictalents.model.Specialization
 import org.hedbor.evan.classictalents.model.Talent
-import org.hedbor.evan.classictalents.util.*
+import org.hedbor.evan.classictalents.util.doubleBinding
+import org.hedbor.evan.classictalents.util.objectBinding
+import org.hedbor.evan.classictalents.util.stringBinding
 
 
 class SpecializationView(private val model: Specialization) : BorderPane() {
     companion object {
-        private val OVERLAP = Insets(3.0, 7.0, 7.0, 3.0)
+        private val OVERLAP = Insets(14.0, 8.0, 8.0, 14.0)
     }
 
     @FXML private lateinit var iconView: ImageView
     @FXML private lateinit var specLabel: Label
     @FXML private lateinit var pointCounterLabel: Label
     @FXML private lateinit var talentGrid: GridPane
-    @FXML private lateinit var talentGridShape: Rectangle
     @FXML private lateinit var arrowOverlay: Pane
 
     private val arrows = mutableMapOf<Talent, Node>()
@@ -62,9 +62,8 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
                         true, true,
                         true, true)))
             })
-        // add rounded corners
-        talentGridShape.widthProperty().bind(talentGrid.widthProperty())
-        talentGridShape.heightProperty().bind(talentGrid.heightProperty())
+        talentGrid.widthProperty().addListener { _ -> updateBackgroundShape() }
+        talentGrid.heightProperty().addListener { _ -> updateBackgroundShape() }
 
         model.talents.forEach { addTalent(it) }
         model.talents.addListener(ListChangeListener { c ->
@@ -85,6 +84,22 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
         })
     }
 
+    private fun updateBackgroundShape() {
+        val r = 3.0 // SpecStyles.$border-radius
+        val w = talentGrid.width
+        val h = talentGrid.height
+        val s = "-fx-shape:\"" +
+            "M 0 0 " +
+            "L $w 0 " +
+            "L $w ${h - r} " +
+            "Q $w $h ${w - r} $h " +
+            "L $r $h " +
+            "Q 0 $h 0 ${h - r} " +
+            "L 0 0 " +
+            "Z\";"
+        talentGrid.style = s
+    }
+
     @FXML
     private fun onResetButtonClicked(event: MouseEvent) {
         if (event.button == MouseButton.PRIMARY) {
@@ -97,7 +112,7 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
     private fun addTalent(talent: Talent) {
         val button = TalentButton(talent)
         talentGrid.add(button, talent.column, talent.row)
-        GridPane.setMargin(button, Insets(15.0))
+        GridPane.setMargin(button, Insets(5.0))
 
         // generate an arrow for talents with a prerequisite
         if (talent.prerequisite != null) {
