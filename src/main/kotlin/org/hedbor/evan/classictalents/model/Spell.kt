@@ -8,6 +8,13 @@ import org.hedbor.evan.classictalents.util.observableListOf
 
 @Suppress("MemberVisibilityCanBePrivate", "unused")
 class Spell {
+    companion object {
+        const val RANGE_SELF = 0.0
+        const val RANGE_MELEE = 5.0
+        const val CAST_INSTANT = 0.0
+        const val CAST_NEXT_MELEE = -1.0
+    }
+
     private val _cost = SimpleIntegerProperty()
     var cost by _cost.delegate()
     fun costProperty() = _cost

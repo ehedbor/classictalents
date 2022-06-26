@@ -2,6 +2,7 @@ package org.hedbor.evan.classictalents.control
 
 import javafx.beans.binding.Bindings
 import javafx.beans.value.ChangeListener
+import javafx.collections.ObservableList
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.geometry.Pos
@@ -19,6 +20,7 @@ import org.hedbor.evan.classictalents.ASSETS_ROOT
 import org.hedbor.evan.classictalents.format.TalentFormatter
 import org.hedbor.evan.classictalents.model.CooldownUnit
 import org.hedbor.evan.classictalents.model.ResourceType
+import org.hedbor.evan.classictalents.model.Spell
 import org.hedbor.evan.classictalents.model.Talent
 import org.hedbor.evan.classictalents.util.*
 import java.text.DecimalFormat
@@ -43,6 +45,8 @@ class TalentButton(private val model: Talent) : StackPane() {
     @FXML private lateinit var tooltipRangeLabel: Label
     @FXML private lateinit var tooltipCastTimeLabel: Label
     @FXML private lateinit var tooltipCooldownLabel: Label
+    @FXML private lateinit var tooltipToolsLabel: Label
+    @FXML private lateinit var tooltipReagentsLabel: Label
 
     @FXML private lateinit var tooltipDescLabel: Label
     @FXML private lateinit var tooltipNextRankPane: VBox
@@ -150,14 +154,21 @@ class TalentButton(private val model: Talent) : StackPane() {
         tooltipCostLabel.textProperty().bind(costText)
 
         val range = Bindings.select<Double?>(model.spellProperty(), "range")
-        val rangeText = range.stringBinding {
+        val minRange = Bindings.select<Double?>(model.spellProperty(), "minRange")
+        val rangeText = range.stringBinding(minRange) {
             when {
                 it == null -> null
-                it <= 0.0 -> ""
-                it <= 5.0 -> "Melee Range"
+                it <= Spell.RANGE_SELF -> null
+                it <= Spell.RANGE_MELEE -> "Melee Range"
                 else -> {
-                    val distance = DecimalFormat("##.###").format(it)
-                    "$distance yd range"
+                    var result = ""
+                    if (minRange.value != null) {
+                        result += DecimalFormat("##.###").format(minRange.get())
+                        result += " - "
+                    }
+                    result += DecimalFormat("##.###").format(it)
+                    result += " yd range"
+                    result
                 }
             }
         }
@@ -170,12 +181,19 @@ class TalentButton(private val model: Talent) : StackPane() {
                 .otherwise(Pos.CENTER_LEFT))
 
         val castTime = Bindings.select<Double?>(model.spellProperty(), "castTime")
-        val castTimeText = castTime.stringBinding {
+        val isChanneled = Bindings.selectBoolean(model.spellProperty(), "channeled")
+        val castTimeText = castTime.stringBinding(isChanneled) {
             when (it) {
                 null -> null
-                0.0 -> "Instant"
+                Spell.CAST_INSTANT -> "Instant"
+                Spell.CAST_NEXT_MELEE -> "Next Melee"
                 else -> {
-                    DecimalFormat("##.###").format(it) + " sec cast"
+                    var result = DecimalFormat("##.###").format(it)
+                    result += " sec cast"
+                    if (isChanneled.get()) {
+                        result = "Channeled ($result)"
+                    }
+                    result
                 }
             }
         }
@@ -201,6 +219,33 @@ class TalentButton(private val model: Talent) : StackPane() {
         tooltipCooldownLabel.visibleProperty().bind(cooldownText.isNotNull)
         tooltipCooldownLabel.managedProperty().bind(cooldownText.isNotNull)
         tooltipCooldownLabel.textProperty().bind(cooldownText)
+
+
+        val toolsBinding = Bindings.select<ObservableList<String>>(model.spellProperty(), "tools")
+        val toolsText = toolsBinding.stringBinding { tools ->
+            if (tools.isNullOrEmpty()) return@stringBinding null
+            var result = "Tools:"
+            for (item in tools) {
+                result += "\n    $item"
+            }
+            result
+        }
+        tooltipToolsLabel.visibleProperty().bind(toolsText.isNotNull)
+        tooltipToolsLabel.managedProperty().bind(toolsText.isNotNull)
+        tooltipToolsLabel.textProperty().bind(toolsText)
+
+        val reagentsBinding = Bindings.select<ObservableList<String>>(model.spellProperty(), "reagents")
+        val reagentsText = reagentsBinding.stringBinding { reagents ->
+            if (reagents.isNullOrEmpty()) return@stringBinding null
+            var result = "Reagents:"
+            for (item in reagents) {
+                result += "\n    $item"
+            }
+            result
+        }
+        tooltipReagentsLabel.visibleProperty().bind(reagentsText.isNotNull)
+        tooltipReagentsLabel.managedProperty().bind(reagentsText.isNotNull)
+        tooltipReagentsLabel.textProperty().bind(reagentsText)
     }
 
     private fun initDesc() {

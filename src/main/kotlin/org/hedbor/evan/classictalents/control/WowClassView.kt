@@ -49,6 +49,6 @@ class WowClassView(private val model: WowClass) {
                     "\u2013" // en dash
             })
 
-        remainingPointsLabel.textProperty().bind(wowClass.allocatedPointsProperty().asString())
+        remainingPointsLabel.textProperty().bind(wowClass.maxPointsProperty().subtract(wowClass.allocatedPointsProperty()).asString())
     }
 }

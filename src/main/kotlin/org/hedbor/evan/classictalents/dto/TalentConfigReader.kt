@@ -12,10 +12,10 @@ import org.hedbor.evan.classictalents.util.toObservableList
 
 class TalentConfigReader {
     companion object {
-        private val COST_PATTERN = Regex("""(?<cost>\d+)\s*(?<resource>%\s*of\s*base\s*mana|mana|rage|energy)""", RegexOption.IGNORE_CASE)
-        private val RANGE_PATTERN = Regex("""(?<keyword>self|melee)|(?<distance>\d+(?:\.\d+)?)\s*(?<unit>yards?|yds?)""", RegexOption.IGNORE_CASE)
-        private val CAST_TIME_PATTERN = Regex("""(?<keyword>instant)|(?<time>\d+(?:\.\d+)?)\s*(?<unit>seconds?|secs?)""", RegexOption.IGNORE_CASE)
-        private val COOLDOWN_PATTERN = Regex("""(?<cooldown>\d+(?:\.\d+)?)\s*(?<unit>seconds?|secs?|minutes?|mins?|hours?|hrs?)""", RegexOption.IGNORE_CASE)
+        private val COST_PATTERN = Regex("""^\s*(?<cost>\d+)\s*(?<resource>%\s*of\s*base\s*mana|mana|rage|energy)\s*$""", RegexOption.IGNORE_CASE)
+        private val RANGE_PATTERN = Regex("""^\s*(?:(?<keyword>self|melee)|(?:(?<minDistance>\d+(?:\.\d+)?)\s*-\s*)?(?<distance>\d+(?:\.\d+)?)\s*(?<unit>yards?|yds?))\s*$""", RegexOption.IGNORE_CASE)
+        private val CAST_TIME_PATTERN = Regex("""^\s*(?:(?<keyword>instant|next\s*melee)|(?<time>\d+(?:\.\d+)?)\s*(?<unit>seconds?|secs?)\s*(?<isChanneled>\(channeled\))?)\s*$""", RegexOption.IGNORE_CASE)
+        private val COOLDOWN_PATTERN = Regex("""^\s*(?<cooldown>\d+(?:\.\d+)?)\s*(?<unit>seconds?|secs?|minutes?|mins?|hours?|hrs?)\s*$""", RegexOption.IGNORE_CASE)
     }
     
     private val mapper = ObjectMapper(YAMLFactory())
@@ -217,18 +217,22 @@ class TalentConfigReader {
         if (spellDto.range != null) {
             val match = RANGE_PATTERN.find(spellDto.range)
             requireNotNull(match) {
-                "Spell range must be of the form [<keyword:Self|Melee>|<distance:float> <unit:yd>] " +
+                "Spell range must be of the form [<keyword:Self|Melee>|[<minDistance:float> -] <distance:float> <unit:yd>] " +
                     "(got '${spellDto.range}')\n\t$errorPath"
             }
 
             spell.range = if (match.groups["keyword"] != null) {
                 val keyword = match.groups["keyword"]?.value?.lowercase()
                 when (keyword) {
-                    "self" -> 0.0
-                    "melee" -> 5.0
+                    "self" -> Spell.RANGE_SELF
+                    "melee" -> Spell.RANGE_MELEE
                     else -> throw IllegalStateException("failed to parse range keyword despite matching regex")
                 }
             } else {
+                match.groups["minDistance"]?.value?.let {
+                    spell.minRange = it.toDouble()
+                }
+
                 val distance = match.groups["distance"]?.value?.toDoubleOrNull()
                     ?: throw IllegalArgumentException("failed to parse range distance despite matching regex")
 
@@ -242,13 +246,17 @@ class TalentConfigReader {
         run {
             val match = CAST_TIME_PATTERN.find(spellDto.castTime)
             requireNotNull(match) {
-                "Spell cast time must be of the form [<keyword:Instant>|<time:float> <unit:sec>] " +
+                "Spell cast time must be of the form [<keyword:Instant|Next Melee>|<time:float> <unit:sec> [<channeled:(Channeled)>]] " +
                     "(got '${spellDto.castTime}')\n\t$errorPath"
             }
 
             spell.castTime = if (match.groups["keyword"] != null) {
-                // no need to check keyword as it is always "instant"
-                0.0
+                val keyword = match.groups["keyword"]?.value?.lowercase()?.replace("\\s+".toRegex(), " ")
+                when (keyword) {
+                    "instant" -> Spell.CAST_INSTANT
+                    "next melee" -> Spell.CAST_NEXT_MELEE
+                    else -> throw IllegalStateException("failed to parse cast time keyword despite matching regex")
+                }
             } else {
                 val time = match.groups["time"]?.value?.toDoubleOrNull()
                     ?: throw IllegalArgumentException("failed to parse cast time despite matching regex")
@@ -257,6 +265,8 @@ class TalentConfigReader {
                 requireNotNull(match.groups["unit"]) { "failed to parse cast time unit despite matching regex" }
                 time
             }
+
+            spell.isChanneled = (match.groups["isChanneled"] != null)
         }
 
         if (spellDto.cooldown != null) {

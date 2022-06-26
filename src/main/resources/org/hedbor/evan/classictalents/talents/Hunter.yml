@@ -75,7 +75,7 @@ Hunter:
             Max Rank: 2
             Icon: "images/druid/DemoralizingRoar.png"
             Description: >-
-              While your pet is active, you and your pet will regenerate {0:|1,2,3}% of your 
+              While your pet is active, you and your pet will regenerate {0:|1,2}% of your 
               total health every 10 sec.
           Intimidation:
             Location: [4, 1]
@@ -103,19 +103,7 @@ Hunter:
             Description: >-
               Gives your pet a {:|20,40,60,80,100}% chance to gain a 30% attack speed increase for 8 
               sec after dealing a critical strike.
-          Bestial Wrath:
-            Location: [6, 1]
-            Requires: Intimidation
-            Max Rank: 1
-            Icon: "images/druid/FerociousBite.jpg"
-            Description: >-
-              Send your pet into a rage causing 50% additional damage for 18 sec. While enraged, the 
-              beast does not feel pity or remorse or fear and it cannot be stopped unless killed.
-            Spell:
-              Cost: 12% of Base Mana
-              Range: 100 yd
-              Cast Time: Instant
-              Cooldown: 2 min
+
       Marksmanship:
         Icon: "images/skills/Marksmanship.png"
         Background: "images/backgrounds/hunter_marksmanship.jpg"
@@ -150,7 +138,7 @@ Hunter:
             Icon: "images/hunter/AimedShot.png"
             Description: An aimed shot that increases ranged damage by 70.
             Spell:
-              Range: 35 yd
+              Range: 8-35 yd
               Cast Time: 3 sec
           Improved Arcane Shot:
             Location: [2, 1]
@@ -322,6 +310,188 @@ Hunter:
               effect. When the target wakes up, the Sting causes 300 Nature damage over 12 sec. Only 
               usable out of combat. Only one Sting per hunter can be active on the target at a time.
             Spell:
-              Range: 35 yd
+              Range: 8-35 yd
               Cast Time: Instant
               Cooldown: 2 min
+  TBC:
+    Specializations:
+      Beast Mastery:
+        Icon: "images/hunter/TameBeast.png"
+        Background: "images/backgrounds/hunter_beastmastery.jpg"
+        Talents:
+          Improved Aspect of the Hawk:
+            Location: [0, 1]
+            Max Rank: 5
+            Icon: "images/hunter/AspectOfTheHawk.png"
+            Description: >-
+              While Aspect of the Hawk is active, all normal ranged attacks have a 10% 
+              chance of increasing ranged attack speed by {:|3,6,9,12,15}% for 12 sec.
+          Endurance Training:
+            Location: [0, 2]
+            Max Rank: 5
+            Icon: "images/shaman/Reincarnation.png"
+            Description: >-
+              Increases the health of your pet by {0:|2,4,6,8,10}% and your total health by 
+              {0:|1,2,3,4,5}%.
+          Focused Fire:
+            Location: [1, 0]
+            Max Rank: 2
+            Icon: "images/hunter/FocusedFire.jpg"
+            Description: >-
+              All damage caused by you is increased by {0:|1,2}% while your pet is active and the
+              critical strike chance of your Kill Command ability is increased by {0:|10,20}%.
+          Improved Aspect of the Monkey:
+            Location: [1, 1]
+            Max Rank: 3
+            Icon: "images/hunter/AspectOfTheMonkey.png"
+            Description: Increases the Dodge bonus of your Aspect of the Monkey by {:|2,4,6}%.
+          Thick Hide:
+            Location: [1, 2]
+            Max Rank: 3
+            Icon: "images/druid/ThickHide.png"
+            Description: >-
+              Increases the armor rating of your pets by {0:|7,14,20}% and your armor contribution
+              from items by {0:|4,7,10}%.
+          Improved Revive Pet:
+            Location: [1, 3]
+            Max Rank: 2
+            Icon: "images/hunter/RevivePet.png"
+            Description: >-
+              Revive Pet's casting time is reduced by {0:|3,6} sec, mana cost is reduced by 
+              {0:|20,40}%, and increases the health your pet returns with by an additional {0:|15,30}%.
+          Pathfinding:
+            Location: [2, 0]
+            Max Rank: 2
+            Icon: "images/druid/TigersFury.png"
+            Description: >-
+              Increases the speed bonus of your Aspect of the Cheetah and Aspect of the Pack by 
+              {:|4,8}%.
+          Bestial Swiftness:
+            Location: [2, 1]
+            Max Rank: 1
+            Icon: "images/druid/Dash.png"
+            Description: Increases the outdoor movement speed of your pets by 30%.
+          Unleashed Fury:
+            Location: [2, 2]
+            Max Rank: 5
+            Icon: "images/druid/FrenziedRegeneration.png"
+            Description: Increases the damage done by your pets by {:|4,8,12,16,20}%.
+          Improved Mend Pet:
+            Location: [3, 1]
+            Max Rank: 2
+            Icon: "images/hunter/MendPet.png"
+            Description: >-
+              Reduces the mana cost of your Mend Pet spell by {0:|10,20}% and gives the Mend Pet 
+              spell a {0:|25,50}% chance of cleansing 1 Curse, Disease, Magic or Poison effect from 
+              the pet each tick.
+          Ferocity:
+            Location: [3, 2]
+            Max Rank: 5
+            Icon: "images/hunter/Ferocity.png"
+            Description: Increases the critical strike chance of your pet by {:|2,4,6,8,10}%.
+          Spirit Bond:
+            Location: [4, 0]
+            Max Rank: 2
+            Icon: "images/druid/DemoralizingRoar.png"
+            Description: >-
+              While your pet is active, you and your pet will regenerate {0:|1,2}% of your 
+              total health every 10 sec.
+          Intimidation:
+            Location: [4, 1]
+            Max Rank: 1
+            Icon: "images/hunter/Intimidation.png"
+            Description: >-
+              Command your pet to intimidate the target on the next successful melee attack, causing 
+              a high amount of threat and stunning the target for 3 sec.
+            Spell:
+              Cost: 6% of Base Mana
+              Range: 100 yd
+              Cast Time: Next Melee
+              Cooldown: 1 min
+          Bestial Discipline:
+            Location: [4, 3]
+            Max Rank: 2
+            Icon: "images/druid/Wrath.png"
+            Description: >-
+              Increases the Focus regeneration of your pets by {:|50,100}%.
+          Animal Handler:
+            Location: [5, 0]
+            Max Rank: 2
+            Icon: "images/hunter/AnimalHandler.jpg"
+            Description: >- 
+              Increases your speed while mounted by {0:|4,8}% and your pet's chance to hit by 
+              {0:|2,4}%. The mounted movement speed increase does not stack with other effects.
+          Frenzy:
+            Location: [5, 2]
+            Requires: Ferocity
+            Max Rank: 5
+            Icon: "images/druid/Swipe.png"
+            Description: >-
+              Gives your pet a {:|20,40,60,80,100}% chance to gain a 30% attack speed increase for 8 
+              sec after dealing a critical strike.
+          Ferocious Inspiration:
+            Location: [6, 0]
+            Max Rank: 3
+            Icon: "images/hunter/FerociousInspiration.jpg"
+            Description: >-
+              When your pet scores a critical hit, all party members have all damage increased by
+              {:|1,2,3,4,5}% for 10 sec.
+          Bestial Wrath:
+            Location: [6, 1]
+            Requires: Intimidation
+            Max Rank: 1
+            Icon: "images/druid/FerociousBite.jpg"
+            Description: >-
+              Send your pet into a rage causing 50% additional damage for 18 sec. While enraged, the 
+              beast does not feel pity or remorse or fear and it cannot be stopped unless killed.
+            Spell:
+              Cost: 10% of Base Mana
+              Range: 100 yd
+              Cast Time: Instant
+              Cooldown: 2 min
+          Catlike Reflexes:
+            Location: [6, 2]
+            Max Rank: 3
+            Icon: "images/hunter/CatlikeReflexes.jpg"
+            Description: >-
+              Increases your chance to dodge by {0:|1,2,3}% and your pet's chance to dodge by an
+              additional {0:|3,6,9}%
+          Serpent's Swiftness:
+            Location: [7, 2]
+            Max Rank: 5
+            Icon: "images/hunter/SerpentsSwiftness.jpg"
+            Description: >-
+              Increases ranged combat attack speed by {0:|4,8,12,16,20}% and your pet's melee attack
+              speed by {0:|4,8,12,16,20}%.
+          The Beast Within:
+            Location: [8, 1]
+            Requires: Bestial Wrath
+            Max Rank: 1
+            Icon: "images/hunter/ItsMorbinTime.jpg"
+            Description: >-
+              When your pet is under the effects of Bestial Wrath, you also go into a rage causing
+              10% additional damage and reducing mana costs of all spells by 20% for 18 sec. While
+              enraged, you do not feel pity or remorse or fear and you cannot be stopped unless 
+              killed.
+      Marksmanship:
+        Icon: "images/skills/Marksmanship.png"
+        Background: "images/backgrounds/hunter_marksmanship.jpg"
+        Talents:
+          Improved Concussive Shot:
+            Location: [0, 1]
+            Max Rank: 5
+            Icon: "images/skills/Dazed.png"
+            Description: >-
+              Gives your Concussive Shot a {:|4,8,12,16,20}% chance to stun the target for 3 sec.
+      Survival:
+        Icon: "images/hunter/MongooseBite.png"
+        Background: "images/backgrounds/hunter_survival.jpg"
+        Talents:
+          Monster Slaying:
+            Location: [0, 0]
+            Max Rank: 3
+            Icon: "images/hunter/MonsterSlaying.jpg"
+            Description: >-
+              Increases all damage caused against Beasts, Giants and Dragonkin targets by {0:|1,2,3}% 
+              and increases critical damage caused against Beasts, Giants and Dragonkin targets by 
+              an additional {0:|1,2,3}%.

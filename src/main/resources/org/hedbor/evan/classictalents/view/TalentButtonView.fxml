@@ -26,9 +26,7 @@
                minHeight="-Infinity"
                maxHeight="600">
         <graphic>
-          <!--                style="-fx-border-width: 2px; -fx-border-color: green;"-->
           <Pane fx:id="tooltipGraphicWrapper">
-            <!--            style="-fx-border-color: blue; -fx-border-width: 1px;"-->
             <VBox fx:id="tooltipGraphic"
                   prefWidth="400"
                   minHeight="-Infinity"
@@ -51,6 +49,10 @@
                   <Label fx:id="tooltipCooldownLabel" styleClass="tooltip-subtitle"
                          prefWidth="200" alignment="CENTER_RIGHT"/>
                 </HBox>
+                <Label fx:id="tooltipToolsLabel" styleClass="tooltip-subtitle"
+                       prefWidth="400"/>
+                <Label fx:id="tooltipReagentsLabel" styleClass="tooltip-subtitle"
+                       prefWidth="400"/>
               </VBox>
 
               <!-- Description -->
