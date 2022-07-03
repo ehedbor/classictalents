@@ -276,6 +276,9 @@ Hunter:
             Max Rank: 1
             Icon: "images/warrior/Whirlwind.png"
             Description: When activated, increases your Dodge and Parry chance by 25% for 10 sec.
+            Spell:
+              Cast Time: Instant
+              Cooldown: 5 min
           Trap Mastery:
             Location: [3, 0]
             Max Rank: 2
@@ -297,7 +300,7 @@ Hunter:
             Location: [4, 1]
             Max Rank: 3
             Icon: "images/druid/Furor.png"
-            Description: Increases your critical strike chance with all attacks by {:|1,2,3,4,5}%.
+            Description: Increases your critical strike chance with all attacks by {:|1,2,3}%.
           Counterattack:
             Location: [4, 2]
             Requires: Deterrence
@@ -308,8 +311,10 @@ Hunter:
               40 damage and immobilizes the target for 5 sec. Counterattack cannot be dodged, 
               blocked, or parried.
             Spell:
+              Cost: 45 mana
               Range: melee
               Cast Time: Instant
+              Cooldown: 5 sec
           Lightning Reflexes:
             Location: [5, 2]
             Max Rank: 5
@@ -325,6 +330,7 @@ Hunter:
               effect. When the target wakes up, the Sting causes 300 Nature damage over 12 sec. Only 
               usable out of combat. Only one Sting per hunter can be active on the target at a time.
             Spell:
+              Cost: 115 Mana
               Range: 8-35 yd
               Cast Time: Instant
               Cooldown: 2 min
@@ -669,3 +675,141 @@ Hunter:
             Icon: "images/warrior/BloodRage.png"
             Description: >-
               Increases the critical strike chance of Raptor Strike and Mongoose Bite by {:|10,20}%.
+          Entrapment:
+            Location: [1, 0]
+            Max Rank: 3
+            Icon: "images/druid/EntanglingRoots.png"
+            Description: >-
+              Gives your Immolation Trap, Frost Trap, Explosive Trap, and Snake Trap a {:|8,16,25}% 
+              chance to entrap the target, preventing them from moving for 5 sec.
+          Deflection:
+            Location: [1, 1]
+            Max Rank: 5
+            Icon: "images/skills/Parry.png"
+            Description: Increases your Parry chance by {:|1,2,3,4,5}%.
+          Improved Wing Clip:
+            Location: [1, 2]
+            Max Rank: 3
+            Icon: "images/hunter/WingClip.png"
+            Description: >-
+              Gives your Wing Clip ability a {:|7,14,20}% chance to immobilize the target for 5 sec.
+          Clever Traps:
+            Location: [2, 0]
+            Max Rank: 2
+            Icon: "images/paladin/DivineIntervention.png"
+            Description: >-
+              Increases the duration of Freezing and Frost Trap effects by {0:|15,30}%, the damage 
+              of Immolation and Explosive Trap effects by {0:|15,30}%, and the number of snakes
+              summoned from Snake Traps by {0:|15,30}%.
+          Survivalist:
+            Location: [2, 1]
+            Max Rank: 5
+            Icon: "images/warlock/RitualOfSummoning.png"
+            Description: Increases total health by {:|2,4,6,8,10}%.
+          Deterrence:
+            Location: [2, 2]
+            Max Rank: 1
+            Icon: "images/warrior/Whirlwind.png"
+            Description: When activated, increases your Dodge and Parry chance by 25% for 10 sec.
+            Spell:
+              Cast Time: Instant
+              Cooldown: 5 min
+          Trap Mastery:
+            Location: [3, 0]
+            Max Rank: 2
+            Icon: "images/hunter/TrapMastery.png"
+            Description: Decreases the chance enemies will resist trap effects by {:|5,10}%.
+          Surefooted:
+            Location: [3, 1]
+            Max Rank: 3
+            Icon: "images/rogue/Kick.png"
+            Description: >-
+              Increases hit chance by {0:|1,2,3}% and increases the chance movement impairing effects
+              will be resisted by an additional {0:|5,10,15}%.
+          Improved Feign Death:
+            Location: [3, 3]
+            Max Rank: 2
+            Icon: "images/hunter/FeignDeath.png"
+            Description: Reduces the chance your Feign Death ability will be resisted by {:|2,4}%.
+          Survival Instincts:
+            Location: [4, 0]
+            Max Rank: 2
+            Icon: "images/hunter/SurvivalInstincts.jpg"
+            Description: >-
+              Reduces all damage taken by {0:|2,4}% and increases attack power by {0:|2,4}%.
+          Killer Instinct:
+            Location: [4, 1]
+            Max Rank: 3
+            Icon: "images/druid/Furor.png"
+            Description: Increases your critical strike chance with all attacks by {:|1,2,3}%.
+          Counterattack:
+            Location: [4, 2]
+            Requires: Deterrence
+            Max Rank: 1
+            Icon: "images/warrior/Retaliation.png"
+            Description: >-
+              A strike that becomes active after parrying an opponent's attack. This attack deals 
+              40 damage and immobilizes the target for 5 sec. Counterattack cannot be dodged, 
+              blocked, or parried.
+            Spell:
+              Cost: 45 mana
+              Range: melee
+              Cast Time: Instant
+              Cooldown: 5 sec
+          Resourcefulness:
+            Location: [5, 0]
+            Max Rank: 3
+            Icon: "images/hunter/Resourcefulness.jpg"
+            Description: >-
+              Reduces the mana cost of all traps and melee abilities by {0:|20,40,60}% and reduces
+              the cooldown of all traps by {0:|2,4,6} sec.
+          Lightning Reflexes:
+            Location: [5, 2]
+            Max Rank: 5
+            Icon: "images/hunter/LightningReflexes.png"
+            Description: Increases your Agility by {:|3,6,9,12,15}%.
+          Thrill of the Hunt:
+            Location: [6, 0]
+            Max Rank: 3
+            Icon: "images/hunter/ThrillOfTheHunt.jpg"
+            Description: >-
+              Gives you a {:|33,66,100}% chance to regain 40% of the mana cost of any shot when it 
+              critically hits.
+          Wyvern Sting:
+            Location: [6, 1]
+            Requires: Killer Instinct
+            Max Rank: 1
+            Icon: "images/hunter/WyvernSting.png"
+            Description: >-
+              A stinging shot that puts the target to sleep for 12 sec. Any damage will cancel the 
+              effect. When the target wakes up, the Sting causes 300 Nature damage over 12 sec. Only
+              one Sting per hunter can be active on the target at a time.
+            Spell:
+              Cost: 115 Mana
+              Range: 35 yd
+              Cast Time: Instant
+              Cooldown: 2 min
+          Expose Weakness:
+            Location: [6, 2]
+            Requires: Lightning Reflexes
+            Max Rank: 3
+            Icon: "images/rogue/FindWeakness.jpg"
+            Description: >-
+              Your ranged criticals have a {:|33,66,100}% chance to apply an Expose Weakness effect
+              to the target. Expose Weakness increases the attack power of all attackers against
+              that target by 25% of your Agility for 7 sec.
+          Master Tactician:
+            Location: [7, 1]
+            Max Rank: 5
+            Icon: "images/hunter/MasterTactician.jpg"
+            Description: >-
+              Your successful ranged attacks have a 6% chance to increase your critical strike 
+              chance with all attacks by {:|2,4,6,8,10}% for 8 sec.
+          Readiness:
+            Location: [8, 1]
+            Requires: Master Tactician
+            Max Rank: 1
+            Icon: "images/hunter/Readiness.jpg"
+            Description: >-
+              When activated, this ability immediately finishes the cooldown on your other Hunter 
+              abilities.
