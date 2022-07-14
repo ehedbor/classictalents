@@ -1,4 +1,6 @@
 app/
+scripts/*.log
+scripts/out
 
 # IntelliJ
 .idea/
