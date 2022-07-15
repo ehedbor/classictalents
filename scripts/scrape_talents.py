@@ -5,22 +5,28 @@ import re
 import sys
 import time
 
-import selenium.webdriver.support.wait
-from selenium import webdriver
-from selenium.webdriver import ActionChains
+from scrape_talents_util import merge_talent_desc
+from selenium.common.exceptions import StaleElementReferenceException
+from selenium.webdriver import ActionChains, Chrome, Firefox
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
-from shutil import rmtree
 from typing import List
 from urllib.error import HTTPError
 from urllib.parse import urlparse
 from urllib.request import urlretrieve
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
+import yaml
+
+
+CLICK_DELAY = 0.02
+DEALLOC_THRESHOLD = 5
+FINISH_DEALLOC_THRESHOLD = 4
 
 
 def get_wowhead_talent_calc_url(expansion, class_name):
@@ -30,11 +36,9 @@ def get_wowhead_talent_calc_url(expansion, class_name):
         return f"https://www.wowhead.com/wotlk/talent-calc/{class_name}"
 
 
-URL_FROM_STYLE_REGEX = re.compile('background-image: url\\("([^"]+)"\\);')
-
 def get_background_from_style_attr(element):
     style = element.get_attribute("style")
-    match = re.match(URL_FROM_STYLE_REGEX, style)
+    match = re.match('background-image: url\\("([^"]+)"\\);', style)
     return match.group(1)
 
 
@@ -57,46 +61,84 @@ def url_to_file(url):
     Extracts and returns the file component of a URL
     """
     filename = os.path.basename(urlparse(url).path)
+
     return filename.replace("_", "/").replace("-", "/")
+
+class Location:
+    """
+    Used for YAML output
+    """
+    def __init__(self, row, column):
+        self.row = row
+        self.column = column
+
+def represent_location(dumper: yaml.Dumper, data: Location) -> yaml.Node:
+    return dumper.represent_sequence('tag:yaml.org,2002:seq', [data.row, data.column], True)
 
 
 class SpellModel:
-    def __init__(self):
+    def __init__(self, spell_info: List[str]):
+        """
+        spell_info format:
+        unit range
+        cast_time cooldown
+        """
         self.cast_time: str | None = None
         self.range: str | None = None
         self.cooldown: str | None = None
         self.cost: str | None = None
 
-    def scrape(self, spell_details):
-        for entry in spell_details.find_elements(By.TAG_NAME, "tr"):
-            if len(entry.find_elements(By.TAG_NAME, "th")) == 0:
-                continue
-            table_header = entry.find_element(By.TAG_NAME, "th").text
-            table_data = entry.find_element(By.TAG_NAME, "td").text
-            if table_header == "Cost":
-                if table_data == "None":
-                    self.cost = None
-                else:
-                    self.cost = table_data
-                print(f"  Cost: {self.cost}")
-            elif table_header == "Range":
-                if "Self" in table_data:
-                    self.range = None
-                elif "5 yards" in table_data:
-                    self.range = "Melee"
-                else:
-                    parts = table_data.split()
-                    self.range = f"{parts[0]} {parts[1]}"
-                print(f"  Range: {self.range}")
-            elif table_header == "Cast time":
-                self.cast_time = table_data
-                print(f"  Cast Time: {self.cast_time}")
-            elif table_header == "Cooldown":
-                if table_data == "n/a":
-                    self.cooldown = None
-                else:
-                    self.cooldown = table_data
-                print(f"  Cooldown: {self.cooldown}")
+        print(f'      Spell:')
+
+        if len(spell_info) == 1:
+            spell_info.insert(0, "")
+
+        # '# yd range', '# - # yd range' or 'melee range'
+        parts = spell_info[0].split()
+        if len(parts) > 0 and parts[-1].lower() == 'range':
+            parts.pop()
+            if parts[-1].lower() == "melee":
+                self.range = "Melee"
+                parts.pop()
+            else:
+                self.range = parts.pop(-2) + " " + parts.pop(-1)
+                if parts and parts[-1] == "-":
+                    self.range = f"{parts.pop(-2)} {parts.pop(-1)} {self.range}"
+
+            print(f'       Range: {self.range}')
+
+        # next is unit. this can be used directly
+        if len(parts) > 0:
+            self.cost = ' '.join(parts)
+            print(f'       Cost: {self.cost}')
+
+        parts = spell_info[1].split()
+        # cooldown
+        if len(parts) > 0 and parts[-1].lower() == "cooldown":
+            parts.pop()
+            self.cooldown = parts.pop(-2) + " " + parts.pop(-1)
+            print(f'       CD: {self.cooldown}')
+
+        # cast time can be used directly, unless it ends in 'cast'
+        if len(parts) > 0 and parts[-1].lower() == "cast":
+            parts.pop()
+            self.cast_time = ' '.join(parts)
+        else:
+            self.cast_time = 'Instant'
+        print(f'       Cast: {self.cast_time}')
+
+    def generate_yaml(self):
+        result = {}
+
+        if self.cost:
+            result['Cost'] = self.cost
+        if self.range:
+            result['Range'] = self.range
+        result['Cast Time'] = self.cast_time
+        if self.cooldown:
+            result['Cooldown'] = self.cooldown
+
+        return result
 
 
 class TalentModel:
@@ -115,6 +157,35 @@ class TalentModel:
         return url_to_file(self.icon_url)
 
     def scrape(self, driver, talent_element):
+        self._scrape_basics(talent_element)
+
+        # allocate a single point. this is needed for description later on
+        
+        (ActionChains(driver)
+            .move_to_element(talent_element)
+            .click()
+            .pause(CLICK_DELAY)
+            .perform())
+
+        tooltip_path = "//*[contains(@class, 'wowhead-tooltip')]/table/tbody/tr/td"
+        header_path = f"{tooltip_path}/table[1]"
+
+        self._scrape_name(driver, header_path)
+
+        while True:
+            try:
+                spell_info = driver.find_element(By.XPATH, f"{header_path}/tbody/tr/td")\
+                                   .text.splitlines()[2:-1]
+                break
+            except StaleElementReferenceException:
+                print("Spell info stale, retrying...")
+
+        if len(spell_info) > 0:
+            self.spell = SpellModel(spell_info)
+
+        self._scrape_description(driver, tooltip_path)
+
+    def _scrape_basics(self, talent_element):
         self.row = int(talent_element.get_attribute("data-row"))
         self.column = int(talent_element.get_attribute("data-col"))
         print(f'     Talent ({self.row}, {self.column}):')
@@ -126,109 +197,69 @@ class TalentModel:
         self.icon_url = get_background_from_style_attr(icon_element)
         print(f'      Icon: "{self.icon_url}"')
 
-        # scrolled in spec.scrape
-        (ActionChains(driver)
-            # .scroll_to_element(talent_element)
-            .move_to_element(talent_element)
-            .click()
-            .pause(0.1)
-            .perform())
+    def _scrape_name(self, driver, header_path):
+        name_elem = []
+        while True:
+            try:
+                WebDriverWait(driver, 20).until(
+                    ec.presence_of_element_located((By.XPATH, header_path)))
+                header = driver.find_element(By.XPATH, header_path)
 
-        tooltip_path = "//*[contains(@class, 'wowhead-tooltip')]/table/tbody/tr/td"
-        tooltip = driver.find_element(By.XPATH, tooltip_path)
-        header = tooltip.find_elements(By.XPATH, "./table")[0]
+                name_elem = header.find_elements(By.XPATH, ".//tbody/tr/td/a/b")
+                if len(name_elem) == 1:
+                    break
+            except StaleElementReferenceException:
+                print('Stale element when getting talent name, retrying...', file=sys.stderr)
 
-        name_elem = header.find_elements(By.XPATH, "./tbody/tr/td/table/tbody/tr/td/a")
-        if not name_elem:
-            name_elem = header.find_elements(By.XPATH, "./tbody/tr/td/a")
+        if len(name_elem) == 0:
+            raise RuntimeError("Failed to get name after 10 attempts")
+
         self.name = name_elem[0].text
         print(f'      Name: {self.name}')
 
-        # todo scrape spell
-
+    def _scrape_description(self, driver, tooltip_path):
         descriptions = []
         for rank in range(1, self.max_rank + 1):
             # we have to recalculate the tooltip because
             # clicking on the button makes the old tooltip stale
-            tooltip = driver.find_element(By.XPATH, tooltip_path)
-            desc_elem = tooltip.find_elements(By.XPATH, "./table")[1]
-            desc = desc_elem.find_element(By.XPATH, "./tbody/tr/td/div[@class='q']").text
-            print(f"      Rank {rank} description: '{desc}'")
+            while True:
+                try:
+                    desc_path = f"{tooltip_path}/table[2]/tbody/tr/td/div[@class='q']"
+                    WebDriverWait(driver, 20).until(
+                        ec.presence_of_element_located((By.XPATH, desc_path)))
+                    # this can be stale for some reason, so keep trying till it isnt
+                    desc = driver.find_element(By.XPATH, desc_path).text
+                    break
+                except StaleElementReferenceException:
+                    print('Stale element when getting talent description, retrying...',
+                          file=sys.stderr)
+
             descriptions.append(desc)
 
             if rank != self.max_rank:
                 # get next description
-                ActionChains(driver).click().pause(0.25).perform()
-        self.description = descriptions[0]
+                ActionChains(driver).click().pause(CLICK_DELAY).perform()
 
-    # def finish_scrape(self, driver):
-    #     driver.get(self.talent_url)
-    #     self.name = driver.find_element(By.CSS_SELECTOR, "#main-contents .text h1").text
-    #     print(f"Talent ({self.row}, {self.column}) = {self.name}")
-    #
-    #     # get spell data
-    #     is_spell = True
-    #     spell_details = driver.find_element(By.CSS_SELECTOR, "#spelldetails tbody")
-    #     if spell_details.find_elements(By.XPATH, './/a[text() = "Passive spell"]'):
-    #         is_spell = False
-    #
-    #     if is_spell:
-    #         print(f" Spell:")
-    #         self.spell = SpellModel()
-    #         self.spell.scrape(spell_details)
-    #     else:
-    #         print(" Not spell")
-    #
-    #     # get description
-    #     descriptions = []
-    #     for rank in range(1, self.max_rank + 1):
-    #         tooltip = driver.find_element(By.CSS_SELECTOR, "#main-contents .text .wowhead-tooltip")
-    #         tooltip_content = tooltip.find_elements(By.CSS_SELECTOR, "table tbody tr td table")[-1]
-    #         tooltip_desc = tooltip_content.find_element(By.CSS_SELECTOR, "tbody tr td div.q")
-    #         descriptions.append(tooltip_desc.text)
-    #
-    #         if rank != self.max_rank:
-    #             # TODO: not all talents (ie primal fury) have a see also tab
-    #             see_also_button = driver.find_element(By.XPATH, "//a[contains(@href,'#see-also')]")
-    #             see_also_button.click()
-    #
-    #             see_also_tab = driver.find_elements(By.XPATH,
-    #                                                 '//*[contains(@id, "tab-see-also")]/'
-    #                                                 'div[@class="listview-scroller-horizontal"]/'
-    #                                                 'div[@class="listview-scroller-vertical"]/'
-    #                                                 'table/tbody/tr')
-    #             if len(see_also_tab) == 0:
-    #                 raise RuntimeError("See also tab is empty!")
-    #
-    #             link = None
-    #             for see_also_entry in see_also_tab:
-    #                 name = see_also_entry.find_elements(By.TAG_NAME, "td")[1]
-    #                 link_elem = name.find_element(By.CSS_SELECTOR, "div a")
-    #                 talent_name = link_elem.text
-    #                 if talent_name != self.name:
-    #                     continue
-    #
-    #                 rank_text = name.find_element(By.CSS_SELECTOR, "div div.small2").text
-    #                 if rank_text != f"Rank {rank + 1}":
-    #                     continue
-    #
-    #                 link = link_elem.get_attribute("href")
-    #
-    #             if not link:
-    #                 raise RuntimeError(
-    #                     f"Can't find next rank link (next={rank + 1}/{self.max_rank})")
-    #
-    #             print(f"Next rank ({rank + 1}/{self.max_rank}): {link}")
-    #             driver.get(link)
-    #
-    #     # TODO: merge descriptions
-    #     self.description = descriptions[0]
-    #     print(f' Descriptions:')
-    #     for d in descriptions:
-    #         print(f'  - "{d}"')
+        self.description = merge_talent_desc(descriptions)
+        print(f'      Description: "{self.description}"')
 
     def download_images(self, output_dir: str):
         download_file(self.icon_url, f"{output_dir}/{self.icon}")
+
+    def generate_yaml(self):
+        result = {
+            'Location': Location(self.row, self.column),
+            'Requires': self.prerequisite,
+            'Max Rank': self.max_rank,
+            'Icon': self.icon,
+            'Description': self.description,
+        }
+        if not self.prerequisite:
+            del result['Requires']
+        if self.spell:
+            result['Spell'] = self.spell.generate_yaml()
+
+        return result
 
 
 class SpecModel:
@@ -247,8 +278,11 @@ class SpecModel:
         return "backgrounds/" + url_to_file(self.background_url)
 
     def scrape(self, driver, tree_element):
-        for e in tree_element.find_elements(By.XPATH, "./*"):
-            print(e.tag_name, e.get_attribute("class"))
+        self._scrape_simple(tree_element)
+        self._scrape_talents(driver, tree_element)
+        self._reset_talents(driver, tree_element)
+
+    def _scrape_simple(self, tree_element):
         self.name = tree_element.find_element(
             By.XPATH, "./div[@class='ctc-tree-header']/b").text
         print(f'   Spec {self.name}:')
@@ -265,51 +299,102 @@ class SpecModel:
         self.background_url = get_background_from_style_attr(background_element)
         print(f'    Background: {self.background_url}')
 
+    def _scrape_talents(self, driver, tree_element):
         talents_path = "./*[@class='ctc-tree-talents']/*[@class='ctc-tree-talent']"
         talents = tree_element.find_elements(By.XPATH, talents_path)
-        
-        def key_function(tup):
-            index, talent = tup
+        prerequisites = self._scrape_prerequisites(tree_element)
+
+        def key_function(talent):
             row = int(talent.get_attribute("data-row"))
             column = int(talent.get_attribute("data-col"))
-            return 4 * row + column
+            # misnomer. higher priority => sorted later
+            priority = 10 * row + column
+            # ensure that talents with prerequisites are last in their row
+            if (row, column) in prerequisites.values():
+                priority += 5
+            return priority
 
-        talents = sorted(enumerate(talents), key=key_function)
+        talents = sorted(talents, key=key_function)
 
-        print(f"Iterating over talents: (len={len(talents)})")
-        for i, talent_element in talents:
+        dealloced_talents = []
+        for talent_element in talents:
+            self._deallocate_old_talents(driver, talents, dealloced_talents)
             talent_model = TalentModel()
-
-            # talent_element_path = f"{talents_path}[{i + 1}]"
-            # WebDriverWait(tree_element, 20).until(
-            #     ec.visibility_of_element_located((By.XPATH, talent_element_path)))
-            # driver.execute_script("return arguments[0].scrollIntoView(true);", talent_element)
-
-            # deallocate old talents when we are potentially going to run out of points
-            points_left = int(driver.find_element(
-                By.CSS_SELECTOR, ".ctc-main-status-points-spent b").text)
-            if points_left <= 5:
-                print("Deallocating old talents")
-                # don't modify the 5 most recent talents
-                for _, t in talents[:-5]:
-                    # remove all points from this talent
-                    while (current_points := int(t.get_attribute('data-points'))) > 0:
-                        ActionChains(driver).context_click(t).perform()
-                        if int(t.get_attribute('data-points')) == current_points:
-                            # cant be deallocated
-                            break
-
-                    points_left = int(driver.find_element(
-                        By.CSS_SELECTOR, ".ctc-main-status-points-spent b").text)
-                    if points_left >= 10:
-                        break
-
             talent_model.scrape(driver, talent_element)
             self.talents.append(talent_model)
 
-        # reset talents once done with the spec
-        print("Resetting spec talents")
+        print("    Resolving prerequisites...")
+        for prereq_loc, depend_loc in prerequisites.items():
+            prerequisite = next(t for t in self.talents if prereq_loc == (t.row, t.column))
+            dependency = next(t for t in self.talents if depend_loc == (t.row, t.column))
+            print(f"     {prerequisite.name} unlocks {dependency.name}")
+            dependency.prerequisite = prerequisite.name
 
+    def _scrape_prerequisites(self, tree_element):
+        def zero(a): return 0
+        def get_size(a): return int(a.get_attribute('data-size'))
+        def get_width(a): return int(a.get_attribute('data-width'))
+        def get_height(a): return int(a.get_attribute('data-height'))
+        def negate(func): return lambda a: -func(a)
+        arrow_types = [
+            ('ctc-tree-talent-arrow-down',       zero,              get_size),
+            ('ctc-tree-talent-arrow-right',      get_size,          zero),
+            ('ctc-tree-talent-arrow-right-down', get_width,         get_height),
+            ('ctc-tree-talent-arrow-left',       negate(get_size),  zero),
+            ('ctc-tree-talent-arrow-left-down',  negate(get_width), get_height),
+        ]
+
+        print("    Scraping prerequisites...")
+        prerequisites = {}
+        for css_class, horiz_offset, vert_offset in arrow_types:
+            arrows = tree_element.find_elements(By.CLASS_NAME, css_class)
+            for arrow in arrows:
+                prereq_row = int(arrow.get_attribute('data-row'))
+                prereq_col = int(arrow.get_attribute('data-col'))
+                dep_row = prereq_row + vert_offset(arrow)
+                dep_col = prereq_col + horiz_offset(arrow)
+                prerequisites[(prereq_row, prereq_col)] = (dep_row, dep_col)
+                print(f"     Talent ({prereq_row}, {prereq_col}) unlocks"
+                      f" talent ({dep_row}, {dep_col})")
+
+        return prerequisites
+
+    def _deallocate_old_talents(self, driver, talents, dealloced_talents):
+        points_left = int(driver.find_element(
+            By.CSS_SELECTOR, ".ctc-main-status-points-spent b").text)
+        if points_left >= DEALLOC_THRESHOLD:
+            return
+
+        # deallocate old talents when we are potentially going to run out of points
+        # but don't modify the 5 most recent talents
+        for i, t in enumerate(talents[:-5]):
+            if i in dealloced_talents:
+                continue
+
+            # remove all points from this talent
+            old_points = int(t.get_attribute('data-points'))
+            while True:
+                if old_points == 0:
+                    dealloced_talents.append(i)
+                    break
+
+                ActionChains(driver).context_click(t).perform()
+                new_points = int(t.get_attribute('data-points'))
+
+                if old_points == new_points:
+                    # can't be deallocated
+                    dealloced_talents.append(i)
+                    break
+
+                old_points = new_points
+
+            points_left = int(driver.find_element(
+                By.CSS_SELECTOR, ".ctc-main-status-points-spent b").text)
+            if points_left > FINISH_DEALLOC_THRESHOLD:
+                break
+
+    def _reset_talents(self, driver, tree_element):
+        # reset talents once done with the spec
         reset_button_path = ".//span[contains(@class, 'ctc-tree-header-reset')]"
         reset_button = tree_element.find_element(By.XPATH, reset_button_path)
         # WebDriverWait(driver, 20).until(
@@ -317,13 +402,27 @@ class SpecModel:
         # driver.execute_script("return arguments[0].scrollIntoView(true);", reset_button)
 
         (ActionChains(driver)
-            .move_to_element(reset_button)
-            .click(reset_button)
-            .perform())
+         .move_to_element(reset_button)
+         .click(reset_button)
+         .perform())
 
     def download_images(self, output_dir: str):
         download_file(self.icon_url, f"{output_dir}/{self.icon}")
         download_file(self.background_url, f"{output_dir}/{self.background}")
+        for talent in self.talents:
+            talent.download_images(output_dir)
+
+    def generate_yaml(self):
+        result = {
+            'Icon': self.icon,
+            'Background': self.background,
+            'Talents': {}
+        }
+
+        for talent in self.talents:
+            result['Talents'][talent.name] = talent.generate_yaml()
+
+        return result
 
 
 class ExpacModel:
@@ -351,10 +450,19 @@ class ExpacModel:
         num_specs = len(driver.find_elements(By.XPATH, '//*[@class="ctc-tree"]'))
         for i in range(num_specs):
             spec_model = SpecModel()
-            print(f"Spec #{i + 1}/{num_specs}")
             tree = driver.find_elements(By.XPATH, f'//*[@class="ctc-tree"]')[i]
             spec_model.scrape(driver, tree)
             self.specializations.append(spec_model)
+
+    def download_images(self, output_dir: str):
+        for spec in self.specializations:
+            spec.download_images(output_dir)
+
+    def generate_yaml(self):
+        result = {'Specializations': {}}
+        for spec in sorted(self.specializations, key=lambda s: s.name):
+            result['Specializations'][spec.name] = spec.generate_yaml()
+        return result
 
 class ClassModel:
     def __init__(self):
@@ -391,29 +499,71 @@ class ClassModel:
 
     def download_images(self, output_dir: str):
         download_file(self.icon_url, f"{output_dir}/{self.icon}")
+        for expac in self.expansions:
+            expac.download_images(output_dir)
 
-def scrape(driver):
-    # close cookie warning
+    def generate_yaml(self):
+        cls = {
+            "Class": self.name,
+            "Icon": self.icon,
+            "Color": self.color,
+        }
+        for e in self.expansions:
+            if e.name == 'classic':
+                cls['Classic'] = e.generate_yaml()
+            elif e.name == 'tbc':
+                cls['TBC'] = e.generate_yaml()
+            if e.name == 'wotlk':
+                cls['WotLK'] = e.generate_yaml()
+
+        return cls
+
+def create_driver():
+    print("Initializing driver...")
+    options = FirefoxOptions()
+    # options.headless = True
+    service = FirefoxService(executable_path=GeckoDriverManager("v0.31.0").install())
+    driver = Firefox(service=service, options=options)
+    driver.install_addon("extensions/ublock_origin-1.43.0.xpi", temporary=True)
+    driver.maximize_window()
+    return driver
+
+def close_popups(driver):
+    print("Denying cookies...")
+
     driver.get("https://classic.wowhead.com")
 
-    reject_cookies_path = "//button[@id='onetrust-reject-all-handler']"
-    WebDriverWait(driver, 20).until(ec.element_to_be_clickable((By.XPATH, reject_cookies_path)))
-    time.sleep(0.5)
-    reject_cookies = driver.find_element(By.XPATH, reject_cookies_path)
-    reject_cookies.click()
+    # ActionChains(driver, 20).scroll_by_amount(0, -1000).pause(0.5).perform()
+    time.sleep(1)
+
+    reject_cookies_id = "onetrust-reject-all-handler"
+    WebDriverWait(driver, 10).until(
+        ec.element_to_be_clickable((By.ID, reject_cookies_id)))
+    reject_cookies = driver.find_element(By.ID, reject_cookies_id)
+    ActionChains(driver, 10).click(reject_cookies).pause(1).perform()
+
+    no_notifications_class = "notifications-dialog-buttons-decline"
+    WebDriverWait(driver, 10).until(
+        ec.element_to_be_clickable((By.CLASS_NAME, no_notifications_class)))
+    no_notifications = driver.find_element(By.CLASS_NAME, no_notifications_class)
+    ActionChains(driver, 10).click(no_notifications).pause(1).perform()
+
+    # the video player is blocked with ublock
+
+def scrape(driver):
+    close_popups(driver)
 
     classes_to_scrape = [
-        ('druid', ['classic'])
-        # ('druid',        ['classic', 'tbc', 'wotlk']),
-        # ('hunter',       ['classic', 'tbc', 'wotlk']),
-        # ('mage',         ['classic', 'tbc', 'wotlk']),
-        # ('paladin',      ['classic', 'tbc', 'wotlk']),
-        # ('priest',       ['classic', 'tbc', 'wotlk']),
-        # ('rogue',        ['classic', 'tbc', 'wotlk']),
-        # ('shaman',       ['classic', 'tbc', 'wotlk']),
-        # ('warlock',      ['classic', 'tbc', 'wotlk']),
-        # ('warrior',      ['classic', 'tbc', 'wotlk']),
-        # ('death-knight', ['wotlk']),
+        ('druid',        ['classic', 'tbc', 'wotlk']),
+        ('hunter',       ['classic', 'tbc', 'wotlk']),
+        ('mage',         ['classic', 'tbc', 'wotlk']),
+        ('paladin',      ['classic', 'tbc', 'wotlk']),
+        ('priest',       ['classic', 'tbc', 'wotlk']),
+        ('rogue',        ['classic', 'tbc', 'wotlk']),
+        ('shaman',       ['classic', 'tbc', 'wotlk']),
+        ('warlock',      ['classic', 'tbc', 'wotlk']),
+        ('warrior',      ['classic', 'tbc', 'wotlk']),
+        ('death-knight', ['wotlk']),
     ]
 
     classes = []
@@ -422,52 +572,59 @@ def scrape(driver):
         model.scrape(driver, class_name, expansions)
         classes.append(model)
 
-    # for class_model in classes:
-    #     for expac_model in class_model.expansions:
-    #         for spec_model in expac_model.specializations:
-    #             for talent_model in spec_model.talents:
-    #                 talent_model.finish_scrape(driver)
-
     return classes
 
 def download_images(classes: List[ClassModel]):
     print("Downloading image files...")
     # remote the output dir if it already exists
     # rmtree('out')
-    os.makedirs('out', exist_ok=True)
+    os.makedirs('out/images', exist_ok=True)
     for class_model in classes:
-        # output_dir = "out/" + class_model.name.lower().replace(' ', '')
-        output_dir = "out/images"
-        os.makedirs(output_dir, exist_ok=True)
-        print(f'Class {class_model.name} -> "{output_dir}"')
-        # class_model.download_images(output_dir)
+        class_model.download_images('out/images')
 
-        for expac_model in class_model.expansions:
-            print(f' Expac {expac_model.name}:')
-            for spec_model in expac_model.specializations:
-                print(f'  Spec {spec_model.name} -> "{output_dir}"')
-                # spec_output_dir = output_dir + "/" + spec_model.name.lower().replace(' ', '')
-                spec_output_dir = output_dir
-                os.makedirs(spec_output_dir, exist_ok=True)
-                spec_model.download_images(spec_output_dir)
+def generate_yaml(classes: List[ClassModel]):
+    print("Generating yaml...")
+    os.makedirs('out/talents', exist_ok=True)
 
-                for talent_model in spec_model.talents:
-                    talent_model.download_images(spec_output_dir)
+    yaml.representer.SafeRepresenter.add_representer(Location, represent_location)
+    for class_model in classes:
+        output_file = f"out/talents/{class_model.name}.yml"
+        print(f'{class_model.name} -> "{output_file}"')
+        with open(output_file, 'w') as f:
+            yaml.safe_dump(
+                data=class_model.generate_yaml(),
+                stream=f,
+                default_flow_style=False,
+                sort_keys=False,
+            )
+
+def format_time(t):
+    t = int(t)
+    min = t // 60
+    sec = t % 60
+
+    return f"{min} min {sec} sec" if min > 0 else f"{sec} sec"
 
 def main():
-    use_firefox = True
-    if use_firefox:
-        service = FirefoxService(executable_path=GeckoDriverManager("v0.31.0").install())
-        driver = webdriver.Firefox(service=service)
+    start_time = time.time()
+    try:
+        driver = None
+        try:
+            driver = create_driver()
+            classes = scrape(driver)
+        finally:
+            if driver:
+                driver.quit()
+
+        download_images(classes)
+        generate_yaml(classes)
+    except BaseException:
+        elapsed_time = time.time() - start_time
+        print(f"Failed in {format_time(elapsed_time)} seconds.", file=sys.stderr)
+        raise
     else:
-        service = ChromeService(executable_path=ChromeDriverManager().install())
-        options = ChromeOptions()
-        options.headless = True
-        driver = webdriver.Chrome(service=service, options=options)
+        elapsed_time = time.time() - start_time
+        print(f"Done in {format_time(elapsed_time)} seconds.")
 
-    classes = scrape(driver)
-    driver.quit()
-
-    download_images(classes)
-
-main()
+if __name__ == '__main__':
+    main()
