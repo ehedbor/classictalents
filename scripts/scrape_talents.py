@@ -1,15 +1,14 @@
 from __future__ import annotations
 
 import os
+import random
 import re
 import sys
 import time
 
 from scrape_talents_util import merge_talent_desc
 from selenium.common.exceptions import StaleElementReferenceException
-from selenium.webdriver import ActionChains, Chrome, Firefox
-from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver import ActionChains, Firefox
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
@@ -19,14 +18,14 @@ from typing import List
 from urllib.error import HTTPError
 from urllib.parse import urlparse
 from urllib.request import urlretrieve
-from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 import yaml
 
 
-CLICK_DELAY = 0.02
+CLICK_DELAY = 0.4
 DEALLOC_THRESHOLD = 5
 FINISH_DEALLOC_THRESHOLD = 4
+FALLBACK_IMAGE_URL = "https://wow.zamimg.com/images/wow/icons/medium/inv_misc_questionmark.jpg"
 
 
 def get_wowhead_talent_calc_url(expansion, class_name):
@@ -52,8 +51,11 @@ def download_file(url, path):
             print("OK")
         else:
             print("Skipped")
+        return url
     except HTTPError as e:
         print(f'ERROR: {e.code} {e.reason}', file=sys.stderr)
+        urlretrieve(FALLBACK_IMAGE_URL, path)
+        return FALLBACK_IMAGE_URL
 
 
 def url_to_file(url):
@@ -77,7 +79,7 @@ def represent_location(dumper: yaml.Dumper, data: Location) -> yaml.Node:
 
 
 class SpellModel:
-    def __init__(self, spell_info: List[str]):
+    def __init__(self):
         """
         spell_info format:
         unit range
@@ -88,9 +90,23 @@ class SpellModel:
         self.cooldown: str | None = None
         self.cost: str | None = None
 
+    @staticmethod
+    def from_spell_info(spell_info: List[str]) -> SpellModel | None:
+        spell = SpellModel()
         print(f'      Spell:')
 
-        if len(spell_info) == 1:
+        spell_info = spell_info.copy()
+        i = 0
+        while i < len(spell_info):
+            e = spell_info[i]
+            if 'Rank' in e or 'Talent' in e or 'Requires' in e or 'Level' in e:
+                del spell_info[i]
+                continue
+            i += 1
+
+        if len(spell_info) == 0:
+            return None
+        elif len(spell_info) == 1:
             spell_info.insert(0, "")
 
         # '# yd range', '# - # yd range' or 'melee range'
@@ -98,34 +114,36 @@ class SpellModel:
         if len(parts) > 0 and parts[-1].lower() == 'range':
             parts.pop()
             if parts[-1].lower() == "melee":
-                self.range = "Melee"
+                spell.range = "Melee"
                 parts.pop()
             else:
-                self.range = parts.pop(-2) + " " + parts.pop(-1)
+                spell.range = parts.pop(-2) + " " + parts.pop(-1)
                 if parts and parts[-1] == "-":
-                    self.range = f"{parts.pop(-2)} {parts.pop(-1)} {self.range}"
+                    spell.range = f"{parts.pop(-2)} {parts.pop(-1)} {spell.range}"
 
-            print(f'       Range: {self.range}')
+            print(f'       Range: {spell.range}')
 
         # next is unit. this can be used directly
         if len(parts) > 0:
-            self.cost = ' '.join(parts)
-            print(f'       Cost: {self.cost}')
+            spell.cost = ' '.join(parts)
+            print(f'       Cost: {spell.cost}')
 
         parts = spell_info[1].split()
         # cooldown
         if len(parts) > 0 and parts[-1].lower() == "cooldown":
             parts.pop()
-            self.cooldown = parts.pop(-2) + " " + parts.pop(-1)
-            print(f'       CD: {self.cooldown}')
+            spell.cooldown = parts.pop(-2) + " " + parts.pop(-1)
+            print(f'       CD: {spell.cooldown}')
 
         # cast time can be used directly, unless it ends in 'cast'
         if len(parts) > 0 and parts[-1].lower() == "cast":
             parts.pop()
-            self.cast_time = ' '.join(parts)
+            spell.cast_time = ' '.join(parts)
         else:
-            self.cast_time = 'Instant'
-        print(f'       Cast: {self.cast_time}')
+            spell.cast_time = 'Instant'
+        print(f'       Cast: {spell.cast_time}')
+
+        return spell
 
     def generate_yaml(self):
         result = {}
@@ -175,13 +193,12 @@ class TalentModel:
         while True:
             try:
                 spell_info = driver.find_element(By.XPATH, f"{header_path}/tbody/tr/td")\
-                                   .text.splitlines()[2:-1]
+                                   .text.splitlines()
                 break
             except StaleElementReferenceException:
                 print("Spell info stale, retrying...")
 
-        if len(spell_info) > 0:
-            self.spell = SpellModel(spell_info)
+        self.spell = SpellModel.from_spell_info(spell_info)
 
         self._scrape_description(driver, tooltip_path)
 
@@ -198,7 +215,6 @@ class TalentModel:
         print(f'      Icon: "{self.icon_url}"')
 
     def _scrape_name(self, driver, header_path):
-        name_elem = []
         while True:
             try:
                 WebDriverWait(driver, 20).until(
@@ -244,7 +260,7 @@ class TalentModel:
         print(f'      Description: "{self.description}"')
 
     def download_images(self, output_dir: str):
-        download_file(self.icon_url, f"{output_dir}/{self.icon}")
+        self.icon_url = download_file(self.icon_url, f"{output_dir}/{self.icon}")
 
     def generate_yaml(self):
         result = {
@@ -308,10 +324,13 @@ class SpecModel:
             row = int(talent.get_attribute("data-row"))
             column = int(talent.get_attribute("data-col"))
             # misnomer. higher priority => sorted later
-            priority = 10 * row + column
+            priority = 15 * row + column
             # ensure that talents with prerequisites are last in their row
             if (row, column) in prerequisites.values():
-                priority += 5
+                priority += 10
+                # if this is also a dependency, make it happen before other prereqs
+                if (row, column) in prerequisites.keys():
+                    priority -= 5
             return priority
 
         talents = sorted(talents, key=key_function)
@@ -407,8 +426,8 @@ class SpecModel:
          .perform())
 
     def download_images(self, output_dir: str):
-        download_file(self.icon_url, f"{output_dir}/{self.icon}")
-        download_file(self.background_url, f"{output_dir}/{self.background}")
+        self.icon_url = download_file(self.icon_url, f"{output_dir}/{self.icon}")
+        self.background_url = download_file(self.background_url, f"{output_dir}/{self.background}")
         for talent in self.talents:
             talent.download_images(output_dir)
 
@@ -478,9 +497,24 @@ class ClassModel:
         print(f"Scraping class {class_name}...")
 
         for expansion in expansions:
-            expac_model = ExpacModel()
-            expac_model.scrape(driver, expansion, class_name)
-            self.expansions.append(expac_model)
+            failures = 0
+            while True:
+                try:
+                    expac_model = ExpacModel()
+                    expac_model.scrape(driver, expansion, class_name)
+                    self.expansions.append(expac_model)
+                    break
+                except BaseException as e:
+                    failures += 1
+                    if failures == 3:
+                        print(f"FATAL ERROR! Expansion {expansion} FAILED for {class_name}"
+                              " after 3 attempts!")
+                        raise
+                    else:
+                        print(f"SEVERE ERROR: Expansion {expansion} FAILED for {class_name}!",
+                              file=sys.stderr)
+                        print(f"    Cause: {e}")
+                        print("Retrying...")
 
         # use the currently open page to get info about the class as a whole
         status_bar = driver.find_element(By.CSS_SELECTOR, ".ctc-main-status-class-name")
@@ -498,7 +532,7 @@ class ClassModel:
         return url_to_file(self.icon_url)
 
     def download_images(self, output_dir: str):
-        download_file(self.icon_url, f"{output_dir}/{self.icon}")
+        self.icon_url = download_file(self.icon_url, f"{output_dir}/{self.icon}")
         for expac in self.expansions:
             expac.download_images(output_dir)
 
@@ -565,6 +599,8 @@ def scrape(driver):
         ('warrior',      ['classic', 'tbc', 'wotlk']),
         ('death-knight', ['wotlk']),
     ]
+    # fun factor
+    random.shuffle(classes_to_scrape)
 
     classes = []
     for class_name, expansions in classes_to_scrape:
