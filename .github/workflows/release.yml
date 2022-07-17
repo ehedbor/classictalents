@@ -19,7 +19,7 @@ jobs:
       with:
         name: Release ${{ github.ref_name }}
         draft: false
-        prerelease: ${{ contains(steps.get_tag.outputs.tag, "pre") }}
+        prerelease: ${{ contains(steps.get_tag.outputs.tag, 'pre') }}
         generate_release_notes: false
   build_release:
     name: Build Release
