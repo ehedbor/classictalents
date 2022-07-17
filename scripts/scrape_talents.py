@@ -95,7 +95,10 @@ class SpellModel:
         spell = SpellModel()
         print(f'      Spell:')
 
+        # TODO this doesnt work in some cases (ie dancing rune weapon)... wny?
         spell_info = spell_info.copy()
+        # remove the first line (spell name)
+        spell_info.pop(0)
         i = 0
         while i < len(spell_info):
             e = spell_info[i]
