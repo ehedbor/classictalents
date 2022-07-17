@@ -135,17 +135,20 @@ class TalentButton(private val model: Talent) : StackPane() {
         tooltipSpellPane.visibleProperty().bind(model.spellProperty().isNotNull)
         tooltipSpellPane.managedProperty().bind(model.spellProperty().isNotNull)
 
-        val resourceCost = Bindings.select<Int?>(model.spellProperty(), "cost")
-        val resource = Bindings.select<ResourceType?>(model.spellProperty(), "resource")
-        val costText = stringBinding(resourceCost, resource) {
-            if (resourceCost.value == null || resource.value == null) {
-                null
-            } else {
-                "" + resourceCost.value + when (resource.value!!) {
+        val resourceCosts = Bindings.select<ObservableList<Pair<Int, ResourceType>>>(model.spellProperty(), "resourceCosts")
+        val costText = resourceCosts.stringBinding { costs ->
+            if (costs.isNullOrEmpty()) return@stringBinding null
+
+            costs.joinToString(separator = " / ") { (cost, res) ->
+                cost.toString() + when (res) {
                     ResourceType.MANA -> " Mana"
                     ResourceType.PERCENT_OF_BASE_MANA -> "% of Base Mana"
                     ResourceType.RAGE -> " Rage"
                     ResourceType.ENERGY -> " Energy"
+                    ResourceType.BLOOD_RUNES -> if (cost == 1) " Blood Rune" else " Blood Runes"
+                    ResourceType.FROST_RUNES -> if (cost == 1) " Frost Rune" else " Frost Runes"
+                    ResourceType.UNHOLY_RUNES -> if (cost == 1) " Unholy Rune" else " Unholy Runes"
+                    ResourceType.RUNIC_POWER -> " Runic Power"
                 }
             }
         }

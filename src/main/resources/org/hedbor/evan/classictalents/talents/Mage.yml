@@ -1,364 +1,1461 @@
-Mage:
-  Icon: "images/mage/ClassIcon.jpg"
-  Color: "#3FC7EB"
-  Classic:
-    Specializations:
-      Arcane:
-        Icon: "images/mage/ArcaneIntellect.png"
-        Background: "images/backgrounds/mage_arcane.jpg"
-        Talents:
-          Arcane Subtlety:
-            Location: [0, 0]
-            Max Rank: 2
-            Icon: "images/priest/DispelMagic.png"
-            Description: >-
-              Reduces your target's resistance to all your spells by {0:|5,10} and reduces the threat 
-              caused by your Arcane spells by {0:|20,40}%.
-          Arcane Focus:
-            Location: [0, 1]
-            Max Rank: 5
-            Icon: "images/paladin/Toughness.png"
-            Description: >-
-              Reduces the chance that the opponent can resist your Arcane spells by {:|2,4,6,8,10}%.
-          Improved Arcane Missiles:
-            Location: [0, 2]
-            Max Rank: 5
-            Icon: "images/druid/Moonfire.png"
-            Description: >-
-              Gives you a {:|20,40,60,80,100}% chance to avoid interruption caused by damage while 
-              channeling Arcane Missiles.
-          Wand Specialization:
-            Location: [1, 0]
-            Max Rank: 2
-            Icon: "images/skills/WandSpecialization.png"
-            Description: Increases your damage with Wands by {:|13,25}%.
-          Magic Absorption:
-            Location: [1, 1]
-            Max Rank: 5
-            Icon: "images/mage/MagicAbsorption.png"
-            Description: >-
-              Increase all resistances by {0:|2,4,6,8,10} and causes all spells you fully resist to 
-              restore {0:|1,2,3,4,5}% of your mana. 1 sec. cooldown.
-          Arcane Concentration:
-            Location: [1, 2]
-            Max Rank: 5
-            Icon: "images/priest/ManaBurn.png"
-            Description: >-
-              Gives you a {:|2,4,6,8,10}% chance of entering a Clearcasting state after any damage 
-              spell hits a target. The Clearcasting state reduces the mana cost of your next damage 
-              spell by 100%.
-          Magic Attunement:
-            Location: [2, 0]
-            Max Rank: 2
-            Icon: "images/druid/Wrath.png"
-            Description: >-
-              Increases the effect of your Amplify Magic and Dampen Magic spells by {:|25,50}%.
-          Improved Arcane Explosion:
-            Location: [2, 1]
-            Max Rank: 3
-            Icon: "images/mage/ArcaneExplosion.png"
-            Description: >-
-              Increases the critical strike chance of your Arcane Explosion spell by an additional 
-              {:|2,4,6}%.
-          Arcane Resilience:
-            Location: [2, 2]
-            Max Rank: 1
-            Icon: "images/mage/ArcaneResilience.jpg"
-            Description: Increases your armor by an amount equal to 50% of your Intellect.
-          Improved Mana Shield:
-            Location: [3, 0]
-            Max Rank: 2
-            Icon: "images/warlock/DetectLesserInvisibility.png"
-            Description: >-
-              Decreases the mana lost per point of damage taken when Mana Shield is active by 
-              {:|10,20}%.
-          Improved Counterspell:
-            Location: [3, 1]
-            Max Rank: 2
-            Icon: "images/mage/Counterspell.png"
-            Description: >-
-              Gives your Counterspell a {:|50,100}% chance to silence the target for 4 sec.
-          Arcane Meditation:
-            Location: [3, 3]
-            Max Rank: 3
-            Icon: "images/priest/MindFlay.png"
-            Description: Allows {:|5,10,15}% of your Mana regeneration to continue while casting.
-          Presence of Mind:
-            Location: [4, 1]
-            Max Rank: 1
-            Icon: "images/mage/PresenceOfMind.png"
-            Description: >-
-              When activated, your next Mage spell with a casting time less than 10 sec becomes an
-              instant cast spell.
-            Spell:
-              Cast Time: Instant
-              Cooldown: 3 min
-          Arcane Mind:
-            Location: [4, 2]
-            Requires: Arcane Resilience
-            Max Rank: 5
-            Icon: "images/warlock/Fear.png"
-            Description: Increases your maximum Mana by {:|2,4,6,8,10}%.
-          Arcane Instability:
-            Location: [5, 1]
-            Requires: Presence of Mind
-            Max Rank: 3
-            Icon: "images/mage/ArcaneInstability.png"
-            Description: Increases your spell damage and critical strike chance by {:|1,2,3}%.
-          Arcane Power:
-            Location: [6, 1]
-            Requires: Arcane Instability
-            Max Rank: 1
-            Icon: "images/shaman/LightningBolt.png"
-            Description: >-
-              When activated, your spells deal 30% more damage while costing 30% more mana to cast. 
-              This effect lasts 15 sec.
-            Spell:
-              Cast Time: Instant
-              Cooldown: 3 min
-      Fire:
-        Icon: "images/mage/FireBolt02.png"
-        Background: "images/backgrounds/mage_fire.jpg"
-        Talents:
-          Improved Fireball:
-            Location: [0, 1]
-            Max Rank: 5
-            Icon: "images/mage/Fireball.png"
-            Description: >-
-              Reduces the casting time of your Fireball spell by {:|0.1,0.2,0.3,0.4,0.5} sec.
-          Impact:
-            Location: [0, 2]
-            Max Rank: 5
-            Icon: "images/mage/Impact.png"
-            Description: >-
-              Gives your Fire spells a {:|2,4,6,8,10}% chance to stun the target for 2 sec.
-          Ignite:
-            Location: [1, 0]
-            Max Rank: 5
-            Icon: "images/warlock/Hellfire.png"
-            Description: >-
-              Your critical strikes from Fire damage spells cause the target to burn for an 
-              additional {:|8,16,24,32,40}% of your spell's damage over 4 sec.
-          Flame Throwing:
-            Location: [1, 1]
-            Max Rank: 2
-            Icon: "images/hunter/Flare.png"
-            Description: Increases the range of your Fire spells by {:|3,6} yards.
-          Improved Fire Blast:
-            Location: [1, 2]
-            Max Rank: 3
-            Icon: "images/mage/FireBlast.png"
-            Description: Reduces the cooldown of your Fire Blast spell by {:|0.5,1,1.5} sec.
-          Incinerate:
-            Location: [2, 0]
-            Max Rank: 2
-            Icon: "images/shaman/FlameShock.png"
-            Description: >-
-              Increases the critical strike chance of your Fire Blast and Scorch spells by {:|2,4}%.
-          Improved Flamestrike:
-            Location: [2, 1]
-            Max Rank: 3
-            Icon: "images/mage/Flamestrike.png"
-            Description: >-
-              Increases the critical strike chance of your Flamestrike spell by {:|5,10,15}%.
-          Pyroblast:
-            Location: [2, 2]
-            Max Rank: 1
-            Icon: "images/mage/Pyroblast.png"
-            Description: >-
-              Hurls an immense fiery boulder that causes 148 to 195 Fire damage and an additional 56 
-              Fire damage over 12 sec.
-            Spell:
-              Cost: 125 Mana
-              Range: 35 yd
-              Cast Time: 6 sec
-          Burning Soul:
-            Location: [2, 3]
-            Max Rank: 2
-            Icon: "images/warlock/Aftermath.png"
-            Description: >-
-              Gives your Fire spells a {0:|35,70}% chance to not lose casting time when you take 
-              damage and reduces the threat caused by your Fire spells by {0:|15,30}%.
-          Improved Scorch:
-            Location: [3, 0]
-            Max Rank: 3
-            Icon: "images/mage/Scorch.png"
-            Description: >-
-              Your Scorch spells have a {:|33,66,100}% chance to cause your target to be vulnerable 
-              to Fire damage. This vulnerability increases the Fire damage dealt to your target by 
-              3% and lasts 30 sec. Stacks up to 5 times.
-          Improved Fire Ward:
-            Location: [3, 1]
-            Max Rank: 2
-            Icon: "images/mage/FireWard.png"
-            Description: >-
-              Causes your Fire Ward to have a {:|10,20}% chance to reflect Fire spells while active.
-          Master of Elements:
-            Location: [3, 3]
-            Max Rank: 3
-            Icon: "images/mage/MasterOfElements.jpg"
-            Description: >-
-              Your Fire and Frost spell criticals will refund {:|10,20,30}% of their base mana cost.
-          Critical Mass:
-            Location: [4, 1]
-            Max Rank: 3
-            Icon: "images/shaman/ElementalMastery.png"
-            Description: Increases the critical strike chance of your Fire spells by {:|2,4,6}%.
-          Blast Wave:
-            Location: [4, 2]
-            Requires: Pyroblast
-            Max Rank: 1
-            Icon: "images/paladin/Exorcism.png"
-            Description: >-
-              A wave of flame radiates outward from the caster, damaging all enemies caught within 
-              the blast for 160 to 192 Fire damage, and dazing them for 6 sec.
-            Spell:
-              Cost: 215 Mana
-              Cast Time: Instant
-              Cooldown: 45 sec
-          Fire Power:
-            Location: [5, 2]
-            Max Rank: 5
-            Icon: "images/warlock/Immolate.png"
-            Description: Increases the damage done by your Fire spells by {:|2,4,6,8,10}%.
-          Combustion:
-            Location: [6, 1]
-            Requires: Critical Mass
-            Max Rank: 1
-            Icon: "images/shaman/FireNovaTotem.png"
-            Description: >-
-              When activated, this spell causes each of your Fire damage spell hits to increase your 
-              critical strike chance with Fire damage spells by 10%. This effect lasts until you 
-              have caused 3 critical strikes with Fire spells.
-            Spell:
-              Cast Time: Instant
-              Cooldown: 3 min
-      Frost:
-        Icon: "images/mage/Frostbolt.png"
-        Background: "images/backgrounds/mage_frost.jpg"
-        Talents:
-          Frost Warding:
-            Location: [0, 0]
-            Max Rank: 2
-            Icon: "images/mage/FrostWard.png"
-            Description: >-
-              Increases the armor and resistances given by your Frost Armor and Ice Armor spells by 
-              {0:|15,30}%. In addition, gives your Frost Ward a {0:|10,20}% chance to reflect Frost 
-              spells and effects while active.
-          Improved Frostbolt:
-            Location: [0, 1]
-            Max Rank: 5
-            Icon: "images/mage/Frostbolt.png"
-            Description: >-
-              Reduces the casting time of your Frostbolt spell by {:|0.1,0.2,0.3,0.4,0.5} sec.
-          Elemental Precision:
-            Location: [0, 2]
-            Max Rank: 3
-            Icon: "images/mage/ElementalPrecision.png"
-            Description: >-
-              Reduces the chance that the opponent can resist your Frost and Fire spells by 
-              {:|2,4,6}%.
-          Ice Shards:
-            Location: [1, 0]
-            Max Rank: 5
-            Icon: "images/mage/IceShards.png"
-            Description: >-
-              Increases the critical strike damage bonus of your Frost spells by 
-              {:|20,40,60,80,100}%.
-          Frostbite:
-            Location: [1, 1]
-            Max Rank: 3
-            Icon: "images/mage/Frostbite.png"
-            Description: >-
-              Gives your Chill effects a {:|5,10,15}% chance to freeze the target for 5 sec.
-          Improved Frost Nova:
-            Location: [1, 2]
-            Max Rank: 2
-            Icon: "images/mage/FrostNova.png"
-            Description: Reduces the cooldown of your Frost Nova spell by {:|2,4} sec.
-          Permafrost:
-            Location: [1, 3]
-            Max Rank: 3
-            Icon: "images/mage/Permafrost.png"
-            Description: >-
-              Increases the duration of your Chill effects by {0:|1,2,3} sec and reduces the target's 
-              speed by an additional {0:|3,7,10}%.
-          Piercing Ice:
-            Location: [2, 0]
-            Max Rank: 3
-            Icon: "images/mage/PiercingIce.png"
-            Description: Increases the damage done by your Frost spells by {:|2,4,6}%.
-          Cold Snap:
-            Location: [2, 1]
-            Max Rank: 1
-            Icon: "images/mage/ColdSnap.png"
-            Description: >-
-              When activated, this spell finishes the cooldown on all of your Frost spells.
-            Spell:
-              Cast Time: Instant
-              Cooldown: 10 min
-          Improved Blizzard:
-            Location: [2, 3]
-            Max Rank: 3
-            Icon: "images/mage/Blizzard.png"
-            Description: >-
-              Adds a chill effect to your Blizzard spell. This effect lowers the target's movement 
-              speed by {:|30,50,65}%. Lasts 1.5 sec.
-          Arctic Reach:
-            Location: [3, 0]
-            Max Rank: 2
-            Icon: "images/warlock/DarkPact.png"
-            Description: >-
-              Increases the range of your Frostbolt and Blizzard spells and the radius of your Frost
-              Nova and Cone of Cold spells by {:|10,20}%.
-          Frost Channeling:
-            Location: [3, 1]
-            Max Rank: 3
-            Icon: "images/skills/Dazed.png"
-            Description: >-
-              Reduces the mana cost of your Frost spells by {0:|5,10,15}% and reduces the threat 
-              caused by your Frost spells by {0:|10,20,30}%.
-          Shatter:
-            Location: [3, 2]
-            Requires: Improved Frost Nova
-            Max Rank: 5
-            Icon: "images/shaman/FrostShock.png"
-            Description: >-
-              Increases the critical strike chance of all your spells against frozen targets by 
-              {:|10,20,30,40,50}%.
-          Ice Block:
-            Location: [4, 1]
-            Max Rank: 1
-            Icon: "images/mage/IceBlock.png"
-            Description: >-
-              You become encased in a block of ice, protecting you from all physical attacks and 
-              spells for 10 sec, but during that time you cannot attack, move or cast spells.
-            Spell:
-              Cost: 15 Mana
-              Cast Time: Instant
-              Cooldown: 5 min
-          Improved Cone of Cold:
-            Location: [4, 2]
-            Max Rank: 3
-            Icon: "images/mage/ConeOfCold.png"
-            Description: Increases the damage dealt by your Cone of Cold spell by {:|15,30,45}%.
-          Winter's Chill:
-            Location: [5, 2]
-            Max Rank: 5
-            Icon: "images/mage/WintersChill.png"
-            Description: >-
-              Gives your Frost damage spells a {:|20,40,60,80,100}% chance to apply the Winter's 
-              Chill effect, which increases the chance a Frost spell will critically hit the target 
-              by 2% for 15 sec. Stacks up to 5 times.
-          Ice Barrier:
-            Location: [6, 1]
-            Requires: Ice Block
-            Max Rank: 1
-            Icon: "images/mage/IceBarrier.png"
-            Description: >-
-              Instantly shields you, absorbing 455 damage. Lasts 1 min. While the shield holds, 
-              spells will not be interrupted.
-            Spell:
-              Cost: 305 Mana
-              Cast Time: Instant
-              Cooldown: 30 sec
+Class: Mage
+Icon: class/mage.jpg
+Color: rgb(63, 199, 235)
+Classic:
+  Specializations:
+    Arcane:
+      Icon: spell/holy/magicalsentry.jpg
+      Background: backgrounds/81.jpg
+      Talents:
+        Arcane Subtlety:
+          Location: [0, 0]
+          Max Rank: 2
+          Icon: spell/holy/dispelmagic.jpg
+          Description: Reduces your target's resistance to all your spells by {0:|5,10}
+            and reduces the threat caused by your Arcane spells by {0:|20,40}%.
+        Arcane Focus:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/holy/devotion.jpg
+          Description: Reduces the chance that the opponent can resist your Arcane
+            spells by {:|2,4,6,8,10}%.
+        Improved Arcane Missiles:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/nature/starfall.jpg
+          Description: Gives you a {:|20,40,60,80,100}% chance to avoid interruption
+            caused by damage while channeling Arcane Missiles.
+        Wand Specialization:
+          Location: [1, 0]
+          Max Rank: 2
+          Icon: inv/wand/01.jpg
+          Description: Increases your damage with Wands by {:|13,25}%.
+        Magic Absorption:
+          Location: [1, 1]
+          Max Rank: 5
+          Icon: spell/nature/astralrecalgroup.jpg
+          Description: Increases all resistances by {0:|2,4,6,8,10} and causes all
+            spells you fully resist to restore {0:|1,2,3,4,5}% of your total mana.
+            1 sec. cooldown.
+        Arcane Concentration:
+          Location: [1, 2]
+          Max Rank: 5
+          Icon: spell/shadow/manaburn.jpg
+          Description: Gives you a {:|2,4,6,8,10}% chance of entering a Clearcasting
+            state after any damage spell hits a target. The Clearcasting state reduces
+            the mana cost of your next damage spell by 100%.
+        Magic Attunement:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: spell/nature/abolishmagic.jpg
+          Description: Increases the effect of your Amplify Magic and Dampen Magic
+            spells by {:|25,50}%.
+        Improved Arcane Explosion:
+          Location: [2, 1]
+          Max Rank: 3
+          Icon: spell/nature/wispsplode.jpg
+          Description: Increases the critical strike chance of your Arcane Explosion
+            spell by an additional {:|2,4,6}%.
+        Arcane Resilience:
+          Location: [2, 2]
+          Max Rank: 1
+          Icon: spell/arcane/arcaneresilience.jpg
+          Description: Increases your armor by an amount equal to 50% of your Intellect.
+        Improved Mana Shield:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: spell/shadow/detectlesserinvisibility.jpg
+          Description: Decreases the mana lost per point of damage taken when Mana
+            Shield is active by {:|10,20}%.
+        Improved Counterspell:
+          Location: [3, 1]
+          Max Rank: 2
+          Icon: spell/frost/iceshock.jpg
+          Description: Gives your Counterspell a {:|50,100}% chance to silence the
+            target for 4 sec.
+        Arcane Meditation:
+          Location: [3, 3]
+          Max Rank: 3
+          Icon: spell/shadow/siphonmana.jpg
+          Description: Allows {:|5,10,15}% of your Mana regeneration to continue while
+            casting.
+        Presence of Mind:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: spell/nature/enchantarmor.jpg
+          Description: When activated, your next Mage spell with a casting time less
+            than 10 sec becomes an instant cast spell.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 3 min
+        Arcane Mind:
+          Location: [4, 2]
+          Requires: Arcane Resilience
+          Max Rank: 5
+          Icon: spell/shadow/charm.jpg
+          Description: Increases your maximum Mana by {:|2,4,6,8,10}%.
+        Arcane Instability:
+          Location: [5, 1]
+          Requires: Presence of Mind
+          Max Rank: 3
+          Icon: spell/shadow/teleport.jpg
+          Description: Increases your spell damage and critical strike chance by {:|1,2,3}%.
+        Arcane Power:
+          Location: [6, 1]
+          Requires: Arcane Instability
+          Max Rank: 1
+          Icon: spell/nature/lightning.jpg
+          Description: When activated, your spells deal 30% more damage while costing
+            30% more mana to cast. This effect lasts 15 sec.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 3 min
+    Fire:
+      Icon: spell/fire/firebolt02.jpg
+      Background: backgrounds/41.jpg
+      Talents:
+        Improved Fireball:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/fire/flamebolt.jpg
+          Description: Reduces the casting time of your Fireball spell by {:|0.1,0.2,0.3,0.4,0.5}
+            sec.
+        Impact:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/fire/meteorstorm.jpg
+          Description: Gives your Fire spells a {:|2,4,6,8,10}% chance to stun the
+            target for 2 sec.
+        Ignite:
+          Location: [1, 0]
+          Max Rank: 5
+          Icon: spell/fire/incinerate.jpg
+          Description: Your critical strikes from Fire damage spells cause the target
+            to burn for an additional {:|8,16,24,32,40}% of your spell's damage over
+            4 sec.
+        Flame Throwing:
+          Location: [1, 1]
+          Max Rank: 2
+          Icon: spell/fire/flare.jpg
+          Description: Increases the range of your Fire spells by {:|3,6} yards.
+        Improved Fire Blast:
+          Location: [1, 2]
+          Max Rank: 3
+          Icon: spell/fire/fireball.jpg
+          Description: Reduces the cooldown of your Fire Blast spell by {:|0.5,1,1.5}
+            sec.
+        Incinerate:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: spell/fire/flameshock.jpg
+          Description: Increases the critical strike chance of your Fire Blast and
+            Scorch spells by {:|2,4}%.
+        Improved Flamestrike:
+          Location: [2, 1]
+          Max Rank: 3
+          Icon: spell/fire/selfdestruct.jpg
+          Description: Increases the critical strike chance of your Flamestrike spell
+            by {:|5,10,15}%.
+        Pyroblast:
+          Location: [2, 2]
+          Max Rank: 1
+          Icon: spell/fire/fireball02.jpg
+          Description: Hurls an immense fiery boulder that causes 148 to 195 Fire
+            damage and an additional 56 Fire damage over 12 sec.
+          Spell:
+            Cost: 125 Mana
+            Range: 35 yd
+            Cast Time: 6 sec
+        Burning Soul:
+          Location: [2, 3]
+          Max Rank: 2
+          Icon: spell/fire/fire.jpg
+          Description: Gives your Fire spells a {0:|35,70}% chance to not lose casting
+            time when you take damage and reduces the threat caused by your Fire spells
+            by {0:|15,30}%.
+        Improved Scorch:
+          Location: [3, 0]
+          Max Rank: 3
+          Icon: spell/fire/soulburn.jpg
+          Description: Your Scorch spells have a {:|33,66,100}% chance to cause your
+            target to be vulnerable to Fire damage. This vulnerability increases the
+            Fire damage dealt to your target by 3% and lasts 30 sec. Stacks up to
+            5 times.
+        Improved Fire Ward:
+          Location: [3, 1]
+          Max Rank: 2
+          Icon: spell/fire/firearmor.jpg
+          Description: Causes your Fire Ward to have a {:|10,20}% chance to reflect
+            Fire spells while active.
+        Master of Elements:
+          Location: [3, 3]
+          Max Rank: 3
+          Icon: spell/fire/masterofelements.jpg
+          Description: Your Fire and Frost spell criticals will refund {:|10,20,30}%
+            of their base mana cost.
+        Critical Mass:
+          Location: [4, 1]
+          Max Rank: 3
+          Icon: spell/nature/wispheal.jpg
+          Description: Increases the critical strike chance of your Fire spells by
+            {:|2,4,6}%.
+        Blast Wave:
+          Location: [4, 2]
+          Requires: Pyroblast
+          Max Rank: 1
+          Icon: spell/holy/excorcism/02.jpg
+          Description: A wave of flame radiates outward from the caster, damaging
+            all enemies caught within the blast for 160 to 192 Fire damage, and dazing
+            them for 6 sec.
+          Spell:
+            Cost: 215 Mana
+            Cast Time: Instant
+            Cooldown: 45 sec
+        Fire Power:
+          Location: [5, 2]
+          Max Rank: 5
+          Icon: spell/fire/immolation.jpg
+          Description: Increases the damage done by your Fire spells by {:|2,4,6,8,10}%.
+        Combustion:
+          Location: [6, 1]
+          Requires: Critical Mass
+          Max Rank: 1
+          Icon: spell/fire/sealoffire.jpg
+          Description: When activated, this spell causes each of your Fire damage
+            spell hits to increase your critical strike chance with Fire damage spells
+            by 10%. This effect lasts until you have caused 3 critical strikes with
+            Fire spells.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 3 min
+    Frost:
+      Icon: spell/frost/frostbolt02.jpg
+      Background: backgrounds/61.jpg
+      Talents:
+        Frost Warding:
+          Location: [0, 0]
+          Max Rank: 2
+          Icon: spell/frost/frostward.jpg
+          Description: Increases the armor and resistances given by your Frost Armor
+            and Ice Armor spells by {0:|15,30}%. In addition, gives your Frost Ward
+            a {0:|10,20}% chance to reflect Frost spells and effects while active.
+        Improved Frostbolt:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/frost/frostbolt02.jpg
+          Description: Reduces the casting time of your Frostbolt spell by {:|0.1,0.2,0.3,0.4,0.5}
+            sec.
+        Elemental Precision:
+          Location: [0, 2]
+          Max Rank: 3
+          Icon: spell/ice/magicdamage.jpg
+          Description: Reduces the chance that the opponent can resist your Frost
+            and Fire spells by {:|2,4,6}%.
+        Ice Shards:
+          Location: [1, 0]
+          Max Rank: 5
+          Icon: spell/frost/iceshard.jpg
+          Description: Increases the critical strike damage bonus of your Frost spells
+            by {:|20,40,60,80,100}%.
+        Frostbite:
+          Location: [1, 1]
+          Max Rank: 3
+          Icon: spell/frost/frostarmor.jpg
+          Description: Gives your Chill effects a {:|5,10,15}% chance to freeze the
+            target for 5 sec.
+        Improved Frost Nova:
+          Location: [1, 2]
+          Max Rank: 2
+          Icon: spell/frost/freezingbreath.jpg
+          Description: Reduces the cooldown of your Frost Nova spell by {:|2,4} sec.
+        Permafrost:
+          Location: [1, 3]
+          Max Rank: 3
+          Icon: spell/frost/wisp.jpg
+          Description: Increases the duration of your Chill effects by {0:|1,2,3}
+            sec and reduces the target's speed by an additional {0:|4,7,10}%.
+        Piercing Ice:
+          Location: [2, 0]
+          Max Rank: 3
+          Icon: spell/frost/frostbolt.jpg
+          Description: Increases the damage done by your Frost spells by {:|2,4,6}%.
+        Cold Snap:
+          Location: [2, 1]
+          Max Rank: 1
+          Icon: spell/frost/wizardmark.jpg
+          Description: When activated, this spell finishes the cooldown on all of
+            your Frost spells.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 10 min
+        Improved Blizzard:
+          Location: [2, 3]
+          Max Rank: 3
+          Icon: spell/frost/icestorm.jpg
+          Description: Adds a chill effect to your Blizzard spell. This effect lowers
+            the target's movement speed by {:|30,50,65}%. Lasts 1.50 sec.
+        Arctic Reach:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: spell/shadow/darkritual.jpg
+          Description: Increases the range of your Frostbolt and Blizzard spells and
+            the radius of your Frost Nova and Cone of Cold spells by {:|10,20}%.
+        Frost Channeling:
+          Location: [3, 1]
+          Max Rank: 3
+          Icon: spell/frost/stun.jpg
+          Description: Reduces the mana cost of your Frost spells by {0:|5,10,15}%
+            and reduces the threat caused by your Frost spells by {0:|10,20,30}%.
+        Shatter:
+          Location: [3, 2]
+          Requires: Improved Frost Nova
+          Max Rank: 5
+          Icon: spell/frost/frostshock.jpg
+          Description: Increases the critical strike chance of all your spells against
+            frozen targets by {:|10,20,30,40,50}%.
+        Ice Block:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: spell/frost/frost.jpg
+          Description: You become encased in a block of ice, protecting you from all
+            physical attacks and spells for 10 sec, but during that time you cannot
+            attack, move or cast spells.
+          Spell:
+            Cost: 15 Mana
+            Cooldown: 3 min
+            Cast Time: Instant
+        Improved Cone of Cold:
+          Location: [4, 2]
+          Max Rank: 3
+          Icon: spell/frost/glacier.jpg
+          Description: Increases the damage dealt by your Cone of Cold spell by {:|15,25,35}%.
+        Winter's Chill:
+          Location: [5, 2]
+          Max Rank: 5
+          Icon: spell/frost/chillingblast.jpg
+          Description: Gives your Frost damage spells a {:|20,40,60,80,100}% chance
+            to apply the Winter's Chill effect, which increases the chance a Frost
+            spell will critically hit the target by 2% for 15 sec. Stacks up to 5
+            times.
+        Ice Barrier:
+          Location: [6, 1]
+          Requires: Ice Block
+          Max Rank: 1
+          Icon: spell/ice/lament.jpg
+          Description: Instantly shields you, absorbing 455 damage. Lasts 1 min. While
+            the shield holds, spells will not be interrupted.
+          Spell:
+            Cost: 305 Mana
+            Cast Time: Instant
+            Cooldown: 30 sec
+TBC:
+  Specializations:
+    Arcane:
+      Icon: spell/holy/magicalsentry.jpg
+      Background: backgrounds/81.jpg
+      Talents:
+        Arcane Subtlety:
+          Location: [0, 0]
+          Max Rank: 2
+          Icon: spell/holy/dispelmagic.jpg
+          Description: Reduces your target's resistance to all your spells by {0:|5,10}
+            and reduces the threat caused by your Arcane spells by {0:|20,40}%.
+        Arcane Focus:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/holy/devotion.jpg
+          Description: Reduces the chance that the opponent can resist your Arcane
+            spells by {:|2,4,6,8,10}%.
+        Improved Arcane Missiles:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/nature/starfall.jpg
+          Description: Gives you a {:|20,40,60,80,100}% chance to avoid interruption
+            caused by damage while channeling Arcane Missiles.
+        Wand Specialization:
+          Location: [1, 0]
+          Max Rank: 2
+          Icon: inv/wand/01.jpg
+          Description: Increases your damage with Wands by {:|13,25}%.
+        Magic Absorption:
+          Location: [1, 1]
+          Max Rank: 5
+          Icon: spell/nature/astralrecalgroup.jpg
+          Description: Increases all resistances by {0:|2,4,6,8,10} and causes all
+            spells you fully resist to restore {0:|1,2,3,4,5}% of your total mana.
+            1 sec. cooldown.
+        Arcane Concentration:
+          Location: [1, 2]
+          Max Rank: 5
+          Icon: spell/shadow/manaburn.jpg
+          Description: Gives you a {:|2,4,6,8,10}% chance of entering a Clearcasting
+            state after any damage spell hits a target. The Clearcasting state reduces
+            the mana cost of your next damage spell by 100%.
+        Magic Attunement:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: spell/nature/abolishmagic.jpg
+          Description: Increases the effect of your Amplify Magic and Dampen Magic
+            spells by {:|25,50}%.
+        Arcane Impact:
+          Location: [2, 1]
+          Max Rank: 3
+          Icon: spell/nature/wispsplode.jpg
+          Description: Increases the critical strike chance of your Arcane Explosion
+            and Arcane Blast spells by an additional {:|2,4,6}%.
+        Arcane Fortitude:
+          Location: [2, 3]
+          Max Rank: 1
+          Icon: spell/arcane/arcaneresilience.jpg
+          Description: Increases your armor by an amount equal to 100% of your Intellect.
+        Improved Mana Shield:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: spell/shadow/detectlesserinvisibility.jpg
+          Description: Decreases the mana lost per point of damage taken when Mana
+            Shield is active by {:|10,20}%.
+        Improved Counterspell:
+          Location: [3, 1]
+          Max Rank: 2
+          Icon: spell/frost/iceshock.jpg
+          Description: Gives your Counterspell a {:|50,100}% chance to silence the
+            target for 4 sec.
+        Arcane Meditation:
+          Location: [3, 3]
+          Max Rank: 3
+          Icon: spell/shadow/siphonmana.jpg
+          Description: Allows {:|10,20,30}% of your mana regeneration to continue
+            while casting.
+        Improved Blink:
+          Location: [4, 0]
+          Max Rank: 2
+          Icon: spell/arcane/blink.jpg
+          Description: For 4 sec after casting Blink, your chance to be hit by all
+            attacks and spells is reduced by {:|13,25}%.
+        Presence of Mind:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: spell/nature/enchantarmor.jpg
+          Description: When activated, your next Mage spell with a casting time less
+            than 10 sec becomes an instant cast spell.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 3 min
+        Arcane Mind:
+          Location: [4, 3]
+          Max Rank: 5
+          Icon: spell/shadow/charm.jpg
+          Description: Increases your total Intellect by {:|3,6,9,12,15}%.
+        Prismatic Cloak:
+          Location: [5, 0]
+          Max Rank: 2
+          Icon: spell/arcane/prismaticcloak.jpg
+          Description: Reduces all damage taken by {:|2,4}%.
+        Arcane Instability:
+          Location: [5, 1]
+          Requires: Presence of Mind
+          Max Rank: 3
+          Icon: spell/shadow/teleport.jpg
+          Description: Increases your spell damage and critical strike chance by {:|1,2,3}%.
+        Arcane Potency:
+          Location: [5, 2]
+          Requires: Arcane Concentration
+          Max Rank: 3
+          Icon: spell/arcane/arcanepotency.jpg
+          Description: Increases the critical strike chance of any spell cast while
+            Clearcasting by {:|10,20,30}%.
+        Empowered Arcane Missiles:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: spell/nature/starfall.jpg
+          Description: Your Arcane Missiles spell gains an additional {0:|15,30,45}%
+            of your bonus spell damage effects, but mana cost is increased by {0:|2,4,6}%.
+        Spell Power:
+          Location: [6, 2]
+          Max Rank: 2
+          Icon: spell/arcane/arcanetorrent.jpg
+          Description: Increases critical strike damage bonus of all spells by {:|25,50}%.
+        Arcane Power:
+          Location: [6, 1]
+          Requires: Arcane Instability
+          Max Rank: 1
+          Icon: spell/nature/lightning.jpg
+          Description: When activated, your spells deal 30% more damage while costing
+            30% more mana to cast. This effect lasts 15 sec.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 3 min
+        Mind Mastery:
+          Location: [7, 1]
+          Max Rank: 5
+          Icon: spell/arcane/mindmastery.jpg
+          Description: Increases spell damage by up to {:|5,10,15,20,25}% of your
+            total Intellect.
+        Slow:
+          Location: [8, 1]
+          Max Rank: 1
+          Icon: spell/nature/slow.jpg
+          Description: Reduces target's movement speed by 50%, increases the time
+            between ranged attacks by 50% and increases casting time by 50%. Lasts
+            15 sec. Slow can only affect one target at a time.
+          Spell:
+            Cost: 20% of base mana
+            Range: 30 yd
+            Cast Time: Instant
+    Fire:
+      Icon: spell/fire/firebolt02.jpg
+      Background: backgrounds/41.jpg
+      Talents:
+        Improved Fireball:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/fire/flamebolt.jpg
+          Description: Reduces the casting time of your Fireball spell by {:|0.1,0.2,0.3,0.4,0.5}
+            sec.
+        Impact:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/fire/meteorstorm.jpg
+          Description: Gives your Fire spells a {:|2,4,6,8,10}% chance to stun the
+            target for 2 sec.
+        Ignite:
+          Location: [1, 0]
+          Max Rank: 5
+          Icon: spell/fire/incinerate.jpg
+          Description: Your critical strikes from Fire damage spells cause the target
+            to burn for an additional {:|8,16,24,32,40}% of your spell's damage over
+            4 sec.
+        Flame Throwing:
+          Location: [1, 1]
+          Max Rank: 2
+          Icon: spell/fire/flare.jpg
+          Description: Increases the range of your Fire spells by {:|3,6} yards.
+        Improved Fire Blast:
+          Location: [1, 2]
+          Max Rank: 3
+          Icon: spell/fire/fireball.jpg
+          Description: Reduces the cooldown of your Fire Blast spell by {:|0.5,1,1.5}
+            sec.
+        Incineration:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: spell/fire/flameshock.jpg
+          Description: Increases the critical strike chance of your Fire Blast and
+            Scorch spells by {:|2,4}%.
+        Improved Flamestrike:
+          Location: [2, 1]
+          Max Rank: 3
+          Icon: spell/fire/selfdestruct.jpg
+          Description: Increases the critical strike chance of your Flamestrike spell
+            by {:|5,10,15}%.
+        Pyroblast:
+          Location: [2, 2]
+          Max Rank: 1
+          Icon: spell/fire/fireball02.jpg
+          Description: Hurls an immense fiery boulder that causes 148 to 195 Fire
+            damage and an additional 56 Fire damage over 12 sec.
+          Spell:
+            Cost: 125 Mana
+            Range: 35 yd
+            Cast Time: 6 sec
+        Burning Soul:
+          Location: [2, 3]
+          Max Rank: 2
+          Icon: spell/fire/fire.jpg
+          Description: Gives your Fire spells a {0:|35,70}% chance to not lose casting
+            time when you take damage and reduces the threat caused by your Fire spells
+            by {0:|5,10}%.
+        Improved Scorch:
+          Location: [3, 0]
+          Max Rank: 3
+          Icon: spell/fire/soulburn.jpg
+          Description: Your Scorch spells have a {:|33,66,100}% chance to cause your
+            target to be vulnerable to Fire damage. This vulnerability increases the
+            Fire damage dealt to your target by 3% and lasts 30 sec. Stacks up to
+            5 times.
+        Molten Shields:
+          Location: [3, 1]
+          Max Rank: 2
+          Icon: spell/fire/firearmor.jpg
+          Description: Causes your Fire Ward to have a {0:|10,20}% chance to reflect
+            Fire spells while active. In addition, your Molten Armor has a {0:|50,100}%
+            chance to affect ranged and spell attacks.
+        Master of Elements:
+          Location: [3, 3]
+          Max Rank: 3
+          Icon: spell/fire/masterofelements.jpg
+          Description: Your Fire and Frost spell criticals will refund {:|10,20,30}%
+            of their base mana cost.
+        Playing with Fire:
+          Location: [4, 0]
+          Max Rank: 3
+          Icon: spell/fire/playingwithfire.jpg
+          Description: Increases all spell damage caused by {0:|1,2,3}% and all spell
+            damage taken by {0:|1,2,3}%.
+        Critical Mass:
+          Location: [4, 1]
+          Max Rank: 3
+          Icon: spell/nature/wispheal.jpg
+          Description: Increases the critical strike chance of your Fire spells by
+            {:|2,4,6}%.
+        Blast Wave:
+          Location: [4, 2]
+          Requires: Pyroblast
+          Max Rank: 1
+          Icon: spell/holy/excorcism/02.jpg
+          Description: A wave of flame radiates outward from the caster, damaging
+            all enemies caught within the blast for 160 to 192 Fire damage, and Dazing
+            them for 6 sec.
+          Spell:
+            Cost: 215 Mana
+            Cast Time: Instant
+            Cooldown: 30 sec
+        Blazing Speed:
+          Location: [5, 0]
+          Max Rank: 2
+          Icon: spell/fire/burningspeed.jpg
+          Description: Gives you a {:|5,10}% chance when hit by a melee or ranged
+            attack to increase your movement speed by 50% and dispel all movement
+            impairing effects. This effect lasts 8 sec.
+        Fire Power:
+          Location: [5, 2]
+          Max Rank: 5
+          Icon: spell/fire/immolation.jpg
+          Description: Increases the damage done by your Fire spells by {:|2,4,6,8,10}%.
+        Pyromaniac:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: spell/fire/burnout.jpg
+          Description: Increases chance to critically hit and reduces the mana cost
+            of all Fire spells by an additional {:|1,2,3}%.
+        Molten Fury:
+          Location: [6, 2]
+          Max Rank: 2
+          Icon: spell/fire/moltenblood.jpg
+          Description: Increases damage of all spells against targets with less than
+            20% health by {:|10,20}%.
+        Combustion:
+          Location: [6, 1]
+          Requires: Critical Mass
+          Max Rank: 1
+          Icon: spell/fire/sealoffire.jpg
+          Description: When activated, this spell causes each of your Fire damage
+            spell hits to increase your critical strike chance with Fire damage spells
+            by 10%. This effect lasts until you have caused 3 critical strikes with
+            Fire spells.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 3 min
+        Empowered Fireball:
+          Location: [7, 2]
+          Max Rank: 5
+          Icon: spell/fire/flamebolt.jpg
+          Description: Your Fireball spell gains an additional {:|3,6,9,12,15}% of
+            your bonus spell damage effects.
+        Dragon's Breath:
+          Location: [8, 1]
+          Requires: Combustion
+          Max Rank: 1
+          Icon: inv/misc/head/dragon/01.jpg
+          Description: Targets in a cone in front of the caster take 382 to 442 Fire
+            damage and are Disoriented for 3 sec. Any direct damaging attack will
+            revive targets. Turns off your attack when used.
+          Spell:
+            Cost: 475 Mana
+            Cast Time: Instant
+            Cooldown: 20 sec
+    Frost:
+      Icon: spell/frost/frostbolt02.jpg
+      Background: backgrounds/61.jpg
+      Talents:
+        Frost Warding:
+          Location: [0, 0]
+          Max Rank: 2
+          Icon: spell/frost/frostward.jpg
+          Description: Increases the armor and resistances given by your Frost Armor
+            and Ice Armor spells by {0:|15,30}%. In addition, gives your Frost Ward
+            a {0:|10,20}% chance to reflect Frost spells and effects while active.
+        Improved Frostbolt:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/frost/frostbolt02.jpg
+          Description: Reduces the casting time of your Frostbolt spell by {:|0.1,0.2,0.3,0.4,0.5}
+            sec.
+        Elemental Precision:
+          Location: [0, 2]
+          Max Rank: 3
+          Icon: spell/ice/magicdamage.jpg
+          Description: Reduces the mana cost and chance targets resist your Frost
+            and Fire spells by {:|1,2,3}%.
+        Ice Shards:
+          Location: [1, 0]
+          Max Rank: 5
+          Icon: spell/frost/iceshard.jpg
+          Description: Increases the critical strike damage bonus of your Frost spells
+            by {:|20,40,60,80,100}%.
+        Frostbite:
+          Location: [1, 1]
+          Max Rank: 3
+          Icon: spell/frost/frostarmor.jpg
+          Description: Gives your Chill effects a {:|5,10,15}% chance to freeze the
+            target for 5 sec.
+        Improved Frost Nova:
+          Location: [1, 2]
+          Max Rank: 2
+          Icon: spell/frost/freezingbreath.jpg
+          Description: Reduces the cooldown of your Frost Nova spell by {:|2,4} sec.
+        Permafrost:
+          Location: [1, 3]
+          Max Rank: 3
+          Icon: spell/frost/wisp.jpg
+          Description: Increases the duration of your Chill effects by {0:|1,2,3}
+            sec and reduces the target's speed by an additional {0:|4,7,10}%.
+        Piercing Ice:
+          Location: [2, 0]
+          Max Rank: 3
+          Icon: spell/frost/frostbolt.jpg
+          Description: Increases the damage done by your Frost spells by {:|2,4,6}%.
+        Icy Veins:
+          Location: [2, 1]
+          Max Rank: 1
+          Icon: spell/frost/coldhearted.jpg
+          Description: Hastens your spellcasting, increasing spell casting speed by
+            20% and gives you 100% chance to avoid interruption caused by damage while
+            casting. Lasts 20 sec.
+          Spell:
+            Cost: 3% of base mana
+            Cast Time: Instant
+            Cooldown: 3 min
+        Improved Blizzard:
+          Location: [2, 3]
+          Max Rank: 3
+          Icon: spell/frost/icestorm.jpg
+          Description: Adds a chill effect to your Blizzard spell. This effect lowers
+            the target's movement speed by {:|30,50,65}%. Lasts 1.50 sec.
+        Arctic Reach:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: spell/shadow/darkritual.jpg
+          Description: Increases the range of your Frostbolt, Ice Lance and Blizzard
+            spells and the radius of your Frost Nova and Cone of Cold spells by {:|10,20}%.
+        Frost Channeling:
+          Location: [3, 1]
+          Max Rank: 3
+          Icon: spell/frost/stun.jpg
+          Description: Reduces the mana cost of your Frost spells by {0:|5,10,15}%
+            and reduces the threat caused by your Frost spells by {0:|4,7,10}%.
+        Shatter:
+          Location: [3, 2]
+          Requires: Improved Frost Nova
+          Max Rank: 5
+          Icon: spell/frost/frostshock.jpg
+          Description: Increases the critical strike chance of all your spells against
+            frozen targets by {:|10,20,30,40,50}%.
+        Frozen Core:
+          Location: [4, 0]
+          Max Rank: 3
+          Icon: spell/frost/frozencore.jpg
+          Description: Reduces the damage taken by Frost and Fire effects by {:|2,4,6}%.
+        Cold Snap:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: spell/frost/wizardmark.jpg
+          Description: When activated, this spell finishes the cooldown on all Frost
+            spells you recently cast.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 8 min
+        Improved Cone of Cold:
+          Location: [4, 2]
+          Max Rank: 3
+          Icon: spell/frost/glacier.jpg
+          Description: Increases the damage dealt by your Cone of Cold spell by {:|15,25,35}%.
+        Ice Floes:
+          Location: [5, 0]
+          Max Rank: 2
+          Icon: spell/frost/icefloes.jpg
+          Description: Reduces the cooldown of your Cone of Cold, Cold Snap, Ice Barrier
+            and Ice Block spells by {:|10,20}%.
+        Winter's Chill:
+          Location: [5, 2]
+          Max Rank: 5
+          Icon: spell/frost/chillingblast.jpg
+          Description: Gives your Frost damage spells a {:|20,40,60,80,100}% chance
+            to apply the Winter's Chill effect, which increases the chance a Frost
+            spell will critically hit the target by 2% for 15 sec. Stacks up to 5
+            times.
+        Arctic Winds:
+          Location: [6, 2]
+          Max Rank: 5
+          Icon: spell/frost/arcticwinds.jpg
+          Description: Increases all Frost damage you cause by {0:|1,2,3,4,5}% and
+            reduces the chance melee and ranged attacks will hit you by {0:|1,2,3,4,5}%.
+        Ice Barrier:
+          Location: [6, 1]
+          Requires: Cold Snap
+          Max Rank: 1
+          Icon: spell/ice/lament.jpg
+          Description: Instantly shields you, absorbing 455 damage. Lasts 1 min. While
+            the shield holds, spells will not be interrupted.
+          Spell:
+            Cost: 305 Mana
+            Cast Time: Instant
+            Cooldown: 30 sec
+        Empowered Frostbolt:
+          Location: [7, 1]
+          Max Rank: 5
+          Icon: spell/frost/frostbolt02.jpg
+          Description: Your Frostbolt spell gains an additional {0:|2,4,6,8,10}% of
+            your bonus spell damage effects and an additional {0:|1,2,3,4,5}% chance
+            to critically strike.
+        Summon Water Elemental:
+          Location: [8, 1]
+          Max Rank: 1
+          Icon: spell/frost/summonwaterelemental/2.jpg
+          Description: Summon a Water Elemental to fight for the caster for 45 sec.
+          Spell:
+            Cost: 16% of base mana
+            Cooldown: 3 min
+            Cast Time: Instant
+WotLK:
+  Specializations:
+    Arcane:
+      Icon: spell/holy/magicalsentry.jpg
+      Background: backgrounds/81.jpg
+      Talents:
+        Arcane Subtlety:
+          Location: [0, 0]
+          Max Rank: 2
+          Icon: spell/holy/dispelmagic.jpg
+          Description: Reduces the chance your helpful spells and damage over time
+            effects will be dispelled by {0:|15,30}% and reduces the threat caused
+            by your Arcane spells by {0:|20,40}%.
+        Arcane Focus:
+          Location: [0, 1]
+          Max Rank: 3
+          Icon: spell/holy/devotion.jpg
+          Description: Increases your chance to hit and reduces the mana cost of your
+            Arcane spells by {:|1,2,3}%.
+        Arcane Stability:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/nature/starfall.jpg
+          Description: Reduces the pushback suffered from damaging attacks while casting
+            Arcane Missiles and Arcane Blast by {:|20,40,60,80,100}%.
+        Arcane Fortitude:
+          Location: [1, 0]
+          Max Rank: 3
+          Icon: spell/arcane/arcaneresilience.jpg
+          Description: Increases your armor by an amount equal to {:|50,100,150}%
+            of your Intellect.
+        Magic Absorption:
+          Location: [1, 1]
+          Max Rank: 2
+          Icon: spell/nature/astralrecalgroup.jpg
+          Description: Increases all resistances by {0:|.5,1} per level and causes
+            all spells you fully resist to restore {0:|1,2}% of your total mana. 1
+            sec cooldown.
+        Arcane Concentration:
+          Location: [1, 2]
+          Max Rank: 5
+          Icon: spell/shadow/manaburn.jpg
+          Description: Gives you a {:|2,4,6,8,10}% chance of entering a Clearcasting
+            state after any damage spell hits a target. The Clearcasting state reduces
+            the mana cost of your next damage spell by 100%.
+        Magic Attunement:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: spell/nature/abolishmagic.jpg
+          Description: Increases the range of your Arcane spells by {0:|3,6} yards
+            and the effect of your Amplify Magic and Dampen Magic spells by {0:|25,50}%.
+        Spell Impact:
+          Location: [2, 1]
+          Max Rank: 3
+          Icon: spell/nature/wispsplode.jpg
+          Description: Increases the damage of your Arcane Explosion, Arcane Blast,
+            Blast Wave, Fire Blast, Scorch, Fireball, Ice Lance and Cone of Cold spells
+            by an additional {:|2,4,6}%.
+        Student of the Mind:
+          Location: [2, 2]
+          Max Rank: 3
+          Icon: ability/mage/studentofthemind.jpg
+          Description: Increases your total Spirit by {:|4,7,10}%.
+        Focus Magic:
+          Location: [2, 3]
+          Max Rank: 1
+          Icon: spell/arcane/studentofmagic.jpg
+          Description: Increases the target's chance to critically hit with spells
+            by 3%. When the target critically hits the caster's chance to critically
+            hit with spells is increased by 3% for 10 sec. Cannot be cast on self.
+          Spell:
+            Cost: 6% of base mana
+            Range: 30 yd
+            Cast Time: Instant
+        Arcane Shielding:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: spell/shadow/detectlesserinvisibility.jpg
+          Description: Decreases the mana lost per point of damage taken when Mana
+            Shield is active by {0:|17,33}% and increases the resistances granted
+            by Mage Armor by {0:|25,50}%.
+        Improved Counterspell:
+          Location: [3, 1]
+          Max Rank: 2
+          Icon: spell/frost/iceshock.jpg
+          Description: Your Counterspell also silences the target for {:|2,4} sec.
+        Arcane Meditation:
+          Location: [3, 2]
+          Max Rank: 3
+          Icon: spell/shadow/siphonmana.jpg
+          Description: Allows {:|17,33,50}% of your mana regeneration to continue
+            while casting.
+        Torment the Weak:
+          Location: [3, 3]
+          Max Rank: 3
+          Icon: ability/mage/tormentoftheweak.jpg
+          Description: Your Frostbolt, Fireball, Frostfire Bolt, Pyroblast, Arcane
+            Missiles, Arcane Blast, and Arcane Barrage abilities deal {:|4,8,12}%
+            more damage to snared or slowed targets.
+        Improved Blink:
+          Location: [4, 0]
+          Max Rank: 2
+          Icon: spell/arcane/blink.jpg
+          Description: Reduces the mana cost of Blink by {0:|25,50}% and for 4 sec
+            after casting your chance to be hit by all attacks and spells is reduced
+            by {0:|15,30}%.
+        Presence of Mind:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: spell/nature/enchantarmor.jpg
+          Description: When activated, your next Mage spell with a casting time less
+            than 10 sec becomes an instant cast spell.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 2 min
+        Arcane Mind:
+          Location: [4, 3]
+          Max Rank: 5
+          Icon: spell/shadow/charm.jpg
+          Description: Increases your total Intellect by {:|3,6,9,12,15}%.
+        Prismatic Cloak:
+          Location: [5, 0]
+          Max Rank: 3
+          Icon: spell/arcane/prismaticcloak.jpg
+          Description: Reduces all damage taken by {0:|2,4,6}% and reduces the fade
+            time of your Invisibility spell by {0:|1,2,3} sec.
+        Arcane Instability:
+          Location: [5, 1]
+          Requires: Presence of Mind
+          Max Rank: 3
+          Icon: spell/shadow/teleport.jpg
+          Description: Increases the damage done by your spells and your critical
+            strike chance by {:|1,2,3}%.
+        Arcane Potency:
+          Location: [5, 2]
+          Requires: Presence of Mind
+          Max Rank: 2
+          Icon: spell/arcane/arcanepotency.jpg
+          Description: Increases the critical strike chance of your next damaging
+            spell by {:|15,30}% after gaining Clearcasting or Presence of Mind.
+        Arcane Empowerment:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: spell/nature/starfall.jpg
+          Description: Increases the damage of your Arcane Missiles spell by an amount
+            equal to {0:|15,30,45}% of your spell power and the damage of your Arcane
+            Blast by {0:|3,6,9}% of your spell power. In addition, increases the damage
+            of all party and raid members within 100 yds by {0:|1,2,3}%.
+        Incanter's Absorption:
+          Location: [6, 2]
+          Max Rank: 3
+          Icon: ability/mage/incantersabsorbtion.jpg
+          Description: When your Mana Shield, Frost Ward, Fire Ward, or Ice Barrier
+            absorbs damage your spell damage is increased by {:|5,10,15}% of the amount
+            absorbed for 10 sec.
+        Arcane Power:
+          Location: [6, 1]
+          Requires: Arcane Instability
+          Max Rank: 1
+          Icon: spell/nature/lightning.jpg
+          Description: When activated, your spells deal 20% more damage while costing
+            20% more mana to cast. This effect lasts 15 sec.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 2 min
+        Mind Mastery:
+          Location: [7, 2]
+          Max Rank: 5
+          Icon: spell/arcane/mindmastery.jpg
+          Description: Increases spell power by {:|3,6,9,12,15}% of your total Intellect.
+        Arcane Flows:
+          Location: [7, 1]
+          Requires: Arcane Power
+          Max Rank: 2
+          Icon: ability/mage/potentspirit.jpg
+          Description: Reduces the cooldown of your Presence of Mind, Arcane Power
+            and Invisibility spells by {0:|15,30}% and the cooldown of your Evocation
+            spell by {0:|1,2} min.
+        Slow:
+          Location: [8, 1]
+          Max Rank: 1
+          Icon: spell/nature/slow.jpg
+          Description: Reduces target's movement speed by 60%, increases the time
+            between ranged attacks by 60% and increases casting time by 30%. Lasts
+            15 sec. Slow can only affect one target at a time.
+          Spell:
+            Cost: 12% of base mana
+            Range: 30 yd
+            Cast Time: Instant
+        Missile Barrage:
+          Location: [8, 2]
+          Max Rank: 5
+          Icon: ability/mage/missilebarrage.jpg
+          Description: Gives your Arcane Blast a {0:|8,16,24,32,40}% chance, and your
+            Arcane Barrage, Fireball, Frostbolt and Frostfire Bolt spells a {0:|4,8,12,16,20}%
+            chance to reduce the channeled duration of the next Arcane Missiles spell
+            by 2.5 secs, reduce the mana cost by 100%, and missiles will fire every
+            .5 secs.
+        Netherwind Presence:
+          Location: [9, 1]
+          Max Rank: 3
+          Icon: ability/mage/netherwindpresence.jpg
+          Description: Increases your spell haste by {:|2,4,6}%.
+        Spell Power:
+          Location: [9, 2]
+          Max Rank: 2
+          Icon: spell/arcane/arcanetorrent.jpg
+          Description: Increases critical strike damage bonus of all spells by {:|25,50}%.
+        Arcane Barrage:
+          Location: [10, 1]
+          Max Rank: 1
+          Icon: ability/mage/arcanebarrage.jpg
+          Description: Launches several missiles at the enemy target, causing 401
+            to 485 Arcane damage.
+          Spell:
+            Cost: 18% of base mana
+            Range: 30 yd
+            Cast Time: Instant
+            Cooldown: 3 sec
+    Fire:
+      Icon: spell/fire/firebolt02.jpg
+      Background: backgrounds/41.jpg
+      Talents:
+        Improved Fire Blast:
+          Location: [0, 0]
+          Max Rank: 2
+          Icon: spell/fire/fireball.jpg
+          Description: Reduces the cooldown of your Fire Blast spell by {:|1,2} sec.
+        Incineration:
+          Location: [0, 1]
+          Max Rank: 3
+          Icon: spell/fire/flameshock.jpg
+          Description: Increases the critical strike chance of your Fire Blast, Scorch,
+            Arcane Blast and Cone of Cold spells by {:|2,4,6}%.
+        Improved Fireball:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/fire/flamebolt.jpg
+          Description: Reduces the casting time of your Fireball spell by {:|0.1,0.2,0.3,0.4,0.5}
+            sec.
+        Ignite:
+          Location: [1, 0]
+          Max Rank: 5
+          Icon: spell/fire/incinerate.jpg
+          Description: Your critical strikes from Fire damage spells cause the target
+            to burn for an additional {:|8,16,24,32,40}% of your spell's damage over
+            4 sec.
+        Burning Determination:
+          Location: [1, 1]
+          Max Rank: 2
+          Icon: spell/fire/totemofwrath.jpg
+          Description: When Interrupted or Silenced you have a {:|50,100}% chance
+            to become immune to the next Interrupt or Silence mechanic. Lasts 20 sec.
+        World in Flames:
+          Location: [1, 2]
+          Max Rank: 3
+          Icon: ability/mage/worldinflames.jpg
+          Description: Increases the critical strike chance of your Flamestrike, Pyroblast,
+            Blast Wave, Dragon's Breath, Living Bomb, Blizzard and Arcane Explosion
+            spells by {:|2,4,6}%.
+        Flame Throwing:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: spell/fire/flare.jpg
+          Description: Increases the range of all Fire spells except Frostfire Bolt
+            by {:|3,6} yards.
+        Impact:
+          Location: [2, 1]
+          Max Rank: 3
+          Icon: spell/fire/meteorstorm.jpg
+          Description: Gives your damaging spells a {:|4,7,10}% chance to cause the
+            next Fire Blast you cast to stun the target for 2 sec.
+        Pyroblast:
+          Location: [2, 2]
+          Max Rank: 1
+          Icon: spell/fire/fireball02.jpg
+          Description: Hurls an immense fiery boulder that causes 148 to 195 Fire
+            damage and an additional 56 Fire damage over 12 sec.
+          Spell:
+            Cost: 22% of base mana
+            Range: 35 yd
+            Cast Time: 5 sec
+        Burning Soul:
+          Location: [2, 3]
+          Max Rank: 2
+          Icon: spell/fire/fire.jpg
+          Description: Reduces the pushback suffered from damaging attacks while casting
+            Fire spells by {0:|35,70}% and reduces the threat caused by your Fire
+            spells by {0:|10,20}%.
+        Improved Scorch:
+          Location: [3, 0]
+          Max Rank: 3
+          Icon: spell/fire/soulburn.jpg
+          Description: Increases your chance to critically hit with Scorch, Fireball
+            and Frostfire Bolt by an additional {0:|1,2,3}% and your damaging Scorch
+            spells have a {0:|33,66,100}% chance to cause your target to be vulnerable
+            to spell damage, increasing spell critical strike chance against that
+            target by 5% and lasts 30 sec.
+        Molten Shields:
+          Location: [3, 1]
+          Max Rank: 2
+          Icon: spell/fire/firearmor.jpg
+          Description: Causes your Fire Ward and Frost Ward spells to have a {0:|15,30}%
+            chance to reflect the warded spell while active. In addition, your Molten
+            Armor has a {0:|50,100}% chance to affect ranged and spell attacks.
+        Master of Elements:
+          Location: [3, 3]
+          Max Rank: 3
+          Icon: spell/fire/masterofelements.jpg
+          Description: Your spell criticals will refund {:|10,20,30}% of their base
+            mana cost.
+        Playing with Fire:
+          Location: [4, 0]
+          Max Rank: 3
+          Icon: spell/fire/playingwithfire.jpg
+          Description: Increases all spell damage caused by {0:|1,2,3}% and all spell
+            damage taken by {0:|1,2,3}%.
+        Critical Mass:
+          Location: [4, 1]
+          Max Rank: 3
+          Icon: spell/nature/wispheal.jpg
+          Description: Increases the critical strike chance of your Fire spells by
+            {:|2,4,6}%.
+        Blast Wave:
+          Location: [4, 2]
+          Requires: Pyroblast
+          Max Rank: 1
+          Icon: spell/holy/excorcism/02.jpg
+          Description: A wave of flame radiates outward from the caster, damaging
+            all enemies caught within the blast for 160 to 192 Fire damage, knocking
+            them back and dazing them for 6 sec.
+          Spell:
+            Cost: 7% of base mana
+            Cast Time: Instant
+            Cooldown: 30 sec
+        Blazing Speed:
+          Location: [5, 0]
+          Max Rank: 2
+          Icon: spell/fire/burningspeed.jpg
+          Description: Gives you a {:|5,10}% chance when hit by a melee or ranged
+            attack to increase your movement speed by 50% and dispel all movement
+            impairing effects. This effect lasts 8 sec.
+        Fire Power:
+          Location: [5, 2]
+          Max Rank: 5
+          Icon: spell/fire/immolation.jpg
+          Description: Increases the damage done by your Fire spells by {:|2,4,6,8,10}%.
+        Pyromaniac:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: spell/fire/burnout.jpg
+          Description: Increases chance to critically hit by {0:|1,2,3}% and allows
+            {0:|17,33,50}% of your mana regeneration to continue while casting.
+        Molten Fury:
+          Location: [6, 2]
+          Max Rank: 2
+          Icon: spell/fire/moltenblood.jpg
+          Description: Increases damage of all spells against targets with less than
+            35% health by {:|6,12}%.
+        Combustion:
+          Location: [6, 1]
+          Requires: Critical Mass
+          Max Rank: 1
+          Icon: spell/fire/sealoffire.jpg
+          Description: When activated, this spell increases your critical strike damage
+            bonus with Fire damage spells by 50%, and causes each of your Fire damage
+            spell hits to increase your critical strike chance with Fire damage spells
+            by 10%. This effect lasts until you have caused 3 non-periodic critical
+            strikes with Fire spells.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 2 min
+        Fiery Payback:
+          Location: [7, 0]
+          Max Rank: 2
+          Icon: ability/mage/fierypayback.jpg
+          Description: When below 35% health all damage taken is reduced by {0:|10,20}%
+            and your Pyroblast spell's cast time is reduced by {0:|1.75,3.5} secs
+            while the cooldown is increased by {0:|2.5,5} secs. In addition, melee
+            and ranged attacks made against you have a {0:|5,10}% chance to disarm
+            your attacker's main hand and ranged weapons.
+        Empowered Fire:
+          Location: [7, 2]
+          Max Rank: 3
+          Icon: spell/fire/flamebolt.jpg
+          Description: Increases the damage of your Fireball, Frostfire Bolt and Pyroblast
+            spells by an amount equal to {0:|5,10,15}% of your spell power. In addition,
+            each time your Ignite talent causes damage, you have a {0:|33,67,100}%
+            chance to regain 2% of your base mana.
+        Hot Streak:
+          Location: [8, 2]
+          Max Rank: 3
+          Icon: ability/mage/hotstreak.jpg
+          Description: Any time you score 2 non-periodic spell criticals in a row
+            using Fireball, Fire Blast, Scorch, Living Bomb, or Frostfire Bolt, you
+            have a {:|33,66,100}% chance the next Pyroblast spell cast within 10 sec
+            will be instant cast.
+        Dragon's Breath:
+          Location: [8, 1]
+          Requires: Combustion
+          Max Rank: 1
+          Icon: inv/misc/head/dragon/01.jpg
+          Description: Targets in a cone in front of the caster take 382 to 442 Fire
+            damage and are Disoriented for 5 sec. Any direct damaging attack will
+            revive targets. Turns off your attack when used.
+          Spell:
+            Cost: 7% of base mana
+            Cast Time: Instant
+            Cooldown: 20 sec
+        Firestarter:
+          Location: [8, 0]
+          Requires: Dragon's Breath
+          Max Rank: 2
+          Icon: ability/mage/firestarter.jpg
+          Description: Your damaging Blast Wave and Dragon's Breath spells have a
+            {:|50,100}% chance to make your next Flamestrike spell instant cast and
+            cost no mana. Lasts 10 sec.
+        Burnout:
+          Location: [9, 1]
+          Max Rank: 5
+          Icon: ability/mage/burnout.jpg
+          Description: Increases your spell critical damage bonus with all spells
+            by {0:|10,20,30,40,50}% but your non-periodic spell criticals cost an
+            additional {0:|1,2,3,4,5}% of the spell's cost.
+        Living Bomb:
+          Location: [10, 1]
+          Max Rank: 1
+          Icon: ability/mage/livingbomb.jpg
+          Description: The target becomes a Living Bomb, taking 612 Fire damage over
+            12 sec. After 12 sec or when the spell is dispelled, the target explodes
+            dealing 306 Fire damage to all enemies within 10 yards.
+          Spell:
+            Cost: 22% of base mana
+            Range: 35 yd
+            Cast Time: Instant
+    Frost:
+      Icon: spell/frost/frostbolt02.jpg
+      Background: backgrounds/61.jpg
+      Talents:
+        Frostbite:
+          Location: [0, 0]
+          Max Rank: 3
+          Icon: spell/frost/frostarmor.jpg
+          Description: Gives your Chill effects a {:|5,10,15}% chance to freeze the
+            target for 5 sec.
+        Improved Frostbolt:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/frost/frostbolt02.jpg
+          Description: Reduces the casting time of your Frostbolt spell by {:|0.1,0.2,0.3,0.4,0.5}
+            sec.
+        Ice Floes:
+          Location: [0, 2]
+          Max Rank: 3
+          Icon: spell/frost/icefloes.jpg
+          Description: Reduces the cooldown of your Frost Nova, Cone of Cold, Ice
+            Block and Icy Veins spells by {:|7,14,20}%.
+        Ice Shards:
+          Location: [1, 0]
+          Max Rank: 3
+          Icon: spell/frost/iceshard.jpg
+          Description: Increases the critical strike damage bonus of your Frost spells
+            by {:|33,66,100}%.
+        Frost Warding:
+          Location: [1, 1]
+          Max Rank: 2
+          Icon: spell/frost/frostward.jpg
+          Description: Increases the armor and resistances given by your Frost Armor
+            and Ice Armor spells by {0:|25,50}%. In addition, gives your Frost Ward
+            and Fire Ward a {0:|15,30}% chance to negate the warded damage spell and
+            restore mana equal to the damage caused.
+        Precision:
+          Location: [1, 2]
+          Max Rank: 3
+          Icon: spell/ice/magicdamage.jpg
+          Description: Reduces the mana cost and increases your chance to hit with
+            spells by {:|1,2,3}%.
+        Permafrost:
+          Location: [1, 3]
+          Max Rank: 3
+          Icon: spell/frost/wisp.jpg
+          Description: Increases the duration of your Chill effects by {0:|1,2,3}
+            sec, reduces the target's speed by an additional {0:|4,7,10}%, and reduces
+            the target's healing received by {0:|7,13,20}%.
+        Piercing Ice:
+          Location: [2, 0]
+          Max Rank: 3
+          Icon: spell/frost/frostbolt.jpg
+          Description: Increases the damage done by your Frost spells by {:|2,4,6}%.
+        Icy Veins:
+          Location: [2, 1]
+          Max Rank: 1
+          Icon: spell/frost/coldhearted.jpg
+          Description: Hastens your spellcasting, increasing spell casting speed by
+            20% and reduces the pushback suffered from damaging attacks while casting
+            by 100%. Lasts 20 sec.
+          Spell:
+            Cost: 3% of base mana
+            Cast Time: Instant
+            Cooldown: 3 min
+        Improved Blizzard:
+          Location: [2, 2]
+          Max Rank: 3
+          Icon: spell/frost/icestorm.jpg
+          Description: Adds a chill effect to your Blizzard spell. This effect lowers
+            the target's movement speed by {:|25,40,50}%. Lasts 1.50 sec.
+        Arctic Reach:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: spell/shadow/darkritual.jpg
+          Description: Increases the range of your Frostbolt, Ice Lance, Deep Freeze
+            and Blizzard spells and the radius of your Frost Nova and Cone of Cold
+            spells by {:|10,20}%.
+        Frost Channeling:
+          Location: [3, 1]
+          Max Rank: 3
+          Icon: spell/frost/stun.jpg
+          Description: Reduces the mana cost of all spells by {0:|4,7,10}% and reduces
+            the threat caused by your Frost spells by {0:|4,7,10}%.
+        Shatter:
+          Location: [3, 2]
+          Max Rank: 3
+          Icon: spell/frost/frostshock.jpg
+          Description: Increases the critical strike chance of all your spells against
+            frozen targets by {:|17,34,50}%.
+        Cold Snap:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: spell/frost/wizardmark.jpg
+          Description: When activated, this spell finishes the cooldown on all Frost
+            spells you recently cast.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 8 min
+        Improved Cone of Cold:
+          Location: [4, 2]
+          Max Rank: 3
+          Icon: spell/frost/glacier.jpg
+          Description: Increases the damage dealt by your Cone of Cold spell by {:|15,25,35}%.
+        Frozen Core:
+          Location: [4, 3]
+          Max Rank: 3
+          Icon: spell/frost/frozencore.jpg
+          Description: Reduces the damage taken from all spells by {:|2,4,6}%.
+        Winter's Chill:
+          Location: [5, 2]
+          Max Rank: 3
+          Icon: spell/frost/chillingblast.jpg
+          Description: Increases your chance to critically hit with Frostbolt by an
+            additional {0:|1,2,3}% and gives your Frost damage spells a {0:|33,66,100}%
+            chance to apply the Winter's Chill effect, which increases the chance
+            spells will critically hit the target by 1% for 15 sec. Stacks up to 5
+            times.
+        Cold as Ice:
+          Location: [5, 0]
+          Requires: Cold Snap
+          Max Rank: 2
+          Icon: ability/mage/coldasice.jpg
+          Description: Reduces the cooldown of your Cold Snap, Ice Barrier and Summon
+            Water Elemental spells by {:|10,20}%.
+        Ice Barrier:
+          Location: [6, 1]
+          Requires: Cold Snap
+          Max Rank: 1
+          Icon: spell/ice/lament.jpg
+          Description: Instantly shields you, absorbing 455 damage. Lasts 1 min. While
+            the shield holds, spellcasting will not be delayed by damage.
+          Spell:
+            Cost: 21% of base mana
+            Cast Time: Instant
+            Cooldown: 30 sec
+        Arctic Winds:
+          Location: [6, 2]
+          Max Rank: 5
+          Icon: spell/frost/arcticwinds.jpg
+          Description: Increases all Frost damage you cause by {0:|1,2,3,4,5}% and
+            reduces the chance melee and ranged attacks will hit you by {0:|1,2,3,4,5}%.
+        Shattered Barrier:
+          Location: [6, 0]
+          Requires: Ice Barrier
+          Max Rank: 2
+          Icon: ability/mage/shattershield.jpg
+          Description: Gives your Ice Barrier spell a {:|50,100}% chance to freeze
+            all enemies within 10 yds for 8 sec when it is destroyed.
+        Empowered Frostbolt:
+          Location: [7, 1]
+          Max Rank: 2
+          Icon: spell/frost/frostbolt02.jpg
+          Description: Increases the damage of your Frostbolt spell by an amount equal
+            to {0:|5,10}% of your spell power and reduces the cast time by {0:|0.1,0.2}
+            sec.
+        Fingers of Frost:
+          Location: [7, 2]
+          Max Rank: 2
+          Icon: ability/mage/wintersgrasp.jpg
+          Description: Gives your Chill effects a {:|7,15}% chance to grant you the
+            Fingers of Frost effect, which treats your next 2 spells cast as if the
+            target were Frozen. Lasts 15 sec.
+        Brain Freeze:
+          Location: [8, 0]
+          Max Rank: 3
+          Icon: ability/mage/brainfreeze.jpg
+          Description: Your Frost damage spells with chilling effects have a {:|5,10,15}%
+            chance to cause your next Fireball or Frostfire Bolt spell to be instant
+            cast and cost no mana.
+        Summon Water Elemental:
+          Location: [8, 1]
+          Max Rank: 1
+          Icon: spell/frost/summonwaterelemental/2.jpg
+          Description: Summon a Water Elemental to fight for the caster for 45 sec.
+          Spell:
+            Cost: 16% of base mana
+            Cast Time: Instant
+            Cooldown: 3 min
+        Enduring Winter:
+          Location: [8, 2]
+          Requires: Summon Water Elemental
+          Max Rank: 3
+          Icon: spell/frost/summonwaterelemental/2.jpg
+          Description: Increases the duration of your Summon Water Elemental spell
+            by {0:|5,10,15} sec and your Frostbolt spell has a {0:|33,66,100}% chance
+            to grant up to 10 party or raid members mana regeneration equal to 1%
+            of their maximum mana per 5 sec for 15 sec. This effect cannot occur more
+            often than once every 6 sec.
+        Chilled to the Bone:
+          Location: [9, 1]
+          Max Rank: 5
+          Icon: ability/mage/chilledtothebone.jpg
+          Description: Increases the damage caused by your Frostbolt, Frostfire Bolt
+            and Ice Lance spells by {0:|1,2,3,4,5}% and reduces the movement speed
+            of all chilled targets by an additional {0:|2,4,6,8,10}%.
+        Deep Freeze:
+          Location: [10, 1]
+          Max Rank: 1
+          Icon: ability/mage/deepfreeze.jpg
+          Description: Stuns the target for 5 sec. Only usable on Frozen targets.
+            Deals (1469 *) to (1741 *) damage to targets permanently immune to stuns.
+          Spell:
+            Cost: 9% of base mana
+            Range: 30 yd
+            Cast Time: Instant
+            Cooldown: 30 sec

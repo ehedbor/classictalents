@@ -2,6 +2,7 @@ package org.hedbor.evan.classictalents.control
 
 import javafx.fxml.FXML
 import javafx.scene.control.Label
+import javafx.scene.image.ImageView
 import javafx.scene.layout.HBox
 import org.hedbor.evan.classictalents.model.WowClass
 import org.hedbor.evan.classictalents.util.stringBinding
@@ -9,6 +10,7 @@ import kotlin.math.round
 
 class WowClassView(private val model: WowClass) {
     @FXML private lateinit var specsPane: HBox
+    @FXML private lateinit var iconView: ImageView
     @FXML private lateinit var classNameLabel: Label
     @FXML private lateinit var spec1PtsLabel: Label
     @FXML private lateinit var spec2PtsLabel: Label
@@ -26,6 +28,8 @@ class WowClassView(private val model: WowClass) {
         wowClass.specializations
             .map { SpecializationView(it) }
             .toCollection(specsPane.children)
+
+        iconView.imageProperty().bind(wowClass.iconProperty())
 
         classNameLabel.textProperty().bind(
             wowClass.nameProperty().stringBinding { "$it:" })

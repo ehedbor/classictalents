@@ -12,14 +12,13 @@ import org.hedbor.evan.classictalents.util.toObservableList
 
 class TalentConfigReader {
     companion object {
-        private val COST_PATTERN = Regex("""^\s*(?<cost>\d+)\s*(?<resource>%\s*of\s*base\s*mana|mana|rage|energy)\s*$""", RegexOption.IGNORE_CASE)
+        private val COST_PATTERN = Regex("""^\s*(?<cost>\d+)\s*(?<resource>%\s*of\s*base\s*mana|mana|rage|energy|(?:blood|frost|unholy)\s*runes?|runic\s*power)\s*$""", RegexOption.IGNORE_CASE)
         private val RANGE_PATTERN = Regex("""^\s*(?:(?<keyword>self|melee)|(?:(?<minDistance>\d+(?:\.\d+)?)\s*-\s*)?(?<distance>\d+(?:\.\d+)?)\s*(?<unit>yards?|yds?))\s*$""", RegexOption.IGNORE_CASE)
         private val CAST_TIME_PATTERN = Regex("""^\s*(?:(?<keyword>instant|next\s*melee)|(?<time>\d+(?:\.\d+)?)\s*(?<unit>seconds?|secs?)\s*(?<isChanneled>\(channeled\))?)\s*$""", RegexOption.IGNORE_CASE)
         private val COOLDOWN_PATTERN = Regex("""^\s*(?<cooldown>\d+(?:\.\d+)?)\s*(?<unit>seconds?|secs?|minutes?|mins?|hours?|hrs?)\s*$""", RegexOption.IGNORE_CASE)
     }
     
     private val mapper = ObjectMapper(YAMLFactory())
-    private val rootType = object : TypeReference<TalentConfigDto>() {}
 
     /**
      * Reads a talent file from the specified resource location.
@@ -30,19 +29,15 @@ class TalentConfigReader {
      * @throws IllegalArgumentException if the yml file is malformed
      */
     fun readClass(filePath: String): List<WowClass> {
-        val config = try {
-            mapper.readValue(javaClass.getResourceAsStream(filePath), rootType)
+        val classDto = try {
+            mapper.readValue(javaClass.getResourceAsStream(filePath), ClassDto::class.java)
         } catch (e: Exception) {
             throw IllegalStateException("Failed to parse talent file at '$filePath'", e)
         }
 
-        require(config.size == 1) {
-            "Expected 1 class per file, found ${config.size}\n\tin file '$filePath'"
-        }
-        val (className, classDto) = config.entries.first()
-        val errorPath = "in file '$filePath', class '$className'"
+        val errorPath = "in file '$filePath', class '${classDto.name}'"
 
-        // common attributes
+        // these attributes are declared in the root node and shared by all WowClass instances 
         val icon = getImage(errorPath, classDto.icon)
         val color = try {
             Color.web(classDto.color)
@@ -51,7 +46,7 @@ class TalentConfigReader {
         }
 
         fun WowClass.addCommonAttributes() {
-            this.name = className
+            this.name = classDto.name
             this.icon = icon
             this.color = color
         }
@@ -193,24 +188,32 @@ class TalentConfigReader {
         spell.reagents = spellDto.reagents?.toObservableList() ?: observableListOf()
 
         if (spellDto.cost != null) {
-            val match = COST_PATTERN.find(spellDto.cost)
-            requireNotNull(match) {
-                "Spell cost must be of the form [<cost:int> <resource:Mana|Rage|Energy|% of Base Mana>] " +
-                    "(got '${spellDto.cost}')\n\t$errorPath"
-            }
+            for (costString in spellDto.cost.split("/")) {
+                val match = COST_PATTERN.find(costString.trim())
+                requireNotNull(match) {
+                    "Spell cost must be of the form [<cost:int> <resource:Mana|Rage|Energy|" +
+                        "% of Base Mana|Blood Runes?|Frost Runes?|Unholy Runes?|Runic Power>] " +
+                        "(got '${spellDto.cost}')\n\t$errorPath"
+                }
 
-            spell.cost = match.groups["cost"]?.value?.toIntOrNull()
-                ?: throw IllegalStateException("failed to parse resource cost despite matching regex")
+                val cost = match.groups["cost"]?.value?.toIntOrNull()
+                    ?: throw IllegalStateException("failed to parse resource cost despite matching regex")
 
-            val resource = match.groups["resource"]?.value
-                ?.lowercase()
-                ?.replace("\\s+".toRegex(), " ")
-            spell.resource = when (resource) {
-                "mana" -> ResourceType.MANA
-                "% of base mana" -> ResourceType.PERCENT_OF_BASE_MANA
-                "energy" -> ResourceType.ENERGY
-                "rage" -> ResourceType.RAGE
-                else -> throw IllegalStateException("failed to parse resource despite matching regex")
+                val resource = match.groups["resource"]?.value
+                    ?.lowercase()
+                    ?.replace("\\s+".toRegex(), " ")
+                val resourceType = when (resource) {
+                    "mana" -> ResourceType.MANA
+                    "% of base mana" -> ResourceType.PERCENT_OF_BASE_MANA
+                    "energy" -> ResourceType.ENERGY
+                    "rage" -> ResourceType.RAGE
+                    "blood rune", "blood runes" -> ResourceType.BLOOD_RUNES
+                    "frost rune", "frost runes" -> ResourceType.FROST_RUNES
+                    "unholy rune", "unholy runes" -> ResourceType.UNHOLY_RUNES
+                    "runic power" -> ResourceType.RUNIC_POWER
+                    else -> throw IllegalStateException("failed to parse resource despite matching regex")
+                }
+                spell.resourceCosts.add(cost to resourceType)
             }
         }
 
@@ -295,7 +298,7 @@ class TalentConfigReader {
         val actualPath = if (path.startsWith("/")) {
             path
         } else {
-            "$ASSETS_ROOT/$path"
+            "$ASSETS_ROOT/images/$path"
         }
 
         val resource = javaClass.getResourceAsStream(actualPath)

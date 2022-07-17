@@ -112,7 +112,7 @@ class SpecializationView(private val model: Specialization) : BorderPane() {
     private fun addTalent(talent: Talent) {
         val button = TalentButton(talent)
         talentGrid.add(button, talent.column, talent.row)
-        GridPane.setMargin(button, Insets(5.0))
+        GridPane.setMargin(button, Insets(2.0))
 
         // generate an arrow for talents with a prerequisite
         if (talent.prerequisite != null) {

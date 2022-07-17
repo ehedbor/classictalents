@@ -15,13 +15,9 @@ class Spell {
         const val CAST_NEXT_MELEE = -1.0
     }
 
-    private val _cost = SimpleIntegerProperty()
-    var cost by _cost.delegate()
-    fun costProperty() = _cost
-
-    private val _resource = SimpleObjectProperty<ResourceType?>()
-    var resource by _resource.delegate()
-    fun resourceProperty() = _resource
+    private val _resourceCosts = SimpleListProperty(observableListOf<Pair<Int, ResourceType>>())
+    var resourceCosts: ObservableList<Pair<Int, ResourceType>> by _resourceCosts.delegate()
+    fun resourceCostsProperty() = _resourceCosts
 
     private val _range = SimpleObjectProperty<Double?>()
     var range by _range.delegate()
@@ -61,6 +57,10 @@ enum class ResourceType {
     PERCENT_OF_BASE_MANA,
     RAGE,
     ENERGY,
+    BLOOD_RUNES,
+    FROST_RUNES,
+    UNHOLY_RUNES,
+    RUNIC_POWER
 }
 
 enum class CooldownUnit {

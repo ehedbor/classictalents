@@ -15,7 +15,7 @@
       <padding>
         <Insets left="10" right="10"/>
       </padding>
-      <BorderPane fx:id="header" styleClass="class-header"
+      <BorderPane styleClass="class-header"
                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <padding>
           <Insets right="10" left="10"/>
@@ -23,16 +23,14 @@
         <left>
           <HBox spacing="5">
             <StackPane>
-              <ImageView styleClass="talent-icon"
-                         fitWidth="27" fitHeight="27">
-                <Image url="@../images/druid/ClassIcon.jpg"/>
-              </ImageView>
+              <ImageView fx:id="iconView"
+                         styleClass="talent-icon"
+                         fitWidth="27" fitHeight="27"/>
               <ImageView styleClass="talent-icon"
                          fitWidth="30" fitHeight="30">
                 <Image url="@../images/button/border.png"/>
               </ImageView>
             </StackPane>
-            <!-- TODO: add style classes for gray text -->
             <Label fx:id="classNameLabel" styleClass="important-class-description-text"/>
             <Label fx:id="spec1PtsLabel" styleClass="important-class-description-text"/>
             <Label text="/" styleClass="important-class-description-text" style="-fx-text-fill: gray;"/>

@@ -1,394 +1,1555 @@
-Warlock:
-  Icon: "images/warlock/ClassIcon.jpg"
-  Color: "#8788EE"
-  Classic:
-    Specializations:
-      Affliction:
-        Icon: "images/warlock/DeathCoil.png"
-        Background: "images/backgrounds/warlock_affliction.jpg"
-        Talents:
-          Suppression:
-            Location: [0, 1]
-            Max Rank: 5
-            Icon: "images/priest/VampiricEmbrace.png"
-            Description: >-
-              Reduces the chance for enemies to resist your Affliction spells by {:|2,4,6,8,10}%.
-          Improved Corruption:
-            Location: [0, 2]
-            Max Rank: 5
-            Icon: "images/warlock/Corruption.png"
-            Description: >-
-              Reduces the casting time of your Corruption spell by {:|0.4,0.8,1.2,1.6,2} sec.
-          Improved Curse of Weakness:
-            Location: [1, 0]
-            Max Rank: 3
-            Icon: "images/warlock/CurseOfWeakness.png"
-            Description: Increases the effect of your Curse of Weakness by {:|6,13,20}%.
-          Improved Drain Soul:
-            Location: [1, 1]
-            Max Rank: 2
-            Icon: "images/warlock/DrainSoul.png"
-            Description: >-
-              Gives you a {:|50,100}% chance to get a 100% increase to your Mana regeneration for 
-              10 sec if the target is killed by you while you drain its soul. In addition, your Mana 
-              regeneration may continue to regenerate while casting at 50% of normal.
-          Improved Life Tap:
-            Location: [1, 2]
-            Max Rank: 2
-            Icon: "images/warlock/LifeTap.png"
-            Description: Increases the amount of Mana awarded by your Life Tap spell by {:|10,20}%.
-          Improved Drain Life:
-            Location: [1, 3]
-            Max Rank: 5
-            Icon: "images/warlock/DrainLife.png"
-            Description: Increases the Health drained by your Drain Life spell by {:|2,4,6,8,10}%.
-          Improved Curse of Agony:
-            Location: [2, 0]
-            Max Rank: 3
-            Icon: "images/warlock/CurseOfAgony.png"
-            Description: Increases the damage done by your Curse of Agony by {:|2,4,6}%.
-          Fel Concentration:
-            Location: [2, 1]
-            Max Rank: 5
-            Icon: "images/warlock/FelConcentration.png"
-            Description: >-
-              Gives you a {:|14,28,42,56,70}% chance to avoid interruption caused by damage while 
-              channeling the Drain Life, Drain Mana or Drain Soul spell.
-          Amplify Curse:
-            Location: [2, 2]
-            Max Rank: 1
-            Icon: "images/warlock/AmplifyCurse.png"
-            Description: >-
-              Increases the effect of your next Curse of Weakness or Curse of Agony by 50%, or your 
-              next Curse of Exhaustion by 20%. Lasts 30 sec.
-            Spell:
-              Cast Time: Instant
-              Cooldown: 3 min
-          Grim Reach:
-            Location: [3, 0]
-            Max Rank: 2
-            Icon: "images/warlock/GrimReach.png"
-            Description: Increases the range of your Affliction spells by {:|10,20}%.
-          Nightfall:
-            Location: [3, 1]
-            Max Rank: 2
-            Icon: "images/warlock/RitualOfSummoning.png"
-            Description: >-
-              Gives your Corruption and Drain Life spells a {:|2,4}% chance to cause you to enter a 
-              Shadow Trance state after damaging the opponent. The Shadow Trance state reduces the 
-              casting time of your next Shadow Bolt spell by 100%.
-          Improved Drain Mana:
-            Location: [3, 3]
-            Max Rank: 2
-            Icon: "images/priest/MindFlay.png"
-            Description: >-
-              Causes {:|15,30}% of the Mana drained by your Drain Mana spell to damage the opponent.
-          Siphon Life:
-            Location: [4, 1]
-            Max Rank: 1
-            Icon: "images/warlock/SiphonLife.png"
-            Description: >-
-              Transfers 15 health from the target to the caster every 3 sec. Lasts 30 sec.
-            Spell:
-              Cost: 150 Mana
-              Range: 30 yd
-              Cast Time: Instant
-          Curse of Exhaustion:
-            Location: [4, 2]
-            Requires: Amplify Curse
-            Max Rank: 1
-            Icon: "images/warlock/CurseOfExhaustion.png"
-            Description: >-
-              Reduces the target's movement speed by 10% for 12 sec. Only one Curse per Warlock can 
-              be active on any one target.
-            Spell:
-              Cost: 8% of Base Mana
-              Range: 30 yd
-              Cast Time: Instant
-          Improved Curse of Exhaustion:
-            Location: [4, 3]
-            Requires: Curse of Exhaustion
-            Max Rank: 4
-            Icon: "images/warlock/CurseOfExhaustion.png"
-            Description: >-
-              Increases the speed reduction of your Curse of Exhaustion by {:|5,10,15,20}%.
-          Shadow Mastery:
-            Location: [5, 1]
-            Requires: Siphon Life
-            Max Rank: 5
-            Icon: "images/warlock/ShadowMastery.png"
-            Description: >-
-              Increases the damage dealt or life drained by your Shadow spells by {:|2,4,6,8,10}%.
-          Dark Pact:
-            Location: [6, 1]
-            Max Rank: 1
-            Icon: "images/warlock/DarkPact.png"
-            Description: Drains 50 of your pet's Mana. returning 100% to you.
-            Spell:
-              Range: 20 yd
-              Cast Time: Instant
-      Demonology:
-        Icon: "images/warlock/DemonicEmbrace.png"
-        Background: "images/backgrounds/warlock_demonology.jpg"
-        Talents:
-          Improved Healthstone:
-            Location: [0, 0]
-            Max Rank: 2
-            Icon: "images/warlock/Cookie.png"
-            Description: Increases the amount of Health restored by your Healthstone by {:|10,20}%.
-          Improved Imp:
-            Location: [0, 1]
-            Max Rank: 3
-            Icon: "images/warlock/SummonImp.png"
-            Description: >-
-              Increases the effect of your Imp's Firebolt, Fire Shield and Blood Pact spells by 
-              {:|10,20,30}%.
-          Demonic Embrace:
-            Location: [0, 2]
-            Max Rank: 5
-            Icon: "images/warlock/DemonicEmbrace.png"
-            Description: >-
-              Increases your total Stamina by {0:|3,6,9,12,15}%, but reduces your total Spirit by 
-              {0:|1,2,3,4,5}%.
-          Improved Health Funnel:
-            Location: [1, 0]
-            Max Rank: 2
-            Icon: "images/warlock/HealthFunnel.png"
-            Description: >-
-              Increases the amount of Health transferred by your Health Funnel spell by {:|10,20}%.
-          Improved Voidwalker:
-            Location: [1, 1]
-            Max Rank: 3
-            Icon: "images/warlock/SummonVoidwalker.png"
-            Description: >-
-              Increases the effectiveness of your Voidwalker's Torment, Consume Shadows, Sacrifice 
-              and Suffering spells by {:|10,20,30}%.
-          Fel Intellect:
-            Location: [1, 2]
-            Max Rank: 5
-            Icon: "images/mage/ArcaneIntellect.png"
-            Description: >-
-              Increases the maximum Mana of your Imp, Voidwalker, Succubus and Felhunter by 
-              {:|3,6,9,12,15}%.
-          Improved Succubus:
-            Location: [2, 0]
-            Max Rank: 3
-            Icon: "images/warlock/SummonSuccubus.png"
-            Description: >-
-              Increases the effect of your Succubus' Lash of Pain and Soothing Kiss spells by 
-              {0:|10,20,30}%, and increases the duration of your Succubus' Seduction and Lesser 
-              Invisibility spells by {0:|10,20,30}%.
-          Fel Domination:
-            Location: [2, 1]
-            Max Rank: 1
-            Icon: "images/mage/RemoveCurse.png"
-            Description: >-
-              Your next Imp, Voidwalker, Succubus, or Felhunter Summon spell has its casting time 
-              reduced by 5.5 sec and its Mana cost reduced by 50%.
-            Spell:
-              Cast Time: Instant
-              Cooldown: 15 min
-          Fel Stamina:
-            Location: [2, 2]
-            Max Rank: 5
-            Icon: "images/warlock/ShadowWard.png"
-            Description: >-
-              Increases the maximum Health of your Imp, Voidwalker, Succubus and Felhunter by 
-              {:|3,6,9,12,15}%.
-          Master Summoner:
-            Location: [3, 1]
-            Requires: Fel Domination
-            Max Rank: 2
-            Icon: "images/warlock/ImpPhaseShift.png"
-            Description: >-
-              Reduces the casting time of your Imp, Voidwalker, Succubus and Felhunter Summoning 
-              spells by {0:|2,4} sec and the Mana cost by {0:|20,40}%.
-          Unholy Power:
-            Location: [3, 2]
-            Max Rank: 5
-            Icon: "images/priest/MindBlast.png"
-            Description: >-
-              Increases the damage done by your Voidwalker, Succubus, and Felhunter's melee attacks 
-              by {:|4,8,12,16,20}%.
-          Improved Enslave Demon:
-            Location: [4, 0]
-            Max Rank: 5
-            Icon: "images/warlock/EnslaveDemon.png"
-            Description: >-
-              Reduces the Attack Speed and Casting Speed penalty of your Enslave Demon spell by 
-              {0:|2,4,6,8,10}% and reduces the resist chance by {0:|2,4,6,8,10}%.
-          Demonic Sacrifice:
-            Location: [4, 1]
-            Max Rank: 1
-            Icon: "images/priest/PsychicScream.png"
-            Description: >-
-              When activated, sacrifices your summoned demon to grant you an effect that lasts 
-              30 min. The effect is canceled if any Demon is summoned.
-              
-              Imp: Increases your Fire damage by 15%.
-              
-              Voidwalker: Restores 3% of total Health every 4 sec.
-              
-              Succubus: Increases your Shadow damage by 15%.
-              
-              Felhunter: Restores 2% of total Mana every 4 sec.
-            Spell:
-              Range: 100 yd
-              Cast Time: Instant
-          Improved Firestone:
-            Location: [4, 3]
-            Max Rank: 2
-            Icon: "images/warlock/CookieBurnt.png"
-            Description: >-
-              Increases the bonus Fire damage from Firestones and the Firestone effect by 
-              {:|15,30}%.
-          Master Demonologist:
-            Location: [5, 2]
-            Requires: Unholy Power
-            Max Rank: 5
-            Icon: "images/warlock/MasterDemonologist.png"
-            Description: >-
-              Grants both the Warlock and the summoned demon an effect as long as that demon is 
-              active.
-              
-              Imp - Reduces threat caused by {0:|4,8,12,16,20}%.
-              
-              Voidwalker - Reduces physical damage taken by {0:|2,4,6,8,10}%.
-              
-              Succubus - Increases all damage caused by {0:|2,4,6,8,10}%.
-              
-              Felhunter - Increases all resistances by {0:|.2,.4,.6,.8,1} per level.
-          Soul Link:
-            Location: [6, 1]
-            Requires: Demonic Sacrifice
-            Max Rank: 1
-            Icon: "images/warlock/SoulLink.png"
-            Description: >-
-              When active, 30% of all damage taken by the caster is taken by your Imp, Voidwalker, 
-              Succubus, or Felhunter demon instead. In addition, both the demon and master will 
-              inflict 3% more damage. Lasts as long as the demon is active.
-            Spell:
-              Cost: 20% of Base Mana
-              Range: 100 yd
-              Cast Time: Instant
-          Improved Spellstone:
-            Location: [6, 2]
-            Max Rank: 2
-            Icon: "images/warlock/CookieGlass.png"
-            Description: Increases the amount of damage absorbed by your Spellstone by {:|15,30}%.
-      Destruction:
-        Icon: "images/warlock/RainOfFire.png"
-        Background: "images/backgrounds/warlock_destruction.jpg"
-        Talents:
-          Improved Shadow Bolt:
-            Location: [0, 1]
-            Max Rank: 5
-            Icon: "images/warlock/ShadowBolt.png"
-            Description: >-
-              Your Shadow Bolt critical strikes increase Shadow damage dealt to the target by 
-              {:|4,8,12,16,20}% until 4 non-periodic damage sources are applied. Effect lasts a 
-              maximum of 12 sec.
-          Cataclysm:
-            Location: [0, 2]
-            Max Rank: 5
-            Icon: "images/warlock/Cataclysm.png"
-            Description: Reduces the Mana cost of your Destruction spells by {:|1,2,3,4,5}%.
-          Bane:
-            Location: [1, 1]
-            Max Rank: 5
-            Icon: "images/warlock/Bane.png"
-            Description: >-
-              Reduces the casting time of your Shadow Bolt and Immolate spells by 
-              {0:|0.1,0.2,0.3,0.4,0.5} sec and your Soul Fire spell by {0:|0.4,0.8,1.2,1.6,2} sec.
-          Aftermath:
-            Location: [1, 2]
-            Max Rank: 5
-            Icon: "images/warlock/Aftermath.png"
-            Description: >-
-              Gives your Destruction spells a {:|2,4,6,8,10}% chance to daze the target for 5 sec.
-          Improved Firebolt:
-            Location: [2, 0]
-            Max Rank: 2
-            Icon: "images/warlock/ImpFireBolt.png"
-            Description: Reduces the casting time of your Imp's Firebolt spell by {:|0.5,1} sec.
-          Improved Lash Of Pain:
-            Location: [2, 1]
-            Max Rank: 2
-            Icon: "images/warlock/SuccubusLashOfPain.png"
-            Description: Reduces the cooldown of your Succubus' Lash of Pain spell by {:|3,6} sec.
-          Devastation:
-            Location: [2, 2]
-            Max Rank: 5
-            Icon: "images/shaman/FlameShock.png"
-            Description: >-
-              Increases the critical strike chance of your Destruction spells by {:|1,2,3,4,5}%.
-          Shadowburn:
-            Location: [2, 3]
-            Max Rank: 1
-            Icon: "images/warlock/Shadowburn.png"
-            Description: >-
-              Instantly blasts the target for 91 to 104 Shadow damage. If the target dies within 
-              5 sec of Shadowburn, and yields experience or honor, the caster gains a Soul Shard.
-            Spell:
-              Reagents:
-                - Soul Shard
-              Cost: 105 Mana
-              Range: 20 yd
-              Cast Time: Instant
-              Cooldown: 15 sec
-          Intensity:
-            Location: [3, 0]
-            Max Rank: 2
-            Icon: "images/warlock/Intensity.png"
-            Description: >-
-              Gives you a {:|35,70}% chance to resist interruption caused by damage while channeling 
-              the Rain of Fire, Hellfire, or Soul Fire spell.
-          Destructive Reach:
-            Location: [3, 1]
-            Max Rank: 2
-            Icon: "images/deathknight/CorpseExplode.png"
-            Description: Increases the range of your Destruction spells by {:|10,20}%.
-          Improved Searing Pain:
-            Location: [3, 3]
-            Max Rank: 5
-            Icon: "images/mage/Scorch.png"
-            Description: >-
-              Increases the critical strike chance of your Searing Pain spell by {:|2,4,6,8,10}%.
-          Pyroclasm:
-            Location: [4, 0]
-            Requires: Intensity
-            Max Rank: 2
-            Icon: "images/shaman/ElementalFury.png"
-            Description: >-
-              Gives your Rain of Fire, Hellfire, and Soul Fire spells a {:|13,25}% chance to stun 
-              the target for 3 sec.
-          Improved Immolate:
-            Location: [4, 1]
-            Max Rank: 5
-            Icon: "images/shaman/FlameShock.png"
-            Description: Increases the initial damage of your Immolate spell by {:|5,10,15,20,25}%.
-          Ruin:
-            Location: [4, 2]
-            Requires: Devastation
-            Max Rank: 1
-            Icon: "images/priest/ShadowWordPain.png"
-            Description: >-
-              Increases the critical strike damage bonus of your Destruction spells by 100%.
-          Emberstorm:
-            Location: [5, 2]
-            Max Rank: 5
-            Icon: "images/mage/Flamestrike.png"
-            Description: Increases the damage done by your Fire spells by {:|2,4,6,8,10}%.
-          Conflagrate:
-            Location: [6, 1]
-            Requires: Improved Immolate
-            Max Rank: 1
-            Icon: "images/mage/FireBlast.png"
-            Description: >-
-              Ignites a target that is already afflicted by Immolate, dealing 249 to 316 Fire damage 
-              and consuming the Immolate spell.
-            Spell:
-              Cost: 135 Mana
-              Range: 30 yd
-              Cast Time: Instant
-              Cooldown: 10 sec
+Class: Warlock
+Icon: class/warlock.jpg
+Color: rgb(135, 136, 238)
+Classic:
+  Specializations:
+    Affliction:
+      Icon: spell/shadow/deathcoil.jpg
+      Background: backgrounds/302.jpg
+      Talents:
+        Suppression:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/shadow/unsummonbuilding.jpg
+          Description: Reduces the chance for enemies to resist your Affliction spells
+            by {:|2,4,6,8,10}%.
+        Improved Corruption:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/shadow/abominationexplosion.jpg
+          Description: Reduces the casting time of your Corruption spell by {:|0.4,0.8,1.2,1.6,2}
+            sec.
+        Improved Curse of Weakness:
+          Location: [1, 0]
+          Max Rank: 3
+          Icon: spell/shadow/curseofmannoroth.jpg
+          Description: Increases the effect of your Curse of Weakness by {:|6,13,20}%.
+        Improved Drain Soul:
+          Location: [1, 1]
+          Max Rank: 2
+          Icon: spell/shadow/haunting.jpg
+          Description: Gives you a {:|50,100}% chance to get a 100% increase to your
+            Mana regeneration for 10 sec if the target is killed by you while you
+            drain its soul. In addition your Mana may continue to regenerate while
+            casting at 50% of normal.
+        Improved Life Tap:
+          Location: [1, 2]
+          Max Rank: 2
+          Icon: spell/shadow/burningspirit.jpg
+          Description: Increases the amount of Mana awarded by your Life Tap spell
+            by {:|10,20}%.
+        Improved Drain Life:
+          Location: [1, 3]
+          Max Rank: 5
+          Icon: spell/shadow/lifedrain02.jpg
+          Description: Increases the Health drained by your Drain Life spell by {:|2,4,6,8,10}%.
+        Improved Curse of Agony:
+          Location: [2, 0]
+          Max Rank: 3
+          Icon: spell/shadow/curseofsargeras.jpg
+          Description: Increases the damage done by your Curse of Agony by {:|2,4,6}%.
+        Fel Concentration:
+          Location: [2, 1]
+          Max Rank: 5
+          Icon: spell/shadow/fingerofdeath.jpg
+          Description: Gives you a {:|14,28,42,56,70}% chance to avoid interruption
+            caused by damage while channeling the Drain Life, Drain Mana, or Drain
+            Soul spell.
+        Amplify Curse:
+          Location: [2, 2]
+          Max Rank: 1
+          Icon: spell/shadow/contagion.jpg
+          Description: Increases the effect of your next Curse of Weakness or Curse
+            of Agony by 50%, or your next Curse of Exhaustion by 20%. Lasts 30 sec.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 3 min
+        Grim Reach:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: spell/shadow/callofbone.jpg
+          Description: Increases the range of your Affliction spells by {:|10,20}%.
+        Nightfall:
+          Location: [3, 1]
+          Max Rank: 2
+          Icon: spell/shadow/twilight.jpg
+          Description: Gives your Corruption and Drain Life spells a {:|2,4}% chance
+            to cause you to enter a Shadow Trance state after damaging the opponent.
+            The Shadow Trance state reduces the casting time of your next Shadow Bolt
+            spell by 100%.
+        Improved Drain Mana:
+          Location: [3, 3]
+          Max Rank: 2
+          Icon: spell/shadow/siphonmana.jpg
+          Description: Causes {:|15,30}% of the Mana drained by your Drain Mana spell
+            to damage the opponent.
+        Siphon Life:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: spell/shadow/requiem.jpg
+          Description: Transfers 15 health from the target to the caster every 3 sec.
+            Lasts 30 sec.
+          Spell:
+            Cost: 150 Mana
+            Range: 30 yd
+            Cast Time: Instant
+        Curse of Exhaustion:
+          Location: [4, 2]
+          Requires: Amplify Curse
+          Max Rank: 1
+          Icon: spell/shadow/grimward.jpg
+          Description: Reduces the target's movement speed by 10% for 12 sec. Only
+            one Curse per Warlock can be active on any one target.
+          Spell:
+            Cost: 8% of base mana
+            Range: 30 yd
+            Cast Time: Instant
+        Improved Curse of Exhaustion:
+          Location: [4, 3]
+          Requires: Curse of Exhaustion
+          Max Rank: 4
+          Icon: spell/shadow/grimward.jpg
+          Description: Increases the speed reduction of your Curse of Exhaustion by
+            {:|5,10,15,20}%.
+        Shadow Mastery:
+          Location: [5, 1]
+          Requires: Siphon Life
+          Max Rank: 5
+          Icon: spell/shadow/shadetruesight.jpg
+          Description: Increases the damage dealt or life drained by your Shadow spells
+            by {:|2,4,6,8,10}%.
+        Dark Pact:
+          Location: [6, 1]
+          Max Rank: 1
+          Icon: spell/shadow/darkritual.jpg
+          Description: Drains 150 of your pet's Mana, returning 100% to you.
+          Spell:
+            Range: 20 yd
+            Cast Time: Instant
+    Demonology:
+      Icon: spell/shadow/metamorphosis.jpg
+      Background: backgrounds/303.jpg
+      Talents:
+        Improved Healthstone:
+          Location: [0, 0]
+          Max Rank: 2
+          Icon: inv/stone/04.jpg
+          Description: Increases the amount of Health restored by your Healthstone
+            by {:|10,20}%.
+        Improved Imp:
+          Location: [0, 1]
+          Max Rank: 3
+          Icon: spell/shadow/summonimp.jpg
+          Description: Increases the effect of your Imp's Firebolt, Fire Shield, and
+            Blood Pact spells by {:|10,20,30}%.
+        Demonic Embrace:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/shadow/metamorphosis.jpg
+          Description: Increases your total Stamina by {0:|3,6,9,12,15}% but reduces
+            your total Spirit by {0:|1,2,3,4,5}%.
+        Improved Health Funnel:
+          Location: [1, 0]
+          Max Rank: 2
+          Icon: spell/shadow/lifedrain.jpg
+          Description: Increases the amount of Health transferred by your Health Funnel
+            spell by {:|10,20}%.
+        Improved Voidwalker:
+          Location: [1, 1]
+          Max Rank: 3
+          Icon: spell/shadow/summonvoidwalker.jpg
+          Description: Increases the effectiveness of your Voidwalker's Torment, Consume
+            Shadows, Sacrifice and Suffering spells by {:|10,20,30}%.
+        Fel Intellect:
+          Location: [1, 2]
+          Max Rank: 5
+          Icon: spell/holy/magicalsentry.jpg
+          Description: Increases the maximum Mana of your Imp, Voidwalker, Succubus,
+            Incubus, and Felhunter by {:|3,6,9,12,15}%.
+        Improved Sayaad:
+          Location: [2, 0]
+          Max Rank: 3
+          Icon: ability/warlock/randomizesuccubusincubus.jpg
+          Description: Increases the effect of your Succubus' and Incubus' Lash of
+            Pain and Soothing Kiss spells by {0:|10,20,30}%, and increases the duration
+            of your Succubus' and Incubus' Seduction and Lesser Invisibility spells
+            by {0:|10,20,30}%.
+        Fel Domination:
+          Location: [2, 1]
+          Max Rank: 1
+          Icon: spell/nature/removecurse.jpg
+          Description: Your next Imp, Voidwalker, Succubus, Incubus, or Felhunter
+            Summon spell has its casting time reduced by 5.5 sec and its Mana cost
+            reduced by 50%.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 15 min
+        Fel Stamina:
+          Location: [2, 2]
+          Max Rank: 5
+          Icon: spell/shadow/antishadow.jpg
+          Description: Increases the maximum Health of your Imp, Voidwalker, Succubus,
+            Incubus, and Felhunter by {:|3,6,9,12,15}%.
+        Unholy Power:
+          Location: [3, 2]
+          Max Rank: 5
+          Icon: spell/shadow/shadowworddominate.jpg
+          Description: Increases the damage done by your Voidwalker, Succubus, Incubus,
+            and Felhunter's melee attacks by {:|4,8,12,16,20}%.
+        Master Summoner:
+          Location: [3, 1]
+          Requires: Fel Domination
+          Max Rank: 2
+          Icon: spell/shadow/impphaseshift.jpg
+          Description: Reduces the casting time of your Imp, Voidwalker, Succubus,
+            Incubus, and Felhunter Summoning spells by {0:|2,4} sec and the Mana cost
+            by {0:|20,40}%.
+        Improved Enslave Demon:
+          Location: [4, 0]
+          Max Rank: 5
+          Icon: spell/shadow/enslavedemon.jpg
+          Description: Reduces the Attack Speed and Casting Speed penalty of your
+            Enslave Demon spell by {0:|2,4,6,8,10}% and reduces the resist chance
+            by {0:|2,4,6,8,10}%.
+        Demonic Sacrifice:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: spell/shadow/psychicscream.jpg
+          Description: >-
+            When activated, sacrifices your summoned demon to grant you
+            an effect that lasts 30 min. The effect is canceled if any Demon is summoned.
+
+            Imp: Increases your Fire damage by 15%.
+
+            Voidwalker: Restores 3% of total Health every 4 sec.
+
+            Succubus/Incubus: Increases your Shadow damage by 15%.
+
+            Felhunter: Restores 2% of total Mana every 4 sec.
+          Spell:
+            Range: 100 yd
+            Cast Time: Instant
+        Improved Firestone:
+          Location: [4, 3]
+          Max Rank: 2
+          Icon: inv/ammo/firetar.jpg
+          Description: Increases the bonus Fire damage from Firestones and the Firestone
+            effect by {:|15,30}%.
+        Master Demonologist:
+          Location: [5, 2]
+          Requires: Unholy Power
+          Max Rank: 5
+          Icon: spell/shadow/shadowpact.jpg
+          Description: >-
+            Grants both the Warlock and the summoned demon an effect as
+            long as that demon is active.
+
+            Imp - Reduces threat caused by {0:|4,8,12,16,20}%.
+
+            Voidwalker - Reduces physical damage taken by {0:|2,4,6,8,10}%.
+
+            Succubus/Incubus - Increases all damage caused by {0:|2,4,6,8,10}%.
+
+            Felhunter - Increases all resistances by {0:|.2,.4,.6,.8,1} per level.
+        Improved Spellstone:
+          Location: [6, 2]
+          Max Rank: 2
+          Icon: inv/misc/gem/sapphire/01.jpg
+          Description: Increases the amount of damage absorbed by your Spellstone
+            by {:|15,30}%.
+        Soul Link:
+          Location: [6, 1]
+          Requires: Demonic Sacrifice
+          Max Rank: 1
+          Icon: spell/shadow/gathershadows.jpg
+          Description: When active, 30% of all damage taken by the caster is taken
+            by your Imp, Voidwalker, Succubus, Incubus, or Felhunter demon instead.
+            In addition, both the demon and master will inflict 3% more damage. Lasts
+            as long as the demon is active.
+          Spell:
+            Cost: 20% of base mana
+            Range: 100 yd
+            Cast Time: Instant
+    Destruction:
+      Icon: spell/shadow/rainoffire.jpg
+      Background: backgrounds/301.jpg
+      Talents:
+        Improved Shadow Bolt:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/shadow/shadowbolt.jpg
+          Description: Your Shadow Bolt critical strikes increase Shadow damage dealt
+            to the target by {:|4,8,12,16,20}% until 4 non-periodic damage sources
+            are applied. Effect lasts a maximum of 12 sec.
+        Cataclysm:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/fire/windsofwoe.jpg
+          Description: Reduces the Mana cost of your Destruction spells by {:|1,2,3,4,5}%.
+        Bane:
+          Location: [1, 1]
+          Max Rank: 5
+          Icon: spell/shadow/deathpact.jpg
+          Description: Reduces the casting time of your Shadow Bolt and Immolate spells
+            by {0:|0.1,0.2,0.3,0.4,0.5} sec and your Soul Fire spell by {0:|0.4,0.8,1.2,1.6,2}
+            sec.
+        Aftermath:
+          Location: [1, 2]
+          Max Rank: 5
+          Icon: spell/fire/fire.jpg
+          Description: Gives your Destruction spells a {:|2,4,6,8,10}% chance to daze
+            the target for 5 sec.
+        Improved Firebolt:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: spell/fire/firebolt.jpg
+          Description: Reduces the casting time of your Imp's Firebolt spell by {:|0.5,1}
+            sec.
+        Improved Lash of Pain:
+          Location: [2, 1]
+          Max Rank: 2
+          Icon: spell/shadow/curse.jpg
+          Description: Reduces the cooldown of your Succubus' and Incubus' Lash of
+            Pain spell by {:|3,6} sec.
+        Devastation:
+          Location: [2, 2]
+          Max Rank: 5
+          Icon: spell/fire/flameshock.jpg
+          Description: Increases the critical strike chance of your Destruction spells
+            by {:|1,2,3,4,5}%.
+        Shadowburn:
+          Location: [2, 3]
+          Max Rank: 1
+          Icon: spell/shadow/scourgebuild.jpg
+          Description: Instantly blasts the target for 91 to 104 Shadow damage. If
+            the target dies within 5 sec of Shadowburn, and yields experience or honor,
+            the caster gains a Soul Shard.
+          Spell:
+            Cost: 105 Mana
+            Range: 20 yd
+            Cast Time: Instant
+            Cooldown: 15 sec
+            Reagents:
+              - Soul Shard
+        Intensity:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: spell/fire/lavaspawn.jpg
+          Description: Gives you a {:|35,70}% chance to resist interruption caused
+            by damage while channeling the Rain of Fire, Hellfire or Soul Fire spell.
+        Destructive Reach:
+          Location: [3, 1]
+          Max Rank: 2
+          Icon: spell/shadow/corpseexplode.jpg
+          Description: Increases the range of your Destruction spells by {:|10,20}%.
+        Improved Searing Pain:
+          Location: [3, 3]
+          Max Rank: 5
+          Icon: spell/fire/soulburn.jpg
+          Description: Increases the critical strike chance of your Searing Pain spell
+            by {:|2,4,6,8,10}%.
+        Improved Immolate:
+          Location: [4, 1]
+          Max Rank: 5
+          Icon: spell/fire/immolation.jpg
+          Description: Increases the initial damage of your Immolate spell by {:|5,10,15,20,25}%.
+        Pyroclasm:
+          Location: [4, 0]
+          Requires: Intensity
+          Max Rank: 2
+          Icon: spell/fire/volcano.jpg
+          Description: Gives your Rain of Fire, Hellfire, and Soul Fire spells a {:|13,26}%
+            chance to stun the target for 3 sec.
+        Ruin:
+          Location: [4, 2]
+          Requires: Devastation
+          Max Rank: 1
+          Icon: spell/shadow/shadowwordpain.jpg
+          Description: Increases the critical strike damage bonus of your Destruction
+            spells by 100%.
+        Emberstorm:
+          Location: [5, 2]
+          Max Rank: 5
+          Icon: spell/fire/selfdestruct.jpg
+          Description: Increases the damage done by your Fire spells by {:|2,4,6,8,10}%.
+        Conflagrate:
+          Location: [6, 1]
+          Requires: Improved Immolate
+          Max Rank: 1
+          Icon: spell/fire/fireball.jpg
+          Description: Ignites a target that is already afflicted by Immolate, dealing
+            249 to 316 Fire damage and consuming the Immolate spell.
+          Spell:
+            Cost: 165 Mana
+            Range: 30 yd
+            Cast Time: Instant
+            Cooldown: 10 sec
+TBC:
+  Specializations:
+    Affliction:
+      Icon: spell/shadow/deathcoil.jpg
+      Background: backgrounds/302.jpg
+      Talents:
+        Suppression:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/shadow/unsummonbuilding.jpg
+          Description: Reduces the chance for enemies to resist your Affliction spells
+            by {:|2,4,6,8,10}%.
+        Improved Corruption:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/shadow/abominationexplosion.jpg
+          Description: Reduces the casting time of your Corruption spell by {:|0.4,0.8,1.2,1.6,2}
+            sec.
+        Improved Curse of Weakness:
+          Location: [1, 0]
+          Max Rank: 2
+          Icon: spell/shadow/curseofmannoroth.jpg
+          Description: Increases the effect of your Curse of Weakness by {:|10,20}%.
+        Improved Drain Soul:
+          Location: [1, 1]
+          Max Rank: 2
+          Icon: spell/shadow/haunting.jpg
+          Description: Returns {0:|7,15}% of your maximum mana if the target is killed
+            by you while you drain its soul. In addition, your Affliction spells generate
+            {0:|5,10}% less threat.
+        Improved Life Tap:
+          Location: [1, 2]
+          Max Rank: 2
+          Icon: spell/shadow/burningspirit.jpg
+          Description: Increases the amount of Mana awarded by your Life Tap spell
+            by {:|10,20}%.
+        Soul Siphon:
+          Location: [1, 3]
+          Max Rank: 2
+          Icon: spell/shadow/lifedrain02.jpg
+          Description: Increases the amount drained by your Drain Life spell by an
+            additional {0:|2,4}% for each Affliction effect on the target, up to a
+            maximum of {0:|24,60}% additional effect.
+        Improved Curse of Agony:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: spell/shadow/curseofsargeras.jpg
+          Description: Increases the damage done by your Curse of Agony by {:|5,10}%.
+        Fel Concentration:
+          Location: [2, 1]
+          Max Rank: 5
+          Icon: spell/shadow/fingerofdeath.jpg
+          Description: Gives you a {:|14,28,42,56,70}% chance to avoid interruption
+            caused by damage while channeling the Drain Life, Drain Mana, or Drain
+            Soul spell.
+        Amplify Curse:
+          Location: [2, 2]
+          Max Rank: 1
+          Icon: spell/shadow/contagion.jpg
+          Description: Increases the effect of your next Curse of Doom or Curse of
+            Agony by 50%, or your next Curse of Exhaustion by an additional 20%. Lasts
+            30 sec.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 3 min
+        Grim Reach:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: spell/shadow/callofbone.jpg
+          Description: Increases the range of your Affliction spells by {:|10,20}%.
+        Nightfall:
+          Location: [3, 1]
+          Max Rank: 2
+          Icon: spell/shadow/twilight.jpg
+          Description: Gives your Corruption and Drain Life spells a {:|2,4}% chance
+            to cause you to enter a Shadow Trance state after damaging the opponent.
+            The Shadow Trance state reduces the casting time of your next Shadow Bolt
+            spell by 100%.
+        Empowered Corruption:
+          Location: [3, 3]
+          Max Rank: 3
+          Icon: spell/shadow/abominationexplosion.jpg
+          Description: Your Corruption spell gains an additional {:|12,24,36}% of
+            your bonus spell damage effects.
+        Shadow Embrace:
+          Location: [4, 0]
+          Max Rank: 5
+          Icon: spell/shadow/shadowembrace.jpg
+          Description: Your Corruption, Curse of Agony, Siphon Life and Seed of Corruption
+            spells also cause the Shadow Embrace effect, which reduces physical damage
+            caused by {:|1,2,3,4,5}%.
+        Siphon Life:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: spell/shadow/requiem.jpg
+          Description: Transfers 15 health from the target to the caster every 3 sec.
+            Lasts 30 sec.
+          Spell:
+            Cost: 140 Mana
+            Range: 30 yd
+            Cast Time: Instant
+        Curse of Exhaustion:
+          Location: [4, 2]
+          Requires: Amplify Curse
+          Max Rank: 1
+          Icon: spell/shadow/grimward.jpg
+          Description: Reduces the target's movement speed by 30% for 12 sec. Only
+            one Curse per Warlock can be active on any one target.
+          Spell:
+            Cost: 6% of base mana
+            Range: 30 yd
+            Cast Time: Instant
+        Shadow Mastery:
+          Location: [5, 1]
+          Requires: Siphon Life
+          Max Rank: 5
+          Icon: spell/shadow/shadetruesight.jpg
+          Description: Increases the damage dealt or life drained by your Shadow spells
+            by {:|2,4,6,8,10}%.
+        Contagion:
+          Location: [6, 1]
+          Max Rank: 5
+          Icon: spell/shadow/painfulafflictions.jpg
+          Description: Increases the damage of Curse of Agony, Corruption and Seed
+            of Corruption by {0:|1,2,3,4,5}% and reduces the chance your Affliction
+            spells will be dispelled by an additional {0:|6,12,18,24,30}%.
+        Dark Pact:
+          Location: [6, 2]
+          Max Rank: 1
+          Icon: spell/shadow/darkritual.jpg
+          Description: Drains 305 of your pet's Mana, returning 100% to you.
+          Spell:
+            Range: 30 yd
+            Cast Time: Instant
+        Improved Howl of Terror:
+          Location: [7, 0]
+          Max Rank: 2
+          Icon: spell/shadow/deathscream.jpg
+          Description: Reduces the casting time of your Howl of Terror spell by {:|0.8,1.5}
+            sec.
+        Malediction:
+          Location: [7, 2]
+          Max Rank: 3
+          Icon: spell/shadow/curseofachimonde.jpg
+          Description: Increases the damage bonus effect of your Curse of the Elements
+            spell by an additional {:|1,2,3}%.
+        Unstable Affliction:
+          Location: [8, 1]
+          Requires: Contagion
+          Max Rank: 1
+          Icon: spell/shadow/unstableaffliction/3.jpg
+          Description: Shadow energy slowly destroys the target, causing 660 damage
+            over 18 sec. In addition, if the Unstable Affliction is dispelled it will
+            cause 990 damage to the dispeller and silence them for 5 sec.
+          Spell:
+            Cost: 270 Mana
+            Range: 30 yd
+            Cast Time: 1.5 sec
+    Demonology:
+      Icon: spell/shadow/metamorphosis.jpg
+      Background: backgrounds/303.jpg
+      Talents:
+        Improved Healthstone:
+          Location: [0, 0]
+          Max Rank: 2
+          Icon: inv/stone/04.jpg
+          Description: Increases the amount of Health restored by your Healthstone
+            by {:|10,20}%.
+        Improved Imp:
+          Location: [0, 1]
+          Max Rank: 3
+          Icon: spell/shadow/summonimp.jpg
+          Description: Increases the effect of your Imp's Firebolt, Fire Shield, and
+            Blood Pact spells by {:|10,20,30}%.
+        Demonic Embrace:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/shadow/metamorphosis.jpg
+          Description: Increases your total Stamina by {0:|3,6,9,12,15}% but reduces
+            your total Spirit by {0:|1,2,3,4,5}%.
+        Improved Health Funnel:
+          Location: [1, 0]
+          Max Rank: 2
+          Icon: spell/shadow/lifedrain.jpg
+          Description: Increases the amount of Health transferred by your Health Funnel
+            spell by {0:|10,20}% and reduces the initial health cost by {0:|10,20}%.
+        Improved Voidwalker:
+          Location: [1, 1]
+          Max Rank: 3
+          Icon: spell/shadow/summonvoidwalker.jpg
+          Description: Increases the effectiveness of your Voidwalker's Torment, Consume
+            Shadows, Sacrifice and Suffering spells by {:|10,20,30}%.
+        Fel Intellect:
+          Location: [1, 2]
+          Max Rank: 3
+          Icon: spell/holy/magicalsentry.jpg
+          Description: Increases the Intellect of your Imp, Voidwalker, Succubus,
+            Incubus, Felhunter and Felguard by {0:|5,10,15}% and increases your maximum
+            mana by {0:|1,2,3}%.
+        Improved Sayaad:
+          Location: [2, 0]
+          Max Rank: 3
+          Icon: spell/shadow/summonsuccubus.jpg
+          Description: Increases the effect of your Succubus' and Incubus' Lash of
+            Pain and Soothing Kiss spells by {0:|10,20,30}%, and increases the duration
+            of your Succubus' and Incubus' Seduction and Lesser Invisibility spells
+            by {0:|10,20,30}%.
+        Fel Domination:
+          Location: [2, 1]
+          Max Rank: 1
+          Icon: spell/nature/removecurse.jpg
+          Description: Your next Imp, Voidwalker, Succubus, Incubus, Felhunter or
+            Felguard Summon spell has its casting time reduced by 5.5 sec and its
+            Mana cost reduced by 50%.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 15 min
+        Fel Stamina:
+          Location: [2, 2]
+          Max Rank: 3
+          Icon: spell/shadow/antishadow.jpg
+          Description: Increases the Stamina of your Imp, Voidwalker, Succubus, Incubus,
+            Felhunter and Felguard by {0:|5,10,15}% and increases your maximum health
+            by {0:|1,2,3}%.
+        Demonic Aegis:
+          Location: [2, 3]
+          Max Rank: 3
+          Icon: spell/shadow/ragingscream.jpg
+          Description: Increases the effectiveness of your Demon Armor and Fel Armor
+            spells by {:|10,20,30}%.
+        Unholy Power:
+          Location: [3, 2]
+          Max Rank: 5
+          Icon: spell/shadow/shadowworddominate.jpg
+          Description: Increases the damage done by your Voidwalker, Succubus, Incubus,
+            Felhunter and Felguard's melee attacks and your Imp's Firebolt by {:|4,8,12,16,20}%.
+        Master Summoner:
+          Location: [3, 1]
+          Requires: Fel Domination
+          Max Rank: 2
+          Icon: spell/shadow/impphaseshift.jpg
+          Description: Reduces the casting time of your Imp, Voidwalker, Succubus,
+            Incubus, Felhunter and Fel Guard Summoning spells by {0:|2,4} sec and
+            the Mana cost by {0:|20,40}%.
+        Improved Enslave Demon:
+          Location: [4, 0]
+          Max Rank: 2
+          Icon: spell/shadow/enslavedemon.jpg
+          Description: Reduces the Attack Speed and Casting Speed penalty of your
+            Enslave Demon spell by {0:|5,10}% and reduces the resist chance by {0:|5,10}%.
+        Demonic Sacrifice:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: spell/shadow/psychicscream.jpg
+          Description: >-
+            When activated, sacrifices your summoned demon to grant you
+            an effect that lasts 30 min. The effect is canceled if any Demon is summoned.
+
+            Imp: Increases your Fire damage by 15%.
+
+            Voidwalker: Restores 2% of total health every 4 sec.
+
+            Succubus/Incubus: Increases your Shadow damage by 15%.
+
+            Felhunter: Restores 3% of total mana every 4 sec.
+
+            Felguard: Increases your Shadow damage by 10% and restores 2% of total
+            mana every 4 sec.
+          Spell:
+            Range: 100 yd
+            Cast Time: Instant
+        Master Conjurer:
+          Location: [4, 3]
+          Max Rank: 2
+          Icon: inv/ammo/firetar.jpg
+          Description: Increases the bonus Fire damage from Firestones and the Firestone
+            effect by {0:|15,30}% and increases the spell critical strike rating bonus
+            of your Spellstone by {0:|15,30}%.
+        Mana Feed:
+          Location: [5, 0]
+          Max Rank: 3
+          Icon: spell/shadow/manafeed.jpg
+          Description: When you gain mana from Drain Mana or Life Tap spells, your
+            pet gains {:|33,66,100}% of the mana you gain.
+        Master Demonologist:
+          Location: [5, 2]
+          Requires: Unholy Power
+          Max Rank: 5
+          Icon: spell/shadow/shadowpact.jpg
+          Description: >-
+            Grants both the Warlock and the summoned demon an effect as
+            long as that demon is active.
+
+            Imp - Reduces threat caused by {0:|4,8,12,16,20}%.
+
+            Voidwalker - Reduces physical damage taken by {0:|2,4,6,8,10}%.
+
+            Succubus/Incubus - Increases all damage caused by {0:|2,4,6,8,10}%.
+
+            Felhunter - Increases all resistances by {0:|.2,.4,.6,.8,1} per level.
+
+            Felguard - Increases all damage caused by {0:|1,2,3,4,5}% and all resistances
+            by {0:|.1,.2,.3,.4,.5} per level.
+        Demonic Resilience:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: spell/shadow/demonicfortitude.jpg
+          Description: Reduces the chance you'll be critically hit by melee and spells
+            by {0:|1,2,3}% and reduces all damage your summoned demon takes by {0:|5,10,15}%.
+        Demonic Knowledge:
+          Location: [6, 2]
+          Max Rank: 3
+          Icon: spell/shadow/improvedvampiricembrace.jpg
+          Description: Increases your spell damage by an amount equal to {:|4,8,12}%
+            of the total of your active demon's Stamina plus Intellect.
+        Soul Link:
+          Location: [6, 1]
+          Requires: Demonic Sacrifice
+          Max Rank: 1
+          Icon: spell/shadow/gathershadows.jpg
+          Description: When active, 20% of all damage taken by the caster is taken
+            by your Imp, Voidwalker, Succubus, Incubus, Felhunter, Felguard, or enslaved
+            demon instead. That damage cannot be prevented. In addition, both the
+            demon and master will inflict 5% more damage. Lasts as long as the demon
+            is active and controlled.
+          Spell:
+            Cost: 16% of base mana
+            Range: 100 yd
+            Cast Time: Instant
+        Demonic Tactics:
+          Location: [7, 1]
+          Max Rank: 5
+          Icon: spell/shadow/demonictactics.jpg
+          Description: Increases melee and spell critical strike chance for you and
+            your summoned demon by {:|1,2,3,4,5}%.
+        Summon Felguard:
+          Location: [8, 1]
+          Max Rank: 1
+          Icon: spell/shadow/summonfelguard.jpg
+          Description: Summons a Felguard under the command of the Warlock.
+          Spell:
+            Cost: 80% of base mana
+            Cast Time: 10 sec
+            Reagents:
+              - Soul Shard
+    Destruction:
+      Icon: spell/shadow/rainoffire.jpg
+      Background: backgrounds/301.jpg
+      Talents:
+        Improved Shadow Bolt:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/shadow/shadowbolt.jpg
+          Description: Your Shadow Bolt critical strikes increase Shadow damage dealt
+            to the target by {:|4,8,12,16,20}% until 4 non-periodic damage sources
+            are applied. Effect lasts a maximum of 12 sec.
+        Cataclysm:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/fire/windsofwoe.jpg
+          Description: Reduces the Mana cost of your Destruction spells by {:|1,2,3,4,5}%.
+        Bane:
+          Location: [1, 1]
+          Max Rank: 5
+          Icon: spell/shadow/deathpact.jpg
+          Description: Reduces the casting time of your Shadow Bolt and Immolate spells
+            by {0:|0.1,0.2,0.3,0.4,0.5} sec and your Soul Fire spell by {0:|0.4,0.8,1.2,1.6,2}
+            sec.
+        Aftermath:
+          Location: [1, 2]
+          Max Rank: 5
+          Icon: spell/fire/fire.jpg
+          Description: Gives your Destruction spells a {:|2,4,6,8,10}% chance to daze
+            the target for 5 sec.
+        Improved Firebolt:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: spell/fire/firebolt.jpg
+          Description: Reduces the casting time of your Imp's Firebolt spell by {:|0.25,0.5}
+            sec.
+        Improved Lash of Pain:
+          Location: [2, 1]
+          Max Rank: 2
+          Icon: spell/shadow/curse.jpg
+          Description: Reduces the cooldown of your Succubus' and Incubus' Lash of
+            Pain spell by {:|3,6} sec.
+        Devastation:
+          Location: [2, 2]
+          Max Rank: 5
+          Icon: spell/fire/flameshock.jpg
+          Description: Increases the critical strike chance of your Destruction spells
+            by {:|1,2,3,4,5}%.
+        Shadowburn:
+          Location: [2, 3]
+          Max Rank: 1
+          Icon: spell/shadow/scourgebuild.jpg
+          Description: Instantly blasts the target for 91 to 104 Shadow damage. If
+            the target dies within 5 sec of Shadowburn, and yields experience or honor,
+            the caster gains a Soul Shard.
+          Spell:
+            Cost: 105 Mana
+            Range: 20 yd
+            Cast Time: Instant
+            Cooldown: 15 sec
+            Reagents:
+              - Soul Shard
+        Intensity:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: spell/fire/lavaspawn.jpg
+          Description: Gives you a {:|35,70}% chance to resist interruption caused
+            by damage while casting or channeling any Destruction spell.
+        Destructive Reach:
+          Location: [3, 1]
+          Max Rank: 2
+          Icon: spell/shadow/corpseexplode.jpg
+          Description: Increases the range of your Destruction spells by {0:|10,20}%
+            and reduces threat caused by Destruction spells by {0:|5,10}%.
+        Improved Searing Pain:
+          Location: [3, 3]
+          Max Rank: 3
+          Icon: spell/fire/soulburn.jpg
+          Description: Increases the critical strike chance of your Searing Pain spell
+            by {:|4,7,10}%.
+        Improved Immolate:
+          Location: [4, 1]
+          Max Rank: 5
+          Icon: spell/fire/immolation.jpg
+          Description: Increases the initial damage of your Immolate spell by {:|5,10,15,20,25}%.
+        Pyroclasm:
+          Location: [4, 0]
+          Requires: Intensity
+          Max Rank: 2
+          Icon: spell/fire/volcano.jpg
+          Description: Gives your Rain of Fire, Hellfire, and Soul Fire spells a {:|13,26}%
+            chance to stun the target for 3 sec.
+        Ruin:
+          Location: [4, 2]
+          Requires: Devastation
+          Max Rank: 1
+          Icon: spell/shadow/shadowwordpain.jpg
+          Description: Increases the critical strike damage bonus of your Destruction
+            spells by 100%.
+        Nether Protection:
+          Location: [5, 0]
+          Max Rank: 3
+          Icon: spell/shadow/netherprotection.jpg
+          Description: After being hit with a Shadow or Fire spell, you have a {:|10,20,30}%
+            chance to become immune to Shadow and Fire spells for 4 sec.
+        Emberstorm:
+          Location: [5, 2]
+          Max Rank: 5
+          Icon: spell/fire/selfdestruct.jpg
+          Description: Increases the damage done by your Fire spells by {0:|2,4,6,8,10}%,
+            and reduces the cast time of your Incinerate spell by {0:|2,4,6,8,10}%.
+        Backlash:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: spell/fire/playingwithfire.jpg
+          Description: Increases your critical strike chance with spells by an additional
+            {0:|1,2,3}% and gives you a {0:|8,16,25}% chance when hit by a physical
+            attack to reduce the cast time of your next Shadow Bolt or Incinerate
+            spell by 100%. This effect lasts 8 sec and will not occur more than once
+            every 8 seconds.
+        Soul Leech:
+          Location: [6, 2]
+          Max Rank: 3
+          Icon: spell/shadow/soulleech/3.jpg
+          Description: Gives your Shadow Bolt, Shadowburn, Soul Fire, Incinerate,
+            Searing Pain and Conflagrate spells a {:|10,20,30}% chance to return health
+            equal to 20% of the damage caused.
+        Conflagrate:
+          Location: [6, 1]
+          Requires: Improved Immolate
+          Max Rank: 1
+          Icon: spell/fire/fireball.jpg
+          Description: Ignites a target that is already afflicted by your Immolate,
+            dealing 249 to 316 Fire damage and consuming the Immolate spell.
+          Spell:
+            Cost: 165 Mana
+            Range: 30 yd
+            Cast Time: Instant
+            Cooldown: 10 sec
+        Shadow and Flame:
+          Location: [7, 1]
+          Max Rank: 5
+          Icon: spell/shadow/shadowandflame.jpg
+          Description: Your Shadow Bolt and Incinerate spells gain an additional {:|4,8,12,16,20}%
+            of your bonus spell damage effects.
+        Shadowfury:
+          Location: [8, 1]
+          Requires: Shadow and Flame
+          Max Rank: 1
+          Icon: spell/shadow/shadowfury.jpg
+          Description: Shadowfury is unleashed, causing 357 to 422 Shadow damage and
+            stunning all enemies within 8 yds for 2 sec.
+          Spell:
+            Cost: 440 Mana
+            Range: 30 yd
+            Cast Time: 0.5 sec
+            Cooldown: 20 sec
+WotLK:
+  Specializations:
+    Affliction:
+      Icon: spell/shadow/deathcoil.jpg
+      Background: backgrounds/302.jpg
+      Talents:
+        Improved Curse of Agony:
+          Location: [0, 0]
+          Max Rank: 2
+          Icon: spell/shadow/curseofsargeras.jpg
+          Description: Increases the damage done by your Curse of Agony by {:|5,10}%.
+        Suppression:
+          Location: [0, 1]
+          Max Rank: 3
+          Icon: spell/shadow/unsummonbuilding.jpg
+          Description: Increases your chance to hit with spells by {0:|1,2,3}%, and
+            reduces the mana cost of your Affliction spells by {0:|2,4,6}%.
+        Improved Corruption:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/shadow/abominationexplosion.jpg
+          Description: Increases the damage done by your Corruption by {0:|2,4,6,8,10}%,
+            and increases the critical strike chance of your Seed of Corruption by
+            {0:|1,2,3,4,5}%.
+        Improved Curse of Weakness:
+          Location: [1, 0]
+          Max Rank: 2
+          Icon: spell/shadow/curseofmannoroth.jpg
+          Description: Increases the amount of attack power reduced by your Curse
+            of Weakness by {:|10,20}%.
+        Improved Drain Soul:
+          Location: [1, 1]
+          Max Rank: 2
+          Icon: spell/shadow/haunting.jpg
+          Description: Returns {0:|7,15}% of your maximum mana if the target is killed
+            by you while you drain its soul. In addition, your Affliction spells generate
+            {0:|10,20}% less threat.
+        Improved Life Tap:
+          Location: [1, 2]
+          Max Rank: 2
+          Icon: spell/shadow/burningspirit.jpg
+          Description: Increases the amount of Mana awarded by your Life Tap spell
+            by {:|10,20}%.
+        Soul Siphon:
+          Location: [1, 3]
+          Max Rank: 2
+          Icon: spell/shadow/lifedrain02.jpg
+          Description: Increases the amount drained by your Drain Life and Drain Soul
+            spells by an additional {0:|3,6}% for each of your Affliction effects
+            on the target, up to a maximum of {0:|9,18}% additional effect.
+        Improved Fear:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: spell/shadow/possession.jpg
+          Description: Causes your Fear spell to inflict a Nightmare on the target
+            when the fear effect ends. The Nightmare effect reduces the target's movement
+            speed by {:|15,30}% for 5 sec.
+        Fel Concentration:
+          Location: [2, 1]
+          Max Rank: 3
+          Icon: spell/shadow/fingerofdeath.jpg
+          Description: Reduces the pushback suffered from damaging attacks while casting
+            Drain Life, Drain Mana, Drain Soul, Unstable Affliction, and Haunt spells by
+            {:|23,46,70}%.
+        Amplify Curse:
+          Location: [2, 2]
+          Max Rank: 1
+          Icon: spell/shadow/contagion.jpg
+          Description: Reduces the global cooldown of your Curses by 0.5 sec.
+        Grim Reach:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: spell/shadow/callofbone.jpg
+          Description: Increases the range of your Affliction spells by {:|10,20}%.
+        Nightfall:
+          Location: [3, 1]
+          Max Rank: 2
+          Icon: spell/shadow/twilight.jpg
+          Description: Gives your Corruption and Drain Life spells a {:|2,4}% chance
+            to cause you to enter a Shadow Trance state after damaging the opponent.
+            The Shadow Trance state reduces the casting time of your next Shadow Bolt
+            spell by 100%.
+        Empowered Corruption:
+          Location: [3, 3]
+          Max Rank: 3
+          Icon: spell/shadow/abominationexplosion.jpg
+          Description: Increases the damage of your Corruption spell by an amount
+            equal to {:|12,24,36}% of your spell power.
+        Shadow Embrace:
+          Location: [4, 0]
+          Max Rank: 5
+          Icon: spell/shadow/shadowembrace.jpg
+          Description: Your Shadow Bolt and Haunt spells apply the Shadow Embrace
+            effect, increasing all shadow periodic damage dealt to the target by you
+            by {0:|1,2,3,4,5}%, and reduces all periodic healing done to the target
+            by {0:|2,4,6,8,10}%. Lasts for 12 sec. Stacks up to 3 times.
+        Siphon Life:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: spell/shadow/requiem.jpg
+          Description: When you deal damage with your Corruption spell, you are instantly
+            healed for % of the damage done. In addition, the damage done by your
+            Corruption, Seed of Corruption and Unstable Affliction damage over time
+            effects is increased by 5%.
+        Curse of Exhaustion:
+          Location: [4, 2]
+          Requires: Amplify Curse
+          Max Rank: 1
+          Icon: spell/shadow/grimward.jpg
+          Description: Reduces the target's movement speed by 30% for 12 sec. Only
+            one Curse per Warlock can be active on any one target.
+          Spell:
+            Cost: 6% of base mana
+            Range: 30 yd
+            Cast Time: Instant
+        Improved Felhunter:
+          Location: [5, 0]
+          Max Rank: 2
+          Icon: spell/shadow/summonfelhunter.jpg
+          Description: Your Felhunter regains {0:|4,8}% of its maximum mana each time
+            it hits with its Shadow Bite ability and the cooldown on that ability
+            is reduced by {0:|2,4} sec. In addition, increases the effect of your
+            Felhunter's Fel Intelligence by {0:|5,10}%.
+        Shadow Mastery:
+          Location: [5, 1]
+          Requires: Siphon Life
+          Max Rank: 5
+          Icon: spell/shadow/shadetruesight.jpg
+          Description: Increases the damage dealt or life drained by your Shadow spells
+            and your Felhunter's Shadow Bite ability by {:|3,6,9,12,15}%.
+        Eradication:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: ability/warlock/eradication.jpg
+          Description: When you deal damage with Corruption, you have 6% chance to
+            increase your spell casting speed by {:|6,12,20}% for 10 sec.
+        Contagion:
+          Location: [6, 1]
+          Max Rank: 5
+          Icon: spell/shadow/painfulafflictions.jpg
+          Description: Increases the damage of Curse of Agony, Corruption and Seed
+            of Corruption by {0:|1,2,3,4,5}% and reduces the chance your helpful Affliction
+            spells and damage over time effects will be dispelled by an additional
+            {0:|6,12,18,24,30}%.
+        Dark Pact:
+          Location: [6, 2]
+          Max Rank: 1
+          Icon: spell/shadow/darkritual.jpg
+          Description: Drains 305 of your summoned demon's Mana, returning 100% to
+            you.
+          Spell:
+            Range: 100 yd
+            Cast Time: Instant
+        Improved Howl of Terror:
+          Location: [7, 0]
+          Max Rank: 2
+          Icon: spell/shadow/deathscream.jpg
+          Description: Reduces the casting time of your Howl of Terror spell by {:|0.8,1.5}
+            sec.
+        Malediction:
+          Location: [7, 2]
+          Max Rank: 3
+          Icon: spell/shadow/curseofachimonde.jpg
+          Description: Increases your spell damage by {0:|1,2,3}%, and increases the
+            periodic critical strike chance of your Corruption and Unstable Affliction
+            spells by {0:|3,6,9}%.
+        Death's Embrace:
+          Location: [8, 0]
+          Max Rank: 3
+          Icon: spell/shadow/deathsembrace.jpg
+          Description: Increases the amount drained by your Drain Life by {0:|10,20,30}%
+            while your health is at or below 20% health, and increases the damage
+            done by your Shadow spells by {0:|4,8,12}% when your target is at or below
+            35% health.
+        Unstable Affliction:
+          Location: [8, 1]
+          Requires: Contagion
+          Max Rank: 1
+          Icon: spell/shadow/unstableaffliction/3.jpg
+          Description: Shadow energy slowly destroys the target, causing 550 damage
+            over 15 sec. In addition, if the Unstable Affliction is dispelled it will
+            cause 990 damage to the dispeller and silence them for 5 sec. Only one
+            Unstable Affliction or Immolate per Warlock can be active on any one target.
+          Spell:
+            Cost: 15% of base mana
+            Range: 30 yd
+            Cast Time: 1.5 sec
+        Pandemic:
+          Location: [8, 2]
+          Requires: Unstable Affliction
+          Max Rank: 1
+          Icon: spell/shadow/unstableaffliction/2.jpg
+          Description: Grants the periodic damage from your Corruption and Unstable
+            Affliction spells the ability to critically hit for 100% increased damage,
+            and increases the critical strike damage bonus of your Haunt spell by
+            100%.
+        Everlasting Affliction:
+          Location: [9, 1]
+          Max Rank: 5
+          Icon: ability/warlock/everlastingaffliction.jpg
+          Description: Your Corruption and Unstable Affliction spells gain an additional
+            {0:|1,2,3,4,5}% of your bonus spell damage, and your Drain Life, Drain
+            Soul, Shadow Bolt, and Haunt spells have a {0:|20,40,60,80,100}% chance
+            to reset the duration of your Corruption spell on the target.
+        Haunt:
+          Location: [10, 1]
+          Max Rank: 1
+          Icon: ability/warlock/haunt.jpg
+          Description: You send a ghostly soul into the target, dealing 405 to 473
+            Shadow damage and increasing all damage done by your Shadow damage-over-time
+            effects on the target by 20% for 12 sec. When the Haunt spell ends or
+            is dispelled, the soul returns to you, healing you for 100% of the damage
+            it did to the target.
+          Spell:
+            Cost: 12% of base mana
+            Range: 30 yd
+            Cast Time: 1.5 sec
+            Cooldown: 8 sec
+    Demonology:
+      Icon: spell/shadow/metamorphosis.jpg
+      Background: backgrounds/303.jpg
+      Talents:
+        Improved Healthstone:
+          Location: [0, 0]
+          Max Rank: 2
+          Icon: inv/stone/04.jpg
+          Description: Increases the amount of Health restored by your Healthstone
+            by {:|10,20}%.
+        Improved Imp:
+          Location: [0, 1]
+          Max Rank: 3
+          Icon: spell/shadow/summonimp.jpg
+          Description: Increases the effect of your Imp's Firebolt, Fire Shield, and
+            Blood Pact spells by {:|10,20,30}%.
+        Demonic Embrace:
+          Location: [0, 2]
+          Max Rank: 3
+          Icon: spell/shadow/metamorphosis.jpg
+          Description: Increases your total Stamina by {:|4,7,10}%.
+        Fel Synergy:
+          Location: [0, 3]
+          Max Rank: 2
+          Icon: spell/shadow/felmending.jpg
+          Description: You have a {:|50,100}% chance to heal your pet for 15% of the
+            amount of spell damage done by you.
+        Improved Health Funnel:
+          Location: [1, 0]
+          Max Rank: 2
+          Icon: spell/shadow/lifedrain.jpg
+          Description: Increases the amount of Health transferred by your Health Funnel
+            spell by {0:|10,20}% and reduces the health cost by {0:|10,20}%. In addition,
+            your summoned Demon takes {0:|15,30}% less damage while under the effect
+            of your Health Funnel.
+        Demonic Brutality:
+          Location: [1, 1]
+          Max Rank: 3
+          Icon: spell/shadow/summonvoidwalker.jpg
+          Description: Increases the effectiveness of your Voidwalker's Torment, Consume
+            Shadows, Sacrifice and Suffering spells by {0:|10,20,30}%, and increases
+            the attack power bonus on your Felguard's Demonic Frenzy effect by {0:|1,2,3}%.
+        Fel Vitality:
+          Location: [1, 2]
+          Max Rank: 3
+          Icon: spell/holy/magicalsentry.jpg
+          Description: Increases the Stamina and Intellect of your Imp, Voidwalker,
+            Succubus, Felhunter and Felguard by {0:|5,10,15}% and increases your maximum
+            health and mana by {0:|1,2,3}%.
+        Improved Sayaad:
+          Location: [2, 0]
+          Max Rank: 3
+          Icon: spell/shadow/summonsuccubus.jpg
+          Description: Reduces the cast time of your Succubus' Seduction by {0:|22,44,66}%,
+            and increases the duration of your Succubus' Seduction and Lesser Invisibility
+            spells by {0:|10,20,30}%.
+        Soul Link:
+          Location: [2, 1]
+          Max Rank: 1
+          Icon: spell/shadow/gathershadows.jpg
+          Description: When active, 20% of all damage taken by the caster is taken
+            by your Imp, Voidwalker, Succubus, Felhunter, Felguard, or enslaved demon
+            instead. That damage cannot be prevented. Lasts as long as the demon is
+            active and controlled.
+          Spell:
+            Cost: 16% of base mana
+            Range: 100 yd
+            Cast Time: Instant
+        Fel Domination:
+          Location: [2, 2]
+          Max Rank: 1
+          Icon: spell/nature/removecurse.jpg
+          Description: Your next Imp, Voidwalker, Succubus, Incubus, Felhunter or
+            Felguard Summon spell has its casting time reduced by 5.5 sec and its
+            Mana cost reduced by 50%.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 3 min
+        Demonic Aegis:
+          Location: [2, 3]
+          Max Rank: 3
+          Icon: spell/shadow/ragingscream.jpg
+          Description: Increases the effectiveness of your Demon Armor and Fel Armor
+            spells by {:|10,20,30}%.
+        Unholy Power:
+          Location: [3, 1]
+          Requires: Soul Link
+          Max Rank: 5
+          Icon: spell/shadow/shadowworddominate.jpg
+          Description: Increases the damage done by your Voidwalker, Succubus, Incubus,
+            Felhunter and Felguard's melee attacks and your Imp's Firebolt by {:|4,8,12,16,20}%.
+        Master Summoner:
+          Location: [3, 2]
+          Requires: Fel Domination
+          Max Rank: 2
+          Icon: spell/shadow/impphaseshift.jpg
+          Description: Reduces the casting time of your Imp, Voidwalker, Succubus,
+            Incubus, Felhunter and Fel Guard Summoning spells by {0:|2,4} sec and
+            the Mana cost by {0:|20,40}%.
+        Master Conjuror:
+          Location: [4, 2]
+          Max Rank: 2
+          Icon: inv/ammo/firetar.jpg
+          Description: Increases the combat ratings gained from your conjured Firestone
+            and Spellstone by {:|150,300}%.
+        Mana Feed:
+          Location: [4, 0]
+          Requires: Unholy Power
+          Max Rank: 1
+          Icon: spell/shadow/manafeed.jpg
+          Description: When you gain mana from Drain Mana or Life Tap spells, your
+            summoned demon gains 100% of the mana you gain.
+        Master Demonologist:
+          Location: [5, 1]
+          Requires: Unholy Power
+          Max Rank: 5
+          Icon: spell/shadow/shadowpact.jpg
+          Description: >-
+            Grants both the Warlock and the summoned demon an effect as
+            long as that demon is active.
+
+            Imp - Increases your Fire damage by {0:|1,2,3,4,5}%, and increases the
+            critical effect chance of your Fire spells by {0:|1,2,3,4,5}%.
+
+            Voidwalker - Reduces Physical damage taken by {0:|2,4,6,8,10}%.
+
+            Succubus - Increases your Shadow damage by {0:|1,2,3,4,5}%, and increases
+            the critical effect chance of your Shadow spells by {0:|1,2,3,4,5}%.
+
+            Felhunter - Reduces all spell damage taken by {0:|2,4,6,8,10}%.
+
+            Felguard - Increases all damage done by {0:|1,2,3,4,5}%, and reduces all
+            damage taken by {0:|1,2,3,4,5}%.
+        Molten Core:
+          Location: [5, 2]
+          Max Rank: 3
+          Icon: ability/warlock/moltencore.jpg
+          Description: >-
+            Increases the duration of your Immolate by {0:|3,6,9} sec,
+            and you have a {0:|4,8,12}% chance to gain the Molten Core effect when
+            your Corruption deals damage. The Molten Core effect empowers your next
+            3 Incinerate or Soul Fire spells cast within 15 sec.
+
+            Incinerate - Increases damage done by {0:|6,12,18}% and reduces cast time
+            by {0:|10,20,30}%.
+
+            Soul Fire - Increases damage done by {0:|6,12,18}% and increases critical
+            strike chance by {0:|5,10,15}%.
+        Demonic Resilience:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: spell/shadow/demonicfortitude.jpg
+          Description: Reduces the chance you'll be critically hit by melee and spells
+            by {0:|1,2,3}% and reduces all damage your summoned demon takes by {0:|5,10,15}%.
+        Demonic Knowledge:
+          Location: [6, 2]
+          Max Rank: 3
+          Icon: spell/shadow/improvedvampiricembrace.jpg
+          Description: Increases your spell damage by an amount equal to {:|4,8,12}%
+            of the total of your active demon's Stamina plus Intellect.
+        Demonic Empowerment:
+          Location: [6, 1]
+          Requires: Master Demonologist
+          Max Rank: 1
+          Icon: ability/warlock/demonicempowerment.jpg
+          Description: >-
+            Grants the Warlock's summoned demon Empowerment.
+
+            Imp - Increases the Imp''s spell critical strike chance by 20% for 30
+            sec.
+
+            Voidwalker - Increases the Voidwalker's health by 20%, and its threat
+            generated from spells and attacks by 20% for 20 sec.
+
+            Succubus and Incubus - Instantly vanishes, causing the demon to go into
+            an improved Invisibility state. The vanish effect removes all stuns, snares
+            and movement impairing effects from the demon.
+
+            Felhunter - Dispels all magical effects from the Felhunter.
+
+            Felguard - Increases the Felguard's attack speed by 20% and breaks all
+            stun, snare and movement impairing effects and makes your Felguard immune
+            to them for 15 sec.
+          Spell:
+            Cost: 6% of base mana
+            Range: 100 yd
+            Cast Time: Instant
+            Cooldown: 1 min
+        Demonic Tactics:
+          Location: [7, 1]
+          Max Rank: 5
+          Icon: spell/shadow/demonictactics.jpg
+          Description: Increases melee and spell critical strike chance for you and
+            your summoned demon by {:|2,4,6,8,10}%.
+        Decimation:
+          Location: [7, 2]
+          Max Rank: 2
+          Icon: spell/fire/fireball02.jpg
+          Description: When you Shadowbolt, Incinerate or Soul Fire a target that
+            is at or below 35% health, the cast time of {0:|,your }Soul Fire spell
+            is reduced by {0:|20,}{0:|,40}% for 10 sec. Soul Fires cast under the
+            effect of Decimation cost no shard.
+        Summon Felguard:
+          Location: [8, 1]
+          Max Rank: 1
+          Icon: spell/shadow/summonfelguard.jpg
+          Description: Summons a Felguard under the command of the Warlock.
+          Spell:
+            Cost: 80% of base mana
+            Cast Time: 10 sec
+            Reagents:
+              - Soul Shard
+        Nemesis:
+          Location: [8, 2]
+          Max Rank: 3
+          Icon: spell/shadow/demonicempathy.jpg
+          Description: Reduces the cooldown of your Demonic Empowerment, Metamorphosis,
+            and Fel Domination spells by {:|10,20,30}%.
+        Improved Demonic Tactics:
+          Location: [8, 0]
+          Requires: Demonic Tactics
+          Max Rank: 3
+          Icon: ability/warlock/improveddemonictactics.jpg
+          Description: Increases your summoned demon's critical strike chance equal
+            to {:|10,20,30}% of your critical strike chance.
+        Demonic Pact:
+          Location: [9, 1]
+          Max Rank: 5
+          Icon: spell/shadow/demonicpact.jpg
+          Description: Increases your spell damage by {0:|2,4,6,8,10}%, and your pet's
+            criticals apply the Demonic Pact effect to your party or raid members.
+            Demonic Pact increases spell power by {0:|2,4,6,8,10}% of your Spell Damage
+            for 45 sec. This effect has a 20 sec cooldown. Does not work on Enslaved
+            demons.
+        Metamorphosis:
+          Location: [10, 1]
+          Max Rank: 1
+          Icon: spell/shadow/demonform.jpg
+          Description: You transform into a Demon for 30 sec. This form increases
+            your armor by 600%, damage by 20%, reduces the chance you'll be critically
+            hit by melee attacks by 6% and reduces the duration of stun and snare
+            effects by 50%. You gain some unique demon abilities in addition to your
+            normal abilities. 3 minute cooldown.
+          Spell:
+            Cast Time: Instant
+    Destruction:
+      Icon: spell/shadow/rainoffire.jpg
+      Background: backgrounds/301.jpg
+      Talents:
+        Improved Shadow Bolt:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/shadow/shadowbolt.jpg
+          Description: Increases the damage done by your Shadow Bolt spell by {0:|2,4,6,8,10}%,
+            and your Shadow Bolt has a {0:|20,40,60,80,100}% chance to cause your
+            target to be vulnerable to spell damage, increasing spell critical strike
+            chance against that target by 5%. Effect lasts 30 sec.
+        Bane:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/shadow/deathpact.jpg
+          Description: Reduces the casting time of your Shadow Bolt. Chaos Bolt and
+            Immolate spells by {0:|0.1,0.2,0.3,0.4,0.5} sec and your Soul Fire spell
+            by {0:|0.4,0.8,1.2,1.6,2} sec.
+        Aftermath:
+          Location: [1, 0]
+          Max Rank: 2
+          Icon: spell/fire/fire.jpg
+          Description: Increases the periodic damage done by your Immolate by {0:|3,6}%,
+            and your Conflagrate has a {0:|50,100}% chance to daze the target for
+            5 sec.
+        Molten Skin:
+          Location: [1, 1]
+          Max Rank: 3
+          Icon: ability/mage/moltenarmor.jpg
+          Description: Reduces all damage taken by {:|2,4,6}%.
+        Cataclysm:
+          Location: [1, 2]
+          Max Rank: 3
+          Icon: spell/fire/windsofwoe.jpg
+          Description: Reduces the Mana cost of your Destruction spells by {:|4,7,10}%.
+        Demonic Power:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: spell/fire/firebolt.jpg
+          Description: Reduces the cooldown of your Succubus' Lash of Pain spell by
+            {0:|3,6} sec. and reduces the casting time of your Imp's Firebolt spell
+            by {0:|0.25,0.50} sec.
+        Shadowburn:
+          Location: [2, 1]
+          Max Rank: 1
+          Icon: spell/shadow/scourgebuild.jpg
+          Description: Instantly blasts the target for 91 to 104 Shadow damage. If
+            the target dies within 5 sec of Shadowburn, and yields experience or honor,
+            the caster gains a Soul Shard.
+          Spell:
+            Cost: 20% of base mana
+            Range: 20 yd
+            Cast Time: Instant
+            Cooldown: 15 sec
+            Reagents:
+              - Soul Shard
+        Ruin:
+          Location: [2, 2]
+          Max Rank: 5
+          Icon: spell/shadow/shadowwordpain.jpg
+          Description: Increases the critical strike damage bonus of your Destruction
+            spells and your Imp's Firebolt spell by {:|20,40,60,80,100}%.
+        Intensity:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: spell/fire/lavaspawn.jpg
+          Description: Reduces the pushback suffered from damaging attacks while casting
+            or channeling any Destruction spell by {:|35,70}%.
+        Destructive Reach:
+          Location: [3, 1]
+          Max Rank: 2
+          Icon: spell/shadow/corpseexplode.jpg
+          Description: Increases the range of your Destruction spells by {0:|10,20}%
+            and reduces threat caused by Destruction spells by {0:|10,20}%.
+        Improved Searing Pain:
+          Location: [3, 3]
+          Max Rank: 3
+          Icon: spell/fire/soulburn.jpg
+          Description: Increases the critical strike chance of your Searing Pain spell
+            by {:|4,7,10}%.
+        Improved Immolate:
+          Location: [4, 1]
+          Max Rank: 3
+          Icon: spell/fire/immolation.jpg
+          Description: Increases the damage done by your Immolate spell by {:|10,20,30}%.
+        Backlash:
+          Location: [4, 0]
+          Requires: Intensity
+          Max Rank: 3
+          Icon: spell/fire/playingwithfire.jpg
+          Description: Increases your critical strike chance with spells by an additional
+            {0:|1,2,3}% and gives you a {0:|8,16,25}% chance when hit by a physical
+            attack to reduce the cast time of your next Shadow Bolt or Incinerate
+            spell by 100%. This effect lasts 8 sec and will not occur more than once
+            every 8 seconds.
+        Devastation:
+          Location: [4, 2]
+          Requires: Ruin
+          Max Rank: 1
+          Icon: spell/fire/flameshock.jpg
+          Description: Increases the critical strike chance of your Destruction spells
+            by 5%.
+        Nether Protection:
+          Location: [5, 0]
+          Max Rank: 3
+          Icon: spell/shadow/netherprotection.jpg
+          Description: After being hit with a spell, you have a {:|10,20,30}% chance
+            to gain Nether Protection, reducing all damage by that spell school by
+            30% for 8 sec.
+        Emberstorm:
+          Location: [5, 2]
+          Max Rank: 5
+          Icon: spell/fire/selfdestruct.jpg
+          Description: Increases the damage done by your Fire spells by {0:|3,6,9,12,15}%
+            and reduces the cast time of your Incinerate spell by {0:|0.05,0.10,0.15,0.20,0.25}
+            sec.
+        Soul Leech:
+          Location: [6, 2]
+          Max Rank: 3
+          Icon: spell/shadow/soulleech/3.jpg
+          Description: Gives your Shadow Bolt, Shadowburn, Chaos Bolt, Soul Fire,
+            Incinerate, Searing Pain and Conflagrate spells a {:|10,20,30}% chance
+            to return health equal to 20% of the damage caused.
+        Pyroclasm:
+          Location: [6, 3]
+          Max Rank: 3
+          Icon: spell/fire/volcano.jpg
+          Description: When you critically strike with Searing Pain or Conflagrate,
+            your Fire and Shadow spell damage is increased by {:|2,4,6}% for 10 sec.
+        Conflagrate:
+          Location: [6, 1]
+          Requires: Improved Immolate
+          Max Rank: 1
+          Icon: spell/fire/fireball.jpg
+          Description: >-
+            Consumes an Immolate or Shadowflame effect on the enemy target to instantly
+            deal damage equal to 60% of your Immolate or Shadowflame, and causes an
+            additional 40% damage over 6 sec.
+          Spell:
+            Cost: 16% of base mana
+            Range: 30 yd
+            Cast Time: Instant
+            Cooldown: 10 sec
+        Shadow and Flame:
+          Location: [7, 1]
+          Max Rank: 5
+          Icon: spell/shadow/shadowandflame.jpg
+          Description: Your Shadow Bolt, Shadowburn, Chaos Bolt and Incinerate spells
+            gain an additional {:|4,8,12,16,20}% of your bonus spell damage effects.
+        Improved Soul Leech:
+          Location: [7, 2]
+          Requires: Soul Leech
+          Max Rank: 2
+          Icon: ability/warlock/improvedsoulleech.jpg
+          Description: Your Soul Leech effect also restores mana to you and your summoned
+            demon equal to {0:|1,2}% of maximum mana, and has a {0:|50,100}% chance
+            to grant up to 10 party or raid members mana regeneration equal to 1%
+            of maximum mana per 5 sec. Lasts for 15 sec.
+        Shadowfury:
+          Location: [8, 1]
+          Max Rank: 1
+          Icon: spell/shadow/shadowfury.jpg
+          Description: Shadowfury is unleashed, causing 357 to 422 Shadow damage and
+            stunning all enemies within 8 yds for 3 sec.
+          Spell:
+            Cost: 27% of base mana
+            Range: 30 yd
+            Cast Time: Instant
+            Cooldown: 20 sec
+        Empowered Imp:
+          Location: [8, 2]
+          Max Rank: 3
+          Icon: ability/warlock/empoweredimp.jpg
+          Description: Increases the damage done by your Imp by {0:|10,20,30}%, and
+            all critical hits done by your Imp have a {0:|33,66,100}% chance to increase
+            your spell critical hit chance for your next spell by 100%. This effect
+            lasts 8 sec.
+        Backdraft:
+          Location: [8, 0]
+          Requires: Conflagrate
+          Max Rank: 3
+          Icon: ability/warlock/backdraft.jpg
+          Description: When you cast Conflagrate, the cast time and global cooldown
+            of your next three Destruction spells is reduced by {:|10,20,30}%. Lasts
+            15 sec.
+        Fire and Brimstone:
+          Location: [9, 1]
+          Max Rank: 5
+          Icon: ability/warlock/fireandbrimstone.jpg
+          Description: Increases the damage done by your Incinerate and Chaos Bolt
+            spells to targets afflicted by your Immolate by {0:|2,4,6,8,10}%, and
+            the critical strike chance of your Conflagrate spell is increased by {0:|5,10,15,20,25}%.
+        Chaos Bolt:
+          Location: [10, 1]
+          Max Rank: 1
+          Icon: ability/warlock/chaosbolt.jpg
+          Description: Sends a bolt of chaotic fire at the enemy, dealing 864 to 1089
+            Fire damage. Chaos Bolt cannot be resisted, and pierces through all absorption
+            effects.
+          Spell:
+            Cost: 7% of base mana
+            Range: 30 yd
+            Cast Time: 2.5 sec
+            Cooldown: 12 sec

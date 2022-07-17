@@ -18,7 +18,8 @@ class ClassicTalentsApp : Application() {
         loadIcons(primaryStage)
 
         val view = FXMLLoader.load<VBox>(javaClass.getResource("$ASSETS_ROOT/view/MainView.fxml"))
-        val scene = Scene(view, 1045.0, 1025.0)
+        // TODO: determine min fit size automatically
+        val scene = Scene(view, 970.0, 1110.0)
 
         loadFonts()
         loadStylesheets(scene)

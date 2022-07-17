@@ -1,0 +1,679 @@
+Class: Death Knight
+Icon: class/deathknight.jpg
+Color: rgb(196, 30, 58)
+WotLK:
+  Specializations:
+    Blood:
+      Icon: spell/deathknight/bloodpresence.jpg
+      Background: backgrounds/398.jpg
+      Talents:
+        Butchery:
+          Location: [0, 0]
+          Max Rank: 2
+          Icon: inv/axe/68.jpg
+          Description: Whenever you kill an enemy that grants experience or honor,
+            you generate up to {0:|10,20} runic power. In addition, you generate {0:|1,2}
+            runic power per 5 sec while in combat.
+        Subversion:
+          Location: [0, 1]
+          Max Rank: 3
+          Icon: spell/deathknight/subversion.jpg
+          Description: Increases the critical strike chance of Blood Strike, Scourge
+            Strike, Heart Strike and Obliterate by {0:|3,6,9}%, and reduces threat
+            generated while in Blood or Unholy Presence by {0:|8,16,25}%.
+        Blade Barrier:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: ability/upgrademoonglaive.jpg
+          Description: Whenever your Blood Runes are on cooldown, you gain the Blade
+            Barrier effect, which decreases damage taken by {:|1,2,3,4,5}% for the
+            next 10 sec.
+        Bladed Armor:
+          Location: [1, 0]
+          Max Rank: 5
+          Icon: inv/shoulder/36.jpg
+          Description: Increases your attack power by {:|1,2,3,4,5} for every 180
+            armor value you have.
+        Scent of Blood:
+          Location: [1, 1]
+          Max Rank: 3
+          Icon: ability/rogue/bloodyeye.jpg
+          Description: You have a 15% chance after dodging, parrying or taking direct
+            damage to gain the Scent of Blood effect, causing your next
+            {0:?=1:melee hit,_:{0} melee hits} to generate 10 runic power.
+        Two-Handed Weapon Specialization:
+          Location: [1, 2]
+          Max Rank: 2
+          Icon: inv/sword/68.jpg
+          Description: Increases the damage you deal with two-handed melee weapons
+            by {:|2,4}%.
+        Rune Tap:
+          Location: [2, 0]
+          Max Rank: 1
+          Icon: spell/deathknight/runetap.jpg
+          Description: Converts 1 Blood Rune into 10% of your maximum health.
+          Spell:
+            Cost: 1 Blood Rune
+            Cast Time: Instant
+            Cooldown: 1 min
+        Dark Conviction:
+          Location: [2, 1]
+          Max Rank: 5
+          Icon: spell/deathknight/darkconviction.jpg
+          Description: Increases your chance to critically hit with weapons, spells
+            and abilities by {:|1,2,3,4,5}%.
+        Death Rune Mastery:
+          Location: [2, 2]
+          Max Rank: 3
+          Icon: inv/sword/62.jpg
+          Description: Whenever you hit with Death Strike or Obliterate there is a
+            {:|33,66,100}% chance that the Frost and Unholy Runes will become Death
+            Runes when they activate. Death Runes count as a Blood, Frost or Unholy
+            Rune.
+        Spell Deflection:
+          Location: [3, 2]
+          Max Rank: 3
+          Icon: spell/deathknight/spelldeflection.jpg
+          Description: You have a chance equal to your Parry chance of taking {:|15,30,45}%
+            less damage from a direct damage spell.
+        Vendetta:
+          Location: [3, 3]
+          Max Rank: 3
+          Icon: spell/deathknight/vendetta.jpg
+          Description: Heals you for up to {:|2,4,6}% of your maximum health whenever
+            you kill a target that yields experience or honor.
+        Improved Rune Tap:
+          Location: [3, 0]
+          Requires: Rune Tap
+          Max Rank: 3
+          Icon: spell/deathknight/runetap.jpg
+          Description: Increases the health provided by Rune Tap by {0:|33,66,100}%
+            and lowers its cooldown by {0:|10,20,30} sec.
+        Bloody Strikes:
+          Location: [4, 0]
+          Max Rank: 3
+          Icon: spell/deathknight/deathstrike.jpg
+          Description: Increases the damage of Blood Strike by {0:|5,10,15}% and Heart
+            Strike by {0:|15,30,45}%, and increases the damage of Blood Boil by {0:|10,20,30}%.
+        Veteran of the Third War:
+          Location: [4, 2]
+          Max Rank: 3
+          Icon: spell/misc/warsongfocus.jpg
+          Description: Increases your total Strength by {0:|2,4,6}%, your Stamina
+            by {0:|1,2,3}%, and your expertise by {0:|2,4,6}.
+        Mark of Blood:
+          Location: [4, 3]
+          Max Rank: 1
+          Icon: ability/hunter/rapidkilling.jpg
+          Description: Place a Mark of Blood on an enemy. Whenever the marked enemy
+            deals damage to a target, that target is healed for 4% of its maximum
+            health. Lasts for 20 sec or up to 20 hits.
+          Spell:
+            Cost: 1 Blood Rune
+            Range: 30 yd
+            Cast Time: Instant
+            Cooldown: 3 min
+        Abomination's Might:
+          Location: [5, 2]
+          Max Rank: 2
+          Icon: ability/warrior/intensifyrage.jpg
+          Description: Increases the attack power by {0:|5,10}% of party and raid
+            members within 100 yards. Also increases your total Strength by {0:|1,2}%.
+        Bloody Vengeance:
+          Location: [5, 1]
+          Requires: Dark Conviction
+          Max Rank: 3
+          Icon: ability/backstab.jpg
+          Description: Gives you a {:|1,2,3}% bonus to physical damage you deal for
+            30 sec after dealing a critical strike from a weapon swing, spell, or
+            ability. This effect stacks up to 3 times.
+        Bloodworms:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: spell/shadow/soulleech.jpg
+          Description: Your weapon hits have a {:|3,6,9}% chance to cause the target
+            to spawn 2-4 Bloodworms. Bloodworms attack your enemies, healing you as
+            they do damage for 20 sec or until killed.
+        Unholy Frenzy:
+          Location: [6, 1]
+          Max Rank: 1
+          Icon: spell/deathknight/bladedarmor.jpg
+          Description: Induces a friendly unit into a killing frenzy for 30 sec. The
+            target is Enraged, which increases their physical damage by 20%, but causes
+            them to lose health equal to 1% of their maximum health every second.
+          Spell:
+            Range: 30 yd
+            Cast Time: Instant
+            Cooldown: 3 min
+        Improved Blood Presence:
+          Location: [6, 2]
+          Max Rank: 2
+          Icon: spell/deathknight/bloodpresence.jpg
+          Description: While in Frost Presence or Unholy Presence, you retain {0:|2,4}%
+            healing from Blood Presence, and healing done to you is increased by {0:|5,10}%
+            in Blood Presence.
+        Improved Death Strike:
+          Location: [7, 0]
+          Max Rank: 2
+          Icon: spell/deathknight/butcher2.jpg
+          Description: Increases the damage of your Death Strike by {0:|15,30}%, increases
+            its critical strike chance by {0:|3,6}%, and increases the healing granted
+            by {0:|25,50}%.
+        Sudden Doom:
+          Location: [7, 1]
+          Max Rank: 3
+          Icon: spell/shadow/painspike.jpg
+          Description: Your Blood Strikes and Heart Strikes have a {:|5,10,15}% chance
+            to launch a free Death Coil at your target.
+        Vampiric Blood:
+          Location: [7, 2]
+          Max Rank: 1
+          Icon: spell/shadow/lifedrain.jpg
+          Description: Temporarily grants the Death Knight 15% of maximum health and
+            increases the amount of health generated through spells and effects by
+            35% for 10 sec. After the effect expires, the health is lost.
+          Spell:
+            Cost: 1 Blood Rune
+            Cast Time: Instant
+            Cooldown: 1 min
+        Will of the Necropolis:
+          Location: [8, 0]
+          Max Rank: 3
+          Icon: ability/creature/cursed/02.jpg
+          Description: Damage that would take you below 35% health or taken while
+            you are at 35% health is reduced by {:|5,10,15}%.
+        Heart Strike:
+          Location: [8, 1]
+          Max Rank: 1
+          Icon: inv/weapon/shortblade/40.jpg
+          Description: Instantly strike the target and his nearest ally, causing
+            50% weapon damage plus X on the primary target, and 25% weapon damage plus
+            (X / 2) on the secondary target. Each target takes 10% additional damage
+            for each of your diseases active on that target.
+          Spell:
+            Cost: 1 Blood Rune
+            Range: Melee
+            Cast Time: Instant
+        Might of Mograine:
+          Location: [8, 2]
+          Max Rank: 3
+          Icon: spell/deathknight/classicon.jpg
+          Description: Increases the critical strike damage bonus of your Blood Boil,
+            Blood Strike, Death Strike, and Heart Strike abilities by {:|15,30,45}%.
+        Blood Gorged:
+          Location: [9, 1]
+          Max Rank: 5
+          Icon: spell/nature/reincarnation.jpg
+          Description: When you are above 75% health, you deal {0:|2,4,6,8,10}% more
+            damage. In addition, your attacks ignore up to {0:|2,4,6,8,10}% of your
+            opponent's armor at all times.
+        Dancing Rune Weapon:
+          Location: [10, 1]
+          Max Rank: 1
+          Icon: inv/sword/07.jpg
+          Description: Summons a second rune weapon that fights on its own for 12
+            sec, doing the same attacks as the Death Knight but for 50% reduced damage.
+          Spell:
+            Cost: 60 Runic Power
+            Range: 30 yd
+            Cast Time: Instant
+            Cooldown: 1.5 min
+    Frost:
+      Icon: spell/deathknight/frostpresence.jpg
+      Background: backgrounds/399.jpg
+      Talents:
+        Improved Icy Touch:
+          Location: [0, 0]
+          Max Rank: 3
+          Icon: spell/deathknight/icetouch.jpg
+          Description: Your Icy Touch does an additional {0:|5,10,15}% damage and
+            your Frost Fever reduces melee and ranged attack speed by an additional
+            {0:|2,4,6}%.
+        Runic Power Mastery:
+          Location: [0, 1]
+          Max Rank: 2
+          Icon: spell/arcane/arcane01.jpg
+          Description: Increases your maximum Runic Power by {:|15,30}.
+        Toughness:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/holy/devotion.jpg
+          Description: Increases your armor value from items by {0:|2,4,6,8,10}% and
+            reduces the duration of all movement slowing effects by {0:|6,12,18,24,30}%.
+        Icy Reach:
+          Location: [1, 1]
+          Max Rank: 2
+          Icon: spell/frost/manarecharge.jpg
+          Description: Increases the range of your Icy Touch, Chains of Ice and Howling
+            Blast by {:|5,10} yards.
+        Black Ice:
+          Location: [1, 2]
+          Max Rank: 5
+          Icon: spell/shadow/darkritual.jpg
+          Description: Increases your Frost and Shadow damage by {:|2,4,6,8,10}%.
+        Nerves of Cold Steel:
+          Location: [1, 3]
+          Max Rank: 3
+          Icon: ability/dualwield.jpg
+          Description: Increases your chance to hit with one-handed melee weapons
+            by {0:|1,2,3}% and increases the damage done by your offhand weapon by
+            {0:|8,16,25}%.
+        Lichborne:
+          Location: [2, 1]
+          Max Rank: 1
+          Icon: spell/shadow/raisedead.jpg
+          Description: Draw upon unholy energy to become undead for 10 sec. While
+            undead, you are immune to Charm, Fear and Sleep effects.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 2 min
+        Annihilation:
+          Location: [2, 2]
+          Max Rank: 3
+          Icon: inv/weapon/hand/18.jpg
+          Description: Increases the critical strike chance of your melee special
+            abilities by {0:|1,2,3}%. In addition, there is a {0:|33,66,100}% chance
+            that your Obliterate will do its damage without consuming diseases.
+        Icy Talons:
+          Location: [2, 0]
+          Requires: Improved Icy Touch
+          Max Rank: 5
+          Icon: spell/deathknight/icytalons.jpg
+          Description: You leech heat from victims of your Frost Fever, so that when
+            their melee attack speed is reduced, yours increases by {:|4,8,12,16,20}%
+            for the next 20 sec.
+        Killing Machine:
+          Location: [3, 1]
+          Max Rank: 5
+          Icon: inv/sword/122.jpg
+          Description: Your melee attacks have a chance to make your next Icy Touch,
+            Howling Blast or Frost Strike a critical strike.{0:?>1:Effect occurs more often than 
+            Killing Machine (Rank {0:|,1,2,3,4})}.
+        Chill of the Grave:
+          Location: [3, 2]
+          Max Rank: 2
+          Icon: spell/frost/frostshock.jpg
+          Description: Your Chains of Ice, Howling Blast, Icy Touch and Obliterate
+            generate {:|2.5,5} additional runic power.
+        Endless Winter:
+          Location: [3, 3]
+          Max Rank: 2
+          Icon: spell/shadow/twilight.jpg
+          Description: Your strength is increased by {0:|2,4}% and
+            {0:|the cost of your Mind Freeze is reduced to 10,your Mind Freeze no longer costs} runic power.
+        Frigid Dreadplate:
+          Location: [4, 1]
+          Max Rank: 3
+          Icon: inv/chest/mail/04.jpg
+          Description: Reduces the chance melee attacks will hit you by {:|1,2,3}%.
+        Glacier Rot:
+          Location: [4, 2]
+          Max Rank: 3
+          Icon: spell/nature/removedisease.jpg
+          Description: Diseased enemies take {:|7,13,20}% more damage from your Icy
+            Touch, Howling Blast and Frost Strike.
+        Deathchill:
+          Location: [4, 3]
+          Max Rank: 1
+          Icon: spell/shadow/soulleech/2.jpg
+          Description: When activated, makes your next Icy Touch, Howling Blast, Frost
+            Strike or Obliterate a critical hit if used within 30 sec.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 2 min
+        Merciless Combat:
+          Location: [5, 1]
+          Max Rank: 2
+          Icon: inv/sword/112.jpg
+          Description: Your Icy Touch, Howling Blast, Obliterate and Frost Strike
+            do an additional {:|6,12}% damage when striking targets with less than
+            35% health.
+        Rime:
+          Location: [5, 2]
+          Max Rank: 3
+          Icon: spell/frost/freezingbreath.jpg
+          Description: Increases the critical strike chance of your Icy Touch and
+            Obliterate by {0:|5,10,15}% and casting Obliterate has a {0:|5,10,15}%
+            chance to reset the cooldown on Howling Blast and cause your next Howling
+            Blast to consume no runes.
+        Improved Icy Talons:
+          Location: [5, 0]
+          Requires: Icy Talons
+          Max Rank: 1
+          Icon: spell/deathknight/icytalons.jpg
+          Description: Increases the melee haste of all party and raid members within
+            100 yds by 20% and your haste by an additional 5%.
+        Chilblains:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: spell/frost/wisp.jpg
+          Description: Victims of your Frost Fever disease are Chilled, reducing movement
+            speed by {:|15,30,50}% for 10 sec.
+        Hungering Cold:
+          Location: [6, 1]
+          Max Rank: 1
+          Icon: inv/staff/15.jpg
+          Description: Purges the earth around the Death Knight of all heat. Enemies
+            within 10 yards are trapped in ice, preventing them from performing any
+            action for 10 sec and infecting them with Frost Fever. Enemies are considered
+            Frozen, but any damage other than diseases will break the ice.
+          Spell:
+            Cost: 40 Runic Power
+            Cast Time: Instant
+            Cooldown: 1 min
+        Improved Frost Presence:
+          Location: [6, 2]
+          Max Rank: 2
+          Icon: spell/deathknight/frostpresence.jpg
+          Description: While in Blood Presence or Unholy Presence, you retain {0:|4,8}%
+            stamina from Frost Presence, and damage done to you is decreased by an
+            additional {0:|1,2}% in Frost Presence.
+        Threat of Thassarian:
+          Location: [7, 0]
+          Max Rank: 3
+          Icon: ability/dualwieldspecialization.jpg
+          Description: When dual-wielding, your Death Strikes, Obliterates, Plague
+            Strikes, Rune Strikes, Blood Strikes and Frost Strikes have a {:|30,60,100}%
+            chance to also deal damage with your offhand weapon.
+        Blood of the North:
+          Location: [7, 1]
+          Max Rank: 3
+          Icon: inv/weapon/shortblade/79.jpg
+          Description: Increases Blood Strike and Frost Strike damage by {0:|3,6,10}%.
+            In addition, whenever you hit with Blood Strike or Pestilence there is
+            a {0:|30,60,100}% chance that the Blood Rune will become a Death Rune
+            when it activates. Death Runes count as a Blood, Frost or Unholy Rune.
+        Unbreakable Armor:
+          Location: [7, 2]
+          Max Rank: 1
+          Icon: inv/armor/helm/plate/naxxramas/raidwarrior/c/01.jpg
+          Description: Reinforces your armor with a thick coat of ice, increasing
+            your armor by 25% and increasing your Strength by 20% for 20 sec.
+          Spell:
+            Cost: 1 Frost Rune
+            Cooldown: 1 min
+            Cast Time: Instant
+        Acclimation:
+          Location: [8, 0]
+          Max Rank: 3
+          Icon: classic/spell/fire/elementaldevastation.jpg
+          Description: When you are hit by a spell, you have a {:|10,20,30}% chance
+            to boost your resistance to that type of magic for 18 sec. Stacks up to
+            3 times.
+        Frost Strike:
+          Location: [8, 1]
+          Max Rank: 1
+          Icon: spell/deathknight/empowerruneblade2.jpg
+          Description: Instantly strike the enemy, causing 55% weapon damage plus
+            48 as Frost damage.
+          Spell:
+            Cost: 40 Runic Power
+            Range: Melee
+            Cast Time: Instant
+        Guile of Gorefiend:
+          Location: [8, 2]
+          Max Rank: 3
+          Icon: inv/sword/53.jpg
+          Description: Increases the critical strike damage bonus of your Blood Strike,
+            Frost Strike, Howling Blast and Obliterate abilities by {0:|15,30,45}%,
+            and increases the duration of your Icebound Fortitude by {0:|2,4,6} secs.
+        Tundra Stalker:
+          Location: [9, 1]
+          Max Rank: 5
+          Icon: spell/nature/tranquility.jpg
+          Description: Your spells and abilities deal {0:|3,6,9,12,15}% more damage
+            to targets infected with Frost Fever. Also increases your expertise by
+            {0:|1,2,3,4,5}.
+        Howling Blast:
+          Location: [10, 1]
+          Max Rank: 1
+          Icon: spell/frost/arcticwinds.jpg
+          Description: Blast the target with a frigid wind dealing 198 to 214 Frost
+            damage to all enemies within 10 yards.
+          Spell:
+            Cost: 1 Frost Rune / 1 Unholy Rune
+            Range: 20 yd
+            Cast Time: Instant
+            Cooldown: 8 sec
+    Unholy:
+      Icon: spell/deathknight/unholypresence.jpg
+      Background: backgrounds/400.jpg
+      Talents:
+        Vicious Strikes:
+          Location: [0, 0]
+          Max Rank: 2
+          Icon: spell/deathknight/plaguestrike.jpg
+          Description: Increases the critical strike chance by {0:|3,6}% and critical
+            strike damage bonus by {0:|15,30}% of your Plague Strike and Scourge Strike.
+        Virulence:
+          Location: [0, 1]
+          Max Rank: 3
+          Icon: spell/shadow/burningspirit.jpg
+          Description: Increases your chance to hit with your spells by {0:|1,2,3}%
+            and reduces the chance that your damage over time diseases can be cured
+            by {0:|10,20,30}%.
+        Anticipation:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/nature/mirrorimage.jpg
+          Description: Increases your Dodge chance by {:|1,2,3,4,5}%.
+        Epidemic:
+          Location: [1, 0]
+          Max Rank: 2
+          Icon: spell/shadow/shadowwordpain.jpg
+          Description: Increases the duration of Blood Plague and Frost Fever by {:|3,6}
+            sec.
+        Morbidity:
+          Location: [1, 1]
+          Max Rank: 3
+          Icon: spell/shadow/deathanddecay.jpg
+          Description: Increases the damage and healing of Death Coil by {0:|5,10,15}%
+            and reduces the cooldown on Death and Decay by {0:|5,10,15} sec.
+        Unholy Command:
+          Location: [1, 2]
+          Max Rank: 2
+          Icon: spell/deathknight/strangulate.jpg
+          Description: Reduces the cooldown of your Death Grip ability by {:|5,10}
+            sec.
+        Ravenous Dead:
+          Location: [1, 3]
+          Max Rank: 3
+          Icon: spell/deathknight/gnaw/ghoul.jpg
+          Description: Increases your total Strength by {0:|1,2,3}% and the contribution
+            your Ghouls get from your Strength and Stamina by {0:|20,40,60}%.
+        Outbreak:
+          Location: [2, 0]
+          Max Rank: 3
+          Icon: spell/shadow/plaguecloud.jpg
+          Description: Increases the damage of Plague Strike by {0:|10,20,30}% and
+            Scourge Strike by {0:|7,13,20}%.
+        Necrosis:
+          Location: [2, 1]
+          Max Rank: 5
+          Icon: inv/weapon/shortblade/60.jpg
+          Description: Your auto attacks deal an additional {:|4,8,12,16,20}% Shadow
+            damage.
+        Corpse Explosion:
+          Location: [2, 2]
+          Max Rank: 1
+          Icon: ability/creature/disease/02.jpg
+          Description: Cause a corpse to explode for 166 Shadow damage to all enemies
+            within 10 yards. Will use a nearby corpse if the target is not a corpse.
+            Does not affect mechanical or elemental corpses.
+          Spell:
+            Cost: 40 Runic Power
+            Range: 30 yd
+            Cast Time: Instant
+            Cooldown: 5 sec
+        On a Pale Horse:
+          Location: [3, 1]
+          Max Rank: 2
+          Icon: spell/deathknight/summondeathcharger.jpg
+          Description: You become as hard to stop as death itself. The duration of
+            all Stun and Fear effects used against you is reduced by {0:|10,20}%,
+            and your mounted speed is increased by {0:|10,20}%. This does not stack
+            with other movement speed increasing effects.
+        Blood-Caked Blade:
+          Location: [3, 2]
+          Max Rank: 3
+          Icon: ability/criticalstrike.jpg
+          Description: Your auto attacks have a {:|10,20,30}% chance to cause a Blood-Caked
+            Strike, which hits for 25% weapon damage plus 12.5% for each of your diseases
+            on the target.
+        Night of the Dead:
+          Location: [3, 3]
+          Max Rank: 2
+          Icon: spell/deathknight/armyofthedead.jpg
+          Description: Reduces the cooldown on Raise Dead by {0:|45,90} sec and the
+            cooldown on Army of the Dead by {0:|2,4} min. Also reduces the damage
+            your pet takes from creature area of effect attacks by {0:|45,90}%.
+        Unholy Blight:
+          Location: [4, 0]
+          Max Rank: 1
+          Icon: spell/shadow/contagion.jpg
+          Description: Causes the victims of your Death Coil to be surrounded by a
+            vile swarm of unholy insects, taking 10% of the damage done by the Death
+            Coil over 10 sec, and preventing any diseases on the victim from being
+            dispelled.
+        Impurity:
+          Location: [4, 1]
+          Max Rank: 5
+          Icon: spell/shadow/shadowandflame.jpg
+          Description: The attack power bonus of your spells is increased by {:|4,8,12,16,20}%.
+        Dirge:
+          Location: [4, 2]
+          Max Rank: 2
+          Icon: spell/shadow/shadesofdarkness.jpg
+          Description: Your Death Strike, Plague Strike and Scourge Strike generate
+            {:|2.5,5} additional runic power.
+        Desecration:
+          Location: [5, 0]
+          Max Rank: 2
+          Icon: spell/shadow/shadowfiend.jpg
+          Description: Your Plague Strikes and Scourge Strikes cause the Desecrated
+            Ground effect. Targets in the area are slowed by {:|25,50}% by the grasping
+            arms of the dead while standing on the unholy ground. Lasts 20 sec.
+        Magic Suppression:
+          Location: [5, 1]
+          Max Rank: 3
+          Icon: spell/shadow/antimagicshell.jpg
+          Description: You take {0:|2,4,6}% less damage from all magic. In addition,
+            your Anti-Magic Shell absorbs an additional {0:|8,16,25}% of spell damage.
+        Reaping:
+          Location: [5, 2]
+          Max Rank: 3
+          Icon: spell/shadow/shadetruesight.jpg
+          Description: Whenever you hit with Blood Strike or Pestilence there is a
+            {:|33,66,100}% chance that the Blood Rune becomes a Death Rune when it
+            activates. Death Runes count as a Blood, Frost or Unholy Rune.
+        Master of Ghouls:
+          Location: [5, 3]
+          Requires: Night of the Dead
+          Max Rank: 1
+          Icon: spell/shadow/animatedead.jpg
+          Description: Reduces the cooldown on Raise Dead by 60 sec, and the Ghoul
+            summoned by your Raise Dead spell is considered a pet under your control.
+            Unlike normal Death Knight Ghouls, your pet does not have a limited duration.
+        Desolation:
+          Location: [6, 0]
+          Max Rank: 5
+          Icon: spell/shadow/unholyfrenzy.jpg
+          Description: Your Blood Strikes cause you to deal {:|1,2,3,4,5}% additional
+            damage with all attacks for the next 20 sec.
+        Improved Unholy Presence:
+          Location: [6, 2]
+          Max Rank: 2
+          Icon: spell/deathknight/unholypresence.jpg
+          Description: While in Blood Presence or Frost Presence, you retain {0:|8,15}%
+            increased movement speed from Unholy Presence, and your runes finish their
+            cooldowns {0:|5,10}% faster in Unholy Presence.
+        Anti-Magic Zone:
+          Location: [6, 1]
+          Requires: Magic Suppression
+          Max Rank: 1
+          Icon: spell/deathknight/antimagiczone.jpg
+          Description: Places a large, stationary Anti-Magic Zone that reduces spell
+            damage done to party or raid members inside it by 75%. The Anti-Magic
+            Zone lasts for 10 sec or until it absorbs (10000 + 2 * Attack power) spell
+            damage.
+          Spell:
+            Cost: 1 Unholy Rune
+            Cast Time: Instant
+            Cooldown: 2 min
+        Ghoul Frenzy:
+          Location: [6, 3]
+          Requires: Master of Ghouls
+          Max Rank: 1
+          Icon: ability/ghoulfrenzy.jpg
+          Description: Grants your pet 25% haste for 30 sec and heals it for 60% of
+            its health over the duration.
+          Spell:
+            Cost: 1 Unholy Rune
+            Range: 45 yd
+            Cast Time: Instant
+            Cooldown: 10 sec
+        Crypt Fever:
+          Location: [7, 1]
+          Max Rank: 3
+          Icon: spell/nature/nullifydisease.jpg
+          Description: Your diseases also cause Crypt Fever, which increases disease
+            damage taken by the target by {:|10,20,30}%.
+        Bone Shield:
+          Location: [7, 2]
+          Max Rank: 1
+          Icon: inv/chest/leather/13.jpg
+          Description: The Death Knight is surrounded by 3 whirling bones. While at
+            least 1 bone remains, he takes 20% less damage from all sources and deals
+            2% more damage with all attacks, spells and abilities. Each damaging attack
+            that lands consumes 1 bone. Lasts 5 min.
+          Spell:
+            Cost: 1 Unholy Rune
+            Cast Time: Instant
+            Cooldown: 1 min
+        Wandering Plague:
+          Location: [8, 0]
+          Max Rank: 3
+          Icon: spell/shadow/callofbone.jpg
+          Description: When your diseases damage an enemy, there is a chance equal
+            to your melee critical strike chance that they will cause {:|33,66,100}%
+            additional damage to the target and all enemies within 8 yards. Ignores
+            any target under the effect of a spell that is cancelled by taking damage.
+        Scourge Strike:
+          Location: [8, 2]
+          Max Rank: 1
+          Icon: spell/deathknight/scourgestrike.jpg
+          Description: An unholy strike that deals 70% of weapon damage as Physical
+            damage plus 238. In addition, for each of your diseases on your target,
+            you deal an additional 12% of the Physical damage done as Shadow damage.
+          Spell:
+            Cost: 1 Frost Rune / 1 Unholy Rune
+            Range: Melee
+            Cast Time: Instant
+        Ebon Plaguebringer:
+          Location: [8, 1]
+          Requires: Crypt Fever
+          Max Rank: 3
+          Icon: ability/creature/cursed/03.jpg
+          Description: Your Crypt Fever morphs into Ebon Plague, which increases magic
+            damage taken by {0:|4,9,13}% in addition to increasing disease damage
+            taken. Improves your critical strike chance with weapons and spells by
+            {0:|1,2,3}% at all times.
+        Rage of Rivendare:
+          Location: [9, 1]
+          Max Rank: 5
+          Icon: inv/weapon/halberd14.jpg
+          Description: Your spells and abilities deal {0:|2,4,6,8,10}% more damage
+            to targets infected with Blood Plague. Also increases your expertise by
+            {0:|1,2,3,4,5}.
+        Summon Gargoyle:
+          Location: [10, 1]
+          Max Rank: 1
+          Icon: ability/hunter/pet/bat.jpg
+          Description: A Gargoyle flies into the area and bombards the target with
+            Nature damage modified by the Death Knight's attack power. Persists for
+            30 sec.
+          Spell:
+            Cost: 60 Runic Power
+            Range: 30 yd
+            Cast Time: Instant
+            Cooldown: 3 min

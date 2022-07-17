@@ -27,6 +27,7 @@ class MainModel {
         check(classes.isEmpty()) { "Cannot load classes more than once" }
 
         val classFileNames = sequenceOf(
+            "$ASSETS_ROOT/talents/DeathKnight.yml",
             "$ASSETS_ROOT/talents/Druid.yml",
             "$ASSETS_ROOT/talents/Hunter.yml",
             "$ASSETS_ROOT/talents/Mage.yml",

@@ -1,855 +1,1503 @@
-Druid:
-  Icon: "images/druid/ClassIcon.jpg"
-  Color: "#FF7C0A"
-  Classic:
-    Specializations:
-      Balance:
-        Icon: "images/druid/Moonfire.png"
-        Background: "images/backgrounds/druid_balance.jpg"
-        Talents:
-          Improved Wrath:
-            Location: [0, 0]
-            Max Rank: 5
-            Icon: "images/druid/Wrath.png"
-            Description: Reduces the cast time of your Wrath spell by 0.{:|1,2,3,4,5} sec.
-          Nature's Grasp:
-            Location: [0, 1]
-            Max Rank: 1
-            Icon: "images/druid/NaturesGrasp.png"
-            Description: >-
-              While active, any time an enemy strikes the caster they have a 35% chance to become 
-              afflicted by Entangling Roots (Rank 1). Only usable outdoors. 1 charge. Lasts 45 sec.
-            Spell:
-              Cost: 50 Mana
-              Cast Time: Instant
-              Cooldown: 1 min
-          Improved Nature's Grasp:
-            Location: [0, 2]
-            Requires: Nature's Grasp
-            Max Rank: 4
-            Icon: "images/druid/NaturesGrasp.png"
-            Description: >-
-              Increases the chance for your Nature's Grasp to entangle an enemy by {:|15,30,45,60}%.
-          Improved Entangling Roots:
-            Location: [1, 0]
-            Max Rank: 3
-            Icon: "images/druid/EntanglingRoots.png"
-            Description: >-
-              Gives you a {:|40,70,100}% chance to avoid interruption caused by damage while casting
-              Entangling Roots.
-          Improved Moonfire:
-            Location: [1, 1]
-            Max Rank: 5
-            Icon: "images/druid/Moonfire.png"
-            Description: >-
-              Increases the damage and critical strike chance of your Moonfire spell by 
-              {:|2,4,6,8,10}%.
-          Natural Weapons:
-            Location: [1, 2]
-            Max Rank: 5
-            Icon: "images/druid/FocusedStarlight.png"
-            Description: >-
-              Increases the damage you deal with physical attacks in all forms by {:|2,4,6,8,10}%.
-          Natural Shapeshifter:
-            Location: [1, 3]
-            Max Rank: 3
-            Icon: "images/mage/ArcaneExplosion.png"
-            Description: Reduces the mana cost of all shapeshifting by {:|1,2,3}0%.
-          Improved Thorns:
-            Location: [2, 0]
-            Max Rank: 3
-            Icon: "images/druid/Thorns.png"
-            Description: Increases damage caused by your Thorns spell by {:|25,50,75}%
-          Omen of Clarity:
-            Location: [2, 2]
-            Requires: Natural Weapons
-            Max Rank: 1
-            Icon: "images/druid/OmenOfClarity.png"
-            Description: >-
-              Imbues the Druid with natural energy. Each of the Druid's melee attacks has a chance 
-              of causing the caster to enter a Clearcasting state. The Clearcasting state reduces 
-              the Mana, Rage or Energy cost of your next damage or healing spell or offensive 
-              ability by 100%. Lasts 10 min.
-            Spell:
-              Cost: 120 Mana
-              Cast Time: Instant
-          Nature's Reach:
-            Location: [2, 3]
-            Max Rank: 2
-            Icon: "images/skills/HerbGathering.png"
-            Description: >-
-              Increases the range of your Wrath, Entangling Roots, Faerie Fire, Moonfire, Starfire, 
-              and Hurricane spells by {:|10,20}%.
-          Vengeance:
-            Location: [3, 1]
-            Requires: Improved Moonfire
-            Max Rank: 5
-            Icon: "images/mage/Evocation.png"
-            Description: >-
-              Increases the critical strike damage bonus of your Starfire, Moonfire, and Wrath 
-              spells by {:|2,4,6,8,10}0%.
-          Improved Starfire:
-            Location: [3, 2]
-            Max Rank: 5
-            Icon: "images/druid/Starfire.png"
-            Description: >-
-              Reduces the cast time of Starfire by 0.{0:|1,2,3,4,5} sec and has a {0:|3,6,9,12,15}% 
-              chance to stun the target for 3 sec.
-          Nature's Grace:
-            Location: [4, 1]
-            Max Rank: 1
-            Icon: "images/druid/NaturesGrace.png"
-            Description: >-
-              All spell criticals grace you with a blessing of nature, reducing the casting time of 
-              your next spell by 0.5 sec.
-          Moonglow:
-            Location: [4, 2]
-            Max Rank: 3
-            Icon: "images/druid/Moonglow.png"
-            Description: >-
-              Reduces the Mana cost of your Moonfire, Starfire, Wrath, Healing Touch, Regrowth and 
-              Rejuvenation spells by {:|3,6,9}%.
-          Moonfury:
-            Location: [5, 1]
-            Requires: Nature's Grace
-            Max Rank: 5
-            Icon: "images/druid/MoonkinAura.png"
-            Description: >-
-              Increases the damage done by your Starfire, Moonfire and Wrath spells by 
-              {:|2,4,6,8,10}%.
-          Moonkin Form:
-            Location: [6, 1]
-            Max Rank: 1
-            Icon: "images/druid/MoonkinForm.png"
-            Description: >-
-              Transforms the Druid into Moonkin Form. While in this form the armor contribution from 
-              items is increased by 360% and all party members within 30 yards have their spell 
-              critical chance increased by 3%. The Moonkin can only cast Balance spells while 
-              shapeshifted.
-              
-              The act of shapeshifting frees the caster of Polymorph and Movement Impairing effects.
-            Spell:
-              Cost: 35% of Base Mana
-              Cast Time: Instant
-      Feral Combat:
-        Icon: "images/druid/BearForm.png"
-        Background: "images/backgrounds/druid_feral.jpg"
-        Talents:
-          Ferocity:
-            Location: [0, 1]
-            Max Rank: 5
-            Icon: "images/hunter/Hyena.png"
-            Description: >-
-              Reduces the cost of your Maul, Swipe, Claw, and Rake abilities by {:|1,2,3,4,5} Rage 
-              or Energy.
-          Feral Aggression:
-            Location: [0, 2]
-            Max Rank: 5
-            Icon: "images/druid/DemoralizingRoar.png"
-            Description: >-
-              Increases the Attack Power reduction of your Demoralizing Roar by {0:|8,16,24,32,40}% 
-              and the damage caused by your Ferocious Bite by {0:|3,6,9,12,15}%.
-          Feral Instinct:
-            Location: [1, 0]
-            Max Rank: 5
-            Icon: "images/druid/Prowl.png"
-            Description: >-
-              Increases threat caused in Bear and Dire Bear Form by {:|3,6,9,12,15}% and reduces the 
-              chance enemies have to detect you while Prowling.
-          Brutal Impact:
-            Location: [1, 1]
-            Max Rank: 2
-            Icon: "images/druid/Bash.png"
-            Description: >-
-              Increases the stun duration of your Bash and Pounce abilities by {:|0.5,1} sec.
-          Thick Hide:
-            Location: [1, 2]
-            Max Rank: 5
-            Icon: "images/druid/ThickHide.png"
-            Description: Increases your Armor contribution from items by {:|2,4,6,8,10}%.
-          Feline Swiftness:
-            Location: [2, 0]
-            Max Rank: 2
-            Icon: "images/shaman/GhostWolf.png"
-            Description: >-
-              Increases your movement speed by {0:|15,30}% while outdoors in Cat Form and increases 
-              your chance to dodge while in Cat Form by {0:|2,4}%.
-          Feral Charge:
-            Location: [2, 1]
-            Max Rank: 1
-            Icon: "images/hunter/Bear.png"
-            Description: >-
-              Causes you to charge an enemy, immobilizing and interrupting any spell being cast for 
-              4 sec.
-            Spell:
-              Cost: 5 Rage
-              Range: 25 yd
-              Cast Time: Instant
-              Cooldown: 15 sec
-          Sharpened Claws:
-            Location: [2, 2]
-            Max Rank: 3
-            Icon: "images/hunter/Ferocity.png"
-            Description: >-
-              Increases your critical strike chance while in Bear, Dire Bear or Cat Form by 
-              {:|2,4,6}%.
-          Improved Shred:
-            Location: [3, 0]
-            Max Rank: 2
-            Icon: "images/druid/Shred.png"
-            Description: Reduces the Energy cost of your Shred ability by {:|6,12}.
-          Predatory Strikes:
-            Location: [3, 1]
-            Max Rank: 3
-            Icon: "images/hunter/Cat.png"
-            Description: >-
-              Increases your melee attack power in Cat, Bear and Dire Bear Forms by {:|50,100,150}% 
-              of your level.
-          Blood Frenzy:
-            Location: [3, 2]
-            Requires: Sharpened Claws
-            Max Rank: 2
-            Icon: "images/druid/Rip.png"
-            Description: >-
-              Your critical strikes from Cat Form abilities that add combo points have a {:|50,100}% 
-              chance to add an additional combo point.
-          Primal Fury:
-            Location: [3, 3]
-            Requires: Sharpened Claws
-            Max Rank: 2
-            Icon: "images/skills/Cannibalize.png"
-            Description: >-
-              Gives you a {:|50,100}% chance to gain an additional 5 Rage anytime you get a critical 
-              strike while in Bear and Dire Bear Form.
-          Savage Fury:
-            Location: [4, 0]
-            Max Rank: 2
-            Icon: "images/druid/Ravage.png"
-            Description: >-
-              Increases the damage caused by your Claw, Rake, Maul and Swipe abilities by {:|10,20}%.
-          Faerie Fire (Feral):
-            Location: [4, 2]
-            Max Rank: 1
-            Icon: "images/druid/FaerieFire.png"
-            Description: >-
-              Decrease the armor of the target by 175 for 40 sec. While affected, the target cannot 
-              stealth or turn invisible.
-            Spell:
-              Range: 30 yd
-              Cast Time: Instant
-              Cooldown: 6 sec
-          Heart of the Wild:
-            Location: [5, 1]
-            Requires: Predatory Strikes
-            Max Rank: 5
-            Icon: "images/druid/HeartOfTheWild.png"
-            Description: >-
-              Increases your Intellect by {0:|4,8,12,16,20}%. In addition, while in Bear or Dire Bear 
-              Form your Stamina is increased by {0:|4,8,12,16,20}% and while in Cat Form your 
-              Strength is increased by {0:|4,8,12,16,20}%.
-          Leader of the Pack:
-            Location: [6, 1]
-            Max Rank: 1
-            Icon: "images/druid/LeaderOfThePack.png"
-            Description: >-
-              While in Cat, Bear or Dire Bear Form, the Leader of the Pack increases ranged and 
-              melee critical chance of all party members within 45 yards by 3%.
-      Restoration:
-        Icon: "images/druid/HealingTouch.png"
-        Background: "images/backgrounds/druid_restoration.jpg"
-        Talents:
-          Improved Mark of the Wild:
-            Location: [0, 1]
-            Max Rank: 5
-            Icon: "images/druid/MarkOfTheWild.png"
-            Description: >-
-              Increases the effect of your Mark of the Wild and Gift of the Wild spells by 
-              {:|7,14,21,28,35}%.
-          Furor:
-            Location: [0, 2]
-            Max Rank: 5
-            Icon: "images/druid/Furor.png"
-            Description: >-
-              Gives you a {:|20,40,60,80,100}% chance to gain 10 Rage when you shapeshift into Bear 
-              and Dire Bear Form or 40 Energy when you shapeshift into Cat Form.
-          Improved Healing Touch:
-            Location: [1, 0]
-            Max Rank: 5
-            Icon: "images/druid/HealingTouch.png"
-            Description: >-
-              Reduces the cast time of your Healing Touch spell by {:|0.1,0.2,0.3,0.4,0.5} sec.
-          Nature's Focus:
-            Location: [1, 1]
-            Max Rank: 5
-            Icon: "images/shaman/ChainHeal.png"
-            Description: >-
-              Gives you a {:|14,28,42,56,70}% chance to avoid interruption caused by damage while 
-              casting the Healing Touch, Regrowth and Tranquility spells.
-          Improved Enrage:
-            Location: [1, 2]
-            Max Rank: 2
-            Icon: "images/druid/Enrage.png"
-            Description: The Enrage ability now instantly generates {:|5,10} Rage.
-          Reflection:
-            Location: [2, 1]
-            Max Rank: 3
-            Icon: "images/shaman/WaterWalking.png"
-            Description: Allows {:|5,10,15}% of your Mana regeneration to continue while casting.
-          Insect Swarm:
-            Location: [2, 2]
-            Max Rank: 1
-            Icon: "images/druid/InsectSwarm.jpg"
-            Description: >-
-              The enemy target is swarmed by insects, decreasing their chance to hit by 2% and 
-              causing 66 Nature damage over 12 sec.
-            Spell:
-              Cost: 45 Mana
-              Range: 30 yd
-              Cast Time: Instant
-          Subtlety:
-            Location: [2, 3]
-            Max Rank: 5
-            Icon: "images/hunter/EyesOfTheBeast.png"
-            Description:  Reduces the threat generated by your Healing spells by {:|4,8,12,16,20}%.
-          Tranquil Spirit:
-            Location: [3, 1]
-            Max Rank: 5
-            Icon: "images/druid/TranquilSpirit.jpg"
-            Description: >-
-              Reduces the Mana cost of your Healing Touch and Tranquility spells by {:|2,4,6,8,10}%.
-          Improved Rejuvenation:
-            Location: [3, 3]
-            Max Rank: 3
-            Icon: "images/druid/Rejuvenation.png"
-            Description: Increases the effect of your Rejuvenation spell by {:|5,10,15}%.
-          Nature's Swiftness:
-            Location: [4, 0]
-            Requires: Improved Healing Touch
-            Max Rank: 1
-            Icon: "images/hunter/AspectOfTheHawk.png"
-            Description: When activated, your next Nature spell becomes an instant cast spell.
-            Spell:
-              Cast Time: Instant
-              Cooldown: 3 min
-          Gift of Nature:
-            Location: [4, 2]
-            Requires: Insect Swarm
-            Max Rank: 5
-            Icon: "images/hunter/AspectOfTheWild.png"
-            Description: Increases the effect of all healing spells by {:|2,4,6,8,10}%.
-          Improved Tranquility:
-            Location: [4, 3]
-            Max Rank: 2
-            Icon: "images/druid/Tranquility.png"
-            Description: Reduces threat caused by Tranquility by {:|50,100}%.
-          Improved Regrowth:
-            Location: [5, 2]
-            Max Rank: 5
-            Icon: "images/druid/Regrowth.png"
-            Description: >-
-              Increases the critical effect chance of your Regrowth spell by {:|10,20,30,40,50}%
-          Swiftmend:
-            Location: [6, 1]
-            Requires: Tranquil Spirit
-            Max Rank: 1
-            Icon: "images/druid/Swiftmend.jpg"
-            Description: >-
-              Consumes a Rejuvenation or Regrowth effect on a friendly target to instantly heal them 
-              an amount equal to 12 sec. of Rejuvenation or 18 sec. of Regrowth.
-            Spell:
-              Cost: 20% of Base Mana
-              Range: 40 yd
-              Cast Time: Instant
-              Cooldown: 15 sec
-  TBC:
-    Specializations:
-      Balance:
-        Icon: "images/druid/Moonfire.png"
-        Background: "images/backgrounds/druid_balance.jpg"
-        Talents:
-          Starlight Wrath:
-            Location: [0, 0]
-            Max Rank: 5
-            Icon: "images/druid/Wrath.png"
-            Description: >-
-              Reduces the cast time of your Wrath and Starfire spells by {:|0.1,0.2,0.3,0.4,0.5} sec.
-          Nature's Grasp:
-            Location: [0, 1]
-            Max Rank: 1
-            Icon: "images/druid/NaturesGrasp.png"
-            Description: >-
-              While active, any time an enemy strikes the caster they have a 35% chance to become 
-              afflicted by Entangling Roots (Rank 1). Only usable outdoors. 1 charge. Lasts 45 sec.
-            Spell:
-              Cost: 50 Mana
-              Cast Time: Instant
-              Cooldown: 1 min
-          Improved Nature's Grasp:
-            Location: [0, 2]
-            Requires: Nature's Grasp
-            Max Rank: 4
-            Icon: "images/druid/NaturesGrasp.png"
-            Description: >-
-              Increases the chance for your Nature's Grasp to entangle an enemy by {:|15,30,45,65}%.
-          Improved Entangling Roots:
-            Location: [1, 0]
-            Max Rank: 3
-            Icon: "images/druid/EntanglingRoots.png"
-            Description: >-
-              Gives you a {:|40,70,100}% chance to avoid interruption caused by damage while casting
-              Entangling Roots and Cyclone.
-          Focused Starlight:
-            Location: [1, 1]
-            Max Rank: 2
-            Icon: "images/druid/FocusedStarlight.png"
-            Description: >-
-              Increases the critical strike chance of your Wrath and Starfire spells by {:|2,4}%.
-          Improved Moonfire:
-            Location: [1, 2]
-            Max Rank: 2
-            Icon: "images/druid/Moonfire.png"
-            Description: >-
-              Increases the damage and critical strike chance of your Moonfire spell by {:|5,10}%.
-          Brambles:
-            Location: [2, 0]
-            Max Rank: 3
-            Icon: "images/druid/Thorns.png"
-            Description: >-
-              Increases damage caused by your Thorns and Entangling Roots spells by {:|25,50,75}%
-          Insect Swarm:
-            Location: [2, 2]
-            Max Rank: 1
-            Icon: "images/druid/InsectSwarm.jpg"
-            Description: >-
-              The enemy target is swarmed by insects, decreasing their chance to hit by 2% and 
-              causing 108 Nature damage over 12 sec.
-            Spell:
-              Cost: 50 Mana
-              Range: 30 yd
-              Cast Time: Instant
-          Nature's Reach:
-            Location: [2, 3]
-            Max Rank: 2
-            Icon: "images/skills/HerbGathering.png"
-            Description: >-
-              Increases the range of your Balance spells and Faerie Fire (Feral) by {:|10,20}%.
-          Vengeance:
-            Location: [3, 1]
-            Requires: Focused Starlight
-            Max Rank: 5
-            Icon: "images/mage/Evocation.png"
-            Description: >-
-              Increases the critical strike damage bonus of your Starfire, Moonfire, and Wrath 
-              spells by {:|20,40,60,80,100}%.
-          Celestial Focus:
-            Location: [3, 2]
-            Max Rank: 3
-            Icon: "images/druid/Starfire.png"
-            Description: >-
-              Gives your Starfire spell a {0:|5,10,15}% chance to stun the target for 3 sec and 
-              increases the chance you'll resist spell interruption when casting your wrath spell 
-              by {0:|25,50,70}%.
-          Lunar Guidance:
-            Location: [4, 0]
-            Max Rank: 3
-            Icon: "images/druid/LunarGuidance.jpg"
-            Description: >-
-              Increases your spell damage and healing by {:|8,16,25}% of your total Intellect.
-          Nature's Grace:
-            Location: [4, 1]
-            Max Rank: 1
-            Icon: "images/druid/NaturesGrace.png"
-            Description: >-
-              All spell criticals grace you with a blessing of nature, reducing the casting time of 
-              your next spell by 0.5 sec.
-          Moonglow:
-            Location: [4, 2]
-            Max Rank: 3
-            Icon: "images/druid/Moonglow.png"
-            Description: >-
-              Reduces the Mana cost of your Moonfire, Starfire, Wrath, Healing Touch, Regrowth and 
-              Rejuvenation spells by {:|3,6,9}%.
-          Moonfury:
-            Location: [5, 1]
-            Requires: Nature's Grace
-            Max Rank: 5
-            Icon: "images/druid/MoonkinAura.png"
-            Description: >-
-              Increases the damage done by your Starfire, Moonfire and Wrath spells by 
-              {:|2,4,6,8,10}%.
-          Balance of Power:
-            Location: [5, 2]
-            Max Rank: 2
-            Icon: "images/druid/BalanceOfPower.jpg"
-            Description: >-
-              Increases your chance to hit with all spells and reduces the chance you'll be hit by 
-              spells by {:|2,4}%.
-          Dreamstate:
-            Location: [6, 0]
-            Max Rank: 3
-            Icon: "images/druid/Dreamstate.jpg"
-            Description: >-
-              Regenerate mana equal to {:|4,7,10}% of your Intellect every 5 sec, even while 
-              casting.
-          Moonkin Form:
-            Location: [6, 1]
-            Max Rank: 1
-            Icon: "images/druid/MoonkinForm.png"
-            Description: >-
-              Shapeshift into Moonkin Form. While in this form the armor contribution from 
-              items is increased by 400%, attack power is increased by 150% of your level and all 
-              party members within 30 yards have their spell critical chance increased by 5%. The 
-              Moonkin can only cast Balance and Remove Curse spells while shapeshifted.
-              
-              The act of shapeshifting frees the caster of Polymorph and Movement Impairing effects.
-            Spell:
-              Cost: 22% of Base Mana
-              Cast Time: Instant
-          Improved Faerie Fire:
-            Location: [6, 2]
-            Max Rank: 3
-            Icon: "images/druid/FaerieFire.png"
-            Description: >-
-              Your Faerie Fire spell also increases the chance the target will be hit by melee and
-              ranged attacks by {:|1,2,3}%.
-          Wrath of Cenarius:
-            Location: [7, 1]
-            Max Rank: 5
-            Icon: "images/druid/WrathOfCenarius.jpg"
-            Description: >-
-              Your Starfire spell gains an additional {0:|4,8,12,16,20}% and your Wrath gains an 
-              additional {0:|2,4,6,8,10}% of your bonus damage effects.
-          Force of Nature:
-            Location: [8, 1]
-            Max Rank: 1
-            Icon: "images/druid/ForceOfNature.jpg"
-            Description: Summons 3 treants to attack enemy targets for 30 sec.
-            Spell:
-              Cost: 12% of Base Mana
-              Cast Time: Instant
-              Range: 30 yd
-              Cooldown: 3 min
-      Feral Combat:
-        Icon: "images/druid/BearForm.png"
-        Background: "images/backgrounds/druid_feral.jpg"
-        Talents:
-          Ferocity:
-            Location: [0, 1]
-            Max Rank: 5
-            Icon: "images/hunter/Hyena.png"
-            Description: >-
-              Reduces the cost of your Maul, Swipe, Claw, Rake and Mangle abilities by {:|1,2,3,4,5} 
-              Rage or Energy.
-          Feral Aggression:
-            Location: [0, 2]
-            Max Rank: 5
-            Icon: "images/druid/DemoralizingRoar.png"
-            Description: >-
-              Increases the Attack Power reduction of your Demoralizing Roar by {0:|8,16,24,32,40}% 
-              and the damage caused by your Ferocious Bite by {0:|3,6,9,12,15}%.
-          Feral Instinct:
-            Location: [1, 0]
-            Max Rank: 3
-            Icon: "images/druid/Prowl.png"
-            Description: >-
-              Increases threat caused in Bear and Dire Bear Form by {:|5,10,15}% and reduces the 
-              chance enemies have to detect you while Prowling.
-          Brutal Impact:
-            Location: [1, 1]
-            Max Rank: 2
-            Icon: "images/druid/Bash.png"
-            Description: >-
-              Increases the stun duration of your Bash and Pounce abilities by {:|0.5,1} sec.
-          Thick Hide:
-            Location: [1, 2]
-            Max Rank: 3
-            Icon: "images/druid/ThickHide.png"
-            Description: Increases your Armor contribution from items by {:|4,7,10}%.
-          Feral Swiftness:
-            Location: [2, 0]
-            Max Rank: 2
-            Icon: "images/shaman/GhostWolf.png"
-            Description: >-
-              Increases your movement speed by {0:|15,30}% while outdoors in Cat Form and increases 
-              your chance to dodge while in Cat Form, Bear Form and Dire Bear Form by {0:|2,4}%.
-          Feral Charge:
-            Location: [2, 1]
-            Max Rank: 1
-            Icon: "images/hunter/Bear.png"
-            Description: >-
-              Causes you to charge an enemy, immobilizing and interrupting any spell being cast for 
-              4 sec.
-            Spell:
-              Cost: 5 Rage
-              # TODO: minimum range is 8
-              Range: 25 yd
-              Cast Time: Instant
-              Cooldown: 15 sec
-          Sharpened Claws:
-            Location: [2, 2]
-            Max Rank: 3
-            Icon: "images/hunter/Ferocity.png"
-            Description: >-
-              Increases your critical strike chance while in Bear, Dire Bear or Cat Form by 
-              {:|2,4,6}%.
-          Shredding Attacks:
-            Location: [3, 0]
-            Max Rank: 2
-            Icon: "images/druid/Shred.png"
-            Description: >-
-              Reduces the Energy cost of your Shred ability by {0:|9,18} and the Rage cost of your 
-              Lacerate ability by {0:|1,2}.
-          Predatory Strikes:
-            Location: [3, 1]
-            Max Rank: 3
-            Icon: "images/hunter/Cat.png"
-            Description: >-
-              Increases your melee attack power in Cat, Bear, Dire Bear and Moonkin Forms by 
-              {:|50,100,150}% of your level.
-          Primal Fury:
-            Location: [3, 2]
-            Requires: Sharpened Claws
-            Max Rank: 2
-            Icon: "images/skills/Cannibalize.png"
-            Description: >-
-              Gives you a {0:|50,100}% chance to gain an additional 5 Rage anytime you get a 
-              critical strike while in Bear and Dire Bear Form and your critical strikes from Cat 
-              Form abilities that add combo points have a {0:|50,100}% chance to add an additional 
-              combo point.
-          Savage Fury:
-            Location: [4, 0]
-            Max Rank: 2
-            Icon: "images/druid/Ravage.png"
-            Description: >-
-              Increases the damage caused by your Claw, Rake, and Mangle (Cat) abilities by 
-              {:|10,20}%.
-          Faerie Fire (Feral):
-            Location: [4, 2]
-            Max Rank: 1
-            Icon: "images/druid/FaerieFire.png"
-            Description: >-
-              Decrease the armor of the target by 175 for 40 sec. While affected, the target cannot 
-              stealth or turn invisible.
-            Spell:
-              Range: 30 yd
-              Cast Time: Instant
-              Cooldown: 6 sec
-          Nurturing Instinct:
-            Location: [4, 3]
-            Max Rank: 2
-            Icon: "images/druid/NurturingInstinct.jpg"
-            Description: >-
-              Increases your healing spells by up to {0:|50,100}% of your Agility, and increases
-              healing done to you by {0:|10,20}% while in Cat Form.
-          Heart of the Wild:
-            Location: [5, 1]
-            Requires: Predatory Strikes
-            Max Rank: 5
-            Icon: "images/druid/HeartOfTheWild.png"
-            Description: >-
-              Increases your Intellect by {0:|4,8,12,16,20}%. In addition, while in Bear or Dire Bear 
-              Form your Stamina is increased by {0:|4,8,12,16,20}% and while in Cat Form your 
-              Attack Power is increased by {0:|2,4,6,8,10}%.
-          Survival of the Fittest:
-            Location: [5, 2]
-            Max Rank: 3
-            Icon: "images/druid/Enrage.png"
-            Description: >-
-              Increases all attributes by {0:|1,2,3}% and reduces the chance you'll be critically
-              hit by melee attacks by {0:|1,2,3}%.
-          Primal Tenacity:
-            Location: [6, 0]
-            Max Rank: 3
-            Icon: "images/druid/PrimalTenacity.jpg"
-            Description: Increases your chance to resist Stun and Fear mechanics by {:|5,10,15}%.
-          Leader of the Pack:
-            Location: [6, 1]
-            Max Rank: 1
-            Icon: "images/druid/LeaderOfThePack.png"
-            Description: >-
-              While in Cat, Bear or Dire Bear Form, the Leader of the Pack increases ranged and 
-              melee critical chance of all party members within 45 yards by 5%.
-          Improved Leader of the Pack:
-            Location: [6, 2]
-            Requires: Leader of the Pack
-            Max Rank: 2
-            Icon: "images/druid/LeaderOfThePack.png"
-            Description: >-
-              Your Leader of the Pack ability also causes affected targets to have a 100% chance to
-              heal themselves for {:|2,4}% of their total health when they critically hit with a 
-              melee or ranged attack. The healing effect cannot occur more than once every 6 sec.
-          Predatory Instincts:
-            Location: [7, 2]
-            Max Rank: 5
-            Icon: "images/druid/PredatoryInstincts.jpg"
-            Description: >-
-              While in Cat Form, Bear Form, or Dire Bear Form, increases your damage from melee 
-              critical strikes by {0:|2,4,6,8,10}% and your chance to avoid area effect attacks
-              by {0:|3,6,9,12,15}%.
-          Mangle:
-            Location: [8, 1]
-            Requires: Leader of the Pack
-            Max Rank: 1
-            Icon: "images/druid/Mangle.jpg"
-            Description: >-
-              Mangle the target, inflicting damage and causing the target to take additional damage
-              from bleed effects for 12 sec. This ability can be used in Cat Form or Dire Bear Form.
-            Spell:
-              Range: 100 yd
-              Cast Time: Instant
-      Restoration:
-        Icon: "images/druid/HealingTouch.png"
-        Background: "images/backgrounds/druid_restoration.jpg"
-        Talents:
-          Improved Mark of the Wild:
-            Location: [0, 1]
-            Max Rank: 5
-            Icon: "images/druid/MarkOfTheWild.png"
-            Description: >-
-              Increases the effect of your Mark of the Wild and Gift of the Wild spells by 
-              {:|7,14,21,28,35}%.
-          Furor:
-            Location: [0, 2]
-            Max Rank: 5
-            Icon: "images/druid/Furor.png"
-            Description: >-
-              Gives you a {:|20,40,60,80,100}% chance to gain 10 Rage when you shapeshift into Bear 
-              and Dire Bear Form or 40 Energy when you shapeshift into Cat Form.
-          Naturalist:
-            Location: [1, 0]
-            Max Rank: 5
-            Icon: "images/druid/HealingTouch.png"
-            Description: >-
-              Reduces the cast time of your Healing Touch spell by {0:|0.1,0.2,0.3,0.4,0.5} sec and
-              increases the damage you deal with physical attacks in all forms by {0:|2,4,6,8,10}%.
-          Nature's Focus:
-            Location: [1, 1]
-            Max Rank: 5
-            Icon: "images/shaman/ChainHeal.png"
-            Description: >-
-              Gives you a {:|14,28,42,56,70}% chance to avoid interruption caused by damage while 
-              casting the Healing Touch, Regrowth and Tranquility spells.
-          Natural Shapeshifter:
-            Location: [1, 2]
-            Max Rank: 3
-            Icon: "images/mage/ArcaneExplosion.png"
-            Description: Reduces the mana cost of all shapeshifting by {:|10,20,30}%.
-          Intensity:
-            Location: [2, 0]
-            Max Rank: 3
-            Icon: "images/shaman/WaterWalking.png"
-            Description: >-
-              Allows {0:|10,20,30}% of your Mana regeneration to continue while casting and causes
-              your Enrage ability to instantly generate {0:|4,7,10} Rage.
-          Subtlety:
-            Location: [2, 1]
-            Max Rank: 5
-            Icon: "images/hunter/EyesOfTheBeast.png"
-            Description: >-
-              Reduces the threat generated by your spells by {0:|4,8,12,16,20}% and reduces the
-              change your spells will be dispelled by {0:|6,12,18,24,30}%.
-          Omen of Clarity:
-            Location: [2, 2]
-            Max Rank: 1
-            Icon: "images/druid/OmenOfClarity.png"
-            Description: >-
-              Imbues the Druid with natural energy. Each of the Druid's melee attacks has a chance 
-              of causing the caster to enter a Clearcasting state. The Clearcasting state reduces 
-              the Mana, Rage or Energy cost of your next damage or healing spell or offensive 
-              ability by 100%. Lasts 30 min.
-            Spell:
-              Cost: 120 Mana
-              Cast Time: Instant
-          Tranquil Spirit:
-            Location: [3, 1]
-            Max Rank: 5
-            Icon: "images/druid/TranquilSpirit.jpg"
-            Description: >-
-              Reduces the Mana cost of your Healing Touch and Tranquility spells by {:|2,4,6,8,10}%.
-          Improved Rejuvenation:
-            Location: [3, 2]
-            Max Rank: 3
-            Icon: "images/druid/Rejuvenation.png"
-            Description: Increases the effect of your Rejuvenation spell by {:|5,10,15}%.
-          Nature's Swiftness:
-            Location: [4, 0]
-            Requires: Intensity
-            Max Rank: 1
-            Icon: "images/hunter/AspectOfTheHawk.png"
-            Description: When activated, your next Nature spell becomes an instant cast spell.
-            Spell:
-              Cast Time: Instant
-              Cooldown: 3 min
-          Gift of Nature:
-            Location: [4, 1]
-            Max Rank: 5
-            Icon: "images/hunter/AspectOfTheWild.png"
-            Description: Increases the effect of all healing spells by {:|2,4,6,8,10}%.
-          Improved Tranquility:
-            Location: [4, 3]
-            Max Rank: 2
-            Icon: "images/druid/Tranquility.png"
-            Description: Reduces threat caused by Tranquility by {:|50,100}%.
-          Empowered Touch:
-            Location: [5, 0]
-            Max Rank: 2
-            Icon: "images/druid/EmpoweredTouch.jpg"
-            Description: >-
-              Your Healing Touch spell gains an additional {:|10,20,30}% of your bonus healing 
-              effects.
-          Improved Regrowth:
-            Location: [5, 2]
-            Requires: Improved Rejuvenation
-            Max Rank: 5
-            Icon: "images/druid/Regrowth.png"
-            Description: >-
-              Increases the critical effect chance of your Regrowth spell by {:|10,20,30,40,50}%
-          Living Spirit:
-            Location: [6, 0]
-            Max Rank: 3
-            Icon: "images/druid/LivingSpirit.jpg"
-            Description: Increases your total Spirit by {:|5,10,15}%.
-          Swiftmend:
-            Location: [6, 1]
-            Requires: Gift of Nature
-            Max Rank: 1
-            Icon: "images/druid/Swiftmend.jpg"
-            Description: >-
-              Consumes a Rejuvenation or Regrowth effect on a friendly target to instantly heal them 
-              an amount equal to 12 sec. of Rejuvenation or 18 sec. of Regrowth.
-            Spell:
-              Cost: 16% of Base Mana
-              Range: 40 yd
-              Cast Time: Instant
-              Cooldown: 15 sec
-          Natural Perfection:
-            Location: [6, 2]
-            Max Rank: 3
-            Icon: "images/druid/NaturalPerfection.jpg"
-            Description: >-
-              Your critical strike chance with all spells is increased by {0:|1,2,3}% and 
-              critical strikes against you will give you the Natural Perfection effect, reducing all
-              damage taken by {0:|2,4,6}%. Stacks up to 3 times. Lasts 8 sec.
-          Empowered Rejuvenation:
-            Location: [7, 1]
-            Max Rank: 5
-            Icon: "images/druid/EmpoweredRejuvenation.jpg"
-            Description: >- 
-              The bonus healing effects of your healing over time spells is increased by 
-              {:|4,8,12,16,20}%.
-          Tree of Life:
-            Location: [8, 1]
-            Requires: Empowered Rejuvenation
-            Max Rank: 1
-            Icon: "images/druid/TreeOfLife.jpg"
-            Description: >-
-              Shapeshift into the Tree of Life. While in this form you increase healing received by 
-              25% of your total Spirit for all party members within 45 yards, your movement speed
-              is reduced by 20%, and you can only cast Swiftmend, Innervate, Nature's Swiftness,
-              Rebirth, Barkskin, poison removing and healing over time spells, but the mana cost of
-              these spells is reduced by 20%.
-              
-              The act of shapeshifting frees the caster of Polymorph and Movement Impairing effects.
-            Spell:
-              Cost: 28% of Base Mana
-              Cast Time: Instant
+Class: Druid
+Icon: class/druid.jpg
+Color: rgb(255, 124, 10)
+Classic:
+  Specializations:
+    Balance:
+      Icon: spell/nature/starfall.jpg
+      Background: backgrounds/283.jpg
+      Talents:
+        Improved Wrath:
+          Location: [0, 0]
+          Max Rank: 5
+          Icon: spell/nature/abolishmagic.jpg
+          Description: Reduces the cast time of your Wrath spell by {:|0.1,0.2,0.3,0.4,0.5}
+            sec.
+        Nature's Grasp:
+          Location: [0, 1]
+          Max Rank: 1
+          Icon: spell/nature/natureswrath.jpg
+          Description: While active, any time an enemy strikes the caster they have
+            a 35% chance to become afflicted by Entangling Roots (Rank 1). Only useable
+            outdoors. 1 charge. Lasts 45 sec.
+          Spell:
+            Cost: 50 Mana
+            Cast Time: Instant
+            Cooldown: 1 min
+        Improved Nature's Grasp:
+          Location: [0, 2]
+          Requires: Nature's Grasp
+          Max Rank: 4
+          Icon: spell/nature/natureswrath.jpg
+          Description: Increases the chance for your Nature's Grasp to entangle an
+            enemy by {:|15,30,45,65}%.
+        Improved Entangling Roots:
+          Location: [1, 0]
+          Max Rank: 3
+          Icon: spell/nature/stranglevines.jpg
+          Description: Gives you a {:|40,70,100}% chance to avoid interruption caused
+            by damage while casting Entangling Roots.
+        Improved Moonfire:
+          Location: [1, 1]
+          Max Rank: 5
+          Icon: spell/nature/starfall.jpg
+          Description: Increases the damage and critical strike chance of your Moonfire
+            spell by {:|2,4,6,8,10}%.
+        Natural Weapons:
+          Location: [1, 2]
+          Max Rank: 5
+          Icon: inv/staff/01.jpg
+          Description: Increases the damage you deal with physical attacks in all
+            forms by {:|2,4,6,8,10}%.
+        Natural Shapeshifter:
+          Location: [1, 3]
+          Max Rank: 3
+          Icon: spell/nature/wispsplode.jpg
+          Description: Reduces the mana cost of all shapeshifting by {:|10,20,30}%.
+        Improved Thorns:
+          Location: [2, 0]
+          Max Rank: 3
+          Icon: spell/nature/thorns.jpg
+          Description: Increases damage caused by your Thorns spell by {:|25,50,75}%.
+        Nature's Reach:
+          Location: [2, 3]
+          Max Rank: 2
+          Icon: spell/nature/naturetouchgrow.jpg
+          Description: Increases the range of your Wrath, Entangling Roots, Faerie
+            Fire, Moonfire, Starfire, and Hurricane spells by {:|10,20}%.
+        Omen of Clarity:
+          Location: [2, 2]
+          Requires: Natural Weapons
+          Max Rank: 1
+          Icon: spell/nature/crystalball.jpg
+          Description: Imbues the Druid with natural energy. Each of the Druid's melee
+            attacks has a chance of causing the caster to enter a Clearcasting state.
+            The Clearcasting state reduces the Mana, Rage or Energy cost of your next
+            damage or healing spell or offensive ability by 100%. Lasts 10 min.
+          Spell:
+            Cost: 120 mana
+            Cast Time: Instant
+        Improved Starfire:
+          Location: [3, 2]
+          Max Rank: 5
+          Icon: spell/arcane/starfire.jpg
+          Description: Reduces the cast time of Starfire by {0:|0.1,0.2,0.3,0.4,0.5}
+            sec and has a {0:|3,6,9,12,15}% chance to stun the target for 3 sec.
+        Vengeance:
+          Location: [3, 1]
+          Requires: Improved Moonfire
+          Max Rank: 5
+          Icon: spell/nature/purge.jpg
+          Description: Increases the critical strike damage bonus of your Starfire,
+            Moonfire, and Wrath spells by {:|20,40,60,80,100}%.
+        Nature's Grace:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: spell/nature/naturesblessing.jpg
+          Description: All spell criticals grace you with a blessing of nature, reducing
+            the casting time of your next spell by 0.5 sec.
+        Moonglow:
+          Location: [4, 2]
+          Max Rank: 3
+          Icon: spell/nature/sentinal.jpg
+          Description: Reduces the Mana cost of your Moonfire, Starfire, Wrath, Healing
+            Touch, Regrowth and Rejuvenation spells by {:|3,6,9}%.
+        Moonfury:
+          Location: [5, 1]
+          Requires: Nature's Grace
+          Max Rank: 5
+          Icon: spell/nature/moonglow.jpg
+          Description: Increases the damage done by your Starfire, Moonfire and Wrath
+            spells by {:|2,4,6,8,10}%.
+        Moonkin Form:
+          Location: [6, 1]
+          Max Rank: 1
+          Icon: spell/nature/forceofnature.jpg
+          Description: >-
+            Transforms the Druid into Moonkin Form. While in this form the armor 
+            contribution from items is increased by 360% and all party members 
+            within 30 yards have their spell critical chance increased by 3%. The
+            Moonkin can only cast Balance spells while shapeshifted.
+
+            The act of shapeshifting frees the caster of Polymorph and Movement Impairing
+            effects.
+          Spell:
+            Cost: 35% of base mana
+            Cast Time: Instant
+    Feral Combat:
+      Icon: ability/racial/bearform.jpg
+      Background: backgrounds/281.jpg
+      Talents:
+        Ferocity:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: ability/hunter/pet/hyena.jpg
+          Description: Reduces the cost of your Maul, Swipe, Claw, and Rake abilities
+            by {:|1,2,3,4,5} Rage or Energy.
+        Feral Aggression:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: classic/ability/druid/demoralizingroar.jpg
+          Description: Increases the Attack Power reduction of your Demoralizing Roar
+            by {0:|8,16,24,32,40}% and the damage caused by your Ferocious Bite by
+            {0:|3,6,9,12,15}%.
+        Feral Instinct:
+          Location: [1, 0]
+          Max Rank: 5
+          Icon: ability/ambush.jpg
+          Description: Increases threat caused in Bear and Dire Bear Form by {:|3,6,9,12,15}%
+            and reduces the chance enemies have to detect you while Prowling.
+        Brutal Impact:
+          Location: [1, 1]
+          Max Rank: 2
+          Icon: ability/druid/bash.jpg
+          Description: Increases the stun duration of your Bash and Pounce abilities
+            by {:|0.5,1} sec.
+        Thick Hide:
+          Location: [1, 2]
+          Max Rank: 5
+          Icon: inv/misc/pelt/bear/03.jpg
+          Description: Increases your Armor contribution from items by {:|2,4,6,8,10}%.
+        Feline Swiftness:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: spell/nature/spiritwolf.jpg
+          Description: Increases your movement speed by {0:|15,30}% while outdoors
+            in Cat Form and increases your chance to dodge while in Cat Form by {0:|2,4}%.
+        Feral Charge:
+          Location: [2, 1]
+          Max Rank: 1
+          Icon: ability/hunter/pet/bear.jpg
+          Description: Causes you to charge an enemy, immobilizing and interrupting
+            any spell being cast for 4 sec.
+          Spell:
+            Cost: 5 rage
+            Range: 8-25 yd
+            Cast Time: Instant
+            Cooldown: 15 sec
+        Sharpened Claws:
+          Location: [2, 2]
+          Max Rank: 3
+          Icon: inv/misc/monsterclaw/04.jpg
+          Description: Increases your critical strike chance while in Bear, Dire Bear
+            or Cat Form by {:|2,4,6}%.
+        Improved Shred:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: spell/shadow/vampiricaura.jpg
+          Description: Reduces the Energy cost of your Shred ability by {:|6,12}.
+        Predatory Strikes:
+          Location: [3, 1]
+          Max Rank: 3
+          Icon: ability/hunter/pet/cat.jpg
+          Description: Increases your melee attack power in Cat, Bear and Dire Bear
+            Forms by {:|50,100,150}% of your level.
+        Blood Frenzy:
+          Location: [3, 2]
+          Requires: Sharpened Claws
+          Max Rank: 2
+          Icon: ability/ghoulfrenzy.jpg
+          Description: Your critical strikes from Cat Form abilities that add combo
+            points have a {:|50,100}% chance to add an additional combo point.
+        Primal Fury:
+          Location: [3, 3]
+          Requires: Sharpened Claws
+          Max Rank: 2
+          Icon: ability/racial/cannibalize.jpg
+          Description: Gives you a {:|50,100}% chance to gain an additional 5 Rage
+            anytime you get a critical strike while in Bear and Dire Bear Form.
+        Savage Fury:
+          Location: [4, 0]
+          Max Rank: 2
+          Icon: ability/druid/ravage.jpg
+          Description: Increases the damage caused by your Claw, Rake, Maul and Swipe
+            abilities by {:|10,20}%.
+        Faerie Fire (Feral):
+          Location: [4, 2]
+          Max Rank: 1
+          Icon: spell/nature/faeriefire.jpg
+          Description: Decrease the armor of the target by 175 for 40 sec. While affected,
+            the target cannot stealth or turn invisible.
+          Spell:
+            Range: 30 yd
+            Cast Time: Instant
+            Cooldown: 6 sec
+        Heart of the Wild:
+          Location: [5, 1]
+          Requires: Predatory Strikes
+          Max Rank: 5
+          Icon: spell/holy/blessingofagility.jpg
+          Description: Increases your Intellect by {0:|4,8,12,16,20}%. In addition,
+            while in Bear or Dire Bear Form your Stamina is increased by {0:|4,8,12,16,20}%
+            and while in Cat Form your Strength is increased by {0:|4,8,12,16,20}%.
+        Leader of the Pack:
+          Location: [6, 1]
+          Max Rank: 1
+          Icon: spell/nature/unyeildingstamina.jpg
+          Description: While in Cat, Bear or Dire Bear Form, the Leader of the Pack
+            increases ranged and melee critical chance of all party members within
+            45 yards by 3%.
+    Restoration:
+      Icon: spell/nature/healingtouch.jpg
+      Background: backgrounds/282.jpg
+      Talents:
+        Improved Mark of the Wild:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/nature/regeneration.jpg
+          Description: Increases the effects of your Mark of the Wild and Gift of
+            the Wild spells by {:|7,14,21,28,35}%.
+        Furor:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/holy/blessingofstamina.jpg
+          Description: Gives you {:|20,40,60,80,100}% chance to gain 10 Rage when
+            you shapeshift into Bear and Dire Bear Form or 40 Energy when you shapeshift
+            into Cat Form.
+        Improved Healing Touch:
+          Location: [1, 0]
+          Max Rank: 5
+          Icon: spell/nature/healingtouch.jpg
+          Description: Reduces the cast time of your Healing Touch spell by {:|0.1,0.2,0.3,0.4,0.5}
+            sec.
+        Nature's Focus:
+          Location: [1, 1]
+          Max Rank: 5
+          Icon: spell/nature/healingwavegreater.jpg
+          Description: Gives you a {:|14,28,42,56,70}% chance to avoid interruption
+            caused by damage while casting the Healing Touch, Regrowth and Tranquility
+            spells.
+        Improved Enrage:
+          Location: [1, 2]
+          Max Rank: 2
+          Icon: ability/druid/enrage.jpg
+          Description: The Enrage ability now instantly generates {:|5,10} Rage.
+        Reflection:
+          Location: [2, 1]
+          Max Rank: 3
+          Icon: spell/frost/windwalkon.jpg
+          Description: Allows {:|5,10,15}% of your Mana regeneration to continue while
+            casting.
+        Insect Swarm:
+          Location: [2, 2]
+          Max Rank: 1
+          Icon: spell/nature/insectswarm.jpg
+          Description: The enemy target is swarmed by insects, decreasing their chance
+            to hit by 2% and causing 66 Nature damage over 12 sec.
+          Spell:
+            Cost: 45 Mana
+            Range: 30 yd
+            Cast Time: Instant
+        Subtlety:
+          Location: [2, 3]
+          Max Rank: 5
+          Icon: ability/eyeoftheowl.jpg
+          Description: Reduces the threat generated by your Healing spells by {:|4,8,12,16,20}%.
+        Tranquil Spirit:
+          Location: [3, 1]
+          Max Rank: 5
+          Icon: spell/holy/elunesgrace.jpg
+          Description: Reduces the mana cost of your Healing Touch and Tranquility
+            spells by {:|2,4,6,8,10}%.
+        Improved Rejuvenation:
+          Location: [3, 3]
+          Max Rank: 3
+          Icon: spell/nature/rejuvenation.jpg
+          Description: Increases the effect of your Rejuvenation spell by {:|5,10,15}%.
+        Improved Tranquility:
+          Location: [4, 3]
+          Max Rank: 2
+          Icon: spell/nature/tranquility.jpg
+          Description: Reduces threat caused by Tranquility by {:|50,100}%.
+        Nature's Swiftness:
+          Location: [4, 0]
+          Requires: Improved Healing Touch
+          Max Rank: 1
+          Icon: spell/nature/ravenform.jpg
+          Description: When activated, your next Nature spell becomes an instant cast
+            spell.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 3 min
+        Gift of Nature:
+          Location: [4, 2]
+          Requires: Insect Swarm
+          Max Rank: 5
+          Icon: spell/nature/protectionformnature.jpg
+          Description: Increases the effect of all healing spells by {:|2,4,6,8,10}%.
+        Improved Regrowth:
+          Location: [5, 2]
+          Max Rank: 5
+          Icon: spell/nature/resistnature.jpg
+          Description: Increases the critical effect chance of your Regrowth spell
+            by {:|10,20,30,40,50}%.
+        Swiftmend:
+          Location: [6, 1]
+          Requires: Tranquil Spirit
+          Max Rank: 1
+          Icon: inv/relics/idolofrejuvenation.jpg
+          Description: Consumes a Rejuvenation or Regrowth effect on a friendly target
+            to instantly heal them an amount equal to 12 sec. of Rejuvenation or 18
+            sec. of Regrowth.
+          Spell:
+            Cost: 20% of base mana
+            Range: 40 yd
+            Cast Time: Instant
+            Cooldown: 15 sec
+TBC:
+  Specializations:
+    Balance:
+      Icon: spell/nature/starfall.jpg
+      Background: backgrounds/283.jpg
+      Talents:
+        Starlight Wrath:
+          Location: [0, 0]
+          Max Rank: 5
+          Icon: spell/nature/abolishmagic.jpg
+          Description: Reduces the cast time of your Wrath and Starfire spells by
+            {:|0.1,0.2,0.3,0.4,0.5} sec.
+        Nature's Grasp:
+          Location: [0, 1]
+          Max Rank: 1
+          Icon: spell/nature/natureswrath.jpg
+          Description: While active, any time an enemy strikes the caster they have
+            a 35% chance to become afflicted by Entangling Roots (Rank 1). Only useable
+            outdoors. 1 charge. Lasts 45 sec.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 1 min
+        Improved Nature's Grasp:
+          Location: [0, 2]
+          Requires: Nature's Grasp
+          Max Rank: 4
+          Icon: spell/nature/natureswrath.jpg
+          Description: Increases the chance for your Nature's Grasp to entangle an
+            enemy by {:|15,30,45,65}%.
+        Control of Nature:
+          Location: [1, 0]
+          Max Rank: 3
+          Icon: spell/nature/stranglevines.jpg
+          Description: Gives you a {:|40,70,100}% chance to avoid interruption caused
+            by damage while casting Entangling Roots and Cyclone.
+        Focused Starlight:
+          Location: [1, 1]
+          Max Rank: 2
+          Icon: inv/staff/01.jpg
+          Description: Increases the critical strike chance of your Wrath and Starfire
+            spells by {:|2,4}%.
+        Improved Moonfire:
+          Location: [1, 2]
+          Max Rank: 2
+          Icon: spell/nature/starfall.jpg
+          Description: Increases the damage and critical strike chance of your Moonfire
+            spell by {:|5,10}%.
+        Brambles:
+          Location: [2, 0]
+          Max Rank: 3
+          Icon: spell/nature/thorns.jpg
+          Description: Increases damage caused by your Thorns and Entangling Roots
+            spells by {:|25,50,75}%.
+        Insect Swarm:
+          Location: [2, 2]
+          Max Rank: 1
+          Icon: spell/nature/insectswarm.jpg
+          Description: The enemy target is swarmed by insects, decreasing their chance
+            to hit by 2% and causing 108 Nature damage over 12 sec.
+          Spell:
+            Cost: 50 Mana
+            Range: 30 yd
+            Cast Time: Instant
+        Nature's Reach:
+          Location: [2, 3]
+          Max Rank: 2
+          Icon: spell/nature/naturetouchgrow.jpg
+          Description: Increases the range of your Balance spells and Faerie Fire
+            (Feral) ability by {:|10,20}%.
+        Celestial Focus:
+          Location: [3, 2]
+          Max Rank: 3
+          Icon: spell/arcane/starfire.jpg
+          Description: Gives your Starfire spell a {0:|5,10,15}% chance to stun the
+            target for 3 sec and increases the chance you'll resist spell interruption
+            when casting your Wrath spell by {0:|25,50,70}%.
+        Vengeance:
+          Location: [3, 1]
+          Requires: Focused Starlight
+          Max Rank: 5
+          Icon: spell/nature/purge.jpg
+          Description:
+            Increases the critical strike damage bonus of your Starfire, Moonfire, and
+            Wrath spells by {:|20,40,60,80,100}%.
+        Lunar Guidance:
+          Location: [4, 0]
+          Max Rank: 3
+          Icon: ability/druid/lunarguidance.jpg
+          Description: Increases your spell damage and healing by {:|8,16,25}% of
+            your total Intellect.
+        Nature's Grace:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: spell/nature/naturesblessing.jpg
+          Description: All spell criticals grace you with a blessing of nature, reducing
+            the casting time of your next spell by 0.5 sec.
+        Moonglow:
+          Location: [4, 2]
+          Max Rank: 3
+          Icon: spell/nature/sentinal.jpg
+          Description: Reduces the Mana cost of your Moonfire, Starfire, Wrath, Healing
+            Touch, Regrowth and Rejuvenation spells by {:|3,6,9}%.
+        Balance of Power:
+          Location: [5, 2]
+          Max Rank: 2
+          Icon: ability/druid/balanceofpower.jpg
+          Description: Increases your chance to hit with all spells and reduces
+            the chance you'll be hit by spells by {:|2,4}%
+        Moonfury:
+          Location: [5, 1]
+          Requires: Nature's Grace
+          Max Rank: 5
+          Icon: spell/nature/moonglow.jpg
+          Description: Increases the damage done by your Starfire, Moonfire and Wrath
+            spells by {:|2,4,6,8,10}%.
+        Dreamstate:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: ability/druid/dreamstate.jpg
+          Description: Regenerate mana equal to {:|4,7,10}% of your Intellect every
+            5 sec, even while casting.
+        Moonkin Form:
+          Location: [6, 1]
+          Max Rank: 1
+          Icon: spell/nature/forceofnature.jpg
+          Description: >-
+            Shapeshift into Moonkin Form. While in this form the armor
+            contribution from items is increased by 400%, attack power is increased
+            by 150% of your level and all party members within 30 yards have their
+            spell critical chance increased by 5%. Melee attacks in this form have
+            a chance on hit to regenerate mana based on attack power. The Moonkin
+            can only cast Balance and Remove Curse spells while shapeshifted.
+
+            The act of shapeshifting frees the caster of Polymorph and Movement Impairing
+            effects.'
+          Spell:
+            Cost: 22% of base mana
+            Cast Time: Instant
+        Improved Faerie Fire:
+          Location: [6, 2]
+          Max Rank: 3
+          Icon: spell/nature/faeriefire.jpg
+          Description: Your Faerie Fire spell also increases the chance the target
+            will be hit by melee and ranged attacks by {:|1,2,3}%.
+        Wrath of Cenarius:
+          Location: [7, 1]
+          Max Rank: 5
+          Icon: ability/druid/twilightswrath.jpg
+          Description: Your Starfire spell gains an additional {0:|4,8,12,16,20}%
+            and your Wrath gains an additional {0:|2,4,6,8,10}% of your bonus damage
+            effects.
+        Force of Nature:
+          Location: [8, 1]
+          Max Rank: 1
+          Icon: ability/druid/forceofnature.jpg
+          Description: Summons 3 treants to attack enemy targets for 30 sec.
+          Spell:
+            Cost: 12% of base mana
+            Range: 30 yd
+            Cast Time: Instant
+            Cooldown: 3 min
+    Feral Combat:
+      Icon: ability/racial/bearform.jpg
+      Background: backgrounds/281.jpg
+      Talents:
+        Ferocity:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: ability/hunter/pet/hyena.jpg
+          Description: Reduces the cost of your Maul, Swipe, Claw, Rake and Mangle
+            abilities by {:|1,2,3,4,5} Rage or Energy.
+        Feral Aggression:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: classic/ability/druid/demoralizingroar.jpg
+          Description: Increases the attack power reduction of your Demoralizing Roar
+            by {0:|8,16,24,32,40}% and the damage caused by your Ferocious Bite by
+            {0:|3,6,9,12,15}%.
+        Feral Instinct:
+          Location: [1, 0]
+          Max Rank: 3
+          Icon: ability/ambush.jpg
+          Description: Increases threat caused in Bear and Dire Bear Form by {:|5,10,15}%
+            and reduces the chance enemies have to detect you while Prowling.
+        Brutal Impact:
+          Location: [1, 1]
+          Max Rank: 2
+          Icon: ability/druid/bash.jpg
+          Description: Increases the stun duration of your Bash and Pounce abilities
+            by {:|0.5,1} sec.
+        Thick Hide:
+          Location: [1, 2]
+          Max Rank: 3
+          Icon: inv/misc/pelt/bear/03.jpg
+          Description: Increases your Armor contribution from items by {:|4,7,10}%.
+        Feral Swiftness:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: spell/nature/spiritwolf.jpg
+          Description: Increases your movement speed by {0:|15,30}% while outdoors
+            in Cat Form and increases your chance to dodge while in Cat Form, Bear
+            Form and Dire Bear Form by {0:|2,4}%.
+        Feral Charge:
+          Location: [2, 1]
+          Max Rank: 1
+          Icon: ability/hunter/pet/bear.jpg
+          Description: Causes you to charge an enemy, immobilizing and interrupting
+            any spell being cast for 4 sec.
+          Spell:
+            Cost: 5 rage
+            Range: 8-25 yd
+            Cast Time: Instant
+            Cooldown: 15 sec
+        Sharpened Claws:
+          Location: [2, 2]
+          Max Rank: 3
+          Icon: inv/misc/monsterclaw/04.jpg
+          Description: Increases your critical strike chance while in Bear, Dire Bear
+            or Cat Form by {:|2,4,6}%.
+        Shredding Attacks:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: spell/shadow/vampiricaura.jpg
+          Description: Reduces the energy cost of your Shred ability by {0:|9,18}
+            and the rage cost of your Lacerate ability by {0:|1,2}.
+        Predatory Strikes:
+          Location: [3, 1]
+          Max Rank: 3
+          Icon: ability/hunter/pet/cat.jpg
+          Description: Increases your melee attack power in Cat, Bear, Dire Bear and
+            Moonkin Forms by {:|50,100,150}% of your level.
+        Primal Fury:
+          Location: [3, 2]
+          Requires: Sharpened Claws
+          Max Rank: 2
+          Icon: ability/racial/cannibalize.jpg
+          Description: Gives you a {0:|50,100}% chance to gain an additional 5 Rage
+            anytime you get a critical strike while in Bear and Dire Bear Form and
+            your critical strikes from Cat Form abilities that add combo points have
+            a {0:|50,100}% chance to add an additional combo point.
+        Savage Fury:
+          Location: [4, 0]
+          Max Rank: 2
+          Icon: ability/druid/ravage.jpg
+          Description: Increases the damage caused by your Claw, Rake, and Mangle
+            (Cat) abilities by {:|10,20}%.
+        Faerie Fire (Feral):
+          Location: [4, 2]
+          Max Rank: 1
+          Icon: spell/nature/faeriefire.jpg
+          Description: Decrease the armor of the target by 175 for 40 sec. While affected,
+            the target cannot stealth or turn invisible.
+          Spell:
+            Range: 30 yd
+            Cast Time: Instant
+            Cooldown: 6 sec
+        Nurturing Instinct:
+          Location: [4, 3]
+          Max Rank: 2
+          Icon: ability/druid/healinginstincts.jpg
+          Description: Increases your healing spells by up to {0:|50,100}% of your
+            Agility, and increases healing done to you by {0:|10,20}% while in Cat
+            form.
+        Survival of the Fittest:
+          Location: [5, 2]
+          Max Rank: 3
+          Icon: ability/druid/enrage.jpg
+          Description: Increases all attributes by {0:|1,2,3}% and reduces the chance
+            you'll be critically hit by melee attacks by {0:|1,2,3}%.
+        Heart of the Wild:
+          Location: [5, 1]
+          Requires: Predatory Strikes
+          Max Rank: 5
+          Icon: spell/holy/blessingofagility.jpg
+          Description: Increases your Intellect by {0:|4,8,12,16,20}%. In addition,
+            while in Bear or Dire Bear Form your Stamina is increased by {0:|4,8,12,16,20}%
+            and while in Cat Form your attack power is increased by {0:|2,4,6,8,10}%.
+        Primal Tenacity:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: ability/druid/primaltenacity.jpg
+          Description: Increases your chance to resist Stun and Fear mechanics by
+            {:|5,10,15}%.
+        Leader of the Pack:
+          Location: [6, 1]
+          Max Rank: 1
+          Icon: spell/nature/unyeildingstamina.jpg
+          Description: While in Cat, Bear or Dire Bear Form, the Leader of the Pack
+            increases ranged and melee critical chance of all party members within
+            45 yards by 5%.
+        Improved Leader of the Pack:
+          Location: [6, 2]
+          Requires: Leader of the Pack
+          Max Rank: 2
+          Icon: spell/nature/unyeildingstamina.jpg
+          Description: Your Leader of the Pack ability also causes affected targets
+            to have a 100% chance to heal themselves for {:|2,4}% of their total health
+            when they critically hit with a melee or ranged attack. The healing effect
+            cannot occur more than once every 6 sec.
+        Predatory Instincts:
+          Location: [7, 2]
+          Max Rank: 5
+          Icon: ability/druid/predatoryinstincts.jpg
+          Description: While in Cat Form, Bear Form, or Dire Bear Form, increases
+            your damage from melee critical strikes by {0:|2,4,6,8,10}% and your chance
+            to avoid area effect attacks by {0:|3,6,9,12,15}%.
+        Mangle:
+          Location: [8, 1]
+          Requires: Leader of the Pack
+          Max Rank: 1
+          Icon: ability/druid/mangle2.jpg
+          Description: Mangle the target, inflicting damage and causing the target
+            to take additional damage from bleed effects for 12 sec. This ability
+            can be used in Cat Form or Dire Bear Form.
+          Spell:
+            Range: 100 yd
+            Cast Time: Instant
+    Restoration:
+      Icon: spell/nature/healingtouch.jpg
+      Background: backgrounds/282.jpg
+      Talents:
+        Improved Mark of the Wild:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/nature/regeneration.jpg
+          Description: Increases the effects of your Mark of the Wild and Gift of
+            the Wild spells by {:|7,14,21,28,35}%.
+        Furor:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/holy/blessingofstamina.jpg
+          Description: Gives you {:|20,40,60,80,100}% chance to gain 10 Rage when
+            you shapeshift into Bear and Dire Bear Form or 40 Energy when you shapeshift
+            into Cat Form.
+        Naturalist:
+          Location: [1, 0]
+          Max Rank: 5
+          Icon: spell/nature/healingtouch.jpg
+          Description: Reduces the cast time of your Healing Touch spell by {0:|0.1,0.2,0.3,0.4,0.5}
+            sec and increases the damage you deal with physical attacks in all forms
+            by {0:|2,4,6,8,10}%.
+        Nature's Focus:
+          Location: [1, 1]
+          Max Rank: 5
+          Icon: spell/nature/healingwavegreater.jpg
+          Description: Gives you a {:|14,28,42,56,70}% chance to avoid interruption
+            caused by damage while casting the Healing Touch, Regrowth and Tranquility
+            spells.
+        Natural Shapeshifter:
+          Location: [1, 2]
+          Max Rank: 3
+          Icon: spell/nature/wispsplode.jpg
+          Description: Reduces the mana cost of all shapeshifting by {:|10,20,30}%.
+        Intensity:
+          Location: [2, 0]
+          Max Rank: 3
+          Icon: spell/frost/windwalkon.jpg
+          Description: Allows {0:|10,20,30}% of your Mana regeneration to continue
+            while casting and causes your Enrage ability to instantly generate {0:|4,7,10}
+            rage.
+        Subtlety:
+          Location: [2, 1]
+          Max Rank: 5
+          Icon: ability/eyeoftheowl.jpg
+          Description: Reduces the threat generated by your spells by {0:|4,8,12,16,20}%
+            and reduces the chance your spells will be dispelled by {0:|6,12,18,24,30}%.
+        Omen of Clarity:
+          Location: [2, 2]
+          Max Rank: 1
+          Icon: spell/nature/crystalball.jpg
+          Description: Imbues the Druid with natural energy. Each of the Druid's melee
+            attacks has a chance of causing the caster to enter a Clearcasting state.
+            The Clearcasting state reduces the Mana, Rage or Energy cost of your next
+            damage or healing spell or offensive ability by 100%. Lasts 30 min.
+          Spell:
+            Cost: 120 mana
+            Cast Time: Instant
+        Tranquil Spirit:
+          Location: [3, 1]
+          Max Rank: 5
+          Icon: spell/holy/elunesgrace.jpg
+          Description: Reduces the mana cost of your Healing Touch and Tranquility
+            spells by {:|2,4,6,8,10}%.
+        Improved Rejuvenation:
+          Location: [3, 2]
+          Max Rank: 3
+          Icon: spell/nature/rejuvenation.jpg
+          Description: Increases the effect of your Rejuvenation spell by {:|5,10,15}%.
+        Gift of Nature:
+          Location: [4, 1]
+          Max Rank: 5
+          Icon: spell/nature/protectionformnature.jpg
+          Description: Increases the effect of all healing spells by {:|2,4,6,8,10}%.
+        Improved Tranquility:
+          Location: [4, 3]
+          Max Rank: 2
+          Icon: spell/nature/tranquility.jpg
+          Description: Reduces threat caused by Tranquility by {:|50,100}%.
+        Nature's Swiftness:
+          Location: [4, 0]
+          Requires: Intensity
+          Max Rank: 1
+          Icon: spell/nature/ravenform.jpg
+          Description: When activated, your next Nature spell becomes an instant cast
+            spell.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 3 min
+        Empowered Touch:
+          Location: [5, 0]
+          Max Rank: 2
+          Icon: ability/druid/empoweredtouch.jpg
+          Description: Your Healing Touch spell gains an additional {:|10,20}% of
+            your bonus healing effects.
+        Improved Regrowth:
+          Location: [5, 2]
+          Requires: Improved Rejuvenation
+          Max Rank: 5
+          Icon: spell/nature/resistnature.jpg
+          Description: Increases the critical effect chance of your Regrowth spell
+            by {:|10,20,30,40,50}%.
+        Living Spirit:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: spell/nature/giftofthewaterspirit.jpg
+          Description: Increases your total Spirit by {:|5,10,15}%.
+        Natural Perfection:
+          Location: [6, 2]
+          Max Rank: 3
+          Icon: ability/druid/naturalperfection.jpg
+          Description: Your critical strike chance with all spells is increased by
+            {0:|1,2,3}% and critical strikes against you give you the Natural Perfection
+            effect reducing all damage taken by {0:|2,3,4}%. Stacks up to 3 times.
+            Lasts 8 sec.
+        Swiftmend:
+          Location: [6, 1]
+          Requires: Gift of Nature
+          Max Rank: 1
+          Icon: inv/relics/idolofrejuvenation.jpg
+          Description: Consumes a Rejuvenation or Regrowth effect on a friendly target
+            to instantly heal them an amount equal to 12 sec. of Rejuvenation or 18
+            sec. of Regrowth.
+          Spell:
+            Cost: 16% of base mana
+            Range: 40 yd
+            Cast Time: Instant
+            Cooldown: 15 sec
+        Empowered Rejuvenation:
+          Location: [7, 1]
+          Max Rank: 5
+          Icon: ability/druid/empoweredrejuvination.jpg
+          Description: The bonus healing effects of your healing over time spells
+            is increased by {:|4,8,12,16,20}%.
+        Tree of Life:
+          Location: [8, 1]
+          Requires: Empowered Rejuvenation
+          Max Rank: 1
+          Icon: ability/druid/treeoflife.jpg
+          Description: >-
+            Shapeshift into the Tree of Life. While in this form you increase
+            healing received by 25% of your total Spirit for all party members within
+            45 yards, your movement speed is reduced by 20%, and you can only cast
+            Swiftmend, Innervate, Nature''s Swiftness, Rebirth, Barkskin, poison removing
+            and healing over time spells, but the mana cost of these spells is reduced
+            by 20%.
+
+            The act of shapeshifting frees the caster of Polymorph and Movement Impairing
+            effects.
+          Spell:
+            Cost: 28% of base mana
+            Cast Time: Instant
+WotLK:
+  Specializations:
+    Balance:
+      Icon: spell/nature/starfall.jpg
+      Background: backgrounds/283.jpg
+      Talents:
+        Starlight Wrath:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/nature/abolishmagic.jpg
+          Description: Reduces the cast time of your Wrath and Starfire spells by
+            {:|0.1,0.2,0.3,0.4,0.5} sec.
+        Genesis:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/arcane/arcane03.jpg
+          Description: Increases the damage and healing done by your periodic spell
+            damage and healing effects by {:|1,2,3,4,5}%.
+        Moonglow:
+          Location: [1, 0]
+          Max Rank: 3
+          Icon: spell/nature/sentinal.jpg
+          Description: Reduces the Mana cost of your Moonfire, Starfire, Starfall,
+            Wrath, Healing Touch, Nourish, Regrowth and Rejuvenation spells by {:|3,6,9}%.
+        Nature's Majesty:
+          Location: [1, 1]
+          Max Rank: 2
+          Icon: inv/staff/01.jpg
+          Description: Increases the critical strike chance of your Wrath, Starfire,
+            Starfall, Nourish and Healing Touch spells by {:|2,4}%.
+        Improved Moonfire:
+          Location: [1, 3]
+          Max Rank: 2
+          Icon: spell/nature/starfall.jpg
+          Description: Increases the damage and critical strike chance of your Moonfire
+            spell by {:|5,10}%.
+        Brambles:
+          Location: [2, 0]
+          Max Rank: 3
+          Icon: spell/nature/thorns.jpg
+          Description: Damage from your Thorns and Entangling Roots increased by {0:|25,50,75}%
+            and damage done by your Treants increased by {0:|5,10,15}%. In addition,
+            damage from your Treants and attacks done to you while you have Barkskin
+            active have a {0:|5,10,15}% chance to daze the target for 3 sec.
+        Nature's Grace:
+          Location: [2, 1]
+          Requires: Nature's Majesty
+          Max Rank: 3
+          Icon: spell/nature/naturesblessing.jpg
+          Description: All non-periodic spell criticals have a {:|33,66,100}% chance
+            to grace you with a blessing of nature, increasing your spell casting
+            speed by 20% for 3 sec.
+        Nature's Reach:
+          Location: [2, 3]
+          Max Rank: 2
+          Icon: spell/nature/naturetouchgrow.jpg
+          Description: Increases the range of your Balance spells and Faerie Fire
+            (Feral) ability by {0:|10,20}%, and reduces the threat generated by your
+            Balance spells by {0:|15,30}%.
+        Nature's Splendor:
+          Location: [2, 2]
+          Requires: Nature's Majesty
+          Max Rank: 1
+          Icon: spell/nature/natureguardian.jpg
+          Description: Increases the duration of your Moonfire and Rejuvenation spells
+            by 3 sec, your Regrowth spell by 6 sec, and your Insect Swarm and Lifebloom
+            spells by 2 sec.
+        Vengeance:
+          Location: [3, 1]
+          Max Rank: 5
+          Icon: spell/nature/purge.jpg
+          Description: Increases the critical strike damage bonus of your Starfire,
+            Starfall, Moonfire, and Wrath spells by {:|20,40,60,80,100}%.
+        Celestial Focus:
+          Location: [3, 2]
+          Max Rank: 3
+          Icon: spell/arcane/starfire.jpg
+          Description: Reduces the pushback suffered from damaging attacks while casting
+            Starfire, Hibernate and Hurricane by {0:|23,46,70}% and increases your
+            total spell haste by {0:|1,2,3}%.
+        Lunar Guidance:
+          Location: [4, 0]
+          Max Rank: 3
+          Icon: ability/druid/lunarguidance.jpg
+          Description: Increases your spell power by {:|4,8,12}% of your total Intellect.
+        Insect Swarm:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: spell/nature/insectswarm.jpg
+          Description: The enemy target is swarmed by insects, decreasing their chance
+            to hit by 3% and causing 144 Nature damage over 12 sec.
+          Spell:
+            Cost: 8% of base mana
+            Range: 30 yd
+            Cast Time: Instant
+        Improved Insect Swarm:
+          Location: [4, 2]
+          Requires: Insect Swarm
+          Max Rank: 3
+          Icon: spell/nature/insectswarm.jpg
+          Description: Increases your damage done by your Wrath spell to targets afflicted
+            by your Insect Swarm by {0:|1,2,3}%, and increases the critical strike
+            chance of your Starfire spell by {0:|1,2,3}% on targets afflicted by your
+            Moonfire spell.
+        Dreamstate:
+          Location: [5, 0]
+          Max Rank: 3
+          Icon: ability/druid/dreamstate.jpg
+          Description: Regenerate mana equal to {:|4,7,10}% of your Intellect every
+            5 sec, even while casting.
+        Moonfury:
+          Location: [5, 1]
+          Max Rank: 3
+          Icon: spell/nature/moonglow.jpg
+          Description: Increases the damage done by your Starfire, Moonfire and Wrath
+            spells by {:|3,6,10}%.
+        Balance of Power:
+          Location: [5, 2]
+          Max Rank: 2
+          Icon: ability/druid/balanceofpower.jpg
+          Description: Increases your chance to hit with all spells by {0:|2,4}% and
+            reduces your damage taken from all spells by {0:|3,6}%.
+        Moonkin Form:
+          Location: [6, 1]
+          Max Rank: 1
+          Icon: spell/nature/forceofnature.jpg
+          Description: >-
+            Shapeshift into Moonkin Form. While in this form the armor
+            contribution from items is increased by 370%, damage taken while stunned
+            is reduced by 15%, and all party and raid members within 100 yards have
+            their spell critical chance increased by 5%. Single target spell critical
+            strikes in this form instantly regenerate 2% of your total mana. The Moonkin
+            can not cast healing or resurrection spells while shapeshifted.
+
+            The act of shapeshifting frees the caster of Polymorph and Movement Impairing
+            effects.
+          Spell:
+            Cost: 13% of base mana
+            Cast Time: Instant
+        Improved Moonkin Form:
+          Location: [6, 2]
+          Requires: Moonkin Form
+          Max Rank: 3
+          Icon: ability/druid/improvedmoonkinform.jpg
+          Description: Your Moonkin Aura also causes affected targets to gain {0:|1,2,3}%
+            haste and you to gain {0:|10,20,30}% of your spirit as additional spell
+            damage.
+        Improved Faerie Fire:
+          Location: [6, 3]
+          Max Rank: 3
+          Icon: spell/nature/faeriefire.jpg
+          Description: Your Faerie Fire spell also increases the chance the target
+            will be hit by spell attacks by {0:|1,2,3}%, and increases the critical
+            strike chance of your damage spells by {0:|1,2,3}% on targets afflicted
+            by Faerie Fire.
+        Wrath of Cenarius:
+          Location: [7, 2]
+          Max Rank: 5
+          Icon: ability/druid/twilightswrath.jpg
+          Description: Your Starfire spell gains an additional {0:|4,8,12,16,20}%
+            and your Wrath gains an additional {0:|2,4,6,8,10}% of your bonus damage
+            effects.
+        Owlkin Frenzy:
+          Location: [7, 0]
+          Requires: Moonkin Form
+          Max Rank: 3
+          Icon: ability/druid/owlkinfrenzy.jpg
+          Description: Attacks done to you while in Moonkin form have a {:|5,10,15}%
+            chance to cause you to go into a Frenzy, increasing your damage by 10%,
+            cause you to be immune to pushback while casting Balance spells and restore
+            2% base mana every 2 sec. Lasts 10 sec.
+        Eclipse:
+          Location: [8, 0]
+          Max Rank: 3
+          Icon: ability/druid/eclipse.jpg
+          Description: When you critically hit with Starfire, you have a {0:|33,66,100}%
+            chance of increasing damage done by Wrath by 40%. When you critically
+            hit with Wrath, you have a {0:|20,40,60}% chance of increasing your critical
+            strike chance with Starfire by 40%. Each effect lasts 15 sec and each
+            has a separate 30 sec cooldown. Both effects cannot occur simultaneously.
+        Typhoon:
+          Location: [8, 1]
+          Requires: Moonkin Form
+          Max Rank: 1
+          Icon: ability/druid/typhoon.jpg
+          Description: You summon a violent Typhoon that does 400 Nature damage when
+            in contact with hostile targets, knocking them back and dazing them for
+            6 sec.
+          Spell:
+            Cost: 25% of base mana
+            Range: 30 yd
+            Cast Time: Instant
+            Cooldown: 20 sec
+        Force of Nature:
+          Location: [8, 2]
+          Max Rank: 1
+          Icon: ability/druid/forceofnature.jpg
+          Description: Summons 3 treants to attack enemy targets for 30 sec.
+          Spell:
+            Cost: 12% of base mana
+            Range: 30 yd
+            Cast Time: Instant
+            Cooldown: 3 min
+        Gale Winds:
+          Location: [8, 3]
+          Max Rank: 2
+          Icon: ability/druid/galewinds.jpg
+          Description: Increases damage done by your Hurricane and Typhoon spells
+            by {0:|15,30}%, and increases the range of your Cyclone spell by {0:|2,4}
+            yards.
+        Earth and Moon:
+          Location: [9, 1]
+          Max Rank: 3
+          Icon: ability/druid/earthandsky.jpg
+          Description: Your Wrath and Starfire spells have a 100% chance to apply
+            the Earth and Moon effect, which increases spell damage taken by {0:|4,9,13}%
+            for 12 sec. Also increases your spell damage by {0:|2,4,6}%.
+        Starfall:
+          Location: [10, 1]
+          Max Rank: 1
+          Icon: ability/druid/starfall.jpg
+          Description: You summon a flurry of stars from the sky on all targets within
+            30 yards of the caster, each dealing 145 to 167 Arcane damage. Also causes
+            26 Arcane damage to all other enemies within 5 yards of the enemy target.
+            Maximum 20 stars. Lasts 10 sec. Shapeshifting into an animal form or mounting
+            cancels the effect. Any effect which causes you to lose control of your
+            character will suppress the starfall effect.
+          Spell:
+            Cost: 35% of base mana
+            Cast Time: Instant
+            Cooldown: 1.5 min
+    Feral Combat:
+      Icon: ability/racial/bearform.jpg
+      Background: backgrounds/281.jpg
+      Talents:
+        Ferocity:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: ability/hunter/pet/hyena.jpg
+          Description: Reduces the cost of your Maul, Swipe, Claw, Rake and Mangle
+            abilities by {:|1,2,3,4,5} Rage or Energy.
+        Feral Aggression:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: classic/ability/druid/demoralizingroar.jpg
+          Description: Increases the attack power reduction of your Demoralizing Roar
+            by {0:|8,16,24,32,40}% and the damage caused by your Ferocious Bite by
+            {0:|3,6,9,12,15}%.
+        Feral Instinct:
+          Location: [1, 0]
+          Max Rank: 3
+          Icon: ability/ambush.jpg
+          Description: Increases the damage done by your Swipe ability by {:|10,20,30}%
+            and reduces the chance enemies have to detect you while Prowling.
+        Savage Fury:
+          Location: [1, 1]
+          Max Rank: 2
+          Icon: ability/druid/ravage.jpg
+          Description: Increases the damage caused by your Claw, Rake, Mangle (Cat),
+            Mangle (Bear), and Maul abilities by {:|10,20}%.
+        Thick Hide:
+          Location: [1, 2]
+          Max Rank: 3
+          Icon: inv/misc/pelt/bear/03.jpg
+          Description: Increases your Armor contribution from cloth and leather items
+            by {:|4,7,10}%.
+        Feral Swiftness:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: spell/nature/spiritwolf.jpg
+          Description: Increases your movement speed by {0:|15,30}% in Cat Form and
+            increases your chance to dodge while in Cat Form, Bear Form and Dire Bear
+            Form by {0:|2,4}%.
+        Survival Instincts:
+          Location: [2, 1]
+          Max Rank: 1
+          Icon: ability/druid/tigersroar.jpg
+          Description: When activated, this ability temporarily grants you 30% of
+            your maximum health for 20 sec while in Bear Form, Cat Form, or Dire Bear
+            Form. After the effect expires, the health is lost.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 3 min
+        Sharpened Claws:
+          Location: [2, 2]
+          Max Rank: 3
+          Icon: inv/misc/monsterclaw/04.jpg
+          Description: Increases your critical strike chance while in Bear, Dire Bear
+            or Cat Form by {:|2,4,6}%.
+        Shredding Attacks:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: spell/shadow/vampiricaura.jpg
+          Description: Reduces the energy cost of your Shred ability by {0:|9,18}
+            and the rage cost of your Lacerate ability by {0:|1,2}.
+        Predatory Strikes:
+          Location: [3, 1]
+          Max Rank: 3
+          Icon: ability/hunter/pet/cat.jpg
+          Description: Increases your melee attack power in Cat, Bear and Dire Bear
+            Forms by {0:|50,100,150}% of your level and {0:|7,14,20}% of any attack
+            power on your equipped weapon. In addition, your finishing moves have
+            a {0:|7,13,20}% chance per combo point to make your next Nature spell
+            with a base casting time less than 10 sec. become an instant cast spell.
+        Primal Fury:
+          Location: [3, 2]
+          Requires: Sharpened Claws
+          Max Rank: 2
+          Icon: ability/racial/cannibalize.jpg
+          Description: Gives you a {0:|50,100}% chance to gain an additional 5 Rage
+            anytime you get a critical strike while in Bear and Dire Bear Form and
+            your critical strikes from Cat Form abilities that add combo points have
+            a {0:|50,100}% chance to add an additional combo point.
+        Primal Precision:
+          Location: [3, 3]
+          Requires: Sharpened Claws
+          Max Rank: 2
+          Icon: ability/druid/primalprecision.jpg
+          Description: Increases your expertise by {0:|5\,,10\,} and you are refunded
+            {0:|40,80}% of the energy cost of a finishing move if it fails to land.
+        Brutal Impact:
+          Location: [4, 0]
+          Max Rank: 2
+          Icon: ability/druid/bash.jpg
+          Description: Increases the stun duration of your Bash and Pounce abilities
+            by {0:|0.5,1} sec and decreases the cooldown of Bash by {0:|15,30} sec.
+        Feral Charge:
+          Location: [4, 2]
+          Max Rank: 1
+          Icon: ability/hunter/pet/bear.jpg
+          Description: >-
+            Teaches Feral Charge (Bear) and Feral Charge (Cat).
+
+            Feral Charge (Bear) - Causes you to charge an enemy, immobilizing and
+            interrupting any spell being cast for 4 sec. This ability can be used
+            in Bear Form and Dire Bear Form. 15 second cooldown.
+
+            Feral Charge (Cat) - Causes you to leap behind an enemy, dazing them for
+            3 sec. 30 second cooldown.'
+          Spell:
+            Range: 100 yd
+            Cast Time: Instant
+        Nurturing Instinct:
+          Location: [4, 3]
+          Max Rank: 2
+          Icon: ability/druid/healinginstincts.jpg
+          Description: Increases your healing spells by up to {0:|35,70}% of your
+            Agility, and increases healing done to you by {0:|10,20}% while in Cat
+            form.
+        Natural Reaction:
+          Location: [5, 0]
+          Max Rank: 3
+          Icon: ability/bullrush.jpg
+          Description: Increases your dodge while in Bear Form or Dire Bear Form by
+            {0:|2,4,6}%, and you regenerate {0:|1,2,3} rage every time you dodge while
+            in Bear Form or Dire Bear Form.
+        Survival of the Fittest:
+          Location: [5, 2]
+          Max Rank: 3
+          Icon: ability/druid/enrage.jpg
+          Description: Increases all attributes by {0:|2,4,6}%, reduces the chance
+            you'll be critically hit by melee attacks by {0:|2,4,6}%, and increases
+            your armor contribution from cloth and leather items in Bear Form and
+            Dire Bear Form by {0:|11,22,33}%.
+        Heart of the Wild:
+          Location: [5, 1]
+          Requires: Predatory Strikes
+          Max Rank: 5
+          Icon: spell/holy/blessingofagility.jpg
+          Description: Increases your Intellect by {0:|4,8,12,16,20}%. In addition,
+            while in Bear or Dire Bear Form your Stamina is increased by {0:|2,4,6,8,10}%
+            and while in Cat Form your attack power is increased by {0:|2,4,6,8,10}%.
+        Leader of the Pack:
+          Location: [6, 1]
+          Max Rank: 1
+          Icon: spell/nature/unyeildingstamina.jpg
+          Description: While in Cat, Bear or Dire Bear Form, the Leader of the Pack
+            increases ranged and melee critical chance of all party and raid members
+            within 100 yards by 5%.
+        Improved Leader of the Pack:
+          Location: [6, 2]
+          Requires: Leader of the Pack
+          Max Rank: 2
+          Icon: spell/nature/unyeildingstamina.jpg
+          Description: Your Leader of the Pack ability also causes affected targets
+            to heal themselves for {0:|2,4}% of their total health when they critically
+            hit with a melee or ranged attack. The healing effect cannot occur more
+            than once every 6 sec. In addition, you gain {0:|4,8}% of your maximum
+            mana when you benefit from this heal.
+        Primal Tenacity:
+          Location: [6, 3]
+          Max Rank: 3
+          Icon: ability/druid/primaltenacity.jpg
+          Description: Reduces the duration of fear effects by {0:|10,20,30}%, reduces
+            all damage taken while stunned by {0:|10,20,30}% while in Cat Form.
+        Predatory Instincts:
+          Location: [7, 2]
+          Max Rank: 3
+          Icon: ability/druid/predatoryinstincts.jpg
+          Description: While in Cat Form increases your damage from melee critical
+            strikes by {0:|3,7,10}% and reduces the damage taken from area of effect
+            attacks by {0:|10,20,30}%.
+        Infected Wounds:
+          Location: [7, 3]
+          Max Rank: 3
+          Icon: ability/druid/infectedwound.jpg
+          Description: Your Shred, Maul, and Mangle attacks cause an Infected Wound
+            in the target. The Infected Wound reduces the movement speed of the target
+            by {0:|16,34,50}% and the attack speed by {0:|6,14,20}%. Lasts 12 sec.
+        Protector of the Pack:
+          Location: [7, 0]
+          Requires: Leader of the Pack
+          Max Rank: 3
+          Icon: ability/druid/challangingroar.jpg
+          Description: Increases your attack power by {0:|2,4,6}% and reduces the
+            damage you take by {0:|4,8,12}%, while in Bear or Dire Bear Form.
+        King of the Jungle:
+          Location: [8, 0]
+          Max Rank: 3
+          Icon: ability/druid/kingofthejungle.jpg
+          Description: While using your Enrage ability in Bear Form or Dire Bear Form,
+            your damage is increased by {0:|5,10,15}%, and your Tiger's Fury ability
+            also instantly restores {0:|20,40,60} energy. In addition, the mana cost
+            of Bear Form, Cat Form, and Dire Bear Form is reduced by {0:|20,40,60}%.
+        Mangle:
+          Location: [8, 1]
+          Requires: Leader of the Pack
+          Max Rank: 1
+          Icon: ability/druid/mangle2.jpg
+          Description: Mangle the target, inflicting damage and causing the target
+            to take additional damage from bleed effects for 1 min. This ability can
+            be used in Cat Form or Dire Bear Form.
+          Spell:
+            Range: 100 yd
+            Cast Time: Instant
+        Improved Mangle:
+          Location: [8, 2]
+          Requires: Mangle
+          Max Rank: 3
+          Icon: ability/druid/mangle2.jpg
+          Description: Reduces the cooldown of your Mangle (Bear) ability by {0:|0.5,1.0,1.5}
+            sec., and reduces the energy cost of your Mangle (Cat) ability by {0:|2,4,6}.
+        Rend and Tear:
+          Location: [9, 1]
+          Max Rank: 5
+          Icon: ability/druid/primalagression.jpg
+          Description: Increases damage done by your Maul and Shred attacks on bleeding
+            targets by {0:|4,8,12,16,20}%, and increases the critical strike chance
+            of your Ferocious Bite ability on bleeding targets by {0:|5,10,15,20,25}%.
+        Primal Gore:
+          Location: [9, 2]
+          Requires: Rend and Tear
+          Max Rank: 1
+          Icon: ability/druid/rake.jpg
+          Description: Grants the periodic damage from your Lacerate and Rip abilities
+            the ability to critically hit.
+        Berserk:
+          Location: [10, 1]
+          Max Rank: 1
+          Icon: ability/druid/berserk.jpg
+          Description: 'When activated, this ability causes your Mangle (Bear) ability
+            to hit up to 3 targets and have no cooldown, and reduces the energy cost
+            of all your Cat Form abilities by 50%. Lasts 15 sec. You cannot use Tiger''s
+            Fury while Berserk is active.
+
+            Clears the effect of Fear and makes you immune to Fear for the duration.'
+          Spell:
+            Cast Time: Instant
+            Cooldown: 3 min
+    Restoration:
+      Icon: spell/nature/healingtouch.jpg
+      Background: backgrounds/282.jpg
+      Talents:
+        Improved Mark of the Wild:
+          Location: [0, 0]
+          Max Rank: 2
+          Icon: spell/nature/regeneration.jpg
+          Description: Increases the effects of your Mark of the Wild and Gift of
+            the Wild spells by {0:|20,40}%, and increases all of your total attributes
+            by {0:|1,2}%.
+        Nature's Focus:
+          Location: [0, 1]
+          Max Rank: 3
+          Icon: spell/nature/healingwavegreater.jpg
+          Description: Reduces the pushback suffered from damaging attacks while casting
+            Healing Touch, Wrath, Entangling Roots, Cyclone, Nourish, Regrowth and
+            Tranquility by {:|23,46,70}%.
+        Furor:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/holy/blessingofstamina.jpg
+          Description: Gives you {0:|20,40,60,80,100}% chance to gain 10 Rage when
+            you shapeshift into Bear and Dire Bear Form, and you keep up to {0:|20,40,60,80,100}
+            of your Energy when you shapeshift into Cat Form, and increases your total
+            Intellect while in Moonkin form by {0:|2,4,6,8,10}%.
+        Naturalist:
+          Location: [1, 0]
+          Max Rank: 5
+          Icon: spell/nature/healingtouch.jpg
+          Description: Reduces the cast time of your Healing Touch spell by {0:|0.1,0.2,0.3,0.4,0.5}
+            sec and increases the damage you deal with physical attacks in all forms
+            by {0:|2,4,6,8,10}%.
+        Subtlety:
+          Location: [1, 1]
+          Max Rank: 3
+          Icon: ability/eyeoftheowl.jpg
+          Description: Reduces the threat generated by your restoration spells by
+            {0:|10,20,30}% and reduces the chance your helpful spells, Moonfire, and
+            Insect Swarm will be dispelled by {0:|10,20,30}%.
+        Natural Shapeshifter:
+          Location: [1, 2]
+          Max Rank: 3
+          Icon: spell/nature/wispsplode.jpg
+          Description: Reduces the mana cost of all shapeshifting by {:|10,20,30}%.
+        Intensity:
+          Location: [2, 0]
+          Max Rank: 3
+          Icon: spell/frost/windwalkon.jpg
+          Description: Allows {0:|17,33,50}% of your Mana regeneration to continue
+            while casting and causes your Enrage ability to instantly generate {0:|4,7,10}
+            rage.
+        Omen of Clarity:
+          Location: [2, 1]
+          Max Rank: 1
+          Icon: spell/nature/crystalball.jpg
+          Description: Each of the Druid's damage spells, healing spells, and auto
+            attacks has a chance of causing the caster to enter a Clearcasting state.
+            The Clearcasting state reduces the Mana, Rage or Energy cost of your next
+            damage, healing spell or offensive ability by 100%.
+        Master Shapeshifter:
+          Location: [2, 2]
+          Requires: Natural Shapeshifter
+          Max Rank: 2
+          Icon: ability/druid/mastershapeshifter.jpg
+          Description: >- 
+            Grants an effect which lasts while the Druid is within the
+            respective shapeshift form.
+
+            Bear Form - Increases physical damage by {0:|2,4}%.
+
+            Cat Form - Increases critical strike chance by {0:|2,4}%.
+
+            Moonkin Form - Increases spell damage by {0:|2,4}%.
+
+            Tree of Life Form - Increases healing by {0:|2,4}%.
+        Tranquil Spirit:
+          Location: [3, 1]
+          Max Rank: 5
+          Icon: spell/holy/elunesgrace.jpg
+          Description: Reduces the mana cost of your Healing Touch, Nourish and Tranquility
+            spells by {:|2,4,6,8,10}%.
+        Improved Rejuvenation:
+          Location: [3, 2]
+          Max Rank: 3
+          Icon: spell/nature/rejuvenation.jpg
+          Description: Increases the effect of your Rejuvenation spell by {:|5,10,15}%.
+        Gift of Nature:
+          Location: [4, 1]
+          Max Rank: 5
+          Icon: spell/nature/protectionformnature.jpg
+          Description: Increases the effect of all healing spells by {:|2,4,6,8,10}%.
+        Improved Tranquility:
+          Location: [4, 3]
+          Max Rank: 2
+          Icon: spell/nature/tranquility.jpg
+          Description: Reduces threat caused by Tranquility by {0:|50,100}%, and reduces
+            the cooldown by {0:|30,60}%.
+        Nature's Swiftness:
+          Location: [4, 0]
+          Requires: Intensity
+          Max Rank: 1
+          Icon: spell/nature/ravenform.jpg
+          Description: When activated, your next Nature spell with a base casting
+            time less than 10 sec. becomes an instant cast spell.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 3 min
+        Empowered Touch:
+          Location: [5, 0]
+          Max Rank: 2
+          Icon: ability/druid/empoweredtouch.jpg
+          Description: Your Healing Touch spell gains an additional {0:|20,40}% and
+            your Nourish spell gains an additional {0:|10,20}% of your bonus healing
+            effects.
+        Nature's Bounty:
+          Location: [5, 2]
+          Requires: Improved Rejuvenation
+          Max Rank: 5
+          Icon: spell/nature/resistnature.jpg
+          Description: Increases the critical effect chance of your Regrowth and Nourish
+            spells by {:|5,10,15,20,25}%.
+        Living Spirit:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: spell/nature/giftofthewaterspirit.jpg
+          Description: Increases your total Spirit by {:|5,10,15}%.
+        Natural Perfection:
+          Location: [6, 2]
+          Max Rank: 3
+          Icon: ability/druid/naturalperfection.jpg
+          Description: Your critical strike chance with all spells is increased by
+            {0:|1,2,3}% and critical strikes against you give you the Natural Perfection
+            effect reducing all damage taken by {0:|2,3,4}%. Stacks up to 3 times.
+            Lasts 8 sec.
+        Swiftmend:
+          Location: [6, 1]
+          Requires: Gift of Nature
+          Max Rank: 1
+          Icon: inv/relics/idolofrejuvenation.jpg
+          Description: Consumes a Rejuvenation or Regrowth effect on a friendly target
+            to instantly heal them an amount equal to 12 sec. of Rejuvenation or 18
+            sec. of Regrowth.
+          Spell:
+            Cost: 16% of base mana
+            Range: 40 yd
+            Cast Time: Instant
+            Cooldown: 15 sec
+        Empowered Rejuvenation:
+          Location: [7, 1]
+          Max Rank: 5
+          Icon: ability/druid/empoweredrejuvination.jpg
+          Description: The bonus healing effects of your healing over time spells
+            is increased by {:|4,8,12,16,20}%.
+        Living Seed:
+          Location: [7, 2]
+          Max Rank: 3
+          Icon: ability/druid/giftoftheearthmother.jpg
+          Description: When you critically heal your target with Swiftmend, Regrowth,
+            Nourish or Healing Touch spell you have a {:|33,66,100}% chance to plant
+            a Living Seed on the target for 30% of the amount healed. The Living Seed
+            will bloom when the target is next attacked. Lasts 15 sec.
+        Revitalize:
+          Location: [8, 0]
+          Max Rank: 3
+          Icon: ability/druid/replenish.jpg
+          Description: Your Rejuvenation and Wild Growth spells have a {:|5,10,15}%
+            chance to restore 8 Energy, 4 Rage, 1% Mana or 16 Runic Power per tick.
+        Tree of Life:
+          Location: [8, 1]
+          Requires: Empowered Rejuvenation
+          Max Rank: 1
+          Icon: ability/druid/treeoflife.jpg
+          Description: >-
+            Reduces the mana cost of your healing over time spells by
+            20% and grants the ability to shapeshift into the Tree of Life. While
+            in this form you increase healing received by 6% for all party and raid
+            members within 100 yards, and you can only cast Restoration spells in
+            addition to Innervate, Barkskin, Nature''s Grasp and Thorns spells.
+
+            The act of shapeshifting frees the caster of Polymorph and Movement Impairing
+            effects.
+        Improved Tree of Life:
+          Location: [8, 2]
+          Requires: Tree of Life
+          Max Rank: 3
+          Icon: ability/druid/improvedtreeform.jpg
+          Description: Increases your armor contribution from items while in Tree
+            of Life Form by {0:|67,133,200}%, and increases your healing spell power
+            by {0:|5,10,15}% of your spirit while in Tree of Life Form.
+        Improved Barkskin:
+          Location: [9, 0]
+          Max Rank: 2
+          Icon: spell/nature/stoneclawtotem.jpg
+          Description: Grants {0:|80,160}% additional armor contribution from cloth
+            and leather items while in Travel Form or while not shapeshifted, increases
+            the damage reduction granted by your Barkskin spell by {0:|5,10}% and
+            reduces the chance your Barkskin is dispelled by {0:|35,70}%.
+        Gift of the Earthmother:
+          Location: [9, 2]
+          Max Rank: 5
+          Icon: ability/druid/manatree.jpg
+          Description: Increases your total spell haste by {0:|2,4,6,8,10}% and reduces
+            your global cooldown by {0:|2,4,6,8,10}% when casting Lifebloom.
+        Wild Growth:
+          Location: [10, 1]
+          Requires: Tree of Life
+          Max Rank: 1
+          Icon: ability/druid/flourish.jpg
+          Description: Heals up to 5 friendly party or raid members within 15 yards
+            of the target for (98 * 7 *) over 7 sec. The amount healed is applied
+            quickly at first, and slows down as the Wild Growth reaches its full duration.
+          Spell:
+            Cost: 23% of base mana
+            Range: 40 yd
+            Cast Time: Instant
+            Cooldown: 6 sec

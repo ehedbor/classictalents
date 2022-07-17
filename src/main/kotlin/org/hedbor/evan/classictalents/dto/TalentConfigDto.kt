@@ -3,9 +3,8 @@ package org.hedbor.evan.classictalents.dto
 import com.fasterxml.jackson.annotation.JsonProperty
 
 
-typealias TalentConfigDto = Map<String, ClassDto>
-
 data class ClassDto(
+    @JsonProperty("Class") val name: String,
     @JsonProperty("Icon") val icon: String,
     @JsonProperty("Color") val color: String,
     @JsonProperty("Classic") val classic: ClassicEraDto?,

@@ -1,815 +1,1427 @@
-Hunter:
-  Icon: "images/hunter/ClassIcon.jpg"
-  Color: "#AAD372"
-  Classic:
-    Specializations:
-      Beast Mastery:
-        Icon: "images/hunter/TameBeast.png"
-        Background: "images/backgrounds/hunter_beastmastery.jpg"
-        Talents:
-          Improved Aspect of the Hawk:
-            Location: [0, 1]
-            Max Rank: 5
-            Icon: "images/hunter/AspectOfTheHawk.png"
-            Description: >-
-              While Aspect of the Hawk is active, all normal ranged attacks have a {:|1,2,3,4,5}% 
-              chance of increasing ranged attack speed by 30% for 12 sec.
-          Endurance Training:
-            Location: [0, 2]
-            Max Rank: 5
-            Icon: "images/shaman/Reincarnation.png"
-            Description: Increases the Health of your pets by {:|3,6,9,12,15}%.
-          Improved Eyes of the Beast:
-            Location: [1, 0]
-            Max Rank: 2
-            Icon: "images/hunter/EyesOfTheBeast.png"
-            Description: Increases the duration of your Eyes of the Beast by {:|30,60} sec.
-          Improved Aspect of the Monkey:
-            Location: [1, 1]
-            Max Rank: 5
-            Icon: "images/hunter/AspectOfTheMonkey.png"
-            Description: Increases the Dodge bonus of your Aspect of the Monkey by {:|1,2,3,4,5}%.
-          Thick Hide:
-            Location: [1, 2]
-            Max Rank: 3
-            Icon: "images/druid/ThickHide.png"
-            Description: Increases the Armor rating of your pets by {:|10,20,30}%.
-          Improved Revive Pet:
-            Location: [1, 3]
-            Max Rank: 2
-            Icon: "images/hunter/RevivePet.png"
-            Description: >-
-              Revive Pet's casting time is reduced by {0:|3,6} sec, mana cost is reduced by 
-              {0:|20,40}%, and increases the health your pet returns with by an additional {0:|15,30}%.
-          Pathfinding:
-            Location: [2, 0]
-            Max Rank: 2
-            Icon: "images/druid/TigersFury.png"
-            Description: >-
-              Increases the speed bonus of your Aspect of the Cheetah and Aspect of the Pack by 
-              {:|3,6}%.
-          Bestial Swiftness:
-            Location: [2, 1]
-            Max Rank: 1
-            Icon: "images/druid/Dash.png"
-            Description: Increases the outdoor movement speed of your pets by 30%.
-          Unleashed Fury:
-            Location: [2, 2]
-            Max Rank: 5
-            Icon: "images/druid/FrenziedRegeneration.png"
-            Description: Increases the damage done by your pets by {:|4,8,12,16,20}%.
-          Improved Mend Pet:
-            Location: [3, 1]
-            Max Rank: 2
-            Icon: "images/hunter/MendPet.png"
-            Description: >-
-              Gives the Mend Pet spell a {:|15,30}% chance of cleansing 1 Curse, Disease, Magic or 
-              Poison effect from the pet each tick.
-          Ferocity:
-            Location: [3, 2]
-            Max Rank: 5
-            Icon: "images/hunter/Ferocity.png"
-            Description: Increases the critical strike chance of your pets by {:|3,6,9,12,15}%.
-          Spirit Bond:
-            Location: [4, 0]
-            Max Rank: 2
-            Icon: "images/druid/DemoralizingRoar.png"
-            Description: >-
-              While your pet is active, you and your pet will regenerate {0:|1,2}% of your 
-              total health every 10 sec.
-          Intimidation:
-            Location: [4, 1]
-            Max Rank: 1
-            Icon: "images/hunter/Intimidation.png"
-            Description: >-
-              Command your pet to intimidate the target on the next successful melee attack, causing 
-              a high amount of threat and stunning the target for 3 sec.
-            Spell:
-              Cost: 8% of Base Mana
-              Range: 100 yd
-              Cast Time: Instant
-              Cooldown: 1 min
-          Bestial Discipline:
-            Location: [4, 3]
-            Max Rank: 2
-            Icon: "images/druid/Wrath.png"
-            Description: >-
-              Increases the Focus regeneration of your pets by {:|10,20}%.
-          Frenzy:
-            Location: [5, 2]
-            Requires: Ferocity
-            Max Rank: 5
-            Icon: "images/druid/Swipe.png"
-            Description: >-
-              Gives your pet a {:|20,40,60,80,100}% chance to gain a 30% attack speed increase for 8 
-              sec after dealing a critical strike.
-          Bestial Wrath:
-            Location: [6, 1]
-            Requires: Intimidation
-            Max Rank: 1
-            Icon: "images/druid/FerociousBite.jpg"
-            Description: >-
-              Send your pet into a rage causing 50% additional damage for 18 sec. While enraged, the 
-              beast does not feel pity or remorse or fear and it cannot be stopped unless killed.
-            Spell:
-              Cost: 12% of Base Mana
-              Range: 100 yd
-              Cast Time: Instant
-              Cooldown: 2 min
-      Marksmanship:
-        Icon: "images/skills/Marksmanship.png"
-        Background: "images/backgrounds/hunter_marksmanship.jpg"
-        Talents:
-          Improved Concussive Shot:
-            Location: [0, 1]
-            Max Rank: 5
-            Icon: "images/skills/Dazed.png"
-            Description: >-
-              Gives your Concussive Shot a {:|4,8,12,16,20}% chance to stun the target for 3 sec.
-          Efficiency:
-            Location: [0, 2]
-            Max Rank: 5
-            Icon: "images/mage/ColdSnap.png"
-            Description: Reduces the Mana cost of your Shots and Stings by {:|2,4,6,8,10}%.
-          Improved Hunter's Mark:
-            Location: [1, 1]
-            Max Rank: 5
-            Icon: "images/hunter/HuntersMark.png"
-            Description: >-
-              Increases the Ranged Attack Power bonus of your Hunter's Mark spell by 
-              {:|3,6,9,12,15}%.
-          Lethal Shots:
-            Location: [1, 2]
-            Max Rank: 5
-            Icon: "images/warrior/Impale.png"
-            Description: >-
-              Increases your critical strike chance with ranged weapons by {:|1,2,3,4,5}%.
-          Aimed Shot:
-            Location: [2, 0]
-            Max Rank: 1
-            Icon: "images/hunter/AimedShot.png"
-            Description: An aimed shot that increases ranged damage by 70.
-            Spell:
-              Cost: 75 Mana
-              Range: 8-35 yd
-              Cast Time: 3 sec
-              Cooldown: 6 sec
-          Improved Arcane Shot:
-            Location: [2, 1]
-            Max Rank: 5
-            Icon: "images/hunter/ArcaneShot.png"
-            Description: Reduces the cooldown of your Arcane Shot by {:|0.2,0.4,0.6,0.8,1} sec.
-          Hawk Eye:
-            Location: [2, 3]
-            Max Rank: 3
-            Icon: "images/hunter/HawkEye.png"
-            Description: Increases the range of your ranged weapons by {:|2,4,6} yards.
-          Improved Serpent Sting:
-            Location: [3, 1]
-            Max Rank: 5
-            Icon: "images/hunter/SerpentSting.png"
-            Description: Increases the damage done by your Serpent Sting by {:|2,4,6,8,10}%.
-          Mortal Shots:
-            Location: [3, 2]
-            Requires: Lethal Shots
-            Max Rank: 5
-            Icon: "images/hunter/MortalShots.png"
-            Description: >-
-              Increases your ranged weapon critical strike damage bonus by {:|6,12,18,24,30}%.
-          Scatter Shot:
-            Location: [4, 0]
-            Max Rank: 1
-            Icon: "images/hunter/ScatterShot.png"
-            Description: >-
-              A short-range shot that deals 50% weapon damage and disorients the target for 4 sec. 
-              Any damage caused will remove the effect. Turns off your attack when used.
-            Spell:
-              Cost: 8% of Base Mana
-              Range: 15 yd
-              Cast Time: Instant
-              Cooldown: 30 sec
-          Barrage:
-            Location: [4, 1]
-            Max Rank: 3
-            Icon: "images/hunter/MultiShot.png"
-            Description: >-
-              Increases the damage done by your Multi-Shot and Volley spells by {:|5,10,15}%.
-          Improved Scorpid Sting:
-            Location: [4, 2]
-            Max Rank: 3
-            Icon: "images/hunter/ScorpidSting.png"
-            Description: >-
-              Reduces the Stamina of targets affected by your Scorpid Sting by {:|10,20,30}% of the 
-              amount of Strength reduced.
-          Ranged Weapon Specialization:
-            Location: [5, 2]
-            Max Rank: 5
-            Icon: "images/hunter/RangedWeaponSpecialization.png"
-            Description: Increases the damage you deal with ranged weapons by {:|1,2,3,4,5}%.
-          Trueshot Aura:
-            Location: [6, 1]
-            Requires: Barrage
-            Max Rank: 1
-            Icon: "images/hunter/TrueshotAura.png"
-            Description: >-
-              Increases the attack power of party members within 45 yards by 50. Lasts 30 min.
-            Spell:
-              Cast Time: Instant
-      Survival:
-        Icon: "images/hunter/MongooseBite.png"
-        Background: "images/backgrounds/hunter_survival.jpg"
-        Talents:
-          Monster Slaying:
-            Location: [0, 0]
-            Max Rank: 3
-            Icon: "images/hunter/MonsterSlaying.jpg"
-            Description: >-
-              Increases all damage caused against Beasts, Giants and Dragonkin targets by {0:|1,2,3}% 
-              and increases critical damage caused against Beasts, Giants and Dragonkin targets by 
-              an additional {0:|1,2,3}%.
-          Humanoid Slaying:
-            Location: [0, 1]
-            Max Rank: 3
-            Icon: "images/paladin/Repentance.png"
-            Description: >-
-              Increases all damage caused against Humanoid targets by {0:|1,2,3}% and increases 
-              critical damage caused against Humanoid targets by an additional {0:|1,2,3}%.
-          Deflection:
-            Location: [0, 2]
-            Max Rank: 5
-            Icon: "images/skills/Parry.png"
-            Description: Increases your Parry chance by {:|1,2,3,4,5}%.
-          Entrapment:
-            Location: [1, 0]
-            Max Rank: 5
-            Icon: "images/druid/EntanglingRoots.png"
-            Description: >-
-              Gives your Immolation Trap, Frost Trap, and Explosive Trap a {:|5,10,15,20,25}% chance 
-              to entrap the target, preventing them from moving for 5 sec.
-          Savage Strikes:
-            Location: [1, 1]
-            Max Rank: 2
-            Icon: "images/warrior/BloodRage.png"
-            Description: >-
-              Increases the critical strike chance of Raptor Strike and Mongoose Bite by {:|10,20}%.
-          Improved Wing Clip:
-            Location: [1, 2]
-            Max Rank: 5
-            Icon: "images/hunter/WingClip.png"
-            Description: >-
-              Gives your Wing Clip ability a {:|4,8,12,16,20}% chance to immobilize the target for
-              5 sec.
-          Clever Traps:
-            Location: [2, 0]
-            Max Rank: 2
-            Icon: "images/paladin/DivineIntervention.png"
-            Description: >-
-              Increases the duration of Freezing and Frost trap effects by {0:|15,30}% and the damage 
-              of Immolation and Explosive trap effects by {0:|15,30}%.
-          Survivalist:
-            Location: [2, 1]
-            Max Rank: 5
-            Icon: "images/warlock/RitualOfSummoning.png"
-            Description: Increases total health by {:|2,4,6,8,10}%.
-          Deterrence:
-            Location: [2, 2]
-            Max Rank: 1
-            Icon: "images/warrior/Whirlwind.png"
-            Description: When activated, increases your Dodge and Parry chance by 25% for 10 sec.
-            Spell:
-              Cast Time: Instant
-              Cooldown: 5 min
-          Trap Mastery:
-            Location: [3, 0]
-            Max Rank: 2
-            Icon: "images/hunter/TrapMastery.png"
-            Description: Decreases the chance enemies will resist trap effects by {:|5,10}%.
-          Surefooted:
-            Location: [3, 1]
-            Max Rank: 3
-            Icon: "images/rogue/Kick.png"
-            Description: >-
-              Increases hit chance by {0:|1,2,3}% and increases the chance movement impairing effects
-              will be resisted by an additional {0:|5,10,15}%.
-          Improved Feign Death:
-            Location: [3, 3]
-            Max Rank: 2
-            Icon: "images/hunter/FeignDeath.png"
-            Description: Reduces the chance your Feign Death ability will be resisted by {:|2,4}%.
-          Killer Instinct:
-            Location: [4, 1]
-            Max Rank: 3
-            Icon: "images/druid/Furor.png"
-            Description: Increases your critical strike chance with all attacks by {:|1,2,3}%.
-          Counterattack:
-            Location: [4, 2]
-            Requires: Deterrence
-            Max Rank: 1
-            Icon: "images/warrior/Retaliation.png"
-            Description: >-
-              A strike that becomes active after parrying an opponent's attack. This attack deals 
-              40 damage and immobilizes the target for 5 sec. Counterattack cannot be dodged, 
-              blocked, or parried.
-            Spell:
-              Cost: 45 mana
-              Range: melee
-              Cast Time: Instant
-              Cooldown: 5 sec
-          Lightning Reflexes:
-            Location: [5, 2]
-            Max Rank: 5
-            Icon: "images/hunter/LightningReflexes.png"
-            Description: Increases your Agility by {:|3,6,9,12,15}%.
-          Wyvern Sting:
-            Location: [6, 1]
-            Requires: Killer Instinct
-            Max Rank: 1
-            Icon: "images/hunter/WyvernSting.png"
-            Description: >-
-              A stinging shot that puts the target to sleep for 12 sec. Any damage will cancel the 
-              effect. When the target wakes up, the Sting causes 300 Nature damage over 12 sec. Only 
-              usable out of combat. Only one Sting per hunter can be active on the target at a time.
-            Spell:
-              Cost: 115 Mana
-              Range: 8-35 yd
-              Cast Time: Instant
-              Cooldown: 2 min
-  TBC:
-    Specializations:
-      Beast Mastery:
-        Icon: "images/hunter/TameBeast.png"
-        Background: "images/backgrounds/hunter_beastmastery.jpg"
-        Talents:
-          Improved Aspect of the Hawk:
-            Location: [0, 1]
-            Max Rank: 5
-            Icon: "images/hunter/AspectOfTheHawk.png"
-            Description: >-
-              While Aspect of the Hawk is active, all normal ranged attacks have a 10% 
-              chance of increasing ranged attack speed by {:|3,6,9,12,15}% for 12 sec.
-          Endurance Training:
-            Location: [0, 2]
-            Max Rank: 5
-            Icon: "images/shaman/Reincarnation.png"
-            Description: >-
-              Increases the health of your pet by {0:|2,4,6,8,10}% and your total health by 
-              {0:|1,2,3,4,5}%.
-          Focused Fire:
-            Location: [1, 0]
-            Max Rank: 2
-            Icon: "images/hunter/FocusedFire.jpg"
-            Description: >-
-              All damage caused by you is increased by {0:|1,2}% while your pet is active and the
-              critical strike chance of your Kill Command ability is increased by {0:|10,20}%.
-          Improved Aspect of the Monkey:
-            Location: [1, 1]
-            Max Rank: 3
-            Icon: "images/hunter/AspectOfTheMonkey.png"
-            Description: Increases the Dodge bonus of your Aspect of the Monkey by {:|2,4,6}%.
-          Thick Hide:
-            Location: [1, 2]
-            Max Rank: 3
-            Icon: "images/druid/ThickHide.png"
-            Description: >-
-              Increases the armor rating of your pets by {0:|7,14,20}% and your armor contribution
-              from items by {0:|4,7,10}%.
-          Improved Revive Pet:
-            Location: [1, 3]
-            Max Rank: 2
-            Icon: "images/hunter/RevivePet.png"
-            Description: >-
-              Revive Pet's casting time is reduced by {0:|3,6} sec, mana cost is reduced by 
-              {0:|20,40}%, and increases the health your pet returns with by an additional {0:|15,30}%.
-          Pathfinding:
-            Location: [2, 0]
-            Max Rank: 2
-            Icon: "images/druid/TigersFury.png"
-            Description: >-
-              Increases the speed bonus of your Aspect of the Cheetah and Aspect of the Pack by 
-              {:|4,8}%.
-          Bestial Swiftness:
-            Location: [2, 1]
-            Max Rank: 1
-            Icon: "images/druid/Dash.png"
-            Description: Increases the outdoor movement speed of your pets by 30%.
-          Unleashed Fury:
-            Location: [2, 2]
-            Max Rank: 5
-            Icon: "images/druid/FrenziedRegeneration.png"
-            Description: Increases the damage done by your pets by {:|4,8,12,16,20}%.
-          Improved Mend Pet:
-            Location: [3, 1]
-            Max Rank: 2
-            Icon: "images/hunter/MendPet.png"
-            Description: >-
-              Reduces the mana cost of your Mend Pet spell by {0:|10,20}% and gives the Mend Pet 
-              spell a {0:|25,50}% chance of cleansing 1 Curse, Disease, Magic or Poison effect from 
-              the pet each tick.
-          Ferocity:
-            Location: [3, 2]
-            Max Rank: 5
-            Icon: "images/hunter/Ferocity.png"
-            Description: Increases the critical strike chance of your pet by {:|2,4,6,8,10}%.
-          Spirit Bond:
-            Location: [4, 0]
-            Max Rank: 2
-            Icon: "images/druid/DemoralizingRoar.png"
-            Description: >-
-              While your pet is active, you and your pet will regenerate {0:|1,2}% of your 
-              total health every 10 sec.
-          Intimidation:
-            Location: [4, 1]
-            Max Rank: 1
-            Icon: "images/hunter/Intimidation.png"
-            Description: >-
-              Command your pet to intimidate the target on the next successful melee attack, causing 
-              a high amount of threat and stunning the target for 3 sec.
-            Spell:
-              Cost: 6% of Base Mana
-              Range: 100 yd
-              Cast Time: Next Melee
-              Cooldown: 1 min
-          Bestial Discipline:
-            Location: [4, 3]
-            Max Rank: 2
-            Icon: "images/druid/Wrath.png"
-            Description: >-
-              Increases the Focus regeneration of your pets by {:|50,100}%.
-          Animal Handler:
-            Location: [5, 0]
-            Max Rank: 2
-            Icon: "images/hunter/AnimalHandler.jpg"
-            Description: >- 
-              Increases your speed while mounted by {0:|4,8}% and your pet's chance to hit by 
-              {0:|2,4}%. The mounted movement speed increase does not stack with other effects.
-          Frenzy:
-            Location: [5, 2]
-            Requires: Ferocity
-            Max Rank: 5
-            Icon: "images/druid/Swipe.png"
-            Description: >-
-              Gives your pet a {:|20,40,60,80,100}% chance to gain a 30% attack speed increase for 8 
-              sec after dealing a critical strike.
-          Ferocious Inspiration:
-            Location: [6, 0]
-            Max Rank: 3
-            Icon: "images/hunter/FerociousInspiration.jpg"
-            Description: >-
-              When your pet scores a critical hit, all party members have all damage increased by
-              {:|1,2,3,4,5}% for 10 sec.
-          Bestial Wrath:
-            Location: [6, 1]
-            Requires: Intimidation
-            Max Rank: 1
-            Icon: "images/druid/FerociousBite.jpg"
-            Description: >-
-              Send your pet into a rage causing 50% additional damage for 18 sec. While enraged, the 
-              beast does not feel pity or remorse or fear and it cannot be stopped unless killed.
-            Spell:
-              Cost: 10% of Base Mana
-              Range: 100 yd
-              Cast Time: Instant
-              Cooldown: 2 min
-          Catlike Reflexes:
-            Location: [6, 2]
-            Max Rank: 3
-            Icon: "images/hunter/CatlikeReflexes.jpg"
-            Description: >-
-              Increases your chance to dodge by {0:|1,2,3}% and your pet's chance to dodge by an
-              additional {0:|3,6,9}%
-          Serpent's Swiftness:
-            Location: [7, 2]
-            Max Rank: 5
-            Icon: "images/hunter/SerpentsSwiftness.jpg"
-            Description: >-
-              Increases ranged combat attack speed by {0:|4,8,12,16,20}% and your pet's melee attack
-              speed by {0:|4,8,12,16,20}%.
-          The Beast Within:
-            Location: [8, 1]
-            Requires: Bestial Wrath
-            Max Rank: 1
-            Icon: "images/hunter/ItsMorbinTime.jpg"
-            Description: >-
-              When your pet is under the effects of Bestial Wrath, you also go into a rage causing
-              10% additional damage and reducing mana costs of all spells by 20% for 18 sec. While
-              enraged, you do not feel pity or remorse or fear and you cannot be stopped unless 
-              killed.
-      Marksmanship:
-        Icon: "images/skills/Marksmanship.png"
-        Background: "images/backgrounds/hunter_marksmanship.jpg"
-        Talents:
-          Improved Concussive Shot:
-            Location: [0, 1]
-            Max Rank: 5
-            Icon: "images/skills/Dazed.png"
-            Description: >-
-              Gives your Concussive Shot a {:|4,8,12,16,20}% chance to stun the target for 3 sec.
-          Lethal Shots:
-            Location: [0, 2]
-            Max Rank: 5
-            Icon: "images/warrior/Impale.png"
-            Description: >-
-              Increases your critical strike chance with ranged weapons by {:|1,2,3,4,5}%.
-          Improved Hunter's Mark:
-            Location: [1, 1]
-            Max Rank: 5
-            Icon: "images/hunter/HuntersMark.png"
-            Description: >-
-              Causes {:|20,40,60,80,100}% of your Hunter's Mark ability's base attack power to apply
-              to melee attack power as well.
-          Efficiency:
-            Location: [1, 2]
-            Max Rank: 5
-            Icon: "images/mage/ColdSnap.png"
-            Description: Reduces the Mana cost of your Shots and Stings by {:|2,4,6,8,10}%.
-          Go for the Throat:
-            Location: [2, 0]
-            Max Rank: 2
-            Icon: "images/hunter/GoForTheThroat.jpg"
-            Description: Your ranged critical hits cause your pet to generate {:|25,50} Focus.
-          Improved Arcane Shot:
-            Location: [2, 1]
-            Max Rank: 5
-            Icon: "images/hunter/ArcaneShot.png"
-            Description: Reduces the cooldown of your Arcane Shot by {:|0.2,0.4,0.6,0.8,1} sec.
-          Aimed Shot:
-            Location: [2, 2]
-            Max Rank: 1
-            Icon: "images/hunter/AimedShot.png"
-            Description: >-
-              An aimed shot that increases ranged damage by 70 and reduces healing done to that 
-              target by 50%. Lasts 10 sec.
-            Spell:
-              Cost: 75 Mana
-              Range: 35 yd
-              Cast Time: 2.5 sec
-              Cooldown: 6 sec
-          Rapid Killing:
-            Location: [2, 3]
-            Max Rank: 2
-            Icon: "images/deathknight/MarkOfBlood.jpg"
-            Description: >-
-              Reduces the cooldown of your Rapid Fire ability by {0:|1,2} min. In addition, after
-              killing an opponent that yields experience or honor, your next Aimed Shot, Arcane Shot
-              or Auto Shot causes {0:|10,20}% additional damage. Lasts 20 sec.
-          Improved Stings:
-            Location: [3, 1]
-            Max Rank: 5
-            Icon: "images/hunter/SerpentSting.png"
-            Description: >-
-              Increases the damage done by your Serpent Sting and Wyvern Sting by 
-              {0:|6,12,18,24,30}% and the mana drained by your Viper Sting by {0:|6,12,18,24,30}%.
-              In addition, reduces the chance your Stings will be dispelled by {0:|6,12,18,24,30}%.
-          Mortal Shots:
-            Location: [3, 2]
-            Requires: Aimed Shot
-            Max Rank: 5
-            Icon: "images/hunter/MortalShots.png"
-            Description: >-
-              Increases your ranged weapon critical strike damage bonus by {:|6,12,18,24,30}%.
-          Concussive Barrage:
-            Location: [4, 0]
-            Max Rank: 3
-            Icon: "images/druid/Starfire.png"
-            Description: >-
-              Your successful Auto Shot attacks have a {:|2,4,6}% chance to Daze the target for 
-              4 sec.
-          Scatter Shot:
-            Location: [4, 1]
-            Max Rank: 1
-            Icon: "images/hunter/ScatterShot.png"
-            Description: >-
-              A short-range shot that deals 50% weapon damage and disorients the target for 4 sec. 
-              Any damage caused will remove the effect. Turns off your attack when used.
-            Spell:
-              Cost: 6% of Base Mana
-              Range: 15 yd
-              Cast Time: Instant
-              Cooldown: 30 sec
-          Barrage:
-            Location: [4, 2]
-            Max Rank: 3
-            Icon: "images/hunter/MultiShot.png"
-            Description: >-
-              Increases the damage done by your Multi-Shot and Volley spells by {:|4,8,12}%.
-          Combat Experience:
-            Location: [5, 0]
-            Max Rank: 2
-            Icon: "images/hunter/CombatExperience.jpg"
-            Description: >-
-              Increases your total Agility by {0:|1,2}% and your total Intellect by {0:|3,6}%.
-          Ranged Weapon Specialization:
-            Location: [5, 3]
-            Max Rank: 5
-            Icon: "images/hunter/RangedWeaponSpecialization.png"
-            Description: Increases the damage you deal with ranged weapons by {:|1,2,3,4,5}%.
-          Careful Aim:
-            Location: [6, 0]
-            Max Rank: 3
-            Icon: "images/hunter/CarefulAim.jpg"
-            Description: >-
-              Increases your ranged attack power by an amount equal to {:|15,30,45}% of your total 
-              intellect.
-          Trueshot Aura:
-            Location: [6, 1]
-            Requires: Scatter Shot
-            Max Rank: 1
-            Icon: "images/hunter/TrueshotAura.png"
-            Description: >-
-              Increases the attack power of party members within 45 yards by 50. Lasts until
-              cancelled.
-            Spell:
-              Cast Time: Instant
-          Improved Barrage:
-            Location: [6, 2]
-            Requires: Barrage
-            Max Rank: 3
-            Icon: "images/hunter/MultiShot.png"
-            Description: >-
-              Increases the critical strike chance of your Multi-Shot ability by {0:|4,8,12}% and
-              gives you a {0:|33,66,100}% chance to avoid interruption caused by damage while
-              channeling Volley.
-          Master Marksman:
-            Location: [7, 1]
-            Max Rank: 5
-            Icon: "images/hunter/MasterMarksman.jpg"
-            Description: Increases your ranged attack power by {0:|2,4,6,8,10}%.
-          Silencing Shot:
-            Location: [8, 1]
-            Requires: Master Marksman
-            Max Rank: 1
-            Icon: "images/hunter/SilencingShot.jpg"
-            Description: A shot that deals 50% weapon damage and Silences the target for 3 sec.
-            Spell:
-              Cost: 6% of base mana
-              Range: 35 yd
-              Cooldown: 20 sec
-              Cast Time: Instant
-      Survival:
-        Icon: "images/hunter/MongooseBite.png"
-        Background: "images/backgrounds/hunter_survival.jpg"
-        Talents:
-          Monster Slaying:
-            Location: [0, 0]
-            Max Rank: 3
-            Icon: "images/hunter/MonsterSlaying.jpg"
-            Description: >-
-              Increases all damage caused against Beasts, Giants and Dragonkin targets by {0:|1,2,3}% 
-              and increases critical damage caused against Beasts, Giants and Dragonkin targets by 
-              an additional {0:|1,2,3}%.
-          Humanoid Slaying:
-            Location: [0, 1]
-            Max Rank: 3
-            Icon: "images/paladin/Repentance.png"
-            Description: >-
-              Increases all damage caused against Humanoid targets by {0:|1,2,3}% and increases 
-              critical damage caused against Humanoid targets by an additional {0:|1,2,3}%.
-          Hawk Eye:
-            Location: [0, 2]
-            Max Rank: 3
-            Icon: "images/hunter/HawkEye.png"
-            Description: Increases the range of your ranged weapons by {:|2,4,6} yards.
-          Savage Strikes:
-            Location: [0, 3]
-            Max Rank: 2
-            Icon: "images/warrior/BloodRage.png"
-            Description: >-
-              Increases the critical strike chance of Raptor Strike and Mongoose Bite by {:|10,20}%.
-          Entrapment:
-            Location: [1, 0]
-            Max Rank: 3
-            Icon: "images/druid/EntanglingRoots.png"
-            Description: >-
-              Gives your Immolation Trap, Frost Trap, Explosive Trap, and Snake Trap a {:|8,16,25}% 
-              chance to entrap the target, preventing them from moving for 5 sec.
-          Deflection:
-            Location: [1, 1]
-            Max Rank: 5
-            Icon: "images/skills/Parry.png"
-            Description: Increases your Parry chance by {:|1,2,3,4,5}%.
-          Improved Wing Clip:
-            Location: [1, 2]
-            Max Rank: 3
-            Icon: "images/hunter/WingClip.png"
-            Description: >-
-              Gives your Wing Clip ability a {:|7,14,20}% chance to immobilize the target for 5 sec.
-          Clever Traps:
-            Location: [2, 0]
-            Max Rank: 2
-            Icon: "images/paladin/DivineIntervention.png"
-            Description: >-
-              Increases the duration of Freezing and Frost Trap effects by {0:|15,30}%, the damage 
-              of Immolation and Explosive Trap effects by {0:|15,30}%, and the number of snakes
-              summoned from Snake Traps by {0:|15,30}%.
-          Survivalist:
-            Location: [2, 1]
-            Max Rank: 5
-            Icon: "images/warlock/RitualOfSummoning.png"
-            Description: Increases total health by {:|2,4,6,8,10}%.
-          Deterrence:
-            Location: [2, 2]
-            Max Rank: 1
-            Icon: "images/warrior/Whirlwind.png"
-            Description: When activated, increases your Dodge and Parry chance by 25% for 10 sec.
-            Spell:
-              Cast Time: Instant
-              Cooldown: 5 min
-          Trap Mastery:
-            Location: [3, 0]
-            Max Rank: 2
-            Icon: "images/hunter/TrapMastery.png"
-            Description: Decreases the chance enemies will resist trap effects by {:|5,10}%.
-          Surefooted:
-            Location: [3, 1]
-            Max Rank: 3
-            Icon: "images/rogue/Kick.png"
-            Description: >-
-              Increases hit chance by {0:|1,2,3}% and increases the chance movement impairing effects
-              will be resisted by an additional {0:|5,10,15}%.
-          Improved Feign Death:
-            Location: [3, 3]
-            Max Rank: 2
-            Icon: "images/hunter/FeignDeath.png"
-            Description: Reduces the chance your Feign Death ability will be resisted by {:|2,4}%.
-          Survival Instincts:
-            Location: [4, 0]
-            Max Rank: 2
-            Icon: "images/hunter/SurvivalInstincts.jpg"
-            Description: >-
-              Reduces all damage taken by {0:|2,4}% and increases attack power by {0:|2,4}%.
-          Killer Instinct:
-            Location: [4, 1]
-            Max Rank: 3
-            Icon: "images/druid/Furor.png"
-            Description: Increases your critical strike chance with all attacks by {:|1,2,3}%.
-          Counterattack:
-            Location: [4, 2]
-            Requires: Deterrence
-            Max Rank: 1
-            Icon: "images/warrior/Retaliation.png"
-            Description: >-
-              A strike that becomes active after parrying an opponent's attack. This attack deals 
-              40 damage and immobilizes the target for 5 sec. Counterattack cannot be dodged, 
-              blocked, or parried.
-            Spell:
-              Cost: 45 mana
-              Range: melee
-              Cast Time: Instant
-              Cooldown: 5 sec
-          Resourcefulness:
-            Location: [5, 0]
-            Max Rank: 3
-            Icon: "images/hunter/Resourcefulness.jpg"
-            Description: >-
-              Reduces the mana cost of all traps and melee abilities by {0:|20,40,60}% and reduces
-              the cooldown of all traps by {0:|2,4,6} sec.
-          Lightning Reflexes:
-            Location: [5, 2]
-            Max Rank: 5
-            Icon: "images/hunter/LightningReflexes.png"
-            Description: Increases your Agility by {:|3,6,9,12,15}%.
-          Thrill of the Hunt:
-            Location: [6, 0]
-            Max Rank: 3
-            Icon: "images/hunter/ThrillOfTheHunt.jpg"
-            Description: >-
-              Gives you a {:|33,66,100}% chance to regain 40% of the mana cost of any shot when it 
-              critically hits.
-          Wyvern Sting:
-            Location: [6, 1]
-            Requires: Killer Instinct
-            Max Rank: 1
-            Icon: "images/hunter/WyvernSting.png"
-            Description: >-
-              A stinging shot that puts the target to sleep for 12 sec. Any damage will cancel the 
-              effect. When the target wakes up, the Sting causes 300 Nature damage over 12 sec. Only
-              one Sting per hunter can be active on the target at a time.
-            Spell:
-              Cost: 115 Mana
-              Range: 35 yd
-              Cast Time: Instant
-              Cooldown: 2 min
-          Expose Weakness:
-            Location: [6, 2]
-            Requires: Lightning Reflexes
-            Max Rank: 3
-            Icon: "images/rogue/FindWeakness.jpg"
-            Description: >-
-              Your ranged criticals have a {:|33,66,100}% chance to apply an Expose Weakness effect
-              to the target. Expose Weakness increases the attack power of all attackers against
-              that target by 25% of your Agility for 7 sec.
-          Master Tactician:
-            Location: [7, 1]
-            Max Rank: 5
-            Icon: "images/hunter/MasterTactician.jpg"
-            Description: >-
-              Your successful ranged attacks have a 6% chance to increase your critical strike 
-              chance with all attacks by {:|2,4,6,8,10}% for 8 sec.
-          Readiness:
-            Location: [8, 1]
-            Requires: Master Tactician
-            Max Rank: 1
-            Icon: "images/hunter/Readiness.jpg"
-            Description: >-
-              When activated, this ability immediately finishes the cooldown on your other Hunter 
-              abilities.
+Class: Hunter
+Icon: class/hunter.jpg
+Color: rgb(170, 211, 114)
+Classic:
+  Specializations:
+    Beast Mastery:
+      Icon: ability/hunter/beasttaming.jpg
+      Background: backgrounds/361.jpg
+      Talents:
+        Improved Aspect of the Hawk:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/nature/ravenform.jpg
+          Description: While Aspect of the Hawk is active, all normal ranged attacks
+            have a {:|1,2,3,4,5}% chance of increasing ranged attack speed by 30%
+            for 12 sec.
+        Endurance Training:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/nature/reincarnation.jpg
+          Description: Increases the Health of your pets by {:|3,6,9,12,15}%.
+        Improved Eyes of the Beast:
+          Location: [1, 0]
+          Max Rank: 2
+          Icon: ability/eyeoftheowl.jpg
+          Description: Increases the duration of your Eyes of the Beast by {:|30,60}
+            sec.
+        Improved Aspect of the Monkey:
+          Location: [1, 1]
+          Max Rank: 5
+          Icon: ability/hunter/aspectofthemonkey.jpg
+          Description: Increases the Dodge bonus of your Aspect of the Monkey by {:|1,2,3,4,5}%.
+        Thick Hide:
+          Location: [1, 2]
+          Max Rank: 3
+          Icon: inv/misc/pelt/bear/03.jpg
+          Description: Increases the Armor rating of your pets by {:|10,20,30}%.
+        Improved Revive Pet:
+          Location: [1, 3]
+          Max Rank: 2
+          Icon: ability/hunter/beastsoothe.jpg
+          Description: Revive Pet's casting time is reduced by {0:|3,6} sec, mana
+            cost is reduced by {0:|20,40}%, and increases the health your pet returns
+            with by an additional {0:|15,30}%.
+        Pathfinding:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: ability/mount/jungletiger.jpg
+          Description: Increases the speed bonus of your Aspect of the Cheetah and
+            Aspect of the Pack by {:|3,6}%.
+        Bestial Swiftness:
+          Location: [2, 1]
+          Max Rank: 1
+          Icon: ability/druid/dash.jpg
+          Description: Increases the outdoor movement speed of your pets by 30%.
+        Unleashed Fury:
+          Location: [2, 2]
+          Max Rank: 5
+          Icon: ability/bullrush.jpg
+          Description: Increases the damage done by your pets by {:|4,8,12,16,20}%.
+        Improved Mend Pet:
+          Location: [3, 1]
+          Max Rank: 2
+          Icon: ability/hunter/mendpet.jpg
+          Description: Gives the Mend Pet spell a {:|15,50}% chance of cleansing 1
+            Curse, Disease, Magic or Poison effect from the pet each tick.
+        Ferocity:
+          Location: [3, 2]
+          Max Rank: 5
+          Icon: inv/misc/monsterclaw/04.jpg
+          Description: Increases the critical strike chance of your pets by {:|3,6,9,12,15}%.
+        Spirit Bond:
+          Location: [4, 0]
+          Max Rank: 2
+          Icon: classic/ability/druid/demoralizingroar.jpg
+          Description: While your pet is active, you and your pet will regenerate
+            {:|1,2}% of total health every 10 sec.
+        Intimidation:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: ability/devour.jpg
+          Description: Command your pet to intimidate the target on the next successful
+            melee attack, causing a high amount of threat and stunning the target
+            for 3 sec.
+          Spell:
+            Cost: 8% of base mana
+            Range: 100 yd
+            Cast Time: Instant
+            Cooldown: 1 min
+        Bestial Discipline:
+          Location: [4, 3]
+          Max Rank: 2
+          Icon: spell/nature/abolishmagic.jpg
+          Description: Increases the Focus regeneration of your pets by {:|10,20}%.
+        Frenzy:
+          Location: [5, 2]
+          Requires: Ferocity
+          Max Rank: 5
+          Icon: inv/misc/monsterclaw/03.jpg
+          Description: Gives your pet a {:|20,40,60,80,100}% chance to gain a 30%
+            attack speed increase for 8 sec after dealing a critical strike.
+        Bestial Wrath:
+          Location: [6, 1]
+          Requires: Intimidation
+          Max Rank: 1
+          Icon: ability/druid/ferociousbite.jpg
+          Description: Send your pet into a rage causing 50% additional damage for
+            18 sec. While enraged, the beast does not feel pity or remorse or fear
+            and it cannot be stopped unless killed.
+          Spell:
+            Cost: 12% of base mana
+            Range: 100 yd
+            Cast Time: Instant
+            Cooldown: 2 min
+    Marksmanship:
+      Icon: ability/marksmanship.jpg
+      Background: backgrounds/363.jpg
+      Talents:
+        Improved Concussive Shot:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/frost/stun.jpg
+          Description: Gives your Concussive Shot a {:|4,8,12,16,20}% chance to stun
+            the target for 3 sec.
+        Efficiency:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/frost/wizardmark.jpg
+          Description: Reduces the Mana cost of your Shots and Stings by {:|2,4,6,8,10}%.
+        Improved Hunter's Mark:
+          Location: [1, 1]
+          Max Rank: 5
+          Icon: ability/hunter/snipershot.jpg
+          Description: Increases the Ranged Attack Power bonus of your Hunter's Mark
+            spell by {:|3,6,9,12,15}%.
+        Lethal Shots:
+          Location: [1, 2]
+          Max Rank: 5
+          Icon: ability/searingarrow.jpg
+          Description: Increases your critical strike chance with ranged weapons by
+            {:|1,2,3,4,5}%.
+        Aimed Shot:
+          Location: [2, 0]
+          Max Rank: 1
+          Icon: inv/spear/07.jpg
+          Description: An aimed shot that increases ranged damage by 70.
+          Spell:
+            Cost: 75 Mana
+            Range: 8 - 35 yd
+            Cast Time: 3 sec
+            Cooldown: 6 sec
+        Improved Arcane Shot:
+          Location: [2, 1]
+          Max Rank: 5
+          Icon: ability/impalingbolt.jpg
+          Description: Reduces the cooldown of your Arcane Shot by {:|0.2,0.4,0.6,0.8,1}
+            sec.
+        Hawk Eye:
+          Location: [2, 3]
+          Max Rank: 3
+          Icon: ability/townwatch.jpg
+          Description: Increases the range of your ranged weapons by {:|2,4,6} yards.
+        Improved Serpent Sting:
+          Location: [3, 1]
+          Max Rank: 5
+          Icon: ability/hunter/quickshot.jpg
+          Description: Increases the damage done by your Serpent Sting by {:|2,4,6,8,10}%.
+        Mortal Shots:
+          Location: [3, 2]
+          Requires: Lethal Shots
+          Max Rank: 5
+          Icon: ability/piercedamage.jpg
+          Description: Increases your ranged weapon critical strike damage bonus by
+            {:|6,12,18,24,30}%.
+        Scatter Shot:
+          Location: [4, 0]
+          Max Rank: 1
+          Icon: ability/golemstormbolt.jpg
+          Description: A short-range shot that deals 50% weapon damage and disorients
+            the target for 4 sec. Any damage caused will remove the effect. Turns
+            off your attack when used.
+          Spell:
+            Cost: 8% of base mana
+            Range: 15 yd
+            Cast Time: Instant
+            Cooldown: 30 sec
+        Barrage:
+          Location: [4, 1]
+          Max Rank: 3
+          Icon: ability/upgrademoonglaive.jpg
+          Description: Increases the damage done by your Multi-Shot and Volley spells
+            by {:|5,10,15}%.
+        Improved Scorpid Sting:
+          Location: [4, 2]
+          Max Rank: 3
+          Icon: ability/hunter/criticalshot.jpg
+          Description: Reduces the Stamina of targets affected by your Scorpid Sting
+            by {:|10,20,30}% of the amount of Strength reduced.
+        Ranged Weapon Specialization:
+          Location: [5, 2]
+          Max Rank: 5
+          Icon: inv/weapon/rifle/06.jpg
+          Description: Increases the damage you deal with ranged weapons by {:|1,2,3,4,5}%.
+        Trueshot Aura:
+          Location: [6, 1]
+          Requires: Barrage
+          Max Rank: 1
+          Icon: ability/trueshot.jpg
+          Description: Increases the attack power of party members within 45 yards
+            by 50. Lasts 30 min.
+          Spell:
+            Cost: 325 Mana
+            Cast Time: Instant
+    Survival:
+      Icon: ability/hunter/swiftstrike.jpg
+      Background: backgrounds/362.jpg
+      Talents:
+        Monster Slaying:
+          Location: [0, 0]
+          Max Rank: 3
+          Icon: inv/misc/head/dragon/black.jpg
+          Description: Increases all damage caused against Beasts, Giants and Dragonkin
+            targets by {0:|1,2,3}% and increases critical damage caused against Beasts,
+            Giants and Dragonkin targets by an additional {0:|1,2,3}%.
+        Humanoid Slaying:
+          Location: [0, 1]
+          Max Rank: 3
+          Icon: spell/holy/prayerofhealing.jpg
+          Description: Increases all damage caused against Humanoid targets by {0:|1,2,3}%
+            and increases critical damage caused against Humanoid targets by an additional
+            {0:|1,2,3}%.
+        Deflection:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: ability/parry.jpg
+          Description: Increases your Parry chance by {:|1,2,3,4,5}%.
+        Entrapment:
+          Location: [1, 0]
+          Max Rank: 5
+          Icon: spell/nature/stranglevines.jpg
+          Description: Gives your Immolation Trap, Frost Trap, and Explosive Trap
+            a {:|5,10,15,20,25}% chance to entrap the target, preventing them from
+            moving for 5 sec.
+        Savage Strikes:
+          Location: [1, 1]
+          Max Rank: 2
+          Icon: ability/racial/bloodrage.jpg
+          Description: Increases the critical strike chance of Raptor Strike and Mongoose
+            Bite by {:|10,20}%.
+        Improved Wing Clip:
+          Location: [1, 2]
+          Max Rank: 5
+          Icon: ability/rogue/trip.jpg
+          Description: Gives your Wing Clip ability a {:|4,8,12,16,20}% chance to
+            immobilize the target for 5 sec.
+        Clever Traps:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: spell/nature/timestop.jpg
+          Description: Increases the duration of Freezing and Frost trap effects by
+            {0:|15,30}% and the damage of Immolation and Explosive trap effects by
+            {0:|15,30}%.
+        Survivalist:
+          Location: [2, 1]
+          Max Rank: 5
+          Icon: spell/shadow/twilight.jpg
+          Description: Increases total health by {:|2,4,6,8,10}%.
+        Deterrence:
+          Location: [2, 2]
+          Max Rank: 1
+          Icon: ability/whirlwind.jpg
+          Description: When activated, increases your Dodge and Parry chance by 25%
+            for 10 sec.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 5 min
+        Trap Mastery:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: ability/ensnare.jpg
+          Description: Decreases the chance enemies will resist trap effects by {:|5,10}%.
+        Surefooted:
+          Location: [3, 1]
+          Max Rank: 3
+          Icon: ability/kick.jpg
+          Description: Increases hit chance by {0:|1,2,3}% and increases the chance
+            movement impairing effects will be resisted by an additional {0:|5,10,15}%.
+        Improved Feign Death:
+          Location: [3, 3]
+          Max Rank: 2
+          Icon: ability/rogue/feigndeath.jpg
+          Description: Reduces the chance your Feign Death ability will be resisted
+            by {:|2,4}%.
+        Killer Instinct:
+          Location: [4, 1]
+          Max Rank: 3
+          Icon: spell/holy/blessingofstamina.jpg
+          Description: Increases your critical strike chance with all attacks by {:|1,2,3}%.
+        Counterattack:
+          Location: [4, 2]
+          Requires: Deterrence
+          Max Rank: 1
+          Icon: ability/warrior/challange.jpg
+          Description: A strike that becomes active after parrying an opponent's attack.
+            This attack deals 40 damage and immobilizes the target for 5 sec. Counterattack
+            cannot be blocked, dodged, or parried.
+          Spell:
+            Cost: 45 Mana
+            Range: Melee
+            Cast Time: Instant
+            Cooldown: 5 sec
+        Lightning Reflexes:
+          Location: [5, 2]
+          Max Rank: 5
+          Icon: spell/nature/invisibilty.jpg
+          Description: Increases your Agility by {:|3,6,9,12,15}%.
+        Wyvern Sting:
+          Location: [6, 1]
+          Requires: Killer Instinct
+          Max Rank: 1
+          Icon: inv/spear/02.jpg
+          Description: A stinging shot that puts the target to sleep for 12 sec. Any
+            damage will cancel the effect. When the target wakes up, the Sting causes
+            300 Nature damage over 12 sec. Only usable out of combat. Only one Sting
+            per Hunter can be active on the target at a time.
+          Spell:
+            Cost: 115 Mana
+            Range: 8 - 35 yd
+            Cast Time: Instant
+            Cooldown: 2 min
+TBC:
+  Specializations:
+    Beast Mastery:
+      Icon: ability/hunter/beasttaming.jpg
+      Background: backgrounds/361.jpg
+      Talents:
+        Improved Aspect of the Hawk:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/nature/ravenform.jpg
+          Description: While Aspect of the Hawk is active, all normal ranged attacks
+            have a 10% chance of increasing ranged attack speed by {:|3,6,9,12,15}%
+            for 12 sec.
+        Endurance Training:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/nature/reincarnation.jpg
+          Description: Increases the Health of your pet by {0:|2,4,6,8,10}% and your
+            total health by {0:|1,2,3,4,5}%.
+        Focused Fire:
+          Location: [1, 0]
+          Max Rank: 2
+          Icon: ability/hunter/silenthunter.jpg
+          Description: All damage caused by you is increased by {0:|1,2}% while your
+            pet is active and the critical strike chance of your Kill Command ability
+            is increased by {0:|10,20}%.
+        Improved Aspect of the Monkey:
+          Location: [1, 1]
+          Max Rank: 3
+          Icon: ability/hunter/aspectofthemonkey.jpg
+          Description: Increases the Dodge bonus of your Aspect of the Monkey by {:|2,4,6}%.
+        Thick Hide:
+          Location: [1, 2]
+          Max Rank: 3
+          Icon: inv/misc/pelt/bear/03.jpg
+          Description: Increases the armor rating of your pets by {0:|7,14,20}% and
+            your armor contribution from items by {0:|4,7,10}%.
+        Improved Revive Pet:
+          Location: [1, 3]
+          Max Rank: 2
+          Icon: ability/hunter/beastsoothe.jpg
+          Description: Revive Pet's casting time is reduced by {0:|3,6} sec, mana
+            cost is reduced by {0:|20,40}%, and increases the health your pet returns
+            with by an additional {0:|15,30}%.
+        Pathfinding:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: ability/mount/jungletiger.jpg
+          Description: Increases the speed bonus of your Aspect of the Cheetah and
+            Aspect of the Pack by {:|4,8}%.
+        Bestial Swiftness:
+          Location: [2, 1]
+          Max Rank: 1
+          Icon: ability/druid/dash.jpg
+          Description: Increases the outdoor movement speed of your pets by 30%.
+        Unleashed Fury:
+          Location: [2, 2]
+          Max Rank: 5
+          Icon: ability/bullrush.jpg
+          Description: Increases the damage done by your pets by {:|4,8,12,16,20}%.
+        Improved Mend Pet:
+          Location: [3, 1]
+          Max Rank: 2
+          Icon: ability/hunter/mendpet.jpg
+          Description: Reduces the mana cost of your Mend Pet spell by {0:|10,20}%
+            and gives the Mend Pet spell a {0:|25,50}% chance of cleansing 1 Curse,
+            Disease, Magic or Poison effect from the pet each tick.
+        Ferocity:
+          Location: [3, 2]
+          Max Rank: 5
+          Icon: inv/misc/monsterclaw/04.jpg
+          Description: Increases the critical strike chance of your pet by {:|2,4,6,8,10}%.
+        Spirit Bond:
+          Location: [4, 0]
+          Max Rank: 2
+          Icon: classic/ability/druid/demoralizingroar.jpg
+          Description: While your pet is active, you and your pet will regenerate
+            {:|1,2}% of total health every 10 sec.
+        Intimidation:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: ability/devour.jpg
+          Description: Command your pet to intimidate the target on the next successful
+            melee attack, causing a high amount of threat and stunning the target
+            for 3 sec.
+          Spell:
+            Cost: 6% of base mana
+            Range: 100 yd
+            Cast Time: Instant
+            Cooldown: 1 min
+        Bestial Discipline:
+          Location: [4, 3]
+          Max Rank: 2
+          Icon: spell/nature/abolishmagic.jpg
+          Description: Increases the Focus regeneration of your pets by {:|50,100}%.
+        Animal Handler:
+          Location: [5, 0]
+          Max Rank: 2
+          Icon: ability/hunter/animalhandler.jpg
+          Description: Increases your speed while mounted by {0:|4,8}% and your pet's
+            chance to hit by {0:|2,4}%. The mounted movement speed increase does not
+            stack with other effects.
+        Frenzy:
+          Location: [5, 2]
+          Requires: Ferocity
+          Max Rank: 5
+          Icon: inv/misc/monsterclaw/03.jpg
+          Description: Gives your pet a {:|20,40,60,80,100}% chance to gain a 30%
+            attack speed increase for 8 sec after dealing a critical strike.
+        Ferocious Inspiration:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: ability/hunter/ferociousinspiration.jpg
+          Description: When your pet scores a critical hit, all party members have
+            all damage increased by {:|1,2,3}% for 10 sec.
+        Catlike Reflexes:
+          Location: [6, 2]
+          Max Rank: 3
+          Icon: ability/hunter/catlikereflexes.jpg
+          Description: Increases your chance to dodge by {0:|1,2,3}% and your pet's
+            chance to dodge by an additional {0:|3,6,9}%.
+        Bestial Wrath:
+          Location: [6, 1]
+          Requires: Intimidation
+          Max Rank: 1
+          Icon: ability/druid/ferociousbite.jpg
+          Description: Send your pet into a rage causing 50% additional damage for
+            18 sec. While enraged, the beast does not feel pity or remorse or fear
+            and it cannot be stopped unless killed.
+          Spell:
+            Cost: 10% of base mana
+            Range: 100 yd
+            Cast Time: Instant
+            Cooldown: 2 min
+        Serpent's Swiftness:
+          Location: [7, 2]
+          Max Rank: 5
+          Icon: ability/hunter/serpentswiftness.jpg
+          Description: Increases ranged combat attack speed by {0:|4,8,12,16,20}%
+            and your pet's melee attack speed by {0:|4,8,12,16,20}%.
+        The Beast Within:
+          Location: [8, 1]
+          Requires: Bestial Wrath
+          Max Rank: 1
+          Icon: ability/hunter/beastwithin.jpg
+          Description: When your pet is under the effects of Bestial Wrath, you also
+            go into a rage causing 10% additional damage and reducing mana costs of
+            all spells by 20% for 18 sec. While enraged, you do not feel pity or remorse
+            or fear and you cannot be stopped unless killed.
+    Marksmanship:
+      Icon: ability/marksmanship.jpg
+      Background: backgrounds/363.jpg
+      Talents:
+        Improved Concussive Shot:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/frost/stun.jpg
+          Description: Gives your Concussive Shot a {:|4,8,12,16,20}% chance to stun
+            the target for 3 sec.
+        Lethal Shots:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: ability/searingarrow.jpg
+          Description: Increases your critical strike chance with ranged weapons by
+            {:|1,2,3,4,5}%.
+        Improved Hunter's Mark:
+          Location: [1, 1]
+          Max Rank: 5
+          Icon: ability/hunter/snipershot.jpg
+          Description: Causes {:|20,40,60,80,100}% of your Hunter's Mark ability's
+            base attack power to apply to melee attack power as well.
+        Efficiency:
+          Location: [1, 2]
+          Max Rank: 5
+          Icon: spell/frost/wizardmark.jpg
+          Description: Reduces the Mana cost of your Shots and Stings by {:|2,4,6,8,10}%.
+        Go for the Throat:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: ability/hunter/goforthethroat.jpg
+          Description: Your ranged critical hits cause your pet to generate {:|25,50}
+            Focus.
+        Improved Arcane Shot:
+          Location: [2, 1]
+          Max Rank: 5
+          Icon: ability/impalingbolt.jpg
+          Description: Reduces the cooldown of your Arcane Shot by {:|0.2,0.4,0.6,0.8,1}
+            sec.
+        Aimed Shot:
+          Location: [2, 2]
+          Max Rank: 1
+          Icon: inv/spear/07.jpg
+          Description: An aimed shot that increases ranged damage by 70 and reduces
+            healing done to that target by 50%. Lasts 10 sec.
+          Spell:
+            Cost: 75 Mana
+            Range: 35 yd
+            Cast Time: 2.5 sec
+            Cooldown: 6 sec
+        Rapid Killing:
+          Location: [2, 3]
+          Max Rank: 2
+          Icon: ability/hunter/rapidkilling.jpg
+          Description: Reduces the cooldown of your Rapid Fire ability by {0:|1,2}
+            min. In addition, after killing an opponent that yields experience or
+            honor, your next Aimed Shot, Arcane Shot or Auto Shot causes {0:|10,20}%
+            additional damage. Lasts 20 sec.
+        Improved Stings:
+          Location: [3, 1]
+          Max Rank: 5
+          Icon: ability/hunter/quickshot.jpg
+          Description: Increases the damage done by your Serpent Sting and Wyvern
+            Sting by {0:|6,12,18,24,30}% and the mana drained by your Viper Sting
+            by {0:|6,12,18,24,30}%. In addition, reduces the chance your Stings will
+            be dispelled by {0:|6,12,18,24,30}%.
+        Mortal Shots:
+          Location: [3, 2]
+          Requires: Aimed Shot
+          Max Rank: 5
+          Icon: ability/piercedamage.jpg
+          Description: Increases your ranged weapon critical strike damage bonus by
+            {:|6,12,18,24,30}%.
+        Concussive Barrage:
+          Location: [4, 0]
+          Max Rank: 3
+          Icon: spell/arcane/starfire.jpg
+          Description: Your successful Auto Shot attacks have a {:|2,4,6}% chance
+            to Daze the target for 4 sec.
+        Scatter Shot:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: ability/golemstormbolt.jpg
+          Description: A short-range shot that deals 50% weapon damage and disorients
+            the target for 4 sec. Any damage caused will remove the effect. Turns
+            off your attack when used.
+          Spell:
+            Cost: 6% of base mana
+            Range: 15 yd
+            Cast Time: Instant
+        Barrage:
+          Location: [4, 2]
+          Max Rank: 3
+          Icon: ability/upgrademoonglaive.jpg
+          Description: Increases the damage done by your Multi-Shot and Volley spells
+            by {:|4,8,12}%.
+        Combat Experience:
+          Location: [5, 0]
+          Max Rank: 2
+          Icon: ability/hunter/combatexperience.jpg
+          Description: Increases your total Agility by {0:|1,2}% and your total Intellect
+            by {0:|3,6}%.
+        Ranged Weapon Specialization:
+          Location: [5, 3]
+          Max Rank: 5
+          Icon: inv/weapon/rifle/06.jpg
+          Description: Increases the damage you deal with ranged weapons by {:|1,2,3,4,5}%.
+        Careful Aim:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: ability/hunter/zenarchery.jpg
+          Description: Increases your ranged attack power by an amount equal to {:|15,30,45}%
+            of your total Intellect.
+        Trueshot Aura:
+          Location: [6, 1]
+          Requires: Scatter Shot
+          Max Rank: 1
+          Icon: ability/trueshot.jpg
+          Description: Increases the attack power of party members within 45 yards
+            by 50. Lasts until cancelled.
+          Spell:
+            Cast Time: Instant
+        Improved Barrage:
+          Location: [6, 2]
+          Requires: Barrage
+          Max Rank: 3
+          Icon: ability/upgrademoonglaive.jpg
+          Description: Increases the critical strike chance of your Multi-Shot ability
+            by {0:|4,8,12}% and gives you a {0:|33,66,100}% chance to avoid interruption
+            caused by damage while channeling Volley.
+        Master Marksman:
+          Location: [7, 1]
+          Max Rank: 5
+          Icon: ability/hunter/mastermarksman.jpg
+          Description: Increases your ranged attack power by {:|2,4,6,8,10}%.
+        Silencing Shot:
+          Location: [8, 1]
+          Requires: Master Marksman
+          Max Rank: 1
+          Icon: ability/theblackarrow.jpg
+          Description: A shot that deals 50% weapon damage and Silences the target
+            for 3 sec.
+          Spell:
+            Cost: 6% of base mana
+            Range: 35 yd
+            Cast Time: Instant
+            Cooldown: 20 sec
+    Survival:
+      Icon: ability/hunter/swiftstrike.jpg
+      Background: backgrounds/362.jpg
+      Talents:
+        Monster Slaying:
+          Location: [0, 0]
+          Max Rank: 3
+          Icon: inv/misc/head/dragon/black.jpg
+          Description: Increases all damage caused against Beasts, Giants and Dragonkin
+            targets by {0:|1,2,3}% and increases critical damage caused against Beasts,
+            Giants and Dragonkin targets by an additional {0:|1,2,3}%.
+        Humanoid Slaying:
+          Location: [0, 1]
+          Max Rank: 3
+          Icon: spell/holy/prayerofhealing.jpg
+          Description: Increases all damage caused against Humanoid targets by {0:|1,2,3}%
+            and increases critical damage caused against Humanoid targets by an additional
+            {0:|1,2,3}%.
+        Hawk Eye:
+          Location: [0, 2]
+          Max Rank: 3
+          Icon: ability/townwatch.jpg
+          Description: Increases the range of your ranged weapons by {:|2,4,6} yards.
+        Savage Strikes:
+          Location: [0, 3]
+          Max Rank: 2
+          Icon: ability/racial/bloodrage.jpg
+          Description: Increases the critical strike chance of Raptor Strike and Mongoose
+            Bite by {:|10,20}%.
+        Entrapment:
+          Location: [1, 0]
+          Max Rank: 3
+          Icon: spell/nature/stranglevines.jpg
+          Description: Gives your Immolation Trap, Frost Trap, Explosive Trap, and
+            Snake Trap a {:|8,16,25}% chance to entrap the target, preventing them
+            from moving for 4 sec.
+        Deflection:
+          Location: [1, 1]
+          Max Rank: 5
+          Icon: ability/parry.jpg
+          Description: Increases your Parry chance by {:|1,2,3,4,5}%.
+        Improved Wing Clip:
+          Location: [1, 2]
+          Max Rank: 3
+          Icon: ability/rogue/trip.jpg
+          Description: Gives your Wing Clip ability a {:|7,14,20}% chance to immobilize
+            the target for 5 sec.
+        Clever Traps:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: spell/nature/timestop.jpg
+          Description: Increases the duration of Freezing and Frost Trap effects by
+            {0:|15,30}%, the damage of Immolation and Explosive Trap effects by {0:|15,30}%,
+            and the number of snakes summoned from Snake Traps by {0:|15,30}%.
+        Survivalist:
+          Location: [2, 1]
+          Max Rank: 5
+          Icon: spell/shadow/twilight.jpg
+          Description: Increases total health by {:|2,4,6,8,10}%.
+        Deterrence:
+          Location: [2, 2]
+          Max Rank: 1
+          Icon: ability/whirlwind.jpg
+          Description: When activated, increases your Dodge and Parry chance by 25%
+            for 10 sec.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 5 min
+        Trap Mastery:
+          Location: [3, 0]
+          Max Rank: 2
+          Icon: ability/ensnare.jpg
+          Description: Decreases the chance enemies will resist trap effects by {:|5,10}%.
+        Surefooted:
+          Location: [3, 1]
+          Max Rank: 3
+          Icon: ability/kick.jpg
+          Description: Increases hit chance by {0:|1,2,3}% and increases the chance
+            movement impairing effects will be resisted by an additional {0:|5,10,15}%.
+        Improved Feign Death:
+          Location: [3, 3]
+          Max Rank: 2
+          Icon: ability/rogue/feigndeath.jpg
+          Description: Reduces the chance your Feign Death ability will be resisted
+            by {:|2,4}%.
+        Survival Instincts:
+          Location: [4, 0]
+          Max Rank: 2
+          Icon: ability/hunter/survivalinstincts.jpg
+          Description: Reduces all damage taken by {0:|2,4}% and increases attack
+            power by {0:|2,4}%.
+        Killer Instinct:
+          Location: [4, 1]
+          Max Rank: 3
+          Icon: spell/holy/blessingofstamina.jpg
+          Description: Increases your critical strike chance with all attacks by {:|1,2,3}%.
+        Counterattack:
+          Location: [4, 2]
+          Requires: Deterrence
+          Max Rank: 1
+          Icon: ability/warrior/challange.jpg
+          Description: A strike that becomes active after parrying an opponent's attack.
+            This attack deals 40 damage and immobilizes the target for 5 sec. Counterattack
+            cannot be blocked, dodged, or parried.
+          Spell:
+            Cost: 45 Mana
+            Range: Melee
+            Cast Time: Instant
+            Cooldown: 5 sec
+        Resourcefulness:
+          Location: [5, 0]
+          Max Rank: 3
+          Icon: ability/hunter/resourcefulness.jpg
+          Description: Reduces the mana cost of all traps and melee abilities by {0:|20,40,60}%
+            and reduces the cooldown of all traps by {0:|2,4,6} sec.
+        Lightning Reflexes:
+          Location: [5, 2]
+          Max Rank: 5
+          Icon: spell/nature/invisibilty.jpg
+          Description: Increases your Agility by {:|3,6,9,12,15}%.
+        Thrill of the Hunt:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: ability/hunter/thrillofthehunt.jpg
+          Description: Gives you a {:|33,66,100}% chance to regain 40% of the mana
+            cost of any shot when it critically hits.
+        Wyvern Sting:
+          Location: [6, 1]
+          Requires: Killer Instinct
+          Max Rank: 1
+          Icon: inv/spear/02.jpg
+          Description: A stinging shot that puts the target to sleep for 12 sec. Any
+            damage will cancel the effect. When the target wakes up, the Sting causes
+            300 Nature damage over 12 sec. Only one Sting per Hunter can be active
+            on the target at a time.
+          Spell:
+            Cost: 115 Mana
+            Range: 35 yd
+            Cast Time: Instant
+            Cooldown: 2 min
+        Expose Weakness:
+          Location: [6, 2]
+          Requires: Lightning Reflexes
+          Max Rank: 3
+          Icon: ability/rogue/findweakness.jpg
+          Description: Your ranged criticals have a {:|33,66,100}% chance to apply
+            an Expose Weakness effect to the target. Expose Weakness increases the
+            attack power of all attackers against that target by 25% of your Agility
+            for 7 sec.
+        Master Tactician:
+          Location: [7, 1]
+          Max Rank: 5
+          Icon: ability/hunter/mastertactitian.jpg
+          Description: Your successful ranged attacks have a 6% chance to increase
+            your critical strike chance with all attacks by {:|2,4,6,8,10}% for 8
+            sec.
+        Readiness:
+          Location: [8, 1]
+          Requires: Master Tactician
+          Max Rank: 1
+          Icon: ability/hunter/readiness.jpg
+          Description: When activated, this ability immediately finishes the cooldown
+            on your other Hunter abilities.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 5 min
+WotLK:
+  Specializations:
+    Beast Mastery:
+      Icon: ability/hunter/beasttaming.jpg
+      Background: backgrounds/361.jpg
+      Talents:
+        Improved Aspect of the Hawk:
+          Location: [0, 1]
+          Max Rank: 5
+          Icon: spell/nature/ravenform.jpg
+          Description: While Aspect of the Hawk or Dragonhawk is active, all normal
+            ranged attacks have a 10% chance of increasing ranged attack speed by
+            {:|3,6,9,12,15}% for 12 sec.
+        Endurance Training:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: spell/nature/reincarnation.jpg
+          Description: Increases the health of your pet by {0:|2,4,6,8,10}% and your
+            total health by {0:|1,2,3,4,5}%.
+        Focused Fire:
+          Location: [1, 0]
+          Max Rank: 2
+          Icon: ability/hunter/silenthunter.jpg
+          Description: All damage caused by you is increased by {0:|1,2}% while your
+            pet is active and the critical strike chance of your pet's special abilities
+            is increased by {0:|10,20}% while Kill Command is active.
+        Improved Aspect of the Monkey:
+          Location: [1, 1]
+          Max Rank: 3
+          Icon: ability/hunter/aspectofthemonkey.jpg
+          Description: Increases the Dodge bonus of your Aspect of the Monkey and
+            Aspect of the Dragonhawk by {:|2,4,6}%.
+        Thick Hide:
+          Location: [1, 2]
+          Max Rank: 3
+          Icon: inv/misc/pelt/bear/03.jpg
+          Description: Increases the armor rating of your pets by {0:|7,14,20}% and
+            your armor contribution from items by {0:|4,7,10}%.
+        Improved Revive Pet:
+          Location: [1, 3]
+          Max Rank: 2
+          Icon: ability/hunter/beastsoothe.jpg
+          Description: Revive Pet's casting time is reduced by {0:|3,6} sec, mana
+            cost is reduced by {0:|20,40}%, and increases the health your pet returns
+            with by an additional {0:|15,30}%.
+        Pathfinding:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: ability/mount/jungletiger.jpg
+          Description: Increases the speed bonus of your Aspect of the Cheetah and
+            Aspect of the Pack by {0:|4,8}%, and increases your speed while mounted
+            by {0:|5,10}%. The mounted movement speed increase does not stack with
+            other effects.
+        Aspect Mastery:
+          Location: [2, 1]
+          Max Rank: 1
+          Icon: ability/hunter/aspectmastery.jpg
+          Description: >-
+            Aspect of the Viper - Reduces the damage penalty by 10%.
+
+            Aspect of the Monkey - Reduces the damage done to you while active by 5%.
+
+            Aspect of the Hawk - Increases the attack power bonus by 30%.
+
+            Aspect of the Dragonhawk - Combines the bonuses from Aspect of the Monkey and Hawk.
+        Unleashed Fury:
+          Location: [2, 2]
+          Max Rank: 5
+          Icon: ability/bullrush.jpg
+          Description: Increases the damage done by your pets by {:|3,6,9,12,15}%.
+        Improved Mend Pet:
+          Location: [3, 1]
+          Max Rank: 2
+          Icon: ability/hunter/mendpet.jpg
+          Description: Reduces the mana cost of your Mend Pet spell by {0:|10,20}%
+            and gives the Mend Pet spell a {0:|25,50}% chance of cleansing 1 Curse,
+            Disease, Magic or Poison effect from the pet each tick.
+        Ferocity:
+          Location: [3, 2]
+          Max Rank: 5
+          Icon: inv/misc/monsterclaw/04.jpg
+          Description: Increases the critical strike chance of your pet by {:|2,4,6,8,10}%.
+        Spirit Bond:
+          Location: [4, 0]
+          Max Rank: 2
+          Icon: classic/ability/druid/demoralizingroar.jpg
+          Description: While your pet is active, you and your pet will regenerate
+            {0:|1,2}% of total health every 10 sec., and increases healing done to
+            you and your pet by {0:|5,10}%.
+        Intimidation:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: ability/devour.jpg
+          Description: Command your pet to intimidate the target, causing a high amount
+            of threat and stunning the target for 3 sec. Lasts 15 sec.
+          Spell:
+            Cost: 8% of base mana
+            Range: 100 yd
+            Cast Time: Instant
+            Cooldown: 1 min
+        Bestial Discipline:
+          Location: [4, 3]
+          Max Rank: 2
+          Icon: spell/nature/abolishmagic.jpg
+          Description: Increases the Focus regeneration of your pets by {:|50,100}%.
+        Animal Handler:
+          Location: [5, 0]
+          Max Rank: 2
+          Icon: ability/hunter/animalhandler.jpg
+          Description: Increases your pet's attack power by {0:|5,10}%, and increases
+            the duration of your Master's Call effect by {0:|3,6} sec.
+        Frenzy:
+          Location: [5, 2]
+          Requires: Ferocity
+          Max Rank: 5
+          Icon: inv/misc/monsterclaw/03.jpg
+          Description: Gives your pet a {:|20,40,60,80,100}% chance to gain a 30%
+            attack speed increase for 8 sec after dealing a critical strike.
+        Ferocious Inspiration:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: ability/hunter/ferociousinspiration.jpg
+          Description: All party and raid members have all damage increased by {0:|1,2,3}%
+            within 100 yards of your pet. In addition, increases the damage dealt
+            by Arcane Shot and Steady Shot by {0:|3,6,9}%.
+        Catlike Reflexes:
+          Location: [6, 2]
+          Max Rank: 3
+          Icon: ability/hunter/catlikereflexes.jpg
+          Description: Increases your chance to dodge by {0:|1,2,3}% and your pet's
+            chance to dodge by an additional {0:|3,6,9}%. In addition, reduces the
+            cooldown of your Kill Command ability by {0:|10,20,30} sec.
+        Bestial Wrath:
+          Location: [6, 1]
+          Requires: Intimidation
+          Max Rank: 1
+          Icon: ability/druid/ferociousbite.jpg
+          Description: Send your pet into a rage causing 50% additional damage for
+            10 sec. While enraged, the beast does not feel pity or remorse or fear
+            and it cannot be stopped unless killed.
+          Spell:
+            Cost: 10% of base mana
+            Range: 100 yd
+            Cast Time: Instant
+            Cooldown: 2 min
+        Serpent's Swiftness:
+          Location: [7, 2]
+          Max Rank: 5
+          Icon: ability/hunter/serpentswiftness.jpg
+          Description: Increases ranged combat attack speed by {0:|4,8,12,16,20}%
+            and your pet's melee attack speed by {0:|4,8,12,16,20}%.
+        Invigoration:
+          Location: [7, 0]
+          Requires: Ferocious Inspiration
+          Max Rank: 2
+          Icon: ability/hunter/invigeration.jpg
+          Description: When your pet scores a critical hit with a special ability,
+            you have a {:|50,100}% chance to instantly regenerate 1% mana.
+        Longevity:
+          Location: [8, 0]
+          Max Rank: 3
+          Icon: ability/hunter/longevity.jpg
+          Description: Reduces the cooldown of your Bestial Wrath, Intimidation and
+            Pet Special Abilities by {:|10,20,30}%.
+        The Beast Within:
+          Location: [8, 1]
+          Requires: Bestial Wrath
+          Max Rank: 1
+          Icon: ability/hunter/beastwithin.jpg
+          Description: Increases all damage you deal by 10% and while your pet is
+            under the effects of Bestial Wrath, you also go into a rage causing 10%
+            additional damage and reducing mana costs of all spells by 50% for 10
+            sec. While enraged, you do not feel pity or remorse or fear and you cannot
+            be stopped unless killed.
+        Cobra Strikes:
+          Location: [8, 2]
+          Requires: Serpent's Swiftness
+          Max Rank: 3
+          Icon: ability/hunter/cobrastrikes.jpg
+          Description: You have a {:|20,40,60}% chance when you critically hit with
+            Arcane Shot, Steady Shot or Kill Shot to cause your pet's next 2 special
+            attacks to critically hit.
+        Kindred Spirits:
+          Location: [9, 1]
+          Max Rank: 5
+          Icon: ability/hunter/separationanxiety.jpg
+          Description: Increases your pet's damage by {0:|4,8,12,16,20}% and you and
+            your pet's movement speed by {0:|2,4,6,8,10}% while your pet is active.
+            This does not stack with other movement speed increasing effects.
+        Beast Mastery:
+          Location: [10, 1]
+          Max Rank: 1
+          Icon: ability/hunter/beastmastery.jpg
+          Description: You master the art of Beast training, teaching you the ability
+            to tame Exotic pets and increasing your total amount of Pet Skill Points
+            by 4.
+    Marksmanship:
+      Icon: ability/marksmanship.jpg
+      Background: backgrounds/363.jpg
+      Talents:
+        Improved Concussive Shot:
+          Location: [0, 0]
+          Max Rank: 2
+          Icon: spell/frost/stun.jpg
+          Description: Increases the duration of your Concussive Shot's daze effect
+            by {:|1,2} sec.
+        Focused Aim:
+          Location: [0, 1]
+          Max Rank: 3
+          Icon: ability/hunter/focusedaim.jpg
+          Description: Reduces the pushback suffered from damaging attacks while casting
+            Steady Shot by {0:|23,46,70}%, and increases your chance to hit by {0:|1,2,3}%.
+        Lethal Shots:
+          Location: [0, 2]
+          Max Rank: 5
+          Icon: ability/searingarrow.jpg
+          Description: Increases your critical strike chance with ranged weapons by
+            {:|1,2,3,4,5}%.
+        Careful Aim:
+          Location: [1, 0]
+          Max Rank: 3
+          Icon: ability/hunter/zenarchery.jpg
+          Description: Increases your ranged attack power by an amount equal to {:|33,66,100}%
+            of your total Intellect.
+        Improved Hunter's Mark:
+          Location: [1, 1]
+          Max Rank: 3
+          Icon: ability/hunter/snipershot.jpg
+          Description: Increases the bonus attack power granted by your Hunter's Mark
+            ability by {0:|10,20,30}%, and reduces the mana cost of your Hunter's
+            Mark ability by {0:|33,66,100}%.
+        Mortal Shots:
+          Location: [1, 2]
+          Max Rank: 5
+          Icon: ability/piercedamage.jpg
+          Description: Increases the critical strike damage bonus of your ranged abilities
+            by {:|6,12,18,24,30}%.
+        Go for the Throat:
+          Location: [2, 0]
+          Max Rank: 2
+          Icon: ability/hunter/goforthethroat.jpg
+          Description: Your ranged critical hits cause your pet to generate {:|25,50}
+            Focus.
+        Improved Arcane Shot:
+          Location: [2, 1]
+          Max Rank: 3
+          Icon: ability/impalingbolt.jpg
+          Description: Increases the damage done by your Arcane Shot by {:|5,10,15}%.
+        Rapid Killing:
+          Location: [2, 3]
+          Max Rank: 2
+          Icon: ability/hunter/rapidkilling.jpg
+          Description: Reduces the cooldown of your Rapid Fire ability by {0:|1,2}
+            min. In addition, after killing an opponent that yields experience or
+            honor, your next Aimed Shot, Arcane Shot or Chimera Shot causes {0:|10,20}%
+            additional damage. Lasts 20 sec.
+        Aimed Shot:
+          Location: [2, 2]
+          Requires: Mortal Shots
+          Max Rank: 1
+          Icon: inv/spear/07.jpg
+          Description: An aimed shot that increases ranged damage by 5 and reduces
+            healing done to that target by 50%. Lasts 10 sec.
+          Spell:
+            Cost: 8% of base mana
+            Range: 35 yd
+            Cast Time: Instant
+            Cooldown: 10 sec
+        Improved Stings:
+          Location: [3, 1]
+          Max Rank: 3
+          Icon: ability/hunter/quickshot.jpg
+          Description: Increases the damage done by your Serpent Sting and Wyvern
+            Sting by {0:|10,20,30}% and the mana drained by your Viper Sting by {0:|10,20,30}%.
+            In addition, reduces the chance your Sting damage over time effects will
+            be dispelled by {0:|10,20,30}%.
+        Efficiency:
+          Location: [3, 2]
+          Max Rank: 5
+          Icon: spell/frost/wizardmark.jpg
+          Description: Reduces the Mana cost of your Shots and Stings by {:|3,6,9,12,15}%.
+        Concussive Barrage:
+          Location: [4, 0]
+          Max Rank: 2
+          Icon: spell/arcane/starfire.jpg
+          Description: Your successful Chimera Shot and Multi-Shot attacks have a
+            {:|50,100}% chance to Daze the target for 4 sec.
+        Readiness:
+          Location: [4, 1]
+          Max Rank: 1
+          Icon: ability/hunter/readiness.jpg
+          Description: When activated, this ability immediately finishes the cooldown
+            on your other Hunter abilities except Bestial Wrath.
+          Spell:
+            Cast Time: Instant
+            Cooldown: 3 min
+        Barrage:
+          Location: [4, 2]
+          Max Rank: 3
+          Icon: ability/upgrademoonglaive.jpg
+          Description: Increases the damage done by your Multi-Shot, Aimed Shot, and
+            Volley spells by {:|4,8,12}%.
+        Combat Experience:
+          Location: [5, 0]
+          Max Rank: 2
+          Icon: ability/hunter/combatexperience.jpg
+          Description: Increases your total Agility and Intellect by {:|2,4}%.
+        Ranged Weapon Specialization:
+          Location: [5, 3]
+          Max Rank: 3
+          Icon: inv/weapon/rifle/06.jpg
+          Description: Increases the damage you deal with ranged weapons by {:|1,3,5}%.
+        Piercing Shots:
+          Location: [6, 0]
+          Max Rank: 3
+          Icon: ability/hunter/piercingshots.jpg
+          Description: Your critical Aimed, Steady and Chimera Shots cause the target
+            to bleed for {:|10,20,30}% of the damage dealt over 8 sec.
+        Trueshot Aura:
+          Location: [6, 1]
+          Requires: Readiness
+          Max Rank: 1
+          Icon: ability/trueshot.jpg
+          Description: Increases the attack power of party and raid members within
+            100 yards by 10%. Lasts until cancelled.
+          Spell:
+            Cast Time: Instant
+        Improved Barrage:
+          Location: [6, 2]
+          Requires: Barrage
+          Max Rank: 3
+          Icon: ability/upgrademoonglaive.jpg
+          Description: Increases the critical strike chance of your Multi-Shot and
+            Aimed Shot abilities by {0:|4,8,12}% and reduces the pushback suffered
+            from damaging attacks while channeling Volley by {0:|33,66,100}%.
+        Master Marksman:
+          Location: [7, 1]
+          Max Rank: 5
+          Icon: ability/hunter/mastermarksman.jpg
+          Description: Increases your critical strike chance by {0:|1,2,3,4,5}%, and
+            reduces the Mana cost of your Steady Shot, Aimed Shot, and Chimera Shot
+            by {0:|5,10,15,20,25}%.
+        Rapid Recuperation:
+          Location: [7, 2]
+          Max Rank: 2
+          Icon: ability/hunter/rapidregeneration.jpg
+          Description: You gain {0:|2,4}% of your mana every 3 sec while under the
+            effect of Rapid Fire, and you gain {0:|1,2}% of your mana every 2 sec
+            for 6 sec when you gain Rapid Killing.
+        Wild Quiver:
+          Location: [8, 0]
+          Max Rank: 3
+          Icon: ability/hunter/wildquiver.jpg
+          Description: You have a {:|4,8,12}% chance to shoot an additional shot when
+            doing damage with your auto shot, dealing 80% weapon nature damage. Wild
+            Quiver consumes no ammo.
+        Improved Steady Shot:
+          Location: [8, 2]
+          Max Rank: 3
+          Icon: ability/hunter/improvedsteadyshot.jpg
+          Description: Your Steady Shot hits have a {:|5,10,15}% chance to increase
+            the damage done by your next Aimed Shot, Arcane Shot or Chimera Shot by
+            15%, and reduce the mana cost of your next Aimed Shot, Arcane Shot or
+            Chimera Shot by 20%.
+        Silencing Shot:
+          Location: [8, 1]
+          Requires: Master Marksman
+          Max Rank: 1
+          Icon: ability/theblackarrow.jpg
+          Description: A shot that deals 50% weapon damage and Silences the target
+            for 3 sec. Non-player victim spellcasting is also interrupted for 3 sec.
+          Spell:
+            Cost: 6% of base mana
+            Range: 35 yd
+            Cast Time: Instant
+            Cooldown: 20 sec
+        Marked for Death:
+          Location: [9, 1]
+          Max Rank: 5
+          Icon: ability/hunter/assassinate.jpg
+          Description: Increases your damage done by your shots and the damage done
+            by your pet's special abilities by {0:|1,2,3,4,5}% on marked targets,
+            and increases the critical strike damage bonus of your Aimed Shot, Arcane
+            Shot, Steady Shot, Kill Shot and Chimera Shot by {0:|2,4,6,8,10}%.
+        Chimera Shot:
+          Location: [10, 1]
+          Max Rank: 1
+          Icon: ability/hunter/chimerashot2.jpg
+          Description: >-
+            You deal 125% weapon damage, refreshing the current Sting on your target
+            and triggering an effect:
+
+            Serpent Sting - Instantly deals 40% of the damage done by your Serpent
+            Sting.
+
+            Viper Sting - Instantly restores mana to you equal to 60% of the total
+            amount drained by your Viper Sting.
+
+            Scorpid Sting - Attempts to Disarm the target for 10 sec. This effect
+            cannot occur more than once per 1 minute.
+          Spell:
+            Cost: 12% of base mana
+            Range: 35 yd
+            Cast Time: Instant
+            Cooldown: 10 sec
+    Survival:
+      Icon: ability/hunter/swiftstrike.jpg
+      Background: backgrounds/362.jpg
+      Talents:
+        Improved Tracking:
+          Location: [0, 0]
+          Max Rank: 5
+          Icon: ability/hunter/improvedtracking.jpg
+          Description: While tracking Beasts, Demons, Dragonkin, Elementals, Giants,
+            Humanoids and Undead, all damage done to those types by the Hunter is
+            increased by {:|1,2,3,4,5}%.
+        Hawk Eye:
+          Location: [0, 1]
+          Max Rank: 3
+          Icon: ability/townwatch.jpg
+          Description: Increases the range of your ranged weapons by {:|2,4,6} yards.
+        Savage Strikes:
+          Location: [0, 2]
+          Max Rank: 2
+          Icon: ability/racial/bloodrage.jpg
+          Description: Increases the critical strike chance of Raptor Strike, Mongoose
+            Bite and Counterattack by {:|10,20}%.
+        Surefooted:
+          Location: [1, 0]
+          Max Rank: 3
+          Icon: ability/kick.jpg
+          Description: Reduces the duration of movement impairing effects by {:|10,20,30}%.
+        Entrapment:
+          Location: [1, 1]
+          Max Rank: 3
+          Icon: spell/nature/stranglevines.jpg
+          Description: When your Frost Trap or Snake Trap are triggered you entrap
+            all afflicted targets, preventing them from moving for {:|2,3,4} sec.
+        Trap Mastery:
+          Location: [1, 2]
+          Max Rank: 3
+          Icon: ability/ensnare.jpg
+          Description: >-
+            Frost Trap and Freezing Trap - Increases the duration by {0:|10,20,30}%.
+
+            Immolation Trap, Explosive Trap and Black Arrow - Increases the periodic
+            damage done by {0:|10,20,30}%.
+
+            Snake Trap - Increases the number of snakes summoned by {0:|2,4,6}.
+        Survival Instincts:
+          Location: [1, 3]
+          Max Rank: 2
+          Icon: ability/hunter/survivalinstincts.jpg
+          Description: Reduces all damage taken by {0:|2,4}% and increases the critical
+            strike chance of your Arcane Shot, Steady Shot, and Explosive Shot by
+            {0:|2,4}%.
+        Survivalist:
+          Location: [2, 0]
+          Max Rank: 5
+          Icon: spell/shadow/twilight.jpg
+          Description: Increases your Stamina by {:|2,4,6,8,10}%.
+        Scatter Shot:
+          Location: [2, 1]
+          Max Rank: 1
+          Icon: ability/golemstormbolt.jpg
+          Description: A short-range shot that deals 50% weapon damage and disorients
+            the target for 4 sec. Any damage caused will remove the effect. Turns
+            off your attack when used.
+          Spell:
+            Cost: 8% of base mana
+            Range: 15 yd
+            Cast Time: Instant
+        Deflection:
+          Location: [2, 2]
+          Max Rank: 3
+          Icon: ability/parry.jpg
+          Description: Increases your chance to parry by {0:|1,2,3}%, and reduces
+            the duration of all Disarm effects used against you by {0:|16,25,50}%.
+            This does not stack with other Disarm duration reducing effects.
+        Survival Tactics:
+          Location: [2, 3]
+          Max Rank: 2
+          Icon: ability/rogue/feigndeath.jpg
+          Description: Reduces the chance your Feign Death ability and all trap spells
+            will be resisted by {0:|2,4}%, and reduces the cooldown of your Disengage
+            ability by {0:|2,4} sec.
+        T.N.T.:
+          Location: [3, 1]
+          Max Rank: 3
+          Icon: inv/misc/bomb/05.jpg
+          Description: Increases the damage done by your Explosive Shot, Explosive
+            Trap, Black Arrow and Immolation Trap by {:|2,4,6}%.
+        Lock and Load:
+          Location: [3, 3]
+          Max Rank: 3
+          Icon: ability/hunter/lockandload.jpg
+          Description: You have a {0:|33,66,100}% chance when you trap a target with
+            Freezing Trap, Freezing Arrow or Frost Trap and a {0:|2,4,6}% chance when
+            you deal periodic damage with your Immolation Trap, Explosive Trap or
+            Black Arrow to cause your next 2 Arcane Shot or Explosive Shot spells
+            to trigger no cooldown, cost no mana and consume no ammo. This effect
+            has a 22 sec cooldown.
+        Killer Instinct:
+          Location: [4, 1]
+          Max Rank: 3
+          Icon: spell/holy/blessingofstamina.jpg
+          Description: Increases your critical strike chance with all attacks by {:|1,2,3}%.
+        Hunter vs. Wild:
+          Location: [4, 0]
+          Requires: Survivalist
+          Max Rank: 3
+          Icon: ability/hunter/huntervswild.jpg
+          Description: Increases you and your pet's attack power and ranged attack
+            power equal to {:|10,20,30}% of your total Stamina.
+        Counterattack:
+          Location: [4, 2]
+          Requires: Deflection
+          Max Rank: 1
+          Icon: ability/warrior/challange.jpg
+          Description: A strike that becomes active after parrying an opponent's attack.
+            This attack deals (Attack power * 0.2 + 48) damage and immobilizes the
+            target for 5 sec. Counterattack cannot be blocked, dodged, or parried.
+          Spell:
+            Cost: 3% of base mana
+            Range: Melee
+            Cast Time: Instant
+            Cooldown: 5 sec
+        Lightning Reflexes:
+          Location: [5, 0]
+          Max Rank: 5
+          Icon: spell/nature/invisibilty.jpg
+          Description: Increases your Agility by {:|3,6,9,12,15}%.
+        Resourcefulness:
+          Location: [5, 2]
+          Max Rank: 3
+          Icon: ability/hunter/resourcefulness.jpg
+          Description: Reduces the mana cost of all traps, melee abilities and Black
+            Arrow by {0:|20,40,60}% and reduces the cooldown of all traps and Black
+            Arrow by {0:|2,4,6} sec.
+        Thrill of the Hunt:
+          Location: [6, 2]
+          Max Rank: 3
+          Icon: ability/hunter/thrillofthehunt.jpg
+          Description: Gives you a {:|33,66,100}% chance to regain 40% of the mana
+            cost of any shot when it critically hits.
+        Wyvern Sting:
+          Location: [6, 1]
+          Requires: Killer Instinct
+          Max Rank: 1
+          Icon: inv/spear/02.jpg
+          Description: A stinging shot that puts the target to sleep for 30 sec. Any
+            damage will cancel the effect. When the target wakes up, the Sting causes
+            300 Nature damage over 6 sec. Only one Sting per Hunter can be active
+            on the target at a time.
+          Spell:
+            Cost: 8% of base mana
+            Range: 35 yd
+            Cast Time: Instant
+            Cooldown: 1 min
+        Expose Weakness:
+          Location: [6, 0]
+          Requires: Lightning Reflexes
+          Max Rank: 3
+          Icon: ability/rogue/findweakness.jpg
+          Description: Your ranged criticals have a {:|33,66,100}% chance to grant
+            you Expose Weakness. Expose Weakness increases your attack power by 25%
+            of your Agility for 7 sec.
+        Master Tactician:
+          Location: [7, 0]
+          Max Rank: 5
+          Icon: ability/hunter/mastertactitian.jpg
+          Description: Your successful ranged attacks have a 10% chance to increase
+            your critical strike chance with all attacks by {:|2,4,6,8,10}% for 8
+            sec.
+        Noxious Stings:
+          Location: [7, 1]
+          Requires: Wyvern Sting
+          Max Rank: 3
+          Icon: ability/hunter/potentvenom.jpg
+          Description: If Wyvern Sting is dispelled, the dispeller is also afflicted
+            by Wyvern Sting lasting {0:|16,25,50}% of the duration remaining, and
+            increases all damage done by you on targets afflicted by your Serpent
+            Sting by {0:|1,2,3}%.
+        Point of No Escape:
+          Location: [8, 0]
+          Max Rank: 2
+          Icon: ability/hunter/pointofnoescape.jpg
+          Description: Increases the critical strike chance of all of your attacks
+            on targets affected by your Frost Trap, Freezing Trap and Freezing Arrow
+            by {:|3,6}%.
+        Black Arrow:
+          Location: [8, 1]
+          Max Rank: 1
+          Icon: spell/shadow/painspike.jpg
+          Description: Fires a Black Arrow at the target, increasing all damage done
+            by you to the target by 6% and dealing (Ranged attack power * 0.1 + 157
+            * 5) Shadow damage over 15 sec. Black Arrow shares a cooldown with Trap
+            spells.
+          Spell:
+            Cost: 6% of base mana
+            Range: 35 yd
+            Cast Time: Instant
+            Cooldown: 30 sec
+        Sniper Training:
+          Location: [8, 3]
+          Max Rank: 3
+          Icon: ability/hunter/longshots.jpg
+          Description: Increases the critical strike chance of your Kill Shot ability
+            by {0:|5,10,15}%, and while standing still for 6 sec, you gain Sniper
+            Training increasing the damage done by your Steady Shot, Aimed Shot, Black
+            Arrow and Explosive Shot by {0:|2,4,6}% for 15 sec.
+        Hunting Party:
+          Location: [9, 2]
+          Requires: Thrill of the Hunt
+          Max Rank: 3
+          Icon: ability/hunter/huntingparty.jpg
+          Description: Increases your total Agility by an additional {0:|1,2,3}%,
+            and your Arcane Shot, Explosive Shot and Steady Shot critical strikes
+            have a {0:|33,66,100}% chance to grant up to 10 party or raid members
+            mana regeneration equal to 1% of the maximum mana per 5 sec. Lasts for
+            15 sec.
+        Explosive Shot:
+          Location: [10, 1]
+          Requires: Black Arrow
+          Max Rank: 1
+          Icon: ability/hunter/explosiveshot.jpg
+          Description: You fire an explosive charge into the enemy target, dealing
+            (Ranged attack power * 0.14 + 144)-(Ranged attack power * 0.14 + 172)
+            Fire damage. The charge will blast the target every second for an additional
+            2 sec.
+          Spell:
+            Cost: 7% of base mana
+            Range: 35 yd
+            Cast Time: Instant
+            Cooldown: 6 sec
